@@ -1,12 +1,13 @@
 package aze.GLaDOS.Commands;
 
 import java.math.BigInteger;
-import aze.GLaDOS.Constants;
+import aze.GLaDOS.GLaDOS;
+import aze.GLaDOS.Utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Maths {
-	public static void Fibonacci(GuildMessageReceivedEvent event){
+	public static void Fibonacci(GuildMessageReceivedEvent event, GLaDOS glados){
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		
 		if(message.length >= 2){
@@ -52,36 +53,21 @@ public class Maths {
 					event.getChannel().sendMessage(error.build()).queue();
 				}
 			} else {
-				event.getChannel().sendTyping().queue();
-				EmbedBuilder error = new EmbedBuilder();
-				error.setColor(0xff3923);
-				error.setTitle("Error in the command");
-				error.setDescription("Sorry, the optimised Fibonacci formula cannot handle negative numbers.");
-				event.getChannel().sendMessage(error.build()).queue();
+				event.getChannel().sendMessage(BuildEmbed.errorEmbed("Sorry, the optimised Fibonacci formula cannot handle negative numbers.").build()).queue();
 			}
 		} else {
-			event.getChannel().sendTyping().queue();
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "Fibonacci <positive integer>");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "Fibonacci <positive integer>").build()).queue();
 		}
 	}
 	
-	public static void Factorielle(GuildMessageReceivedEvent event) {
+	public static void Factorielle(GuildMessageReceivedEvent event, GLaDOS glados) {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		if(message.length >= 2){
 			int number = 0;
 			try {
 				number = Integer.parseInt(message[1]);
 			} catch (Exception e){
-				event.getChannel().sendTyping().queue();
-				EmbedBuilder error = new EmbedBuilder();
-				error.setColor(0xff3923);
-				error.setTitle("Error in the syntax !");
-				error.setDescription(e.toString());
-				event.getChannel().sendMessage(error.build()).queue();
+				event.getChannel().sendMessage(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
 			
 			if((number >= 0) && (number <= 1000)){
@@ -108,20 +94,10 @@ public class Maths {
 					event.getChannel().sendMessage(error.build()).queue();
 				}
 			} else {
-				event.getChannel().sendTyping().queue();
-				EmbedBuilder error = new EmbedBuilder();
-				error.setColor(0xff3923);
-				error.setTitle("Error in the command");
-				error.setDescription("Sorry, negative numbers cannot be handled.");
-				event.getChannel().sendMessage(error.build()).queue();
+				event.getChannel().sendMessage(BuildEmbed.errorEmbed("Sorry, negative numbers cannot be handled.").build()).queue();
 			}
 		} else {
-			event.getChannel().sendTyping().queue();
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "facto <positive integer>");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "facto <positive integer>").build()).queue();
 		}
 	}
 }

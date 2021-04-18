@@ -58,7 +58,7 @@ public class Call {
 		
 		Random rng = new Random();
 		int randomNumber = rng.nextInt(messages.length);
-		channel.sendMessage(messages[randomNumber] + " g").queue();
+		channel.sendMessage(messages[randomNumber] + " this is a test").queue();
 	}
 	
 	public static void EpicFreeGame(TextChannel channel){
@@ -157,22 +157,11 @@ public class Call {
 		error.setTitle("TEST");
 		error.setDescription(LoadingBar.loading(0.5, 5));
 		channel.sendMessage(error.build()).queue();
-		
-		
-		//for(TextChannel ch : channels)
-		//{
-		    //sendMessage(ch, "message");
-			//ch.sendMessage("This test message has been scheduled for 11 AM CEST. Please ignore it. If you are an administrator, DO NOT REMOVE IT !").queue();
-		//channels.sendMessage("I was first anyway").queue();
-		//}
 	}
 	
 	public static void THLR(JDA jda){
 		//TextChannel channel = jda.getTextChannelsByName("general", true).get(0);
 		//channel.sendMessage(Quotes.THLR6).queue();
 		//channel.sendMessage(Quotes.THLRfinal).queue();
-	}
-	static void sendMessage(TextChannel ch, String msg) {
-		ch.sendMessage(msg).queue();
 	}
 }

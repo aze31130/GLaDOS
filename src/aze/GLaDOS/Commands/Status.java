@@ -1,9 +1,10 @@
 package aze.GLaDOS.Commands;
 
 import java.util.Random;
-
 import aze.GLaDOS.Constants;
 import aze.GLaDOS.Constants.Roles;
+import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -11,7 +12,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Status {
-	public static void state(GuildMessageReceivedEvent event){
+	public static void state(GuildMessageReceivedEvent event, GLaDOS glados){
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		
 		if(message.length >= 2){
@@ -42,16 +43,12 @@ public class Status {
 				error.setDescription("Unknown state: " + message[1] + ". All states are: <online / idle / dnd>");
 				event.getChannel().sendMessage(error.build()).queue();
 			}
-		} else {
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "state <online / idle / dnd>");
-			event.getChannel().sendMessage(error.build()).queue();
+		} else {	
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "state <online / idle / dnd>").build()).queue();
 		}
 	}
 	
-	public static void activity(GuildMessageReceivedEvent event){
+	public static void activity(GuildMessageReceivedEvent event, GLaDOS glados){
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		
 		if(message.length >= 3){
@@ -70,7 +67,6 @@ public class Status {
 					event.getJDA().getPresence().setActivity(Activity.streaming(concatene(message), "https://www.twitch.tv/ "));
 					break;
 				default:
-					//event.getJDA().getPresence().setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS, message[1] + concatene(message)));
 					event.getJDA().getPresence().setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS, message[1] + concatene(message)));
 					isValidActivity = false;
 			}
@@ -88,11 +84,7 @@ public class Status {
 				event.getChannel().sendMessage(error.build()).queue();
 			}
 		} else {
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "activity <listening / playing / watching / streaming> <name>");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "activity <listening / playing / watching / streaming> <name>").build()).queue();
 		}
 	}
 	
@@ -151,7 +143,7 @@ public class Status {
 		return concatenated;
 	}
 	
-	public static void updateSettings(GuildMessageReceivedEvent event){
+	public static void updateSettings(GuildMessageReceivedEvent event, GLaDOS glados){
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		if(message.length >= 3){
 			if(event.getGuild().getMemberById(event.getAuthor().getId()).getRoles().contains(event.getGuild().getRoleById(Roles.ADMIN.id))){
@@ -161,7 +153,7 @@ public class Status {
 				switch(message[1]){
 					case "commandPrefix":
 						if(message[2].length() == 1){
-							Constants.commandPrefix = message[2];
+							glados.updatePrefix(message[2]);
 						} else {
 							isValidUpdate = false;
 						}
@@ -201,11 +193,7 @@ public class Status {
 				event.getChannel().sendMessage(error.build()).queue();
 			}
 		} else {
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "update-settings [setting] <enable / disable>");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "update-settings [setting] <enable / disable>").build()).queue();
 		}
 	}
 }

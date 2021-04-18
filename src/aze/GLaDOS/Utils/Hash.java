@@ -1,5 +1,8 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.Utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,43 +12,21 @@ import java.util.Base64;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Hash {
-	
-    private static final Charset UTF_8 = StandardCharsets.UTF_8;
-    private static final String OUTPUT_FORMAT = "%-20s:%s";
-
-    public static byte[] digest(byte[] input, String algorithm) {
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance(algorithm);
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalArgumentException(e);
-        }
-        byte[] result = md.digest(input);
-        return result;
-    }
-
-    public static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
-	
-    
-    public static void hash2(GuildMessageReceivedEvent event) {
-
-        //String algorithm = "SHA-256"; // if you perfer SHA-2
-        String algorithm = "SHA-256";
-        
-        //needs to remove the $hash command
-        String sentence = event.getMessage().getContentRaw();
-        
-        byte[] shaInBytes = Hash.digest(sentence.getBytes(UTF_8), algorithm);
-        System.out.println(sentence);
-        System.out.println(String.format(OUTPUT_FORMAT, algorithm + " (hex) ", bytesToHex(shaInBytes)));
-        event.getChannel().sendMessage(String.format(OUTPUT_FORMAT, algorithm + " (hex) ", bytesToHex(shaInBytes))).queue();
-    }
+	public static String getFileChecksum(MessageDigest digest, File file) throws IOException {
+		FileInputStream fis = new FileInputStream(file);
+		byte[] byteArray = new byte[1024];
+		int bytesCount = 0;
+		while ((bytesCount = fis.read(byteArray)) != -1) {
+			digest.update(byteArray, 0, bytesCount);
+		}
+		fis.close();
+		byte[] bytes = digest.digest();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < bytes.length ; i++) {
+			sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		return sb.toString();
+	}
 	
 	public static void hash(GuildMessageReceivedEvent event){
 		try {
@@ -70,12 +51,12 @@ public class Hash {
 		
 		while((i < 30000) && (!found)){
 	        String sentence = Integer.toString(i);
-			byte[] shaInBytes = Hash.digest(sentence.getBytes(UTF_8), algorithm);
+			//byte[] shaInBytes = Hash.digest(sentence.getBytes(UTF_8), algorithm);
 			
-			if(bytesToHex(shaInBytes).equals(hashToFind)){
+			//if(bytesToHex(shaInBytes).equals(hashToFind)){
 				found = true;
-				System.out.println("FOUND !:" + i);
-			}
+				//System.out.println("FOUND !:" + i);
+			//}
 			
 			System.out.println(i);
 			i++;

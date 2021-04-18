@@ -11,11 +11,12 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import aze.GLaDOS.Constants;
+import net.dv8tion.jda.api.JDA;
 
 public class JsonIO {
 	
@@ -28,47 +29,77 @@ public class JsonIO {
 	 * Joined:
 	 * Level:
 	 * Experience:
+	 * TotalExperience:
+	 * Achievements: (JsonArray of achievements)
 	 * Rank:
 	 * MessageAmount:
+	 * ReactAmount:
+	 * ?EmoteAmount:
 	 * Fame:
 	 * Favourite Command:
 	 * Version: 1
 	 */
 	
-	public static JSONArray loadArray(String filename) throws Exception {
-		File file = new File("./" + filename + ".json");
-		JSONArray json = new JSONArray();
+	
+	/*
+	 * JSONTokener jsonTokener = new JSONTokener(new FileReader("./accounts/test.txt"));
+	 * JSONObject jsonObject = new JSONObject(jsonTokener);
+	 */
+	
+	public static JSONArray loadJsonArray(String filename) throws Exception {
+		if(!filename.endsWith(".json")) {
+			filename.concat(".json");
+		}
+		
+		File file = new File("./" + filename);
+		JSONArray json = null;
 		if(file.exists()) {
-			JSONParser jsonParser = new JSONParser();
-			json = (JSONArray) jsonParser.parse(new FileReader("./" + filename + ".json"));
+			JSONTokener jsonParser = new JSONTokener(new FileReader("./" + filename));
+			json = new JSONArray(jsonParser);
 		}
 		return json;
 	}
 	
-	public static JSONObject load(String filename) throws Exception {
-		File file = new File("./" + Constants.SystemFolderName + "/" + filename + ".txt");
-		JSONObject json = new JSONObject();
+	public static JSONObject loadJsonObject(String path) throws Exception {
+		if(!path.endsWith(".json")) {
+			path.concat(".json");
+		}
+		
+		File file = new File("./" + path);
+		JSONObject json = null;
 		if(file.exists()) {
-			JSONParser jsonParser = new JSONParser();
-			json = (JSONObject) jsonParser.parse(new FileReader("./" + Constants.SystemFolderName + "/" + filename + ".txt"));
+			JSONTokener jsonParser = new JSONTokener(new FileReader("./" + path));
+			json = new JSONObject(jsonParser);
 		}
 		return json;
 	}
 	
-	public static void write(JSONObject json, String filename) {
-		if(isFolderCreated()) {
-			try {
-				FileWriter jsonFile = new FileWriter("./" + Constants.SystemFolderName + "/" + filename + ".txt");
-				jsonFile.write(json.toJSONString());
-				jsonFile.flush();
-				jsonFile.close();
-			} catch(Exception e) {
-				System.err.println(e.toString());
-			}
-		} else {
-			createFolder();
-			write(json, filename);
+	public static void saveAccount(JSONObject json, String filename) {
+		if(!filename.endsWith(".json")) {
+			filename = filename.concat(".json");
 		}
+		
+		if(!isAccountFolderCreated()) {
+			createAccountFolder();
+		}
+		
+		try {
+			FileWriter jsonFile = new FileWriter("./accounts/" + filename);
+			jsonFile.write(json.toString());
+			jsonFile.flush();
+			jsonFile.close();
+		} catch(Exception e) {
+			System.err.println(e.toString());
+		}
+	}
+	
+	private static boolean isAccountFolderCreated() {
+		File accountFolder = new File("./accounts/");
+		return (accountFolder.exists() && accountFolder.isDirectory());
+	}
+	
+	private static void createAccountFolder() {
+		new File("./accounts/").mkdir();
 	}
 	
 	public static void copyFile(File source, File dest) throws IOException {
@@ -92,13 +123,12 @@ public class JsonIO {
 		//copie les fichiers monté en ram dans la clef usb
 	}
 	
-	
 	public static void loadAccounts() {
 		String time = new SimpleDateFormat("[dd/MM/yyyy HH:mm:ss]").format(new Date());
 		System.out.println(time + " Loading account...");
 		if(JsonIO.isBackupFolderMounted()) {
 			int acountAmount = 0;
-			File folder = new File(Constants.BackupFolder);
+			File folder = new File("./backup");
 			for (String filenames : folder.list()) {
 				System.out.println(filenames);
 				//copier tout les fichier vers /home/tmp +
@@ -112,18 +142,14 @@ public class JsonIO {
 		}
 	}
 	
-	public static boolean isFolderCreated() {
-		File folder = new File("./" + Constants.SystemFolderName);
-		return (folder.exists() && folder.isDirectory());
-	}
-	
-	public static void createFolder() {
-		File folder = new File("./" + Constants.SystemFolderName);
-		folder.mkdir();
-	}
+
 	
 	public static boolean isBackupFolderMounted() {
-		File folder = new File("./" + Constants.BackupFolder);
+		File folder = new File("./backup/");
 		return (folder.exists() && folder.isDirectory());
+	}
+	
+	public static int accountAmount() {
+		return new File("./accounts").list().length;
 	}
 }

@@ -1,6 +1,6 @@
 package aze.GLaDOS.Commands;
 
-import net.dv8tion.jda.api.EmbedBuilder;
+import aze.GLaDOS.Utils.BuildEmbed;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -14,13 +14,8 @@ public class Music {
 			AudioSendHandler test = null;
 			audioManager.setSendingHandler(test);
 			audioManager.openAudioConnection(voiceChannel);
-			
 		} catch (IllegalArgumentException e) {
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error");
-			error.setDescription("You need to be connected in a voice channel first !");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed(e.toString() + "You need to be connected in a voice channel first !").build()).queue();
 		}
 	}
 	

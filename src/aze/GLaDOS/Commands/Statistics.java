@@ -3,10 +3,18 @@ package aze.GLaDOS.Commands;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 public class Statistics {
-	/* [PRIVATE FILE]
-	* To ensure that no one can abuse the ranking algorithm,
-	* this file will remain private as long as the algorithm
-	* is used. You will be able to see an old version that will
-	* no longer be used in a few days.
-	*/
+	//The Global Elite
+	//Grand Master
+	//Most Valuable Person
+	//Very Important Person
+	//Elder
+	public static void Rank(TextChannel channel) {
+		
+	}
+	
+	public int MemberAmount(Boolean includeBot) {
+		//int guildMembers = event.getGuild().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
+		//int guildBots = event.getGuild().getMembers().stream().filter(member -> member.getUser().isBot()).count();
+		return 0;
+	}
 }

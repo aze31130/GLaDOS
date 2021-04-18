@@ -12,10 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import aze.GLaDOS.Constants;
 import aze.GLaDOS.Constants.Roles;
+import aze.GLaDOS.GLaDOS;
 import aze.GLaDOS.Utils.BuildEmbed;
 import aze.GLaDOS.Utils.Counter;
 import aze.GLaDOS.Utils.JsonIO;
@@ -34,7 +35,7 @@ public class Messages {
 	/*
 	 * IDEAS
 	 * TOP MESSAGER
-	 * TOP EMOJIER / REACTER
+	 * TOP EMOJIER
 	 * TOP LINKER
 	 * 
 	 */
@@ -51,14 +52,9 @@ public class Messages {
 	
 	public static void sendPrivateMessage(GuildMessageReceivedEvent event){
 		User author = event.getJDA().getUserById("");
-		//User author2 = event.getJDA().getUserById("");
-		//File file = new File("./");
-		
-		//author.openPrivateChannel().queue((channel) ->
-		//channel.sendMessage("You want weapons? We’re in a library! Books! The best weapons in the world!").addFile(file).queue());
 		
 		author.openPrivateChannel().queue((channel) ->
-		channel.sendMessage("Hello my dear <3").queue());
+		channel.sendMessage("Hello").addFile(null).queue());
 	}
 	
 	public static void statistics(TextChannel channel, Member member) {
@@ -137,8 +133,8 @@ public class Messages {
 		if(Permission.permissionLevel(member, 1)) {
 			try {
 				Random rng = new Random();
-				JSONArray array = JsonIO.loadArray("general");
-				JSONObject json = (JSONObject) array.get(rng.nextInt(array.size() - 1));
+				JSONArray array = JsonIO.loadJsonArray("general");
+				JSONObject json = (JSONObject) array.get(rng.nextInt(array.length() - 1));
 				channel.sendMessage(json.get("message").toString()).queue();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -149,7 +145,6 @@ public class Messages {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void jsonChannel(TextChannel channel, Member member){
 		if(Permission.permissionLevel(member, 1)) {
 			Counter test = new Counter();
@@ -162,7 +157,7 @@ public class Messages {
 		        json.clear();
 		        if(me.getContentRaw().length() > 0) {
 		        	json.put("message", me.getContentRaw());
-		        	messageArray.add(json);
+		        	messageArray.put(json);
 		        }
 		        
 				
@@ -180,7 +175,7 @@ public class Messages {
 			
 			try {
 				FileWriter jsonFile = new FileWriter(channel.getName() + ".json");
-				jsonFile.write(messageArray.toJSONString());
+				jsonFile.write(messageArray.toString());
 				jsonFile.flush();
 				jsonFile.close();
 			} catch (IOException e) {
@@ -198,7 +193,7 @@ public class Messages {
 		if(Permission.permissionLevel(member, 1)) {
 			Counter test = new Counter();
 			channel.sendMessage("Downloading channel: " + channel.getAsMention()).queue();
-			//channel.getIterableHistory().cache(false).forEachAsync((me) -> { //Async for just backing up remaining for counting
+			//channel.getIterableHistory().cache(false).forEachAsync((me) -> {
 			channel.getIterableHistory().cache(false).forEachRemaining((me) -> {
 				try {
 					FileWriter fw = new FileWriter(channel.getName() + ".txt", true);
@@ -296,7 +291,7 @@ public class Messages {
 		}
 	}
 	
-	public static void tableRase(GuildMessageReceivedEvent event) {
+	public static void tableRase(GuildMessageReceivedEvent event, GLaDOS glados) {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		if(event.getGuild().getMemberById(event.getAuthor().getId()).getRoles().contains(event.getGuild().getRoleById(Roles.ADMIN.id))){
 			if(message.length >= 2){
@@ -306,6 +301,7 @@ public class Messages {
 						//event.getChannel().getIterableHistory().cache(true).forEachAsync((me) ->
 					    //{
 					    	//me.delete();
+					    	//System.out.println("Deleted one !");
 					    	//return true;
 					    //});
 						get1000(event.getChannel(), (messages) -> event.getChannel().purgeMessages(messages));
@@ -323,11 +319,7 @@ public class Messages {
 					error.setDescription("You need to confirm this final action !");
 					event.getChannel().sendMessage(error.build()).queue();
 				}
-				EmbedBuilder error = new EmbedBuilder();
-				error.setColor(0xff3923);
-				error.setTitle("Error");
-				error.setDescription("The command syntax is: " + Constants.commandPrefix + "table-rase <confirm>");
-				event.getChannel().sendMessage(error.build()).queue();
+				event.getChannel().sendMessage(BuildEmbed.errorEmbed("The command syntax is: " + glados.prefix + "table-rase <confirm>").build()).queue();
 			}
 		} else {
 			EmbedBuilder error = new EmbedBuilder();
@@ -338,7 +330,7 @@ public class Messages {
 		} 
 	}
 	
-	public static void clear(GuildMessageReceivedEvent event, Member member){
+	public static void clear(GuildMessageReceivedEvent event, Member member, GLaDOS glados){
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		if(message.length >= 2){
 			if(Permission.permissionLevel(member, 1)){
@@ -362,11 +354,7 @@ public class Messages {
 				event.getChannel().sendMessage(BuildEmbed.errorPermissionEmbed(2).build()).queue();
 			} 
 		} else {
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error in the command");
-			error.setDescription("Usage: " + Constants.commandPrefix + "clear [1-100]");
-			event.getChannel().sendMessage(error.build()).queue();
+			event.getChannel().sendMessage(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "clear [1-100]").build()).queue();
 		}
 	}
 }

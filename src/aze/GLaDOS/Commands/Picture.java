@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
-
 import aze.GLaDOS.Utils.Counter;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -22,6 +21,7 @@ public class Picture {
 			for(Attachment attachment : list){
 				if((attachment.getFileExtension().equalsIgnoreCase("jpg"))){
 					attachment.downloadToFile(new File("./temporaire.jpg"));
+					
 					
 					event.getChannel().sendMessage("Starting processing !").queue();
 					BufferedImage img = null;
