@@ -1,6 +1,7 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import aze.GLaDOS.Constants;
+import aze.GLaDOS.Constants.Permissions;
 import aze.GLaDOS.Constants.Roles;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -18,16 +19,17 @@ public class Permission {
 		List<Role> roles = member.getRoles();
 		int permission = 0;
 		if(member.getId().equals(Constants.OwnerId)) {
-			permission = 3;
+			permission = Permissions.OWNER.level;
 		} else {
 			for(Role role : roles){
 				if(role.getId().equals(Roles.MOD.id)) {
-					permission = 1;
+					permission = Permissions.MOD.level;
+					
 				}
 			}
 			for(Role role : roles){
 				if(role.getId().equals(Roles.ADMIN.id)) {
-					permission = 2;
+					permission = Permissions.ADMIN.level;
 				}
 			}
 		}

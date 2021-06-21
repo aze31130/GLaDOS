@@ -1,4 +1,4 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

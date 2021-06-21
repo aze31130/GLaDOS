@@ -1,6 +1,6 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
-import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.utils.BuildEmbed;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

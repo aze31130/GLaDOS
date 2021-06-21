@@ -1,9 +1,9 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import aze.GLaDOS.Tycoon.Building.Type;
+import aze.GLaDOS.tycoon.Building.Type;
 
 public class Game {
 	private final int MAX_ROUND = 99;

@@ -1,10 +1,11 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import aze.GLaDOS.Tycoon.Building.Type;
-import aze.GLaDOS.Tycoon.Tile.Biome;
+
+import aze.GLaDOS.tycoon.Building.Type;
+import aze.GLaDOS.tycoon.Tile.Biome;
 
 public class Map {
 	public int WIDTH = 20;

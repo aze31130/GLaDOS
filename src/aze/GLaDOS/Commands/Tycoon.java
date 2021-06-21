@@ -1,11 +1,11 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.io.File;
 import java.util.List;
 
-import aze.GLaDOS.Tycoon.Game;
-import aze.GLaDOS.Tycoon.TycoonException;
-import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.tycoon.Game;
+import aze.GLaDOS.tycoon.TycoonException;
+import aze.GLaDOS.utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.TextChannel;
 

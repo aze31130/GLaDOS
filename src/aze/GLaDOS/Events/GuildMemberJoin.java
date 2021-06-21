@@ -1,6 +1,6 @@
-package aze.GLaDOS.Events;
+package aze.GLaDOS.events;
 
-import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.utils.BuildEmbed;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

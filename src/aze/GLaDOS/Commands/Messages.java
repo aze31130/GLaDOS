@@ -1,4 +1,4 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
@@ -15,14 +15,17 @@ import java.util.function.Consumer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import aze.GLaDOS.Constants;
+import aze.GLaDOS.Constants.Channels;
 import aze.GLaDOS.Constants.Roles;
 import aze.GLaDOS.GLaDOS;
-import aze.GLaDOS.Utils.BuildEmbed;
-import aze.GLaDOS.Utils.Counter;
-import aze.GLaDOS.Utils.JsonIO;
-import aze.GLaDOS.Utils.Pair;
-import aze.GLaDOS.Utils.Permission;
+import aze.GLaDOS.database.JsonIO;
+import aze.GLaDOS.utils.BuildEmbed;
+import aze.GLaDOS.utils.Counter;
+import aze.GLaDOS.utils.Pair;
+import aze.GLaDOS.utils.Permission;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -145,49 +148,43 @@ public class Messages {
 		}
 	}
 	
-	public static void jsonChannel(TextChannel channel, Member member){
-		if(Permission.permissionLevel(member, 1)) {
-			Counter test = new Counter();
-			JSONArray messageArray = new JSONArray();
-			
-			channel.sendMessage("Creatin a json array of channel: " + channel.getAsMention()).queue();
-			
-			channel.getIterableHistory().cache(false).forEachRemaining((me) -> {
-				JSONObject json = new JSONObject();
-		        json.clear();
-		        if(me.getContentRaw().length() > 0) {
-		        	json.put("message", me.getContentRaw());
-		        	messageArray.put(json);
-		        }
-		        
-				
-				if(test.value() % 150 == 0) {
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				test.add();
-				return true;
-			});
-			
+	public static void downloadServer(JDA jda) {
+		Guild server = jda.getGuilds().get(1);
+		TextChannel channel = server.getTextChannelById(Channels.BOT_SNAPSHOT.id);
+		
+		
+		for(TextChannel tc : server.getTextChannels()) {
+			channel.sendMessage("Creatin a json array of channel: " + tc.getAsMention()).queue();
 			try {
-				FileWriter jsonFile = new FileWriter(channel.getName() + ".json");
-				jsonFile.write(messageArray.toString());
-				jsonFile.flush();
-				jsonFile.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+				jsonChannel(tc);
+			} catch(Exception e) {
 				channel.sendMessage(e.toString()).queue();
 			}
-			channel.sendMessage("Successfully created json file of ./" + channel.getName().toLowerCase() + ".txt file").queue();
-		} else {
-			channel.sendMessage(BuildEmbed.errorPermissionEmbed(1).build()).queue();
+			
+			channel.sendMessage("Successfully created json file of ./" + tc.getName().toLowerCase() + ".txt file").queue();
 		}
 	}
 	
+	public static void jsonChannel(TextChannel channel) throws IOException {
+		Counter test = new Counter();
+		JSONArray messageArray = new JSONArray();
+		
+		channel.getIterableHistory().cache(false).forEachRemaining((me) -> {
+			JSONObject json = new JSONObject();
+	        json.clear();
+	        if(me.getContentRaw().length() > 0) {
+	        	json.put("message", me.getContentRaw());
+	        	messageArray.put(json);
+	        }
+			test.add();
+			return true;
+		});
+		
+		FileWriter jsonFile = new FileWriter("./data/channels/" + channel.getName() + ".json");
+		jsonFile.write(messageArray.toString());
+		jsonFile.flush();
+		jsonFile.close();
+	}
 	
 	public static void downloadChannel(TextChannel channel, Member member){
 		if(Permission.permissionLevel(member, 1)) {
@@ -203,14 +200,6 @@ public class Messages {
 					out.close();
 				} catch (IOException e) {
 					channel.sendMessage(e.toString());
-				}
-				if(test.value() % 100 == 0) {
-					System.out.println("Waiting:" + test.value());
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 				test.add();
 		    	return true;

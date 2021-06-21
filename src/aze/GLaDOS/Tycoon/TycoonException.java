@@ -1,4 +1,4 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
 public class TycoonException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

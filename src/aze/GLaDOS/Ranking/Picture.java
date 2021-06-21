@@ -1,4 +1,4 @@
-package aze.GLaDOS.Ranking;
+package aze.GLaDOS.ranking;
 
 import net.dv8tion.jda.api.entities.User;
 

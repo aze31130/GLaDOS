@@ -8,21 +8,24 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import aze.GLaDOS.Constants.Channels;
-import aze.GLaDOS.Commands.Call;
-import aze.GLaDOS.Commands.Meme;
-import aze.GLaDOS.Commands.Status;
-import aze.GLaDOS.Events.GuildMemberJoin;
-import aze.GLaDOS.Events.GuildMemberRemove;
-import aze.GLaDOS.Events.GuildMessageReactionAdd;
-import aze.GLaDOS.Events.GuildMessageReactionRemove;
-import aze.GLaDOS.Events.GuildMessageReceived;
-import aze.GLaDOS.Events.GuildSlashCommand;
-import aze.GLaDOS.Events.GuildVoiceJoin;
-import aze.GLaDOS.Events.GuildVoiceLeave;
-import aze.GLaDOS.Events.PrivateMessageReceived;
-import aze.GLaDOS.Utils.BuildEmbed;
-import aze.GLaDOS.Utils.JsonIO;
-import aze.GLaDOS.Utils.Permission;
+import aze.GLaDOS.Constants.Permissions;
+import aze.GLaDOS.commands.Call;
+import aze.GLaDOS.commands.Quote;
+import aze.GLaDOS.commands.Status;
+import aze.GLaDOS.database.JsonIO;
+import aze.GLaDOS.events.GuildButtonClick;
+import aze.GLaDOS.events.GuildMemberJoin;
+import aze.GLaDOS.events.GuildMemberRemove;
+import aze.GLaDOS.events.GuildMessageReactionAdd;
+import aze.GLaDOS.events.GuildMessageReactionRemove;
+import aze.GLaDOS.events.GuildMessageReceived;
+import aze.GLaDOS.events.GuildSlashCommand;
+import aze.GLaDOS.events.GuildVoiceJoin;
+import aze.GLaDOS.events.GuildVoiceLeave;
+import aze.GLaDOS.events.PrivateMessageReceived;
+import aze.GLaDOS.utils.BuildEmbed;
+import aze.GLaDOS.utils.Logger;
+import aze.GLaDOS.utils.Permission;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Member;
@@ -34,19 +37,13 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		GLaDOS glados = GLaDOS.getInstance();
+		Logger log = new Logger(true);
+		System.out.println(log + "Starting GLaDOS");
 		glados.initialize();
-		String time = new SimpleDateFormat("[dd/MM/yyyy HH:mm:ss]").format(new Date());
-		System.out.println(time + " Starting GLaDOS version " + glados.version);
-		System.out.println(time + " Logging messages: " + Constants.logMessage);
-		System.out.println(time + " Logging connexions: " + Constants.logConnexions);
-		System.out.println(time + " Ranking version: ");
-		JsonIO.loadAccounts();
-
-		//THIS IS A TEMPORARY CODE THAT WILL BE REMOVED ON MAY 16TH
-		System.out.println(time + " Delay of 30 seconds has begun ! Connect the server to the network.");
-		//Thread.sleep(30000);
-		System.out.println(time + " Delay of 30 seconds ended ! Trying to connect to websocket...");
-		//THIS IS A TEMPORARY CODE THAT WILL BE REMOVED ON MAY 16TH
+		System.out.println(log + "Logging messages: " + Constants.logMessage);
+		System.out.println(log + "Leveling: " + glados.leveling);
+		System.out.println(log + "Maximum level: " + glados.maxLevel);
+		System.out.println(log + "Ranking version: ALPHA");
 		
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 		builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
@@ -61,6 +58,7 @@ public class Main {
 		jda.addEventListener(new GuildMessageReactionAdd());
 		jda.addEventListener(new GuildMessageReactionRemove());
 		jda.addEventListener(new GuildSlashCommand());
+		jda.addEventListener(new GuildButtonClick());
 		
 		if(Constants.CheckPrivateMessages){
 			jda.addEventListener(new PrivateMessageReceived());
@@ -74,6 +72,13 @@ public class Main {
 		}
 		
 		jda.awaitReady();
+		
+		/*
+		for(Member m : jda.getGuilds().get(1).getMembers()) {
+			Account.createAccount(m);
+		}*/
+		
+		
 		ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();
 		clock.scheduleAtFixedRate(new Runnable() {
 		    @Override
@@ -89,10 +94,11 @@ public class Main {
 				
 				if(!Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) <= 1)){
 					System.out.println("Executed Random Quote on " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-					Meme.randomQuotes(jda.getTextChannelsByName("general", true).get(0));
-					if(Constants.isAccountLoaded && JsonIO.isBackupFolderMounted()) {
+					Quote.randomQuotes(jda.getTextChannelById(Channels.GENERAL.id));
+					if(glados.leveling) {
 						//Ranking.update();
-						JsonIO.backupAccounts();
+						glados.backup();
+						JsonIO.backup();
 					}
 					Constants.LockdownDayAnnonce = true;
 				} else {
@@ -110,11 +116,11 @@ public class Main {
 		    	}
 		    }
 		}, 0, 1, TimeUnit.HOURS);
-		System.out.println(time + " Done ! GLaDOS is running ! ");
+		System.out.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");
 	}
 	
 	public static void shutdown(GuildMessageReceivedEvent event, Member member){
-		if(Permission.permissionLevel(member, 2)){
+		if(Permission.permissionLevel(member, Permissions.ADMIN.level)){
 			String time = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 			System.out.println(time + " Shutting down now !");
 			event.getJDA().shutdown();

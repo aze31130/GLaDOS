@@ -1,4 +1,4 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 public class LoadingBar {
 	public static String loading(double current, int style) {

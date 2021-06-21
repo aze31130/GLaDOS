@@ -1,12 +1,21 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Logger {
-	private String time = new SimpleDateFormat("[dd/MM/yyyy HH:mm:ss]").format(new Date());
+	Boolean isConsole;
+	
+	public Logger(Boolean ic) {
+		this.isConsole = ic;
+	}
+	
 	@Override
 	public String toString() {
-		return this.time;
+		if(this.isConsole) {
+			return new SimpleDateFormat("[dd/MM/yyyy HH:mm:ss] ").format(new Date());
+		} else {
+			return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+		}
 	}
 }

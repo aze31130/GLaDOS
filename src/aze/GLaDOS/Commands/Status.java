@@ -1,9 +1,9 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.util.Random;
 import aze.GLaDOS.Constants;
 import aze.GLaDOS.Constants.Roles;
-import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.utils.BuildEmbed;
 import aze.GLaDOS.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;

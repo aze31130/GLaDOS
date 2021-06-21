@@ -1,4 +1,4 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 public class Counter {
 	int Amount = 0;

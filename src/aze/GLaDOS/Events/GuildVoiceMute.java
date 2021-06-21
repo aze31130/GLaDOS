@@ -1,4 +1,4 @@
-package aze.GLaDOS.Events;
+package aze.GLaDOS.events;
 
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMuteEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

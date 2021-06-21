@@ -1,4 +1,4 @@
-package aze.GLaDOS.Neural;
+package aze.GLaDOS.neural;
 
 public class NeuralNetwork {
 

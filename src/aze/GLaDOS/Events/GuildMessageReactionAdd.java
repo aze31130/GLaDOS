@@ -1,4 +1,4 @@
-package aze.GLaDOS.Events;
+package aze.GLaDOS.events;
 
 import aze.GLaDOS.Constants;
 import aze.GLaDOS.Constants.Roles;

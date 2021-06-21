@@ -1,4 +1,4 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import net.dv8tion.jda.api.entities.User;
 

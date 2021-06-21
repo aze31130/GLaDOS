@@ -1,4 +1,4 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

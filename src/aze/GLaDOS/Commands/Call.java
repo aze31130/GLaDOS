@@ -1,11 +1,11 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.awt.Color;
 import java.util.Random;
 import aze.GLaDOS.Constants.Channels;
 import aze.GLaDOS.Constants.Roles;
-import aze.GLaDOS.Utils.LoadingBar;
-import aze.GLaDOS.Utils.Permission;
+import aze.GLaDOS.utils.LoadingBar;
+import aze.GLaDOS.utils.Permission;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
@@ -13,43 +13,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Call {
-	public static void hardSpam(GuildMessageReceivedEvent event, Member member){
-		String[] message = event.getMessage().getContentRaw().split("\\s+");
-		if(Permission.permissionLevel(member, 1)){
-			if(message.length >= 3){
-				int iterations = 0;
-				try {
-					iterations = Integer.parseInt(message[2]);
-				} catch(Exception e){
-					EmbedBuilder error = new EmbedBuilder();
-					error.setColor(Color.RED);
-					error.setTitle("Exception !");
-					error.setDescription(e.toString());
-					event.getChannel().sendMessage(error.build()).queue();
-				}
-				event.getChannel().sendTyping().queue();
-				event.getChannel().sendMessage("Queueing " + iterations + " iterations of pinging user").queue();
-				while(iterations > 0){
-					event.getChannel().sendMessage(message[1]).queue();
-					iterations--;
-				}
-			} else {
-				event.getChannel().sendTyping().queue();
-				EmbedBuilder error = new EmbedBuilder();
-				error.setColor(Color.RED);
-				error.setTitle("Error");
-				error.setDescription("The command syntax is ?hardspam (@User) <Amount>");
-				event.getChannel().sendMessage(error.build()).queue();
-			}
-		} else {
-			event.getChannel().sendTyping().queue();
-			EmbedBuilder error = new EmbedBuilder();
-			error.setColor(0xff3923);
-			error.setTitle("Error");
-			error.setDescription("You need to have the Administrator role in order to execute that.");
-			event.getChannel().sendMessage(error.build()).queue();
-		}
-	}
 	
 	public static void Slap(TextChannel channel) {
 		String[] messages = {
@@ -93,11 +56,6 @@ public class Call {
 		channel.sendMessage("<@&" + Roles.GAMER.id + "> " + messages[randomNumber] + " https://www.epicgames.com/store/fr/free-games/").queue();
 	}
 	
-	public static void LockdownDay(JDA jda){
-		TextChannel channel = jda.getTextChannelsByName("general", true).get(0);
-		Meme.randomQuotes(channel);
-	}
-	
 	public static void MerryChristmas(JDA jda) {
 		TextChannel channel = jda.getTextChannelsByName("general", true).get(0);
 		channel.sendMessage("May this season of giving be the start of your better life. Have a great and blessed holiday ! Merry christmas @everyone !").queue();
@@ -126,15 +84,16 @@ public class Call {
 		}
 	}
 	
-	public static void maintenance() {
+	public static EmbedBuilder maintenance() {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setColor(Color.ORANGE);
 		embed.setTitle("Scheduled maintenance");
 		embed.setDescription("GLaDOS won't be available between");
 		embed.setThumbnail("https://cdn.iconscout.com/icon/free/png-512/building-maintenance-2027068-1714203.png");
-		embed.addField("29/01/2021", "8:00 PM CET", true);
-		embed.addField("31/01/2021", "12:00 AM CET", true);
+		embed.addField("14/05/2021", "8:00 PM CEST", true);
+		embed.addField("16/05/2021", "12:00 PM CEST", true);
 		embed.setFooter("Thanks for your patience", "https://image.flaticon.com/icons/png/512/777/777081.png");
+		return embed;
 	}
 	
 	public static String concatene2(String[] Table){

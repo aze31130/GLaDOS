@@ -1,14 +1,12 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import aze.GLaDOS.GLaDOS;
 import aze.GLaDOS.Main;
-import aze.GLaDOS.Accounts.Account;
 import aze.GLaDOS.Constants.Channels;
-import aze.GLaDOS.Utils.BuildEmbed;
-import aze.GLaDOS.Utils.Resolver;
+import aze.GLaDOS.utils.BuildEmbed;
+import aze.GLaDOS.utils.Resolver;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -33,10 +31,10 @@ public class Commands {
 				}
 				break;
 			case "hardspam": case "hs":
-				Call.hardSpam(event, event.getMember());
+				//Call.hardSpam(event, event.getMember());
 				break;
-			case "count": case "cm":
-				Messages.countMessages(event, event.getMember());
+			case "move":
+				Move.move(event.getGuild(),event.getJDA().getVoiceChannelsByName(message[1], true).get(0), event.getJDA().getVoiceChannelsByName(message[2], true).get(0));
 				break;
 			case "che-guevara": case "cg":
 				Meme.cheGuevara(event);
@@ -62,20 +60,17 @@ public class Commands {
 			case "random-cat": case "rc":
 				Meme.randomCat(event);
 				break;
-			case "statistics": case "stats-chan":
+			case "statistics":
 				Messages.statistics(event.getChannel(), event.getMember());
 				break;
-			case "download-channel": case "dl-chan":
-				Messages.downloadChannel(event.getChannel(), event.getMember());
-				break;
 			case "json-channel": case "json-chan":
-				Messages.jsonChannel(event.getChannel(), event.getMember());
+				//Messages.jsonChannel(event.getChannel(), event.getMember());
 				break;
 			case "random-meme": case "rm":
 				Meme.meme(event);
 				break;
-			case "account-info":
-				Info.accountInfo(event);
+			case "account": case "profile":
+				Info.account(event);
 				break;
 			case "server-info":
 				Info.serverInfo(event, glados);

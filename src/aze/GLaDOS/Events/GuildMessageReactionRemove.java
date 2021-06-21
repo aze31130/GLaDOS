@@ -1,4 +1,4 @@
-package aze.GLaDOS.Events;
+package aze.GLaDOS.events;
 
 import aze.GLaDOS.Constants;
 import aze.GLaDOS.Constants.Roles;
@@ -23,7 +23,7 @@ public class GuildMessageReactionRemove extends ListenerAdapter {
 			event.getGuild().removeRoleFromMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.INTERNATIONAL.id)).queue();
 		}
 
-		if((event.getChannel().getName().equals(Constants.RoleChannelName)) && (event.getReactionEmote().getName().equals("‚ù§Ô∏è"))){
+		if((event.getChannel().getName().equals(Constants.RoleChannelName)) && (event.getReactionEmote().getName().equals("‚?§Ô∏?"))){
 			event.getGuild().removeRoleFromMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.NSFW.id)).queue();
 		}
 	}

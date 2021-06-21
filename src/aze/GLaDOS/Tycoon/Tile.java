@@ -1,6 +1,6 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
-import aze.GLaDOS.Tycoon.Building.Type;
+import aze.GLaDOS.tycoon.Building.Type;
 
 public class Tile {
 	public enum Biome {

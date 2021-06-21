@@ -1,4 +1,4 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
-import aze.GLaDOS.Utils.Counter;
+
+import aze.GLaDOS.utils.Counter;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

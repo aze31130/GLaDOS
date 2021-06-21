@@ -1,8 +1,8 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.math.BigInteger;
 import aze.GLaDOS.GLaDOS;
-import aze.GLaDOS.Utils.BuildEmbed;
+import aze.GLaDOS.utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 

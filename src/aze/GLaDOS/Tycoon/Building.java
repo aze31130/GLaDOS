@@ -1,4 +1,4 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
 public abstract class Building {
 	public enum Type {

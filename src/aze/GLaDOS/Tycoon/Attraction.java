@@ -1,4 +1,4 @@
-package aze.GLaDOS.Tycoon;
+package aze.GLaDOS.tycoon;
 
 public class Attraction extends Building {
 	public final static int BUILD_COST = 10000;

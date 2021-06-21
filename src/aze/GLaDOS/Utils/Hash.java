@@ -1,9 +1,8 @@
-package aze.GLaDOS.Utils;
+package aze.GLaDOS.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -40,26 +39,6 @@ public class Hash {
 		} catch (NoSuchAlgorithmException exception) {
 			// TODO Auto-generated catch block
 			exception.printStackTrace();
-		}
-	}
-	
-	public static void SuperHash(){
-		int i = 0;
-		String hashToFind = "64834ec3410384ac05ad842ab13d8a3d8fbdd1c4eb7d0788d9f7867d6f145d5c";
-		Boolean found = false;
-		String algorithm = "SHA-256";
-		
-		while((i < 30000) && (!found)){
-	        String sentence = Integer.toString(i);
-			//byte[] shaInBytes = Hash.digest(sentence.getBytes(UTF_8), algorithm);
-			
-			//if(bytesToHex(shaInBytes).equals(hashToFind)){
-				found = true;
-				//System.out.println("FOUND !:" + i);
-			//}
-			
-			System.out.println(i);
-			i++;
 		}
 	}
 	

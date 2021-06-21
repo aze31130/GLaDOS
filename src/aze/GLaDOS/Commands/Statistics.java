@@ -1,4 +1,4 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 

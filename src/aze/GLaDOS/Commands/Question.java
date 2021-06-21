@@ -1,9 +1,6 @@
-package aze.GLaDOS.Commands;
+package aze.GLaDOS.commands;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -16,11 +13,8 @@ public class Question {
 			//parameters:
 			//difficulty
 			//theme
-			String apiUrl = "https://opentdb.com/api.php?amount=1";
-			URL questionURL = new URL(apiUrl);
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(questionURL.openConnection().getInputStream()));
-			
-			String lines;
+			//String apiUrl = "https://opentdb.com/api.php?amount=1";
+
 			
 			String category = "";
 			String question = "";
