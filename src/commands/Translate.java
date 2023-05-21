@@ -34,11 +34,13 @@ public class Translate extends Command {
 	@Override
 	public void execute(Argument args) {
 		GLaDOS g = GLaDOS.getInstance();
+
+		int delay = 300;
 		
 		//Check cooldown
 		long secondsSinceLastExecution = g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
-		if (secondsSinceLastExecution < 300) {
-			args.channel.sendMessage(BuildEmbed.errorEmbed("You need to wait " + (300 - secondsSinceLastExecution) + " seconds until using this command !").build()).queue();
+		if (secondsSinceLastExecution < delay) {
+			args.channel.sendMessage(BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution) + " seconds until using this command !").build()).queue();
 			return;
 		}
 
@@ -47,9 +49,12 @@ public class Translate extends Command {
 		Collections.reverse(messages);
 
 		for (Message m : messages) {
+			String messageContent = m.getContentDisplay();
+			if ((messageContent.length() == 0) || (m.getAuthor().isBot()))
+				continue;
 
 			JSONObject json = new JSONObject();
-			json.put("q", m.getContentDisplay());
+			json.put("q", messageContent);
 			json.put("source", "fr");
 			json.put("target", "en");
 	
@@ -65,8 +70,7 @@ public class Translate extends Command {
 			try {
 				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 				JSONObject responseJson = new JSONObject(response.body());
-	
-				args.channel.sendMessage("[Translated] <" + m.getMember().getEffectiveName() + ">: " + responseJson.get("translatedText").toString()).queue();
+				args.channel.sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: " + responseJson.get("translatedText").toString()).queue();
 			} catch(IOException|InterruptedException e) {
 				args.channel.sendMessage(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
