@@ -43,6 +43,7 @@ public class Translate extends Command {
 			args.channel.sendMessage(BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution) + " seconds until using this command !").build()).queue();
 			return;
 		}
+		g.translationCooldown = LocalDateTime.now();
 
 		//Get the last 15 messages
 		List<Message> messages = args.channel.getHistory().retrievePast(15).complete();
