@@ -1,5 +1,6 @@
 package main;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ public class GLaDOS {
 	public Ranking ranking;
 	public JSONArray bannedWords;
 	public int maxLevel;
+	public LocalDateTime translationCooldown;
 	
 	public List<Account> accounts;
 	public List<Command> commands = new ArrayList<Command>();
@@ -49,6 +51,7 @@ public class GLaDOS {
 			this.token = json.get("token").toString();
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
+			this.translationCooldown = LocalDateTime.now();
 			
 			//Initialize accounts
 			if(leveling) {
@@ -56,6 +59,7 @@ public class GLaDOS {
 			}
 			
 			//Initialize commands
+			this.commands.add(new Translate("translate", "tr", "translate command", "example", false, 1));
 			this.commands.add(new Statistics("stats", "s", "stats command", "example", false, 1));
 			this.commands.add(new Ping("ping", "p", "ping command", "example", false, 1));
 			this.commands.add(new Clear("clear", "c", "clear command", "example", false, 1));
