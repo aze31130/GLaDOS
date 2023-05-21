@@ -46,7 +46,7 @@ public class Translate extends Command {
 		g.translationCooldown = LocalDateTime.now();
 
 		//Get the last 15 messages
-		List<Message> messages = args.channel.getHistory().retrievePast(15).complete();
+		List<Message> messages = args.channel.getHistory().retrievePast(10).complete();
 		Collections.reverse(messages);
 
 		for (Message m : messages) {
