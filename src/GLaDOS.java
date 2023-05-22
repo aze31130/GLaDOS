@@ -3,12 +3,16 @@ package main;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import accounts.Account;
 import commands.*;
 import database.JsonIO;
 import ranking.Ranking;
+import constants.Constants;
+
+import utils.FileUtils;
 
 public class GLaDOS {
 	private static volatile GLaDOS instance = null;
@@ -41,6 +45,15 @@ public class GLaDOS {
 	}
 	
 	public void initialize() {
+		File config = new File("./settings.json");
+
+		//Create config file is not present
+		if (!config.exists()) {
+			FileUtils.createDefaultConfig();
+			System.out.println("You have to define your token inside the " + constants.Constants.Config_File + " file !");
+			System.exit(1);
+		}
+
 		try {
 			//Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./settings.json");
@@ -58,7 +71,8 @@ public class GLaDOS {
 				this.accounts = JsonIO.loadAccounts();
 			}
 			
-			//Initialize commands
+			//Initialize command
+			this.commands.add(new Call("call", "call", "call command", "example", false, 1));
 			this.commands.add(new Translate("translate", "tr", "translate command", "example", false, 1));
 			this.commands.add(new Statistics("stats", "s", "stats command", "example", false, 1));
 			this.commands.add(new Ping("ping", "p", "ping command", "example", false, 1));
@@ -82,9 +96,17 @@ public class GLaDOS {
 			this.commands.add(new Profile("profile", "p", "profile command", "example", false, 2));
 			this.commands.add(new Test("test", "p", "profile command", "example", false, 2));
 		} catch (Exception e) {
-			System.err.println("FATAL ! Couldn't read the settings.json file, exiting !");
-			e.printStackTrace();
-			System.exit(0);
+			System.err.println("Error ! The given " + constants.Constants.Config_File + " is invalid !");
+			System.exit(1);
+		}
+	}
+
+	public void executeCommand(String name, Argument args) {
+		for(Command command : GLaDOS.getInstance().commands) {
+			if(name.equalsIgnoreCase(command.name) || name.equalsIgnoreCase(command.alias)) {
+				command.execute(args);
+				return;
+			}
 		}
 	}
 	
