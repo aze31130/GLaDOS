@@ -13,4 +13,5 @@ javac -cp "./libs/JDA-4.3.0_277-withDependencies.jar:./libs/jda-utilities-2.1-al
 cd $BUILD_FOLDER
 jar cfe $OUTPUT_JAR_NAME Main $(find . -type f -name "*.class")
 cp ../libs/*.jar .
+cp ../settings.json .
 java -cp GLaDOS.jar:jda-utilities-2.1-all.jar:json-20220320.jar:JDA-4.3.0_277-withDependencies.jar main.Main

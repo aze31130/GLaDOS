@@ -15,8 +15,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import constants.Constants.Channels;
+import commands.Argument;
 import commands.Call;
-import commands.Quote;
 import events.GuildButtonClick;
 import events.GuildMemberJoin;
 import events.GuildMemberRemove;
@@ -84,17 +84,33 @@ public class Main {
 				public void run() {
 					Calendar cal = Calendar.getInstance();
 					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) <= 1) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
-						System.out.println("Executed EpicGameAnnoune on " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						//Call.EpicFreeGame(jda.getTextChannelById(Channels.GAMER.id));
-						//glados.executeCommand("Call", new Argument(TODO));
+						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
+						glados.executeCommand(
+							"Call",
+							new Argument(null,
+								jda.getGuildById(constants.Constants.GuildId).getMemberById(constants.Constants.OwnerId),
+								jda.getTextChannelById(Channels.GENERAL.id),
+								new String[]{"Gamer"},
+								null
+							)
+						);
 						constants.Constants.FreeGameAnnonce = true;
 					} else {
 						constants.Constants.FreeGameAnnonce = false;
 					}
 					
-					if(!constants.Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) <= 1)){
-						System.out.println("Executed Random Quote on " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						//Quote.randomQuotes(jda.getTextChannelById(Channels.GENERAL.id));
+					if(!constants.Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) <= 1) && (cal.get(Calendar.SECOND) <= 10)){
+						System.out.println(log + "Executed Random Quote at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
+						glados.executeCommand(
+							"Call",
+							new Argument(null,
+								jda.getGuildById(constants.Constants.GuildId).getMemberById(constants.Constants.OwnerId),
+								jda.getTextChannelById(Channels.GENERAL.id),
+								new String[]{"Midnight"},
+								null
+							)
+						);
+
 						if(glados.leveling) {
 							//Ranking.update();
 							glados.backup();
@@ -122,9 +138,6 @@ public class Main {
 		} catch (Exception e) {
 			System.err.println(log + "Invalid token given ! ");
 		}
-		
-	
-	//jda.getTextChannelById("676731153444765709").sendMessage("bref, en gros, <@327775924403830784> sait pas coder.").queue();
 	
 	/*
 	Guild server = jda.getGuilds().get(1);
