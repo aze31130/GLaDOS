@@ -83,13 +83,13 @@ public class Main {
 				@Override
 				public void run() {
 					Calendar cal = Calendar.getInstance();
-					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) <= 1) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
+					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
 						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						glados.executeCommand(
 							"Call",
 							new Argument(null,
 								jda.getGuildById(constants.Constants.GuildId).getMemberById(constants.Constants.OwnerId),
-								jda.getTextChannelById(Channels.GENERAL.id),
+								jda.getTextChannelById(Channels.GAMER.id),
 								new String[]{"Gamer"},
 								null
 							)
@@ -99,7 +99,7 @@ public class Main {
 						constants.Constants.FreeGameAnnonce = false;
 					}
 					
-					if(!constants.Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) <= 1) && (cal.get(Calendar.SECOND) <= 10)){
+					if(!constants.Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10)){
 						System.out.println(log + "Executed Random Quote at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						glados.executeCommand(
 							"Call",

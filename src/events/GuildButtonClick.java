@@ -8,6 +8,12 @@ public class GuildButtonClick extends ListenerAdapter {
 	public void onButtonClick(ButtonClickEvent event) {
 		Boolean success = true;
 		switch(event.getComponentId()) {
+			case "+Broadcast":
+				event.getGuild().addRoleToMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.BROADCAST_MESSENGER.id)).queue();
+				break;
+			case "-Broadcast":
+				event.getGuild().removeRoleFromMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.BROADCAST_MESSENGER.id)).queue();
+				break;
 			case "+Gamer":
 				event.getGuild().addRoleToMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.GAMER.id)).queue();
 				break;

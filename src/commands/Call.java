@@ -39,7 +39,7 @@ public class Call extends Command {
 
 		switch(args.arguments[0]) {
 			case "Gamer":
-				args.channel.sendMessage("<@&" + Roles.GAMER.id + ">").queue();
+				args.channel.sendMessage("<@&" + Roles.BROADCAST_MESSENGER.id + ">").queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":
