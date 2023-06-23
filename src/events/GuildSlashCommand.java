@@ -6,6 +6,9 @@ import commands.Command;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.components.*;
+
+
 
 public class GuildSlashCommand extends ListenerAdapter {
 	public void onSlashCommand(SlashCommandEvent event) {
@@ -20,6 +23,9 @@ public class GuildSlashCommand extends ListenerAdapter {
 				}
 
 				event.reply("200 OK").queue();
+
+				//event.reply("200 OK").addActionRow(Button.primary("+Broadcast", "Join Broadcast Messenger"), Button.danger("-Broadcast", "Leave Broadcast Messenger")).queue();
+
 				command.execute(new Argument(glados.getAccount(event.getMember().getId()), event.getMember(), event.getTextChannel(), arguments, null));
 				break;
 			}

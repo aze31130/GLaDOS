@@ -95,6 +95,7 @@ public class GLaDOS {
 			this.commands.add(new PictureInverse("picture-inverse", "pi", "picture inverse command", "example", false, 2));
 			this.commands.add(new Profile("profile", "p", "profile command", "example", false, 2));
 			this.commands.add(new Test("test", "p", "profile command", "example", false, 2));
+			this.commands.add(new Role("role", "r", "role command", "example", false, 2));
 		} catch (Exception e) {
 			System.err.println("Error ! The given " + constants.Constants.Config_File + " is invalid !");
 			System.exit(1);
