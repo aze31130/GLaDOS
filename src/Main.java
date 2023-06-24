@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import constants.Constants;
 import constants.Constants.Channels;
 import commands.Argument;
 import commands.Call;
@@ -27,6 +28,7 @@ import events.GuildSlashCommand;
 import events.GuildVoiceJoin;
 import events.GuildVoiceLeave;
 import events.PrivateMessageReceived;
+import utils.DataLogger;
 import utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -82,6 +84,9 @@ public class Main {
 			clock.scheduleAtFixedRate(new Runnable() {
 				@Override
 				public void run() {
+					//Log into the database every online account
+					DataLogger.log(jda.getGuildById(Constants.GuildId).retrieveMetaData().complete().getApproximatePresences());
+
 					Calendar cal = Calendar.getInstance();
 					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
 						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
