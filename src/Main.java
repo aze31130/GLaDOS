@@ -84,10 +84,13 @@ public class Main {
 			clock.scheduleAtFixedRate(new Runnable() {
 				@Override
 				public void run() {
-					//Log into the database every online account
-					DataLogger.log(jda.getGuildById(Constants.GuildId).retrieveMetaData().complete().getApproximatePresences());
-
 					Calendar cal = Calendar.getInstance();
+
+					if ((cal.get(Calendar.SECOND) <= 10)) {
+						//Log into the database every online account
+						DataLogger.log(jda.getGuildById(Constants.GuildId).retrieveMetaData().complete().getApproximatePresences());
+					}
+
 					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
 						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						glados.executeCommand(
