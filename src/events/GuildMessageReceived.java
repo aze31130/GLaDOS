@@ -19,6 +19,7 @@ public class GuildMessageReceived extends ListenerAdapter {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		Boolean isDeleted = false;
 		GLaDOS glados = GLaDOS.getInstance();
+		glados.activityCounter++;
 
 		if(Constants.logMessage){
 			System.out.println(new Logger(true) + "[" + event.getChannel().getParent().getName() + "][#" + event.getChannel().getName() + "][" + event.getAuthor().getAsTag() +  "]" + Arrays.toString(message));

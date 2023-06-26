@@ -1,11 +1,14 @@
 package events;
 
 import constants.Constants.Roles;
+import main.GLaDOS;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class GuildMessageReactionRemove extends ListenerAdapter {
 	public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event){
+		GLaDOS glados = GLaDOS.getInstance();
+		glados.activityCounter++;
 		if((event.getChannel().getName().equals(constants.Constants.RoleChannelName)) && (event.getReactionEmote().getName().equals("member"))){
 			event.getGuild().removeRoleFromMember(event.getMember().getUser().getId(), event.getGuild().getRoleById(Roles.MEMBER.id)).queue();
 		}

@@ -1,11 +1,14 @@
 package events;
 
 import constants.Constants.Roles;
+import main.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class GuildButtonClick extends ListenerAdapter {
 	public void onButtonClick(ButtonClickEvent event) {
+		GLaDOS glados = GLaDOS.getInstance();
+		glados.activityCounter++;
 		Boolean success = true;
 		switch(event.getComponentId()) {
 			case "+Broadcast":

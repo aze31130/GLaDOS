@@ -67,17 +67,17 @@ public class Main {
 			jda.addEventListener(new GuildMessageReactionRemove());
 			jda.addEventListener(new GuildSlashCommand());
 			jda.addEventListener(new GuildButtonClick());
+			jda.addEventListener(new GuildVoiceJoin());
+			jda.addEventListener(new GuildVoiceLeave());
 			
 			if(constants.Constants.CheckPrivateMessages){
 				jda.addEventListener(new PrivateMessageReceived());
 			}
 			
-			if(constants.Constants.logConnexions){
-				jda.addEventListener(new GuildVoiceJoin());
-				jda.addEventListener(new GuildVoiceLeave());
+			// if(constants.Constants.logConnexions){
 				//jda.addEventListener(new ListenerOnline());
 				//jda.addEventListener(new GuildVoiceMute());
-			}
+			// }
 			jda.awaitReady();
 
 			ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();

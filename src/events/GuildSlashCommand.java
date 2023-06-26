@@ -12,9 +12,10 @@ import net.dv8tion.jda.api.interactions.components.*;
 
 public class GuildSlashCommand extends ListenerAdapter {
 	public void onSlashCommand(SlashCommandEvent event) {
+		GLaDOS glados = GLaDOS.getInstance();
+		glados.activityCounter++;
 		for(Command command : GLaDOS.getInstance().commands) {
 			if(event.getName().equalsIgnoreCase(command.name) || event.getName().equalsIgnoreCase(command.alias)) {
-				GLaDOS glados = GLaDOS.getInstance();
 				String[] arguments = new String[event.getOptions().size()];
 				int i = 0;
 				for(OptionMapping om : event.getOptions()) {

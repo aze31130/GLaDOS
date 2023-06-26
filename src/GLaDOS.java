@@ -21,6 +21,7 @@ public class GLaDOS {
 	public boolean leveling; 
 	public String token;
 	public int requestsAmount;
+	public int activityCounter;
 	public Ranking ranking;
 	public JSONArray bannedWords;
 	public int maxLevel;
@@ -64,6 +65,7 @@ public class GLaDOS {
 			this.token = json.get("token").toString();
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
+			this.activityCounter = 0;
 			this.translationCooldown = LocalDateTime.now();
 			
 			//Initialize accounts
