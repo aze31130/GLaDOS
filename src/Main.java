@@ -86,7 +86,7 @@ public class Main {
 				public void run() {
 					Calendar cal = Calendar.getInstance();
 
-					if ((cal.get(Calendar.SECOND) <= 10)) {
+					if ((constants.Constants.EnableLogging && cal.get(Calendar.SECOND) <= 10)) {
 						//Log into the database every online account
 						DataLogger.log(jda.getGuildById(Constants.GuildId).retrieveMetaData().complete().getApproximatePresences());
 					}

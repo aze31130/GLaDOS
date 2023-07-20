@@ -26,15 +26,6 @@ public class Commands {
 					event.getChannel().sendMessage(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 				}
 				break;
-			case "json-channel": case "json-chan":
-				//Messages.jsonChannel(event.getChannel(), event.getMember());
-				break;
-			case "connect":
-				Music.connect(event);
-				break;
-			case "disconnect":
-				Music.disconnect(event);
-				break;
 			case "picture-inverse": case "pi":
 				Picture.inverse(event);
 				break;

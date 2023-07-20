@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class FileUtils {
-	
 	/*
 	 * This private constructor hides the implicit public one
 	 */

@@ -156,7 +156,17 @@ public class BuildEmbed {
 					"Look who decided to grace us with their presence! Welcome, [member]!",
 					"Hold on tight, folks! [member] has joined the server. Let the good times roll!",
 					"Breaking news: [member] has arrived! Get ready for some epic conversations and laughter!",
-					"[member] has entered the arena! Brace yourselves for their awesomeness!"
+					"[member] has entered the arena! Brace yourselves for their awesomeness!",
+					"Ladies and gentlemen, give a round of applause for our newest arrival! Welcome, [member], to the heart of our community!",
+					"Watch out, everyone! [member] just graced us with their presence!",
+					"[member] entered our digital universe!",
+					"Hold your breath and get ready, for [member] has officially joined the game!",
+					"Attention, everyone! [member] has stepped into our virtual gathering",
+					"Whoa, did you see that? [member] just pulled off an incredible barrel roll into our chat!",
+					"Step aside, everyone! It's time to make way for [member]",
+					"Breaking news, folks! Say hello to our latest epic member [member]",
+					"The arena awaits the grand entrance of [member]!",
+					"[member] arrived ! It's gaming time!"
 			};
 			message = messages[randomNumber];
 		} else {
