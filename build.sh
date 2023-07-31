@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-JAVA_VERSION="20"
+JAVA_VERSION="11"
 BUILD_FOLDER="build"
 OUTPUT_JAR_NAME="GLaDOS.jar"
 echo "Compiling glados !"
