@@ -27,7 +27,7 @@ public class FileUtils {
 		defaultConfig.put("bannedWords", bannedWords);
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");
 
-		FileUtils.writeRawFile("settings.json", defaultConfig.toString(4));
+		FileUtils.writeRawFile("config.json", defaultConfig.toString(4));
 	}
 	
 	public static String readRawFile(String filename) {

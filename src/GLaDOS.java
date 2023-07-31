@@ -46,7 +46,7 @@ public class GLaDOS {
 	}
 	
 	public void initialize() {
-		File config = new File("./settings.json");
+		File config = new File("./config.json");
 
 		//Create config file is not present
 		if (!config.exists()) {
@@ -57,7 +57,7 @@ public class GLaDOS {
 
 		try {
 			//Load the global variables
-			JSONObject json = JsonIO.loadJsonObject("./settings.json");
+			JSONObject json = JsonIO.loadJsonObject("./config.json");
 			this.version = json.get("version").toString();
 			this.prefix = json.get("prefix").toString();
 			this.leveling = (boolean)json.get("leveling");

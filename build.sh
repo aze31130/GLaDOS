@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-JAVA_VERSION="11"
+JAVA_VERSION="20"
 BUILD_FOLDER="build"
 OUTPUT_JAR_NAME="GLaDOS.jar"
 echo "Compiling glados !"
@@ -13,5 +13,5 @@ javac -cp "./libs/JDA-4.3.0_277-withDependencies.jar:./libs/jda-utilities-2.1-al
 cd $BUILD_FOLDER
 jar cfe $OUTPUT_JAR_NAME Main $(find . -type f -name "*.class")
 cp ../libs/*.jar .
-cp ../settings.json .
+cp ../config.json .
 java -cp GLaDOS.jar:jda-utilities-2.1-all.jar:json-20220320.jar:JDA-4.3.0_277-withDependencies.jar:sqlite-jdbc-3.42.0.0.jar main.Main

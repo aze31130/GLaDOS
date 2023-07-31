@@ -5,7 +5,7 @@ bin
 build
 accounts
 channels
-settings.json
+config.json
 Constants.java
 TODO.md
 Levels.java
