@@ -2,7 +2,7 @@ package commands;
 
 import java.lang.management.ManagementFactory;
 import com.sun.management.OperatingSystemMXBean;
-import main.GLaDOS;
+import glados.GLaDOS;
 import utils.Converter;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;

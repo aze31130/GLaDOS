@@ -1,6 +1,5 @@
 package commands;
 
-import constants.Constants.Permissions;
 import utils.BuildEmbed;
 import utils.Permission;
 import net.dv8tion.jda.api.entities.Member;
@@ -16,7 +15,7 @@ public class Move extends Command {
 	
 	@Override
 	public void execute(Argument args) {
-		if(Permission.permissionLevel(args.account, args.member, Permissions.ADMIN.level)) {
+		if(Permission.permissionLevel(args.member, 2)) {
 			try {
 				VoiceChannel dest = args.member.getJDA().getVoiceChannelById(args.arguments[0]);
 				for(Member m : args.member.getVoiceState().getChannel().getMembers()) {

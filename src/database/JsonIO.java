@@ -14,9 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import constants.Constants.Permissions;
-import accounts.Account;
-import accounts.Ranks;
 import utils.Logger;
 
 public class JsonIO {
@@ -124,48 +121,48 @@ public class JsonIO {
 		}
 	}
 	
-	public static List<Account> loadAccounts() {
-		System.out.println(new Logger(true) + "Loading account...");
+	// public static List<Account> loadAccounts() {
+	// 	System.out.println(new Logger(true) + "Loading account...");
 		
-		List<Account> accounts = new ArrayList<Account>();
+	// 	List<Account> accounts = new ArrayList<Account>();
 		
-		if(!JsonIO.isDataFolderCreated()) {
-			JsonIO.createDataFolder();
-		}
+	// 	if(!JsonIO.isDataFolderCreated()) {
+	// 		JsonIO.createDataFolder();
+	// 	}
 		
-		if(!JsonIO.isAccountFolderCreated()) {
-			JsonIO.createAccountFolder();
-			//Create the basics files ?
-		}
+	// 	if(!JsonIO.isAccountFolderCreated()) {
+	// 		JsonIO.createAccountFolder();
+	// 		//Create the basics files ?
+	// 	}
 		
-		File folder = new File("./data/accounts");
-		for (String filename : folder.list()) {
-			accounts.add(loadAccount("./data/accounts/" + filename));
-		}
-		System.out.println(new Logger(true) + "Successfully loaded " + folder.list().length + " accounts");
-		return accounts;
-	}
+	// 	File folder = new File("./data/accounts");
+	// 	for (String filename : folder.list()) {
+	// 		accounts.add(loadAccount("./data/accounts/" + filename));
+	// 	}
+	// 	System.out.println(new Logger(true) + "Successfully loaded " + folder.list().length + " accounts");
+	// 	return accounts;
+	// }
 	
 	//Method to load an account object knowing its path
-	public static Account loadAccount(String path) {
-		JSONObject json = loadJsonObject(path);
-		if(json == null) {
-			return null;
-		}
-		return new Account(
-				json.getString("id"),
-				json.getString("name"),
-				json.getString("nickname"),
-				json.getString("tag"),
-				json.getString("created"),
-				json.getString("joined"),
-				json.getInt("level"),
-				json.getLong("experience"),
-				json.getLong("totalExperience"),
-				Ranks.valueOf(json.getString("rank")),
-				Permissions.valueOf(json.getString("permission")),
-				json.getInt("fame"));
-	}
+	// public static Account loadAccount(String path) {
+	// 	JSONObject json = loadJsonObject(path);
+	// 	if(json == null) {
+	// 		return null;
+	// 	}
+	// 	return new Account(
+	// 			json.getString("id"),
+	// 			json.getString("name"),
+	// 			json.getString("nickname"),
+	// 			json.getString("tag"),
+	// 			json.getString("created"),
+	// 			json.getString("joined"),
+	// 			json.getInt("level"),
+	// 			json.getLong("experience"),
+	// 			json.getLong("totalExperience"),
+	// 			Ranks.valueOf(json.getString("rank")),
+	// 			Permissions.valueOf(json.getString("permission")),
+	// 			json.getInt("fame"));
+	// }
 	
 	//Method to backup the entire database
 	public static void backup() {

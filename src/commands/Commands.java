@@ -2,19 +2,20 @@ package commands;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import main.GLaDOS;
-import constants.Constants.Channels;
+import glados.GLaDOS;
 import utils.BuildEmbed;
 import utils.Resolver;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import tycoon.Game;
 
 public class Commands {
 	public static void Main(GuildMessageReceivedEvent event, GLaDOS glados) {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
+		GLaDOS g = GLaDOS.getInstance();
 		switch(message[0].substring(1)){
 			case "tycoon":
-				Tycoon.startGame(event.getJDA().getTextChannelById(Channels.BOT_SNAPSHOT.id), event.getMessage().getAttachments());
+				Tycoon.startGame(event.getJDA().getTextChannelById(g.channelBotSnapshot), event.getMessage().getAttachments());
 				break;
 			case "resolver":
 				Resolver resolver = new Resolver();

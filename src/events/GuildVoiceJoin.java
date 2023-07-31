@@ -1,6 +1,6 @@
 package events;
 
-import main.GLaDOS;
+import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

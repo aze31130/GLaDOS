@@ -1,7 +1,7 @@
 package commands;
 
 import java.awt.Color;
-import main.GLaDOS;
+import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Help extends Command {

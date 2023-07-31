@@ -5,21 +5,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.TextChannel;
-
 import org.json.JSONObject;
 
-import constants.Constants.Permissions;
-import main.GLaDOS;
+import glados.GLaDOS;
 import utils.BuildEmbed;
-import utils.Permission;
 
 import java.util.Collections;
 import java.util.List;

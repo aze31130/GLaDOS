@@ -23,6 +23,28 @@ public class FileUtils {
 		defaultConfig.put("version", "1.0.0");
 		defaultConfig.put("prefix", "?");
 		defaultConfig.put("leveling", false);
+
+		defaultConfig.put("metricLogging", true);
+		defaultConfig.put("logMessages", false);
+		defaultConfig.put("checkPrivateMessages", false);
+		defaultConfig.put("guildId", "");
+		defaultConfig.put("ownerId", "");
+		defaultConfig.put("channel_general", "");
+		defaultConfig.put("channel_gamer", "");
+		defaultConfig.put("channel_botSnapshot", "");
+		defaultConfig.put("channel_nsfw", "");
+		defaultConfig.put("channel_role", "");
+		
+		defaultConfig.put("role_broadcastMessenger", "");
+		defaultConfig.put("role_gamer", "");
+		defaultConfig.put("role_member", "");
+		defaultConfig.put("role_artistic", "");
+		defaultConfig.put("role_international", "");
+		defaultConfig.put("role_developer", "");
+		defaultConfig.put("role_nsfw", "");
+		defaultConfig.put("role_moderator", "");
+		defaultConfig.put("role_administrator", "");
+
 		defaultConfig.put("maxLevel", "100");
 		defaultConfig.put("bannedWords", bannedWords);
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");

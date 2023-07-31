@@ -1,7 +1,7 @@
 package commands;
 
 import java.math.BigInteger;
-import main.GLaDOS;
+import glados.GLaDOS;
 import utils.BuildEmbed;
 
 public class Factorielle extends Command {

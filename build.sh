@@ -14,4 +14,4 @@ cd $BUILD_FOLDER
 jar cfe $OUTPUT_JAR_NAME Main $(find . -type f -name "*.class")
 cp ../libs/*.jar .
 cp ../config.json .
-java -cp GLaDOS.jar:jda-utilities-2.1-all.jar:json-20220320.jar:JDA-4.3.0_277-withDependencies.jar:sqlite-jdbc-3.42.0.0.jar main.Main
+java -cp GLaDOS.jar:jda-utilities-2.1-all.jar:json-20220320.jar:JDA-4.3.0_277-withDependencies.jar:sqlite-jdbc-3.42.0.0.jar Main

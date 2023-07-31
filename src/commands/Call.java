@@ -1,19 +1,15 @@
 package commands;
 
-import java.awt.Color;
-import java.util.Random;
-import constants.Constants.Channels;
-import constants.Constants.Roles;
-import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import utils.Permission;
-import constants.Constants.Permissions;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import org.json.JSONObject;
+
+import glados.GLaDOS;
 
 public class Call extends Command {
 	public Call(String name, String alias, String description, String example,
@@ -25,7 +21,7 @@ public class Call extends Command {
 	@Override
 	public void execute(Argument args) {
 
-		if(!Permission.permissionLevel(args.account, args.member, Permissions.MOD.level)) {
+		if(!Permission.permissionLevel(args.member, 1)) {
 			args.channel.sendMessage(BuildEmbed.errorEmbed("You need to have the Moderator role in order to execute that.").build()).queue();
 			return;
 		}
@@ -35,11 +31,13 @@ public class Call extends Command {
 			return;
 		}
 
+		GLaDOS g = GLaDOS.getInstance();
+
 		EmbedBuilder embed = null;
 
 		switch(args.arguments[0]) {
 			case "Gamer":
-				args.channel.sendMessage("<@&" + Roles.BROADCAST_MESSENGER.id + ">").queue();
+				args.channel.sendMessage("<@&" + g.roleBroadcastMessenger + ">").queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":

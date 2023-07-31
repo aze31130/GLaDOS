@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.json.JSONObject;
-import constants.Constants.Channels;
+
+import glados.GLaDOS;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -18,9 +19,10 @@ public class RandomMeme extends Command {
 	
 	@Override
 	public void execute(Argument args) {
+		GLaDOS g = GLaDOS.getInstance();
 		try {
 			String apiUrl = "https://meme-api.herokuapp.com/gimme/";
-			if (args.channel.isNSFW() && args.channel.getId().equals(Channels.NSFW.id)){
+			if (args.channel.isNSFW() && args.channel.getId().equals(g.channelNsfw)){
 				apiUrl += "nsfw";
 			}
 			//http://www.reddit.com/r/random.json

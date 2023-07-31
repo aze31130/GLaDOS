@@ -1,6 +1,5 @@
 package commands;
 
-import constants.Constants.Permissions;
 import utils.BuildEmbed;
 import utils.Permission;
 
@@ -13,7 +12,7 @@ public class Spam extends Command {
 	
 	@Override
 	public void execute(Argument args) {
-		if(Permission.permissionLevel(args.account, args.member, Permissions.ADMIN.level)) {
+		if(Permission.permissionLevel(args.member, 2)) {
 			if(args.arguments.length > 0){
 				int iterations = 0;
 				try {

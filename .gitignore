@@ -6,7 +6,6 @@ build
 accounts
 channels
 config.json
-Constants.java
 TODO.md
 Levels.java
 Ranking.java

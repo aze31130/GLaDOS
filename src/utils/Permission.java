@@ -1,12 +1,10 @@
 package utils;
 
-import constants.Constants;
-import constants.Constants.Permissions;
-import constants.Constants.Roles;
-import accounts.Account;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import java.util.List;
+
+import glados.GLaDOS;
 
 public class Permission {
 	/* Returns the permission level of someone
@@ -16,21 +14,21 @@ public class Permission {
 	 * |   3   |   2   |  1  |   0  |
 	 * +-------+-------+-----+------+
 	 */
-	public static Boolean permissionLevel(Account account, Member member, int requiredLevel) {
+	public static Boolean permissionLevel(Member member, int requiredLevel) {
 		List<Role> roles = member.getRoles();
+		GLaDOS g = GLaDOS.getInstance();
 		int permission = 0;
-		if(member.getId().equals(Constants.OwnerId)) {
-			permission = Permissions.OWNER.level;
+		if(member.getId().equals(g.ownerId)) {
+			permission = 3;
 		} else {
 			for(Role role : roles){
-				if(role.getId().equals(Roles.MOD.id)) {
-					permission = Permissions.MOD.level;
-					
+				if(role.getId().equals(g.roleModerator)) {
+					permission = 1;
 				}
 			}
 			for(Role role : roles){
-				if(role.getId().equals(Roles.ADMIN.id)) {
-					permission = Permissions.ADMIN.level;
+				if(role.getId().equals(g.roleAdministrator)) {
+					permission = 2;
 				}
 			}
 		}

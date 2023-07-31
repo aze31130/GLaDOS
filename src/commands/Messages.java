@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.function.Consumer;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import constants.Constants.Channels;
 import database.JsonIO;
+import glados.GLaDOS;
 import utils.BuildEmbed;
 import utils.Counter;
 import utils.Permission;
@@ -56,7 +56,7 @@ public class Messages {
 
 	
 	public static void randomMessage(TextChannel channel, Member member){
-		if(Permission.permissionLevel(null, member, 1)) {
+		if(Permission.permissionLevel(member, 1)) {
 			try {
 				Random rng = new Random();
 				JSONArray array = JsonIO.loadJsonArray("general");
@@ -73,7 +73,8 @@ public class Messages {
 	
 	public static void downloadServer(JDA jda) {
 		Guild server = jda.getGuilds().get(1);
-		TextChannel channel = server.getTextChannelById(Channels.BOT_SNAPSHOT.id);
+		GLaDOS g = GLaDOS.getInstance();
+		TextChannel channel = server.getTextChannelById(g.channelBotSnapshot);
 		
 		
 		for(TextChannel tc : server.getTextChannels()) {
@@ -110,7 +111,7 @@ public class Messages {
 	}
 	
 	public static void downloadChannel(TextChannel channel, Member member){
-		if(Permission.permissionLevel(null, member, 1)) {
+		if(Permission.permissionLevel(member, 1)) {
 			Counter test = new Counter();
 			channel.sendMessage("Downloading channel: " + channel.getAsMention()).queue();
 			//channel.getIterableHistory().cache(false).forEachAsync((me) -> {
@@ -135,7 +136,7 @@ public class Messages {
 	
 	
 	public static void countMessages(GuildMessageReceivedEvent event, Member member){
-		if(Permission.permissionLevel(null, member, 1)){
+		if(Permission.permissionLevel(member, 1)){
 			event.getChannel().sendTyping().queue();
 			
 			
@@ -151,7 +152,7 @@ public class Messages {
 				//List<Message> message = messages.get();
 				
 				
-				List<Message> message = new ArrayList<>(constants.Constants.MAX_RETRIEVE_MESSAGES);
+				List<Message> message = new ArrayList<>(1000000);
 				event.getChannel().getIterableHistory().cache(false).forEachAsync((me) ->
 			    {
 			    	message.add(me);

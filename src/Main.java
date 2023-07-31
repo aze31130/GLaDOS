@@ -1,23 +1,9 @@
-package main;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import constants.Constants;
-import constants.Constants.Channels;
 import commands.Argument;
-import commands.Call;
 import events.GuildButtonClick;
 import events.GuildMemberJoin;
 import events.GuildMemberRemove;
@@ -28,13 +14,11 @@ import events.GuildSlashCommand;
 import events.GuildVoiceJoin;
 import events.GuildVoiceLeave;
 import events.PrivateMessageReceived;
+import glados.GLaDOS;
 import utils.DataLogger;
 import utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.exceptions.*;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -46,7 +30,7 @@ public class Main {
 
 		System.out.println(log + "Starting GLaDOS");
 		glados.initialize();
-		System.out.println(log + "Logging messages: " + constants.Constants.logMessage);
+		System.out.println(log + "Logging messages: " + glados.logMessages);
 		System.out.println(log + "Leveling: " + glados.leveling);
 		System.out.println(log + "Maximum level: " + glados.maxLevel);
 		System.out.println(log + "Ranking version: ALPHA");
@@ -70,7 +54,7 @@ public class Main {
 			jda.addEventListener(new GuildVoiceJoin());
 			jda.addEventListener(new GuildVoiceLeave());
 			
-			if(constants.Constants.CheckPrivateMessages){
+			if(glados.checkPrivateMessages){
 				jda.addEventListener(new PrivateMessageReceived());
 			}
 			
@@ -86,57 +70,48 @@ public class Main {
 				public void run() {
 					Calendar cal = Calendar.getInstance();
 
-					if ((constants.Constants.EnableLogging && cal.get(Calendar.SECOND) <= 10)) {
+					if ((glados.metricLogging && cal.get(Calendar.SECOND) <= 10)) {
 						//Log into the database every online account
-						DataLogger.log(jda.getGuildById(Constants.GuildId).retrieveMetaData().complete().getApproximatePresences());
+						DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete().getApproximatePresences());
 					}
 
-					if(!constants.Constants.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
+					if(!glados.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10) && (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)){
 						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						glados.executeCommand(
 							"Call",
-							new Argument(null,
-								jda.getGuildById(constants.Constants.GuildId).getMemberById(constants.Constants.OwnerId),
-								jda.getTextChannelById(Channels.GAMER.id),
+							new Argument(
+								jda.getGuildById(glados.guildId).getMemberById(glados.ownerId),
+								jda.getTextChannelById(glados.channelGamer),
 								new String[]{"Gamer"},
 								null
 							)
 						);
-						constants.Constants.FreeGameAnnonce = true;
+						glados.FreeGameAnnonce = true;
 					} else {
-						constants.Constants.FreeGameAnnonce = false;
+						glados.FreeGameAnnonce = false;
 					}
 					
-					if(!constants.Constants.LockdownDayAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10)){
+					if(!glados.DailyQuote && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10)){
 						System.out.println(log + "Executed Random Quote at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						glados.executeCommand(
 							"Call",
-							new Argument(null,
-								jda.getGuildById(constants.Constants.GuildId).getMemberById(constants.Constants.OwnerId),
-								jda.getTextChannelById(Channels.GENERAL.id),
+							new Argument(
+								jda.getGuildById(glados.guildId).getMemberById(glados.ownerId),
+								jda.getTextChannelById(glados.channelGeneral),
 								new String[]{"Midnight"},
 								null
 							)
 						);
 
-						if(glados.leveling) {
-							//Ranking.update();
-							glados.backup();
-							//JsonIO.backup();
-						}
-						constants.Constants.LockdownDayAnnonce = true;
+						// if(glados.leveling) {
+						// 	Ranking.update();
+						// 	glados.backup();
+						// 	JsonIO.backup();
+						// }
+						glados.DailyQuote = true;
 					} else {
-						constants.Constants.LockdownDayAnnonce = false;
+						glados.DailyQuote = false;
 					}
-					
-					/*
-					if((cal.get(Calendar.MINUTE) % 15) == 0) {
-						jda.getGuildById("676731153444765706").retrieveMetaData()
-						.map(Guild.MetaData::getApproximatePresences)
-						.queue(amount -> jda.getTextChannelById(Channels.BOT_SNAPSHOT.id)
-								.sendMessage("Report " + new Logger(false) + " ```" + amount + " people online.```").queue());
-					}
-					*/
 				}
 			}, 0, 10, TimeUnit.SECONDS);
 			System.out.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");

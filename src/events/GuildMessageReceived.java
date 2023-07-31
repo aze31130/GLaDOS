@@ -2,15 +2,11 @@ package events;
 
 import java.util.Arrays;
 import java.util.Random;
-import constants.Constants;
-import constants.Constants.Channels;
 import commands.Argument;
 import commands.Command;
 import utils.Logger;
 import utils.Mention;
-import main.GLaDOS;
-import accounts.Account;
-import accounts.Levels;
+import glados.GLaDOS;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -21,11 +17,11 @@ public class GuildMessageReceived extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 
-		if(Constants.logMessage){
+		if(glados.logMessages){
 			System.out.println(new Logger(true) + "[" + event.getChannel().getParent().getName() + "][#" + event.getChannel().getName() + "][" + event.getAuthor().getAsTag() +  "]" + Arrays.toString(message));
 		}
 		
-		if((message.length == 1) && !event.getChannel().isNSFW() && !event.getChannel().getId().equals(Channels.NSFW.id)){
+		if((message.length == 1) && !event.getChannel().isNSFW() && !event.getChannel().getId().equals(glados.channelNsfw)){
 			for(int i = 0 ; i < glados.bannedWords.length() ; i++) {
 				if(message[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
 					event.getMessage().delete().queue();
@@ -36,14 +32,14 @@ public class GuildMessageReceived extends ListenerAdapter {
 		}
 		
 		if(!isDeleted) {
-			if(glados.leveling) {
-				Account a = glados.getAccount(event.getMember().getId());
-				if(a != null && a.level < glados.maxLevel) {
-					a.experience += 1;
-					Levels.checkLevelUp(a);
-				}
-				a.totalExperience += 1;
-			}
+			// if(glados.leveling) {
+			// 	Account a = glados.getAccount(event.getMember().getId());
+			// 	if(a != null && a.level < glados.maxLevel) {
+			// 		a.experience += 1;
+			// 		Levels.checkLevelUp(a);
+			// 	}
+			// 	a.totalExperience += 1;
+			// }
 			
 			if(event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
 				if(new Random().nextInt(100) >= 5) {
@@ -58,7 +54,7 @@ public class GuildMessageReceived extends ListenerAdapter {
 				for(Command c : glados.commands) {
 					if(c.name.equalsIgnoreCase(command) || c.alias.equalsIgnoreCase(command)) {
 						glados.addRequest();
-						c.execute(new Argument(glados.getAccount(event.getMember().getId()), event.getMember(), event.getChannel(), arguments, event.getMessage().getAttachments()));
+						c.execute(new Argument(event.getMember(), event.getChannel(), arguments, event.getMessage().getAttachments()));
 					}
 				}
 			}
