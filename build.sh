@@ -4,11 +4,7 @@ JAVA_VERSION="11"
 BUILD_FOLDER="build"
 OUTPUT_JAR_NAME="GLaDOS.jar"
 echo "Compiling glados !"
-if [ -d $BUILD_FOLDER ]
-then
-    rm -rf $BUILD_FOLDER
-fi
-mkdir $BUILD_FOLDER
+mkdir -p $BUILD_FOLDER
 javac -cp "./libs/JDA-4.3.0_277-withDependencies.jar:./libs/jda-utilities-2.1-all.jar:./libs/json-20220320.jar:./libs/sqlite-jdbc-3.42.0.0.jar" --release $JAVA_VERSION -d $BUILD_FOLDER $(find src -type f -name "*.java")
 cd $BUILD_FOLDER
 jar cfe $OUTPUT_JAR_NAME Main $(find . -type f -name "*.class")
