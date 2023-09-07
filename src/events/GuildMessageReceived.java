@@ -42,21 +42,6 @@ public class GuildMessageReceived extends ListenerAdapter {
 			// 	}
 			// 	a.totalExperience += 1;
 			// }
-
-			if (event.getMessage().getContentRaw().startsWith("|c")) {
-				EmbedBuilder embed = new EmbedBuilder();
-				embed.setTitle("Not claimed !");
-				embed.setDescription("Here are NOT your daily Schards: **+" + new Random().nextInt(3000) + "** || (??? in total)");
-				embed.setColor(Color.ORANGE);
-				event.getChannel().sendMessage(embed.build()).queue();
-			}
-
-			if (event.getMessage().getContentRaw().startsWith("|d")) {
-				EmbedBuilder embed = new EmbedBuilder();
-				embed.setTitle("You did not get a card today :-(");
-				embed.setColor(Color.gray);
-				event.getChannel().sendMessage(embed.build()).queue();
-			}
 			
 			if(event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
 				if(new Random().nextInt(100) >= 5) {
