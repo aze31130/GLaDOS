@@ -150,6 +150,8 @@ public class GLaDOS {
 			this.commands.add(new Connect("connect", "co", "connect command", "example", false, 2));
 			this.commands.add(new Disconnect("disconnect", "do", "disconnect command", "example", false, 2));
 			this.commands.add(new Backup("backup", "back", "backup command", "example", false, 2));
+			this.commands.add(new Zip("zip", "zip", "Zip command", "example", false, 0));
+
 		} catch (Exception e) {
 			System.err.println("Error ! The given config file is invalid !");
 			System.exit(1);
