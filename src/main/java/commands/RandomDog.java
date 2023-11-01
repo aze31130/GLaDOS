@@ -6,8 +6,10 @@ import utils.JsonDownloader;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class RandomDog extends Command {
-	public RandomDog(String name, String description, int permissionLevel) {
+	public RandomDog(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

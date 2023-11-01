@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import glados.GLaDOS;
 import utils.BuildEmbed;
 
+import accounts.Permissions;
+
 public class Factorielle extends Command {
-	public Factorielle(String name, String description, int permissionLevel) {
+	public Factorielle(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

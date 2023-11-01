@@ -12,7 +12,7 @@ public class SlashCommandInteraction extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 		for (Command command : GLaDOS.getInstance().commands) {
-			if (event.getName().equalsIgnoreCase(command.name) || event.getName().equalsIgnoreCase(command.alias)) {
+			if (event.getName().equalsIgnoreCase(command.name)) {
 				String[] arguments = new String[event.getOptions().size()];
 				int i = 0;
 				for (OptionMapping om : event.getOptions()) {

@@ -13,10 +13,11 @@ import events.VoiceMute;
 import events.SlashCommandInteraction;
 import events.VoiceUpdate;
 import glados.GLaDOS;
-import utils.DataLogger;
 import utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -59,6 +60,10 @@ public class Main {
 			jda.addEventListener(new VoiceUpdate());
 			jda.addEventListener(new VoiceMute());
 			jda.awaitReady();
+
+			jda.updateCommands().addCommands(
+					Commands.slash("call", "DEBUG COMMAND").addOption(OptionType.STRING, "trigger", "event to trigger"))
+					.queue();
 
 			ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();
 			clock.scheduleAtFixedRate(new Runnable() {
@@ -117,7 +122,7 @@ public class Main {
 		} catch (InterruptedException e) {
 			System.err.println(log + "Thread interrupted !");
 		} catch (Exception e) {
-			System.err.println(log + "Invalid token given ! ");
+			e.printStackTrace();
 		}
 
 		/*

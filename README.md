@@ -1,5 +1,4 @@
 # GLaDOS
----
 
 ## What is it ?
 

@@ -3,8 +3,10 @@ package commands;
 import java.util.Random;
 import utils.BuildEmbed;
 
+import accounts.Permissions;
+
 public class Rng extends Command {
-	public Rng(String name, String description, int permissionLevel) {
+	public Rng(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

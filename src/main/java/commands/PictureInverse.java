@@ -8,8 +8,10 @@ import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 
+import accounts.Permissions;
+
 public class PictureInverse extends Command {
-	public PictureInverse(String name, String description, int permissionLevel) {
+	public PictureInverse(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

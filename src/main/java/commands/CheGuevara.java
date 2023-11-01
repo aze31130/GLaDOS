@@ -7,8 +7,10 @@ import utils.JsonDownloader;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class CheGuevara extends Command {
-	public CheGuevara(String name, String description, int permissionLevel) {
+	public CheGuevara(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

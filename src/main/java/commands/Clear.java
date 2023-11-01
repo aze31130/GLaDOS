@@ -4,18 +4,20 @@ import java.awt.Color;
 import java.util.List;
 import glados.GLaDOS;
 import utils.BuildEmbed;
-import utils.Permission;
+import utils.PermissionsUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 
+import accounts.Permissions;
+
 public class Clear extends Command {
-	public Clear(String name, String description, int permissionLevel) {
+	public Clear(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 
 	@Override
 	public void execute(Argument args) {
-		if (Permission.permissionLevel(args.member, 2)) {
+		if (PermissionsUtils.permissionLevel(args.member, 2)) {
 			GLaDOS glados = GLaDOS.getInstance();
 			if (args.arguments.length > 0) {
 				try {

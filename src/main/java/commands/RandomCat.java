@@ -11,8 +11,10 @@ import utils.BuildEmbed;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class RandomCat extends Command {
-	public RandomCat(String name, String description, int permissionLevel) {
+	public RandomCat(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

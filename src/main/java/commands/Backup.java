@@ -8,15 +8,16 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import accounts.Permissions;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import utils.BuildEmbed;
-import utils.Permission;
+import utils.PermissionsUtils;
 
 public class Backup extends Command {
-	public Backup(String name, String description, int permissionLevel) {
+	public Backup(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 
@@ -58,7 +59,7 @@ public class Backup extends Command {
 
 	@Override
 	public void execute(Argument args) {
-		if (!Permission.permissionLevel(args.member, 2)) {
+		if (!PermissionsUtils.permissionLevel(args.member, 2)) {
 			args.channel
 					.sendMessageEmbeds(BuildEmbed
 							.errorEmbed("You need to have the Administrator role in order to execute that.").build())

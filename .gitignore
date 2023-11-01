@@ -1,8 +1,5 @@
 .project
 target/
-accounts
-channels
-config.json
 Levels.java
 Ranking.java
 *.json

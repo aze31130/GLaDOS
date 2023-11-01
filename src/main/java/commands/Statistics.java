@@ -12,8 +12,10 @@ import utils.EmoteCounter;
 import utils.StatsUtils;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 
+import accounts.Permissions;
+
 public class Statistics extends Command {
-	public Statistics(String name, String description, int permissionLevel) {
+	public Statistics(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

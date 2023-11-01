@@ -4,8 +4,10 @@ import java.awt.Color;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class Help extends Command {
-	public Help(String name, String description, int permissionLevel) {
+	public Help(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

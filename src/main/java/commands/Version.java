@@ -7,8 +7,10 @@ import utils.Converter;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class Version extends Command {
-	public Version(String name, String description, int permissionLevel) {
+	public Version(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

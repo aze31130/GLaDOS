@@ -1,14 +1,13 @@
 package commands;
 
+import accounts.Permissions;
+
 public abstract class Command {
 	public String name;
-	public String alias;
 	public String description;
-	public String example;
-	public Boolean hidden;
-	public int permissionLevel;
+	public Permissions permissionLevel;
 
-	public Command(String name, String description, int permissionLevel) {
+	public Command(String name, String description, Permissions permissionLevel) {
 		this.name = name;
 		this.description = description;
 		this.permissionLevel = permissionLevel;

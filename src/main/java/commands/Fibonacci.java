@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class Fibonacci extends Command {
-	public Fibonacci(String name, String description, int permissionLevel) {
+	public Fibonacci(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

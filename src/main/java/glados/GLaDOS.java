@@ -6,6 +6,8 @@ import java.util.List;
 import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import accounts.Permissions;
 import commands.*;
 import commands.Shutdown;
 import database.JsonIO;
@@ -123,36 +125,51 @@ public class GLaDOS {
 			// }
 
 			// Initialize command
-			this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required", 1));
 			this.commands
-					.add(new Clear("clear", "Clears the latests messages in a channel. Admin privileges required", 1));
-			this.commands.add(new Translate("translate", "Translates the latests messages in a text channel", 1));
-			this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel", 1));
-			this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados", 1));
-			this.commands.add(new Version("version", "Displays version alongside others indicators", 1));
-			this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara", 1));
-			this.commands.add(new Status("activity", "Updates GLaDOS's activity", 1));
-			this.commands.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)", 1));
-			this.commands.add(new Move("move", "Move every voice connected users to another channel", 1));
-			this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required", 1));
-			this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", 2));
+					.add(new Call("call", "Triggers an internal event. Admin privileges required", Permissions.ADMIN));
 			this.commands
-					.add(new Rng("rng", "Generate a random number using 'perfect and totally not rigged' random", 2));
-			this.commands.add(new RandomCat("random-cat", "Displays a cat picture", 2));
-			this.commands.add(new RandomDog("random-dog", "Display a dog picture", 2));
-			this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number", 2));
-			this.commands.add(new Factorielle("factorielle", "Computes given factorial number", 2));
-			this.commands.add(new Idea("what-should-i-do", "Use it when you do not know what to do", 2));
-			this.commands.add(new Help("help", "Shows an help page listing each commands", 2));
-			this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors of a given picture", 2));
-			this.commands.add(new Profile("profile", "Show a user profile", 2));
-			this.commands.add(new Test("test", "Test command, nothing to see here", 2));
-			this.commands.add(new Role("role", "Generate buttons for members to clic on", 2));
-			this.commands.add(new Connect("connect", "Invoke GLaDOS in a vocal channel", 2));
-			this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel", 2));
+					.add(new Clear("clear", "Clears the latests messages in a channel. Admin privileges required",
+							Permissions.ADMIN));
+			this.commands.add(
+					new Translate("translate", "Translates the latests messages in a text channel", Permissions.ADMIN));
 			this.commands
-					.add(new Backup("backup", "Download a backup of the entire server. Admin privileges required", 2));
-			this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.", 2));
+					.add(new Statistics("stats", "Generates statistics regarding a text channel", Permissions.ADMIN));
+			this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados", Permissions.ADMIN));
+			this.commands
+					.add(new Version("version", "Displays version alongside others indicators", Permissions.ADMIN));
+			this.commands
+					.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara", Permissions.ADMIN));
+			this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.ADMIN));
+			this.commands.add(
+					new State("state", "Updates GLaDOS's state (online, idle, do not disturb)", Permissions.ADMIN));
+			this.commands
+					.add(new Move("move", "Move every voice connected users to another channel", Permissions.ADMIN));
+			this.commands
+					.add(new Spam("spam", "Spam-mention a given user. Admin privileges required", Permissions.ADMIN));
+			this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.ADMIN));
+			this.commands
+					.add(new Rng("rng", "Generate a random number using 'perfect and totally not rigged' random",
+							Permissions.ADMIN));
+			this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.ADMIN));
+			this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.ADMIN));
+			this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number", Permissions.ADMIN));
+			this.commands.add(new Factorielle("factorielle", "Computes given factorial number", Permissions.ADMIN));
+			this.commands
+					.add(new Idea("what-should-i-do", "Use it when you do not know what to do", Permissions.ADMIN));
+			this.commands.add(new Help("help", "Shows an help page listing each commands", Permissions.ADMIN));
+			this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors of a given picture",
+					Permissions.ADMIN));
+			this.commands.add(new Profile("profile", "Show a user profile", Permissions.ADMIN));
+			this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.ADMIN));
+			this.commands.add(new Role("role", "Generate buttons for members to clic on", Permissions.ADMIN));
+			this.commands.add(new Connect("connect", "Invoke GLaDOS in a vocal channel", Permissions.ADMIN));
+			this.commands
+					.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel", Permissions.ADMIN));
+			this.commands
+					.add(new Backup("backup", "Download a backup of the entire server. Admin privileges required",
+							Permissions.ADMIN));
+			this.commands
+					.add(new Statistics("statistics", "Generates statistics of the given channel.", Permissions.ADMIN));
 
 		} catch (Exception e) {
 			System.err.println("Error ! The given config file is invalid !");
@@ -162,7 +179,7 @@ public class GLaDOS {
 
 	public void executeCommand(String name, Argument args) {
 		for (Command command : GLaDOS.getInstance().commands) {
-			if (name.equalsIgnoreCase(command.name) || name.equalsIgnoreCase(command.alias)) {
+			if (name.equalsIgnoreCase(command.name)) {
 				command.execute(args);
 				return;
 			}
@@ -181,10 +198,6 @@ public class GLaDOS {
 
 	public int getRequests() {
 		return this.requestsAmount;
-	}
-
-	public void updatePrefix(String newPrefix) {
-		this.prefix = newPrefix;
 	}
 
 	public void checkAccounts() {

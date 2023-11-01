@@ -1,4 +1,4 @@
-package constants;
+package accounts;
 
 public class Constants {
 	public static boolean logMessage = false;
@@ -14,9 +14,9 @@ public class Constants {
 	public static final String Config_File = "settings.json";
 
 	public static final int MAX_RETRIEVE_MESSAGES = 100000;
-	
+
 	public static final String RoleChannelName = "role";
-	
+
 	public enum Channels {
 		GAMER("702846310436438036"),
 		NSFW("699751218179997816"),
@@ -25,15 +25,15 @@ public class Constants {
 		GENERAL("676731153444765709"),
 		EPITA("689491329402667064"),
 		MEME("709396567894786060");
-		
+
 		public final String id;
-		
+
 		private Channels(String id) {
 			this.id = id;
 		}
 	}
-	
-	//Enumeration of every role id
+
+	// Enumeration of every role id
 	public enum Roles {
 		ADMIN("677262572860342333"),
 		MOD("678538602338189314"),
@@ -46,32 +46,11 @@ public class Constants {
 		NSFW("699751539832651836"),
 		GLOBAL("779398365523607573"),
 		ING1("899330612454899732");
-		
+
 		public final String id;
-		
+
 		private Roles(String id) {
 			this.id = id;
-		}
-	}
-	
-	
-	/* Enumeration of every permission level
-	 * +-------+-------+-----+------+
-	 * | OWNER | ADMIN | MOD | NONE |
-	 * +-------+-------+-----+------+
-	 * |   3   |   2   |  1  |   0  |
-	 * +-------+-------+-----+------+
-	 */
-	public enum Permissions {
-		OWNER(3),
-		ADMIN(2),
-		MOD(1),
-		NONE(0);
-		
-		public final int level;
-		
-		private Permissions(int level) {
-			this.level = level;
 		}
 	}
 }

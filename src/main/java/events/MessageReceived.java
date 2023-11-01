@@ -45,7 +45,7 @@ public class MessageReceived extends ListenerAdapter {
 			// }
 
 			if (event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
-				if (new Random().nextInt(100) >= 5) {
+				if (new Random().nextInt(100) >= 15) {
 					event.getChannel().sendMessage(Mention.randomAnswer()).queue();
 				}
 			}
@@ -57,7 +57,7 @@ public class MessageReceived extends ListenerAdapter {
 				;
 
 				for (Command c : glados.commands) {
-					if (c.name.equalsIgnoreCase(command) || c.alias.equalsIgnoreCase(command)) {
+					if (c.name.equalsIgnoreCase(command)) {
 						glados.addRequest();
 						c.execute(new Argument(event.getMember(), event.getChannel(), arguments,
 								event.getMessage().getAttachments()));

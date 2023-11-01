@@ -2,9 +2,10 @@ package commands;
 
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
+import accounts.Permissions;
 
 public class Ping extends Command {
-	public Ping(String name, String description, int permissionLevel) {
+	public Ping(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

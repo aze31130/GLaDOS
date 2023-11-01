@@ -18,8 +18,10 @@ import utils.BuildEmbed;
 import java.util.Collections;
 import java.util.List;
 
+import accounts.Permissions;
+
 public class Translate extends Command {
-	public Translate(String name, String description, int permissionLevel) {
+	public Translate(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

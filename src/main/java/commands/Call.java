@@ -4,22 +4,23 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
-import utils.Permission;
+import utils.PermissionsUtils;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import org.json.JSONObject;
+import accounts.Permissions;
 
 import glados.GLaDOS;
 
 public class Call extends Command {
-	public Call(String name, String description, int permissionLevel) {
+	public Call(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 
 	@Override
 	public void execute(Argument args) {
 
-		if (!Permission.permissionLevel(args.member, 1)) {
+		if (!PermissionsUtils.permissionLevel(args.member, 1)) {
 			args.channel.sendMessageEmbeds(
 					BuildEmbed.errorEmbed("You need to have the Moderator role in order to execute that.").build())
 					.queue();

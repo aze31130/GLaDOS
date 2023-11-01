@@ -4,8 +4,10 @@ import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.managers.AudioManager;
 import utils.BuildEmbed;
 
+import accounts.Permissions;
+
 public class Connect extends Command {
-	public Connect(String name, String description, int permissionLevel) {
+	public Connect(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

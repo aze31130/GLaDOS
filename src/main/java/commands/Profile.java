@@ -4,9 +4,10 @@ import java.awt.Color;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import accounts.Permissions;
 
 public class Profile extends Command {
-	public Profile(String name, String description, int permissionLevel) {
+	public Profile(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

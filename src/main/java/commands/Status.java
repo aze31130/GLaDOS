@@ -4,8 +4,10 @@ import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
+import accounts.Permissions;
+
 public class Status extends Command {
-	public Status(String name, String description, int permissionLevel) {
+	public Status(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

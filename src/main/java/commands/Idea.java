@@ -7,8 +7,10 @@ import utils.JsonDownloader;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import accounts.Permissions;
+
 public class Idea extends Command {
-	public Idea(String name, String description, int permissionLevel) {
+	public Idea(String name, String description, Permissions permissionLevel) {
 		super(name, description, permissionLevel);
 	}
 

@@ -48,7 +48,7 @@ public class MessagesUtils {
 	}
 
 	public static void randomMessage(MessageChannel channel, Member member) {
-		if (Permission.permissionLevel(member, 1)) {
+		if (PermissionsUtils.permissionLevel(member, 1)) {
 			try {
 				Random rng = new Random();
 				JSONArray array = JsonIO.loadJsonArray("general");
@@ -103,7 +103,7 @@ public class MessagesUtils {
 	}
 
 	public static void downloadChannel(MessageChannel channel, Member member) {
-		if (Permission.permissionLevel(member, 1)) {
+		if (PermissionsUtils.permissionLevel(member, 1)) {
 			Counter test = new Counter();
 			channel.sendMessage("Downloading channel: " + channel.getAsMention()).queue();
 			// channel.getIterableHistory().cache(false).forEachAsync((me) -> {
@@ -129,7 +129,7 @@ public class MessagesUtils {
 	}
 
 	public static void countMessages(MessageReceivedEvent event, Member member) {
-		if (Permission.permissionLevel(member, 1)) {
+		if (PermissionsUtils.permissionLevel(member, 1)) {
 			event.getChannel().sendTyping().queue();
 
 			EmbedBuilder info = new EmbedBuilder();
