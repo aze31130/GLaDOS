@@ -1,11 +1,8 @@
-.settings
-.classpath
 .project
-bin
-build
+target/
 accounts
 channels
 config.json
-TODO.md
 Levels.java
 Ranking.java
+*.json
