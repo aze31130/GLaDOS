@@ -7,8 +7,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
-public class GuildSlashCommand extends ListenerAdapter {
-	public void onSlashCommand(SlashCommandInteractionEvent event) {
+public class SlashCommandInteraction extends ListenerAdapter {
+	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 		for (Command command : GLaDOS.getInstance().commands) {

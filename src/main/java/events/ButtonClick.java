@@ -4,8 +4,8 @@ import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class GuildButtonClick extends ListenerAdapter {
-	public void onButtonClick(ButtonInteractionEvent event) {
+public class ButtonClick extends ListenerAdapter {
+	public void onButtonInteraction(ButtonInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 		Boolean success = true;

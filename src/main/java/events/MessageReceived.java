@@ -10,8 +10,8 @@ import glados.GLaDOS;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class GuildMessageReceived extends ListenerAdapter {
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+public class MessageReceived extends ListenerAdapter {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		Boolean isDeleted = false;
 		GLaDOS glados = GLaDOS.getInstance();

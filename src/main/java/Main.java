@@ -3,14 +3,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import events.GuildButtonClick;
-import events.GuildMemberJoin;
-import events.GuildMemberRemove;
-import events.GuildMessageReactionAdd;
-import events.GuildMessageReactionRemove;
-import events.GuildMessageReceived;
-import events.GuildSlashCommand;
-import events.GuildVoiceJoin;
+import events.ButtonClick;
+import events.MemberJoin;
+import events.MemberRemove;
+import events.MessageReactionAdd;
+import events.MessageReactionRemove;
+import events.MessageReceived;
+import events.VoiceMute;
+import events.SlashCommandInteraction;
+import events.VoiceUpdate;
 import glados.GLaDOS;
 import utils.DataLogger;
 import utils.Logger;
@@ -30,7 +31,6 @@ public class Main {
 		System.out.println(log + "Logging messages: " + glados.logMessages);
 		System.out.println(log + "Leveling: " + glados.leveling);
 		System.out.println(log + "Maximum level: " + glados.maxLevel);
-		System.out.println(log + "Ranking version: ALPHA");
 
 		try {
 			JDABuilder builder = JDABuilder.createDefault(glados.token);
@@ -38,22 +38,30 @@ public class Main {
 			builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
 			builder.enableIntents(GatewayIntent.GUILD_MESSAGES);
 			builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
+			builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+			builder.enableIntents(GatewayIntent.GUILD_MESSAGE_REACTIONS);
+			builder.enableIntents(GatewayIntent.GUILD_EMOJIS_AND_STICKERS);
+			builder.enableIntents(GatewayIntent.GUILD_INVITES);
+
 			builder.setChunkingFilter(ChunkingFilter.ALL);
 			builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 			JDA jda = builder.build();
+
 			jda.setAutoReconnect(true);
-			jda.addEventListener(new GuildMemberJoin());
-			jda.addEventListener(new GuildMessageReceived());
-			jda.addEventListener(new GuildMemberRemove());
-			jda.addEventListener(new GuildMessageReactionAdd());
-			jda.addEventListener(new GuildMessageReactionRemove());
-			jda.addEventListener(new GuildSlashCommand());
-			jda.addEventListener(new GuildButtonClick());
-			jda.addEventListener(new GuildVoiceJoin());
+			jda.addEventListener(new ButtonClick());
+			jda.addEventListener(new MemberJoin());
+			jda.addEventListener(new MemberRemove());
+			jda.addEventListener(new MessageReactionAdd());
+			jda.addEventListener(new MessageReactionRemove());
+
+			jda.addEventListener(new MessageReceived());
+			jda.addEventListener(new SlashCommandInteraction());
+			jda.addEventListener(new VoiceUpdate());
+			jda.addEventListener(new VoiceMute());
 
 			// if(constants.Constants.logConnexions){
 			// jda.addEventListener(new ListenerOnline());
-			// jda.addEventListener(new GuildVoiceMute());
+			//
 			// }
 			jda.awaitReady();
 
@@ -65,8 +73,8 @@ public class Main {
 
 					if ((glados.metricLogging && cal.get(Calendar.SECOND) <= 10)) {
 						// Log into the database every online account
-						DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete()
-								.getApproximatePresences());
+						// DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete()
+						// .getApproximatePresences());
 					}
 
 					if (!glados.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17)
