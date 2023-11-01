@@ -1,14 +1,13 @@
-package commands;
+package utils;
 
 import java.util.List;
 
-import utils.EmoteCounter;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 
-public class Stats {
+public class StatsUtils {
 
 	public static void ListChannelMessage(MessageChannel channel, List<EmoteCounter> emotes) {
 		channel.getIterableHistory().cache(false).forEachRemaining((me) -> {

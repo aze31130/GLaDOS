@@ -19,10 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Translate extends Command {
-	public Translate(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Translate(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

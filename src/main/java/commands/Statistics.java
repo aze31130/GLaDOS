@@ -9,13 +9,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import utils.EmoteCounter;
+import utils.StatsUtils;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 
 public class Statistics extends Command {
-	public Statistics(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Statistics(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class Statistics extends Command {
 
 		// Stats.ListChannelMessage(args.member.getJDA().getTextChannelById("699751218179997816"),
 		// ec);
-		Stats.ListChannelMessage(c, ec);
+		StatsUtils.ListChannelMessage(c, ec);
 
 		ec.sort(Comparator.comparingInt(EmoteCounter::getAmount).reversed());
 		try {

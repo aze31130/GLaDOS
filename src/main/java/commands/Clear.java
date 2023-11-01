@@ -9,10 +9,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 
 public class Clear extends Command {
-	public Clear(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Clear(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

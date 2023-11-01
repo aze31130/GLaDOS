@@ -5,10 +5,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
 public class Status extends Command {
-	public Status(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Status(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

@@ -5,10 +5,8 @@ import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Help extends Command {
-	public Help(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Help(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

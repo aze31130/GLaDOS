@@ -123,34 +123,36 @@ public class GLaDOS {
 			// }
 
 			// Initialize command
-			this.commands.add(new Call("call", "call", "call command", "example", false, 1));
-			this.commands.add(new Translate("translate", "tr", "translate command", "example", false, 1));
-			this.commands.add(new Statistics("stats", "s", "stats command", "example", false, 1));
-			this.commands.add(new Ping("ping", "p", "ping command", "example", false, 1));
-			this.commands.add(new Clear("clear", "c", "clear command", "example", false, 1));
-			this.commands.add(new Version("version", "v", "version command", "example", false, 1));
-			this.commands.add(new CheGuevara("che-guevara", "cg", "che guevara command", "example", false, 1));
-			this.commands.add(new Status("activity", "at", "activity command", "example", false, 1));
-			this.commands.add(new State("state", "st", "state command", "example", false, 1));
-			this.commands.add(new Move("move", "mv", "move command", "example", false, 1));
-			this.commands.add(new Spam("spam", "sp", "spam command", "example", false, 1));
-			this.commands.add(new Shutdown("shutdown", "off", "shutdown command", "example", false, 2));
-			this.commands.add(new Rng("rng", "rng", "rng command", "example", false, 2));
-			this.commands.add(new RandomCat("random-cat", "rc", "cat command", "example", false, 2));
-			this.commands.add(new RandomDog("random-dog", "rd", "dog command", "example", false, 2));
-			this.commands.add(new Fibonacci("fibonacci", "fibo", "fibo command", "example", false, 2));
-			this.commands.add(new Factorielle("factorielle", "facto", "facto command", "example", false, 2));
-			this.commands.add(new Idea("what-should-i-do", "wsid", "idea command", "example", false, 2));
-			this.commands.add(new Help("help", "h", "help command", "example", false, 2));
+			this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required", 1));
 			this.commands
-					.add(new PictureInverse("picture-inverse", "pi", "picture inverse command", "example", false, 2));
-			this.commands.add(new Profile("profile", "p", "profile command", "example", false, 2));
-			this.commands.add(new Test("test", "p", "profile command", "example", false, 2));
-			this.commands.add(new Role("role", "r", "role command", "example", false, 2));
-			this.commands.add(new Connect("connect", "co", "connect command", "example", false, 2));
-			this.commands.add(new Disconnect("disconnect", "do", "disconnect command", "example", false, 2));
-			this.commands.add(new Backup("backup", "back", "backup command", "example", false, 2));
-			this.commands.add(new Statistics("statistics", "statistics", "Stats command", "example", false, 2));
+					.add(new Clear("clear", "Clears the latests messages in a channel. Admin privileges required", 1));
+			this.commands.add(new Translate("translate", "Translates the latests messages in a text channel", 1));
+			this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel", 1));
+			this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados", 1));
+			this.commands.add(new Version("version", "Displays version alongside others indicators", 1));
+			this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara", 1));
+			this.commands.add(new Status("activity", "Updates GLaDOS's activity", 1));
+			this.commands.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)", 1));
+			this.commands.add(new Move("move", "Move every voice connected users to another channel", 1));
+			this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required", 1));
+			this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", 2));
+			this.commands
+					.add(new Rng("rng", "Generate a random number using 'perfect and totally not rigged' random", 2));
+			this.commands.add(new RandomCat("random-cat", "Displays a cat picture", 2));
+			this.commands.add(new RandomDog("random-dog", "Display a dog picture", 2));
+			this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number", 2));
+			this.commands.add(new Factorielle("factorielle", "Computes given factorial number", 2));
+			this.commands.add(new Idea("what-should-i-do", "Use it when you do not know what to do", 2));
+			this.commands.add(new Help("help", "Shows an help page listing each commands", 2));
+			this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors of a given picture", 2));
+			this.commands.add(new Profile("profile", "Show a user profile", 2));
+			this.commands.add(new Test("test", "Test command, nothing to see here", 2));
+			this.commands.add(new Role("role", "Generate buttons for members to clic on", 2));
+			this.commands.add(new Connect("connect", "Invoke GLaDOS in a vocal channel", 2));
+			this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel", 2));
+			this.commands
+					.add(new Backup("backup", "Download a backup of the entire server. Admin privileges required", 2));
+			this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.", 2));
 
 		} catch (Exception e) {
 			System.err.println("Error ! The given config file is invalid !");

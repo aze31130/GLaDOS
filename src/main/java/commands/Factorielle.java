@@ -5,10 +5,8 @@ import glados.GLaDOS;
 import utils.BuildEmbed;
 
 public class Factorielle extends Command {
-	public Factorielle(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Factorielle(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

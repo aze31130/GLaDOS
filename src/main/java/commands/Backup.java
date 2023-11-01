@@ -16,11 +16,8 @@ import utils.BuildEmbed;
 import utils.Permission;
 
 public class Backup extends Command {
-
-	public Backup(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Backup(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	private void downloadChannel(MessageChannel tc) throws IOException {

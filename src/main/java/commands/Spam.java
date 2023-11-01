@@ -4,10 +4,8 @@ import utils.BuildEmbed;
 import utils.Permission;
 
 public class Spam extends Command {
-	public Spam(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Spam(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

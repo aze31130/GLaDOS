@@ -5,9 +5,8 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import utils.BuildEmbed;
 
 public class Connect extends Command {
-
-	public Connect(String name, String alias, String description, String example, Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example, hidden, permissionLevel);
+	public Connect(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package commands;
+package utils;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
@@ -13,9 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import database.JsonIO;
 import glados.GLaDOS;
-import utils.BuildEmbed;
-import utils.Counter;
-import utils.Permission;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
@@ -25,7 +22,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class Messages {
+public class MessagesUtils {
 
 	/*
 	 * IDEAS

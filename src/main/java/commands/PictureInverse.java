@@ -9,10 +9,8 @@ import javax.imageio.ImageIO;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 
 public class PictureInverse extends Command {
-	public PictureInverse(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public PictureInverse(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

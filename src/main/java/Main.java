@@ -58,11 +58,6 @@ public class Main {
 			jda.addEventListener(new SlashCommandInteraction());
 			jda.addEventListener(new VoiceUpdate());
 			jda.addEventListener(new VoiceMute());
-
-			// if(constants.Constants.logConnexions){
-			// jda.addEventListener(new ListenerOnline());
-			//
-			// }
 			jda.awaitReady();
 
 			ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();

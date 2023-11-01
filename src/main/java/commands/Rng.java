@@ -4,10 +4,8 @@ import java.util.Random;
 import utils.BuildEmbed;
 
 public class Rng extends Command {
-	public Rng(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Rng(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

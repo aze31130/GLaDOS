@@ -1,11 +1,13 @@
 package commands;
 
+/*
+ * This command is designed to test new features
+ */
 public class Test extends Command {
-	public Test(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example, hidden, permissionLevel);
+	public Test(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
-	
+
 	@Override
 	public void execute(Argument args) {
 	}

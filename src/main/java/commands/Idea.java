@@ -8,10 +8,8 @@ import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Idea extends Command {
-	public Idea(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Idea(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

@@ -5,10 +5,8 @@ import utils.Logger;
 import utils.Permission;
 
 public class Shutdown extends Command {
-	public Shutdown(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Shutdown(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override

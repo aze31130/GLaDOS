@@ -12,10 +12,8 @@ import org.json.JSONObject;
 import glados.GLaDOS;
 
 public class Call extends Command {
-	public Call(String name, String alias, String description, String example,
-			Boolean hidden, int permissionLevel) {
-		super(name, alias, description, example,
-				hidden, permissionLevel);
+	public Call(String name, String description, int permissionLevel) {
+		super(name, description, permissionLevel);
 	}
 
 	@Override
