@@ -11,7 +11,10 @@ import accounts.Permissions;
 import commands.*;
 import commands.Shutdown;
 import database.JsonIO;
-
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.FileUtils;
 
 public class GLaDOS {
@@ -203,6 +206,27 @@ public class GLaDOS {
 	public void checkAccounts() {
 		// Check the amount of registered accounts and compare it to the member list
 		// size
+	}
+
+	/*
+	 * This function registers discord slash commands according to the initialized
+	 * command list
+	 */
+	public void registerCommands(JDA jda) {
+		if (this.commands.isEmpty())
+			return;
+
+		List<SlashCommandData> convertedCommands = new ArrayList<>();
+
+		for (Command c : this.commands) {
+			convertedCommands.add(Commands.slash(c.name, c.description));
+
+			// TODO argument slash commands
+			// convertedCommands.add(Commands.slash(c.name,
+			// c.description).addOption(OptionType.NUMBER, "", ""));
+		}
+
+		jda.updateCommands().addCommands(convertedCommands).queue();
 	}
 
 	// public Account getAccount(String accountId) {

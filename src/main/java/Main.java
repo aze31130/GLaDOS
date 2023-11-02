@@ -61,9 +61,7 @@ public class Main {
 			jda.addEventListener(new VoiceMute());
 			jda.awaitReady();
 
-			jda.updateCommands().addCommands(
-					Commands.slash("call", "DEBUG COMMAND").addOption(OptionType.STRING, "trigger", "event to trigger"))
-					.queue();
+			glados.registerCommands(jda);
 
 			ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();
 			clock.scheduleAtFixedRate(new Runnable() {
