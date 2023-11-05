@@ -62,10 +62,9 @@ public class Backup extends Command {
 	@Override
 	public void execute(Argument args) {
 		if (!PermissionsUtils.permissionLevel(args.member, 2)) {
-			args.channel
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("You need to have the Administrator role in order to execute that.").build())
-					.queue();
+			args.channel.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("You need to have the Administrator role in order to execute that.")
+					.build()).queue();
 			return;
 		}
 		Guild server = args.channel.getJDA().getGuilds().get(1);
@@ -87,10 +86,8 @@ public class Backup extends Command {
 			int i = 0;
 			// Iterate on every channel and download content sequentially
 			for (TextChannel tc : channels) {
-				args.channel
-						.sendMessage(
-								"Downloading channel " + tc.getAsMention() + "(" + (100 * i / channels.size()) + "%)")
-						.queue();
+				args.channel.sendMessage("Downloading channel " + tc.getAsMention() + "("
+						+ (100 * i / channels.size()) + "%)").queue();
 				try {
 					downloadChannel(tc);
 				} catch (Exception e) {

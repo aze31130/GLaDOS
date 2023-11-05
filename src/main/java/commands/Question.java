@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import accounts.Permissions;
 
 public class Question {
 	public static void randomQuestion(MessageChannel ch) {

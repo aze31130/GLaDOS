@@ -7,6 +7,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MemberRemove extends ListenerAdapter {
 	public void onGuildMemberRemove(GuildMemberRemoveEvent event) {
 		event.getGuild().getDefaultChannel().asTextChannel()
-				.sendMessageEmbeds(BuildEmbed.joinLeaveEmbed(event.getUser().getGlobalName(), false).build()).queue();
+				.sendMessageEmbeds(
+						BuildEmbed.joinLeaveEmbed(event.getUser().getGlobalName(), false).build())
+				.queue();
 	}
 }

@@ -12,7 +12,8 @@ public class Argument {
 	public String[] arguments;
 	public List<Attachment> list;
 
-	public Argument(Member member, MessageChannel channel, String[] arguments, List<Attachment> list) {
+	public Argument(Member member, MessageChannel channel, String[] arguments,
+			List<Attachment> list) {
 		this.member = member;
 		this.channel = channel;
 		this.arguments = arguments;

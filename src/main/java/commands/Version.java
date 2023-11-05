@@ -32,15 +32,15 @@ public class Version extends Command {
 		info.addField("Java version: ", System.getProperty("java.runtime.version"), true);
 		info.addField("Java class version: ", System.getProperty("java.class.version"), true);
 		info.addField("JVM's version: ", System.getProperty("java.vm.version"), true);
-		info.addField("JVM's available memory: ",
-				Runtime.getRuntime().freeMemory() + " ("
-						+ Runtime.getRuntime().freeMemory() * 100 / Runtime.getRuntime().totalMemory() + "% free)",
-				true);
+		info.addField("JVM's available memory: ", Runtime.getRuntime().freeMemory() + " ("
+				+ Runtime.getRuntime().freeMemory() * 100 / Runtime.getRuntime().totalMemory()
+				+ "% free)", true);
 		info.addField("JVM's total memory: ", "" + Runtime.getRuntime().totalMemory(), true);
 		info.addField("Available threads: ", "" + Runtime.getRuntime().availableProcessors(), true);
 		info.addField("Temp file path: ", System.getProperty("java.io.tmpdir"), true);
 		info.addField("Request amount: ", Integer.toString(glados.getRequests()), true);
-		info.addField("Uptime: ", Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
+		info.addField("Uptime: ",
+				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);
 		info.setFooter("Request made at " + new Logger(false));
 		args.channel.sendMessageEmbeds(info.build()).queue();

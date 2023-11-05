@@ -14,9 +14,10 @@ import java.util.Random;
 
 public class Markov {
 	private static Random r = new Random();
-	
+
 	public static String markov(String filePath, int keySize, int outputSize) throws IOException {
-		if(keySize < 1) throw new IllegalArgumentException("Key size can't be less than 1");
+		if (keySize < 1)
+			throw new IllegalArgumentException("Key size can't be less than 1");
 		Path path = Paths.get(filePath);
 		byte[] bytes = Files.readAllBytes(path);
 		String[] words = new String(bytes).trim().split(" ");
@@ -24,9 +25,9 @@ public class Markov {
 			throw new IllegalArgumentException("Output size is out of range");
 		}
 		Map<String, List<String>> dict = new HashMap<>();
-		for(int i = 0; i < (words.length - keySize); ++i) {
+		for (int i = 0; i < (words.length - keySize); ++i) {
 			StringBuilder key = new StringBuilder(words[i]);
-			for(int j = i + 1; j < i + keySize; ++j) {
+			for (int j = i + 1; j < i + keySize; ++j) {
 				key.append(' ').append(words[j]);
 			}
 			String value = (i + keySize < words.length) ? words[i + keySize] : "";
@@ -34,7 +35,7 @@ public class Markov {
 				ArrayList<String> list = new ArrayList<>();
 				list.add(value);
 				dict.put(key.toString(), list);
-			}else{
+			} else {
 				dict.get(key.toString()).add(value);
 			}
 		}
@@ -42,18 +43,21 @@ public class Markov {
 		int rn = r.nextInt(dict.size());
 		String prefix = (String) dict.keySet().toArray()[rn];
 		List<String> output = new ArrayList<>(Arrays.asList(prefix.split(" ")));
-		while(true){
+		while (true) {
 			List<String> suffix = dict.get(prefix);
-			if(suffix.size() == 1) {
-				if(Objects.equals(suffix.get(0), "")) return output.stream().reduce("", (a, b) -> a + " " + b);
+			if (suffix.size() == 1) {
+				if (Objects.equals(suffix.get(0), ""))
+					return output.stream().reduce("", (a, b) -> a + " " + b);
 				output.add(suffix.get(0));
-			}else{
+			} else {
 				rn = r.nextInt(suffix.size());
 				output.add(suffix.get(rn));
 			}
-			if(output.size() >= outputSize) return output.stream().limit(outputSize).reduce("", (a, b) -> a + " " + b);
+			if (output.size() >= outputSize)
+				return output.stream().limit(outputSize).reduce("", (a, b) -> a + " " + b);
 			n++;
-			prefix = output.stream().skip(n).limit(keySize).reduce("", (a, b) -> a + " " + b).trim();
+			prefix = output.stream().skip(n).limit(keySize).reduce("", (a, b) -> a + " " + b)
+					.trim();
 		}
 	}
 }

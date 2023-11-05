@@ -78,9 +78,7 @@ public class Profile extends Command {
 
 	// server total levels, experience, message sent, total experience obtained
 	private EmbedBuilder serverProfile(Guild g) {
-		EmbedBuilder profile = new EmbedBuilder()
-				.setColor(Color.GREEN)
-				.setAuthor("GLaDOS")
+		EmbedBuilder profile = new EmbedBuilder().setColor(Color.GREEN).setAuthor("GLaDOS")
 				.setDescription("Server information for " + g.getName())
 				.setThumbnail(g.getIconUrl())
 				.addField("Server created on: ", g.getTimeCreated().toString(), true)

@@ -28,10 +28,9 @@ public class Move extends Command {
 				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
 		} else {
-			args.channel
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("You need to have the Administrator role in order to execute that.").build())
-					.queue();
+			args.channel.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("You need to have the Administrator role in order to execute that.")
+					.build()).queue();
 		}
 	}
 }

@@ -16,8 +16,7 @@ public class Ping extends Command {
 
 	@Override
 	public void execute(Argument args) {
-		EmbedBuilder ping = new EmbedBuilder()
-				.setColor(0x22ff2a)
+		EmbedBuilder ping = new EmbedBuilder().setColor(0x22ff2a)
 				.setTitle("Ping: " + args.channel.getJDA().getGatewayPing() + "ms")
 				.setThumbnail(args.channel.getJDA().getGuildById("676731153444765706").getIconUrl())
 				.setFooter("Request made at " + new Logger(false));

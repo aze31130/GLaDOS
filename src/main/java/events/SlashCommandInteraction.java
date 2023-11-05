@@ -26,7 +26,8 @@ public class SlashCommandInteraction extends ListenerAdapter {
 				// Broadcast Messenger"), Button.danger("-Broadcast", "Leave Broadcast
 				// Messenger")).queue();
 
-				command.execute(new Argument(event.getMember(), event.getChannel(), arguments, null));
+				command.execute(
+						new Argument(event.getMember(), event.getChannel(), arguments, null));
 				break;
 			}
 		}

@@ -19,11 +19,10 @@ public class RandomDog extends Command {
 	@Override
 	public void execute(Argument args) {
 		try {
-			EmbedBuilder info = new EmbedBuilder()
-					.setTitle("Random Dog Picture")
-					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random").getString("message"))
-					.setColor(Color.WHITE)
-					.setFooter("Request made at " + new Logger(false));
+			EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")
+					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random")
+							.getString("message"))
+					.setColor(Color.WHITE).setFooter("Request made at " + new Logger(false));
 			args.channel.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
 			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

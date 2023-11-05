@@ -78,8 +78,8 @@ public class Main {
 					if (!glados.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17)
 							&& (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10)
 							&& (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)) {
-						System.out.println(log + "Executed EpicGameAnnoune at " + cal.get(Calendar.HOUR_OF_DAY) + ":"
-								+ cal.get(Calendar.MINUTE));
+						System.out.println(log + "Executed EpicGameAnnoune at "
+								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						// glados.executeCommand(
 						// "Call",
 						// new Argument(
@@ -92,10 +92,11 @@ public class Main {
 						glados.FreeGameAnnonce = false;
 					}
 
-					if (!glados.DailyQuote && (cal.get(Calendar.HOUR_OF_DAY) == 0) && (cal.get(Calendar.MINUTE) == 0)
+					if (!glados.DailyQuote && (cal.get(Calendar.HOUR_OF_DAY) == 0)
+							&& (cal.get(Calendar.MINUTE) == 0)
 							&& (cal.get(Calendar.SECOND) <= 10)) {
-						System.out.println(log + "Executed Random Quote at " + cal.get(Calendar.HOUR_OF_DAY) + ":"
-								+ cal.get(Calendar.MINUTE));
+						System.out.println(log + "Executed Random Quote at "
+								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						// glados.executeCommand(
 						// "Call",
 						// new Argument(
@@ -115,7 +116,8 @@ public class Main {
 					}
 				}
 			}, 0, 10, TimeUnit.SECONDS);
-			System.out.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");
+			System.out
+					.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");
 
 		} catch (InterruptedException e) {
 			System.err.println(log + "Thread interrupted !");
@@ -126,36 +128,23 @@ public class Main {
 		/*
 		 * Guild server = jda.getGuilds().get(1);
 		 * 
-		 * //TextChannel tc = server.getTextChannelById("676731153444765709");
-		 * for (TextChannel tc : server.getTextChannels()) {
-		 * jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).
-		 * sendMessage("Downloading channel " + tc.getAsMention()).queue();
-		 * try {
-		 * JSONArray messageArray = new JSONArray();
-		 * tc.getIterableHistory().cache(false).forEachRemaining((me) -> {
-		 * JSONObject json = new JSONObject();
-		 * json.clear();
-		 * json.put("author", me.getAuthor().getIdLong());
-		 * json.put("message", me.getContentRaw());
-		 * json.put("date", me.getTimeCreated());
+		 * //TextChannel tc = server.getTextChannelById("676731153444765709"); for (TextChannel tc :
+		 * server.getTextChannels()) { jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).
+		 * sendMessage("Downloading channel " + tc.getAsMention()).queue(); try { JSONArray
+		 * messageArray = new JSONArray();
+		 * tc.getIterableHistory().cache(false).forEachRemaining((me) -> { JSONObject json = new
+		 * JSONObject(); json.clear(); json.put("author", me.getAuthor().getIdLong());
+		 * json.put("message", me.getContentRaw()); json.put("date", me.getTimeCreated());
 		 * messageArray.put(json);
 		 * 
-		 * return true;
-		 * });
+		 * return true; });
 		 * 
-		 * FileWriter jsonFile = new FileWriter("./data/channels/" + tc.getName() +
-		 * ".json");
-		 * jsonFile.write(messageArray.toString());
-		 * jsonFile.flush();
-		 * jsonFile.close();
-		 * } catch(Exception e) {
-		 * jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).sendMessage(e.toString()).
-		 * queue();
-		 * }
-		 * }
+		 * FileWriter jsonFile = new FileWriter("./data/channels/" + tc.getName() + ".json");
+		 * jsonFile.write(messageArray.toString()); jsonFile.flush(); jsonFile.close(); }
+		 * catch(Exception e) {
+		 * jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).sendMessage(e.toString()). queue(); } }
 		 * 
-		 * (Inserting April Joke...) Congratulations, the test is now over. Happy April
-		 * Fool's Day!
+		 * (Inserting April Joke...) Congratulations, the test is now over. Happy April Fool's Day!
 		 */
 	}
 }

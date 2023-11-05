@@ -59,7 +59,8 @@ public class PictureInverse extends Command {
 							red = 255 - color.getRed();
 							green = 255 - color.getGreen();
 							blue = 255 - color.getBlue();
-							// rgb = img.getRGB(startX, startY, w, width, rgbArray, offset, scansize)
+							// rgb = img.getRGB(startX, startY, w, width, rgbArray, offset,
+							// scansize)
 
 							if (red < 0) {
 								red = 0;
@@ -94,7 +95,10 @@ public class PictureInverse extends Command {
 						args.channel.sendMessage(e.toString());
 					}
 				} else {
-					args.channel.sendMessage("Cannot handle " + attachment.getFileExtension() + " files !").queue();
+					args.channel
+							.sendMessage(
+									"Cannot handle " + attachment.getFileExtension() + " files !")
+							.queue();
 				}
 			}
 		} else {

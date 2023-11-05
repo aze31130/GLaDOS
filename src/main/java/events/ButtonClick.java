@@ -11,12 +11,16 @@ public class ButtonClick extends ListenerAdapter {
 		Boolean success = true;
 		switch (event.getComponentId()) {
 			case "+Broadcast":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleBroadcastMessenger)).queue();
+				event.getGuild()
+						.addRoleToMember(event.getMember().getUser(),
+								event.getGuild().getRoleById(glados.roleBroadcastMessenger))
+						.queue();
 				break;
 			case "-Broadcast":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleBroadcastMessenger)).queue();
+				event.getGuild()
+						.removeRoleFromMember(event.getMember().getUser(),
+								event.getGuild().getRoleById(glados.roleBroadcastMessenger))
+						.queue();
 				break;
 			case "+Gamer":
 				event.getGuild().addRoleToMember(event.getMember().getUser(),
@@ -76,8 +80,8 @@ public class ButtonClick extends ListenerAdapter {
 			if (event.getComponentId().startsWith("-")) {
 				action = "removed";
 			}
-			event.reply("Successfully " + action + " " + event.getComponentId().substring(1) + " role !")
-					.setEphemeral(true).queue();
+			event.reply("Successfully " + action + " " + event.getComponentId().substring(1)
+					+ " role !").setEphemeral(true).queue();
 		} else {
 			event.deferEdit().queue();
 		}

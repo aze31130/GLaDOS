@@ -15,8 +15,8 @@ public class Account {
 	public TrustFactor trustLevel;
 	public Permissions permission;
 
-	public Account(String id, int level, long experience, long totalExperience, TrustFactor trustLevel,
-			Permissions permission) {
+	public Account(String id, int level, long experience, long totalExperience,
+			TrustFactor trustLevel, Permissions permission) {
 		this.id = id;
 		this.level = level;
 		this.experience = experience;

@@ -38,8 +38,8 @@ public class Help extends Command {
 		info.addField("state | st", "(Sets the state of GLaDOS)", true);
 		info.addField("activity | at", "(Sets the activity of GLaDOS)", true);
 		info.addField("picture-inverse | pi", "(Currently in beta version)", true);
-		info.addField("fibonacci | fibo <number>", "Calculates Fibonacci for almost any numbers (in less of 3 seconds)",
-				true);
+		info.addField("fibonacci | fibo <number>",
+				"Calculates Fibonacci for almost any numbers (in less of 3 seconds)", true);
 		// info.addField(Main.commandPrefix + "connect", "(Coming soon)", true);
 		// info.addField(Main.commandPrefix + "disconnect", "(Coming soon)", true);
 		info.addField("ping", "(Displays the latency between Discord and GLaDOS)", true);

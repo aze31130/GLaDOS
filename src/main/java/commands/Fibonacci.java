@@ -21,10 +21,8 @@ public class Fibonacci extends Command {
 			try {
 				number = Integer.parseInt(args.arguments[0]);
 			} catch (Exception e) {
-				EmbedBuilder error = new EmbedBuilder()
-						.setColor(0xff3923)
-						.setTitle("Error in the syntax !")
-						.setDescription(e.toString());
+				EmbedBuilder error = new EmbedBuilder().setColor(0xff3923)
+						.setTitle("Error in the syntax !").setDescription(e.toString());
 				args.channel.sendMessageEmbeds(error.build()).queue();
 			}
 
@@ -47,21 +45,22 @@ public class Fibonacci extends Command {
 				try {
 					args.channel.sendMessage("Fibonacci(" + number + ") = " + f).queue();
 				} catch (Exception e) {
-					EmbedBuilder error = new EmbedBuilder()
-							.setColor(0xff3923)
-							.setTitle("Error")
+					EmbedBuilder error = new EmbedBuilder().setColor(0xff3923).setTitle("Error")
 							.setDescription("Cannot send more than 2000 characters !")
-							.addField("Note: ", " In the next update, theses numbers will be send in a textfile", true);
+							.addField("Note: ",
+									" In the next update, theses numbers will be send in a textfile",
+									true);
 					args.channel.sendMessageEmbeds(error.build()).queue();
 				}
 			} else {
-				args.channel
-						.sendMessageEmbeds(
-								BuildEmbed.errorEmbed("The given number " + number + " is out of range.").build())
+				args.channel.sendMessageEmbeds(BuildEmbed
+						.errorEmbed("The given number " + number + " is out of range.").build())
 						.queue();
 			}
 		} else {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: Fibonacci [0;10000]").build()).queue();
+			args.channel
+					.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: Fibonacci [0;10000]").build())
+					.queue();
 		}
 	}
 }

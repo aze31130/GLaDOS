@@ -34,19 +34,21 @@ public class State extends Command {
 			}
 
 			if (isValidState) {
-				EmbedBuilder sucess = new EmbedBuilder()
-						.setColor(0x22ff2a)
+				EmbedBuilder sucess = new EmbedBuilder().setColor(0x22ff2a)
 						.setTitle("Successfully updated to " + args.arguments[0] + " state.");
 				args.channel.sendMessageEmbeds(sucess.build()).queue();
 			} else {
-				EmbedBuilder error = new EmbedBuilder()
-						.setColor(0xff3923)
-						.setTitle("Error in the command");
-				error.setDescription("Unknown state: " + args.arguments[0] + ". All states are: <online / idle / dnd>");
+				EmbedBuilder error =
+						new EmbedBuilder().setColor(0xff3923).setTitle("Error in the command");
+				error.setDescription("Unknown state: " + args.arguments[0]
+						+ ". All states are: <online / idle / dnd>");
 				args.channel.sendMessageEmbeds(error.build()).queue();
 			}
 		} else {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: state <online / idle / dnd>").build()).queue();
+			args.channel
+					.sendMessageEmbeds(
+							BuildEmbed.errorEmbed("Usage: state <online / idle / dnd>").build())
+					.queue();
 		}
 	}
 }

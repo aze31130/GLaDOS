@@ -38,29 +38,29 @@ public class Status extends Command {
 							.setActivity(Activity.streaming(activity, "https://www.twitch.tv/ "));
 					break;
 				default:
-					args.channel.getJDA().getPresence().setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS,
-							args.arguments[1] + args.arguments.toString()));
+					args.channel.getJDA().getPresence()
+							.setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS,
+									args.arguments[1] + args.arguments.toString()));
 					isValidActivity = false;
 			}
 
 			if (isValidActivity) {
-				EmbedBuilder sucess = new EmbedBuilder()
-						.setColor(0x22ff2a)
-						.setTitle("Successfully updated to" + args.arguments[0] + " " + activity + " activity.");
+				EmbedBuilder sucess =
+						new EmbedBuilder().setColor(0x22ff2a).setTitle("Successfully updated to"
+								+ args.arguments[0] + " " + activity + " activity.");
 				args.channel.sendMessageEmbeds(sucess.build()).queue();
 			} else {
-				EmbedBuilder error = new EmbedBuilder()
-						.setColor(0xff3923)
+				EmbedBuilder error = new EmbedBuilder().setColor(0xff3923)
 						.setTitle("Error in the command")
 						.setDescription("Unknown activity: " + args.arguments[0]
 								+ ". All activities are: <listening / playing / watching / streaming> <name>");
 				args.channel.sendMessageEmbeds(error.build()).queue();
 			}
 		} else {
-			args.channel
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("Usage: activity <listening / playing / watching / streaming> <name>").build())
-					.queue();
+			args.channel.sendMessageEmbeds(BuildEmbed
+					.errorEmbed(
+							"Usage: activity <listening / playing / watching / streaming> <name>")
+					.build()).queue();
 		}
 	}
 }

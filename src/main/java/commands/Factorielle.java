@@ -40,17 +40,18 @@ public class Factorielle extends Command {
 					// out.print(f);
 					// out.close();
 					// event.getChannel().sendFile(new File("output.txt")).queue();
-					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
+							.queue();
 				}
 			} else {
 				args.channel
-						.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, negative numbers cannot be handled.").build())
+						.sendMessageEmbeds(BuildEmbed
+								.errorEmbed("Sorry, negative numbers cannot be handled.").build())
 						.queue();
 			}
 		} else {
-			args.channel
-					.sendMessageEmbeds(
-							BuildEmbed.errorEmbed("Usage: " + glados.prefix + "facto <positive integer>").build())
+			args.channel.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("Usage: " + glados.prefix + "facto <positive integer>").build())
 					.queue();
 		}
 	}

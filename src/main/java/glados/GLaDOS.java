@@ -93,56 +93,57 @@ public class GLaDOS {
 		 * Initialize command
 		 */
 		this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.STRING, "trigger", "Call name you want to trigger")
-								.setRequired(true))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "trigger",
+						"Call name you want to trigger").setRequired(true))));
 
-		this.commands.add(new Clear("clear", "Clears the latests messages in a channel. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.INTEGER, "amount", "Amount of message you want to delete"))));
+		this.commands.add(new Clear("clear",
+				"Clears the latests messages in a channel. Admin privileges required",
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
+						"Amount of message you want to delete"))));
 
-		this.commands.add(new Translate("translate", "Translates the latests messages in a text channel",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.STRING, "amount", "Amount of message you want to translate."))));
+		this.commands
+				.add(new Translate("translate", "Translates the latests messages in a text channel",
+						Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "amount",
+								"Amount of message you want to translate."))));
 
 		this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "target", "Channel you want to compute stats of"))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
+						"Channel you want to compute stats of"))));
 
 		this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados",
-				Permissions.ADMIN,
-				Arrays.asList()));
+				Permissions.ADMIN, Arrays.asList()));
 
 		this.commands.add(new Version("version", "displays version alongside others indicators",
-				Permissions.ADMIN,
-				Arrays.asList()));
+				Permissions.ADMIN, Arrays.asList()));
 
 		this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara",
-				Permissions.ADMIN,
-				Arrays.asList()));
+				Permissions.ADMIN, Arrays.asList()));
 
 		this.commands.add(new Move("move", "Move every voice connected users to another channel",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "destination", "Channel you want to move in"))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "destination",
+						"Channel you want to move in"))));
 
 		this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.MENTIONABLE, "target", "Person you want to annoy"))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "target",
+						"Person you want to annoy"))));
 
-		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS",
-				Permissions.ADMIN,
+		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.ADMIN,
 				Arrays.asList()));
 
-		this.commands.add(new Rng("rng", "Generate a random number using 'perfect and totally not rigged' random",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.INTEGER, "lower_bound", "The lower bound is included"),
-						new OptionData(OptionType.INTEGER, "upper_bound", "The upper bound is included"))));
+		this.commands.add(new Rng("rng",
+				"Generate a random number using 'perfect and totally not rigged' random",
+				Permissions.ADMIN,
+				Arrays.asList(
+						new OptionData(OptionType.INTEGER, "lower_bound",
+								"The lower bound is included"),
+						new OptionData(OptionType.INTEGER, "upper_bound",
+								"The upper bound is included"))));
 
-		this.commands.add(new RandomCat("random-cat", "Displays a cat picture",
-				Permissions.ADMIN, Arrays.asList()));
+		this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.ADMIN,
+				Arrays.asList()));
 
-		this.commands.add(new RandomDog("random-dog", "Display a dog picture",
-				Permissions.ADMIN, Arrays.asList()));
+		this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.ADMIN,
+				Arrays.asList()));
 
 		this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number",
 				Permissions.ADMIN, Arrays.asList(
@@ -158,43 +159,44 @@ public class GLaDOS {
 		this.commands.add(new Help("help", "Shows an help page listing each commands",
 				Permissions.ADMIN, Arrays.asList()));
 
-		this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors of a given picture",
-				Permissions.ADMIN, Arrays.asList()));
+		this.commands.add(new PictureInverse("picture-inverse",
+				"Inverse every colors of a given picture", Permissions.ADMIN, Arrays.asList()));
 
-		this.commands.add(new Profile("profile", "Show a user profile",
-				Permissions.ADMIN, Arrays.asList()));
+		this.commands.add(
+				new Profile("profile", "Show a user profile", Permissions.ADMIN, Arrays.asList()));
 
-		this.commands.add(new Test("test", "Test command, nothing to see here",
-				Permissions.ADMIN, Arrays.asList()));
+		this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.ADMIN,
+				Arrays.asList()));
 
 		this.commands.add(new Role("role", "Generate buttons for members to clic on.",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.MENTIONABLE, "role",
-								"Generates the join/leave button for the given role."))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
+						"Generates the join/leave button for the given role."))));
 
 		this.commands.add(new Connect("connect", "Summons GLaDOS in a vocal channel",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "channel", "The channel you want to invoke GLaDOS"))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "channel",
+						"The channel you want to invoke GLaDOS"))));
 
 		this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel",
 				Permissions.ADMIN, Arrays.asList()));
 
-		this.commands.add(new Backup("backup", "Download a backup of the entire server. Admin privileges required",
+		this.commands.add(new Backup("backup",
+				"Download a backup of the entire server. Admin privileges required",
 				Permissions.ADMIN, Arrays.asList()));
 
 		this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "target", "The channel you want to inspect"))));
+				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
+						"The channel you want to inspect"))));
 
-		this.commands.add(new Status("activity", "Updates GLaDOS's activity",
-				Permissions.ADMIN, Arrays.asList(
+		this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.ADMIN,
+				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
 								"Can be [listening, playing, watching, streaming]"),
-						new OptionData(OptionType.INTEGER, "description", "The displayed activity"))));
+						new OptionData(OptionType.INTEGER, "description",
+								"The displayed activity"))));
 
-		this.commands.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
-				Permissions.ADMIN, Arrays.asList(
-						new OptionData(OptionType.STRING, "status",
+		this.commands
+				.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
+						Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "status",
 								"Can be [online, idle, dnd]"))));
 
 		try {
@@ -274,8 +276,7 @@ public class GLaDOS {
 	}
 
 	/*
-	 * This function registers discord slash commands according to the initialized
-	 * command list
+	 * This function registers discord slash commands according to the initialized command list
 	 */
 	public void registerCommands(JDA jda) {
 		if (this.commands.isEmpty())
@@ -287,7 +288,8 @@ public class GLaDOS {
 			if (c.arguments.isEmpty())
 				convertedCommands.add(Commands.slash(c.name, c.description));
 			else
-				convertedCommands.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
+				convertedCommands
+						.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();

@@ -26,7 +26,10 @@ public class Rng extends Command {
 				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
 		} else {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed("You need to provide a number !").build()).queue();
+			args.channel
+					.sendMessageEmbeds(
+							BuildEmbed.errorEmbed("You need to provide a number !").build())
+					.queue();
 		}
 	}
 }

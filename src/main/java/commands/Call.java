@@ -24,14 +24,16 @@ public class Call extends Command {
 	@Override
 	public void execute(Argument args) {
 		if (!PermissionsUtils.permissionLevel(args.member, 1)) {
-			args.channel.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("You need to have the Moderator role in order to execute that.").build())
-					.queue();
+			args.channel.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("You need to have the Moderator role in order to execute that.")
+					.build()).queue();
 			return;
 		}
 
 		if (args.arguments.length == 0) {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed("You need to provide a trigger name !").build())
+			args.channel
+					.sendMessageEmbeds(
+							BuildEmbed.errorEmbed("You need to provide a trigger name !").build())
 					.queue();
 			return;
 		}
@@ -47,7 +49,8 @@ public class Call extends Command {
 				break;
 			case "Midnight":
 				try {
-					JSONObject jsonObject = JsonDownloader.getJson("https://api.quotable.io/random");
+					JSONObject jsonObject =
+							JsonDownloader.getJson("https://api.quotable.io/random");
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
@@ -56,7 +59,8 @@ public class Call extends Command {
 					}
 					embed = BuildEmbed.midnightQuote(quote, author);
 				} catch (Exception e) {
-					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
+							.queue();
 				}
 				break;
 			default:

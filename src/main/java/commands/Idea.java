@@ -26,14 +26,11 @@ public class Idea extends Command {
 			int participants = jsonObject.getInt("participants");
 			int price = jsonObject.getInt("price");
 
-			EmbedBuilder info = new EmbedBuilder()
-					.setAuthor("What Should I Do ?")
-					.setTitle(activity)
-					.addField("Price: ", price + "", false)
-					.addField("Type: ", type, false)
-					.addField("Participants: ", participants + "", false)
-					.setColor(Color.CYAN)
-					.setFooter("Request made at " + new Logger(false));
+			EmbedBuilder info =
+					new EmbedBuilder().setAuthor("What Should I Do ?").setTitle(activity)
+							.addField("Price: ", price + "", false).addField("Type: ", type, false)
+							.addField("Participants: ", participants + "", false)
+							.setColor(Color.CYAN).setFooter("Request made at " + new Logger(false));
 			args.channel.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
 			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

@@ -8,12 +8,8 @@ import glados.GLaDOS;
 
 public class PermissionsUtils {
 	/*
-	 * Returns the permission level of someone
-	 * +-------+-------+-----+------+
-	 * | OWNER | ADMIN | MOD | NONE |
-	 * +-------+-------+-----+------+
-	 * | 3 | 2 | 1 | 0 |
-	 * +-------+-------+-----+------+
+	 * Returns the permission level of someone +-------+-------+-----+------+ | OWNER | ADMIN | MOD
+	 * | NONE | +-------+-------+-----+------+ | 3 | 2 | 1 | 0 | +-------+-------+-----+------+
 	 */
 	public static Boolean permissionLevel(Member member, int requiredLevel) {
 		List<Role> roles = member.getRoles();

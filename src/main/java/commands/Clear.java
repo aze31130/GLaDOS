@@ -22,19 +22,21 @@ public class Clear extends Command {
 			GLaDOS glados = GLaDOS.getInstance();
 			if (args.arguments.length > 0) {
 				try {
-					List<Message> messages = args.channel.getHistory().retrievePast(Integer.parseInt(args.arguments[0]))
-							.complete();
+					List<Message> messages = args.channel.getHistory()
+							.retrievePast(Integer.parseInt(args.arguments[0])).complete();
 					// args.channel.dele.deleteMessages(messages).queue();
-					EmbedBuilder success = new EmbedBuilder()
-							.setColor(Color.GREEN)
+					EmbedBuilder success = new EmbedBuilder().setColor(Color.GREEN)
 							.setTitle("Successfully deleted " + args.arguments[0] + " messages.");
 					args.channel.sendMessageEmbeds(success.build()).queue();
 				} catch (Exception exception) {
-					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
+					args.channel
+							.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build())
+							.queue();
 				}
 			} else {
 				args.channel
-						.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: " + glados.prefix + "clear [1-100]").build())
+						.sendMessageEmbeds(BuildEmbed
+								.errorEmbed("Usage: " + glados.prefix + "clear [1-100]").build())
 						.queue();
 			}
 		} else {

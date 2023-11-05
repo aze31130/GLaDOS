@@ -35,11 +35,13 @@ public class Translate extends Command {
 		int delay = 300;
 
 		// Check cooldown
-		long secondsSinceLastExecution = g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
+		long secondsSinceLastExecution =
+				g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
 		if (secondsSinceLastExecution < delay) {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(
-					"You need to wait " + (delay - secondsSinceLastExecution) + " seconds until using this command !")
-					.build()).queue();
+			args.channel.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution)
+							+ " seconds until using this command !").build())
+					.queue();
 			return;
 		}
 		g.translationCooldown = LocalDateTime.now();
@@ -60,18 +62,18 @@ public class Translate extends Command {
 
 			HttpClient client = HttpClient.newHttpClient();
 
-			HttpRequest request = HttpRequest.newBuilder(
-					URI.create("https://translate.argosopentech.com/translate"))
+			HttpRequest request = HttpRequest
+					.newBuilder(URI.create("https://translate.argosopentech.com/translate"))
 					.header("Content-Type", "application/json")
-					.POST(BodyPublishers.ofString(json.toString()))
-					.build();
+					.POST(BodyPublishers.ofString(json.toString())).build();
 
 			// Build an embed and send it
 			try {
-				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+				HttpResponse<String> response =
+						client.send(request, HttpResponse.BodyHandlers.ofString());
 				JSONObject responseJson = new JSONObject(response.body());
-				args.channel.sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: "
-						+ responseJson.get("translatedText").toString()).queue();
+				args.channel.sendMessage("`[Translated] <" + m.getMember().getEffectiveName()
+						+ ">`: " + responseJson.get("translatedText").toString()).queue();
 			} catch (IOException | InterruptedException e) {
 				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}

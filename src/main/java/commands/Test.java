@@ -15,6 +15,5 @@ public class Test extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-	}
+	public void execute(Argument args) {}
 }

@@ -25,13 +25,11 @@ public class RandomCat extends Command {
 	public void execute(Argument args) {
 		try {
 			String apiUrl = "https://api.thecatapi.com/v1/images/search";
-			JSONArray jsonArray = new JSONArray(new JSONTokener(
-					new BufferedReader(new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
+			JSONArray jsonArray = new JSONArray(new JSONTokener(new BufferedReader(
+					new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
 			JSONObject jsonObject = new JSONObject(jsonArray.get(0).toString());
-			EmbedBuilder info = new EmbedBuilder()
-					.setTitle("Random Cat Picture")
-					.setImage(jsonObject.getString("url"))
-					.setColor(Color.WHITE)
+			EmbedBuilder info = new EmbedBuilder().setTitle("Random Cat Picture")
+					.setImage(jsonObject.getString("url")).setColor(Color.WHITE)
 					.setFooter("Request made at " + new Logger(false));
 			args.channel.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {

@@ -17,11 +17,7 @@ public class QuoteUtils {
 		/*
 		 * All special dates:
 		 * 
-		 * Valentine's Day
-		 * April Fools
-		 * Halloween
-		 * Christmas
-		 * New Year
+		 * Valentine's Day April Fools Halloween Christmas New Year
 		 */
 		return false;
 	}

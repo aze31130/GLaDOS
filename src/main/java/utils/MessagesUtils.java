@@ -25,10 +25,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class MessagesUtils {
 
 	/*
-	 * IDEAS
-	 * TOP MESSAGER
-	 * TOP EMOJIER
-	 * TOP LINKER
+	 * IDEAS TOP MESSAGER TOP EMOJIER TOP LINKER
 	 * 
 	 */
 
@@ -76,8 +73,8 @@ public class MessagesUtils {
 				channel.sendMessage(e.toString()).queue();
 			}
 
-			channel.sendMessage("Successfully created json file of ./" + tc.getName().toLowerCase() + ".txt file")
-					.queue();
+			channel.sendMessage("Successfully created json file of ./" + tc.getName().toLowerCase()
+					+ ".txt file").queue();
 		}
 	}
 
@@ -112,8 +109,8 @@ public class MessagesUtils {
 					FileWriter fw = new FileWriter(channel.getName() + ".txt", true);
 					BufferedWriter bw = new BufferedWriter(fw);
 					PrintWriter out = new PrintWriter(bw);
-					out.print("[" + me.getTimeCreated() + "] [" + me.getAuthor().getAsTag() + "] " + me.getContentRaw()
-							+ "\n");
+					out.print("[" + me.getTimeCreated() + "] [" + me.getAuthor().getAsTag() + "] "
+							+ me.getContentRaw() + "\n");
 					out.close();
 				} catch (IOException e) {
 					channel.sendMessage(e.toString());
@@ -167,7 +164,8 @@ public class MessagesUtils {
 
 				EmbedBuilder result = new EmbedBuilder();
 				result.setColor(Color.GREEN);
-				result.setTitle("Done ! On this channel, " + counter + " messages have been sent !");
+				result.setTitle(
+						"Done ! On this channel, " + counter + " messages have been sent !");
 				event.getChannel().sendMessageEmbeds(result.build()).queue();
 
 			} catch (Exception e) {
@@ -187,7 +185,8 @@ public class MessagesUtils {
 			EmbedBuilder error = new EmbedBuilder();
 			error.setColor(0xff3923);
 			error.setTitle("Error");
-			error.setDescription("You need to have the Administrator role in order to execute that.");
+			error.setDescription(
+					"You need to have the Administrator role in order to execute that.");
 			event.getChannel().sendMessageEmbeds(error.build()).queue();
 		}
 	}
