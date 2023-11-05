@@ -2,7 +2,7 @@ import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
+import commands.Argument;
 import events.ButtonClick;
 import events.MemberJoin;
 import events.MemberRemove;
@@ -38,8 +38,8 @@ public class Main {
 
 			builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
 			builder.enableIntents(GatewayIntent.GUILD_MESSAGES);
-			builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
 			builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+			builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
 			builder.enableIntents(GatewayIntent.GUILD_MESSAGE_REACTIONS);
 			builder.enableIntents(GatewayIntent.GUILD_EMOJIS_AND_STICKERS);
 			builder.enableIntents(GatewayIntent.GUILD_INVITES);
@@ -54,7 +54,6 @@ public class Main {
 			jda.addEventListener(new MemberRemove());
 			jda.addEventListener(new MessageReactionAdd());
 			jda.addEventListener(new MessageReactionRemove());
-
 			jda.addEventListener(new MessageReceived());
 			jda.addEventListener(new SlashCommandInteraction());
 			jda.addEventListener(new VoiceUpdate());
@@ -80,13 +79,12 @@ public class Main {
 							&& (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)) {
 						System.out.println(log + "Executed EpicGameAnnoune at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						// glados.executeCommand(
-						// "Call",
-						// new Argument(
-						// jda.getGuildById(glados.guildId).getMemberById(glados.ownerId),
-						// jda.getTextChannelById(glados.channelGamer),
-						// new String[] { "Gamer" },
-						// null));
+						glados.executeCommand("Call",
+								new Argument(
+										jda.getGuildById(glados.guildId)
+												.getMemberById(glados.ownerId),
+										jda.getTextChannelById(glados.channelGamer),
+										new String[] {"Gamer"}, null));
 						glados.FreeGameAnnonce = true;
 					} else {
 						glados.FreeGameAnnonce = false;
@@ -97,13 +95,12 @@ public class Main {
 							&& (cal.get(Calendar.SECOND) <= 10)) {
 						System.out.println(log + "Executed Random Quote at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						// glados.executeCommand(
-						// "Call",
-						// new Argument(
-						// jda.getGuildById(glados.guildId).getMemberById(glados.ownerId),
-						// jda.getTextChannelById(glados.channelGeneral),
-						// new String[] { "Midnight" },
-						// null));
+						glados.executeCommand("Call",
+								new Argument(
+										jda.getGuildById(glados.guildId)
+												.getMemberById(glados.ownerId),
+										jda.getTextChannelById(glados.channelGeneral),
+										new String[] {"Midnight"}, null));
 
 						// if(glados.leveling) {
 						// Ranking.update();

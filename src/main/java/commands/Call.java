@@ -4,7 +4,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import utils.PermissionsUtils;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 
@@ -23,13 +22,6 @@ public class Call extends Command {
 
 	@Override
 	public void execute(Argument args) {
-		if (!PermissionsUtils.permissionLevel(args.member, 1)) {
-			args.channel.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("You need to have the Moderator role in order to execute that.")
-					.build()).queue();
-			return;
-		}
-
 		if (args.arguments.length == 0) {
 			args.channel
 					.sendMessageEmbeds(

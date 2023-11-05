@@ -14,8 +14,6 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.entities.Message.Attachment;
-import utils.BuildEmbed;
-import utils.PermissionsUtils;
 
 public class Backup extends Command {
 	public Backup(String name, String description, Permissions permissionLevel,
@@ -61,12 +59,6 @@ public class Backup extends Command {
 
 	@Override
 	public void execute(Argument args) {
-		if (!PermissionsUtils.permissionLevel(args.member, 2)) {
-			args.channel.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("You need to have the Administrator role in order to execute that.")
-					.build()).queue();
-			return;
-		}
 		Guild server = args.channel.getJDA().getGuilds().get(1);
 
 		// Check if the user provided a specific channel to download

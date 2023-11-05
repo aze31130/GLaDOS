@@ -1,6 +1,9 @@
 package glados;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,10 +12,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import accounts.Account;
 import accounts.Permissions;
 import commands.*;
-import commands.Shutdown;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -82,7 +84,6 @@ public class GLaDOS {
 	public void initialize() {
 		File config = new File("./config.json");
 
-		// Create config file is not present
 		if (!config.exists()) {
 			FileUtils.createDefaultConfig();
 			System.out.println("You have to define your token inside your config file !");
@@ -93,101 +94,101 @@ public class GLaDOS {
 		 * Initialize command
 		 */
 		this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "trigger",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.STRING, "trigger",
 						"Call name you want to trigger").setRequired(true))));
 
 		this.commands.add(new Clear("clear",
 				"Clears the latests messages in a channel. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
 						"Amount of message you want to delete"))));
 
 		this.commands
 				.add(new Translate("translate", "Translates the latests messages in a text channel",
-						Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "amount",
+						Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
 								"Amount of message you want to translate."))));
 
 		this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
 						"Channel you want to compute stats of"))));
 
 		this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(new Version("version", "displays version alongside others indicators",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(new Move("move", "Move every voice connected users to another channel",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "destination",
-						"Channel you want to move in"))));
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
+						"destination", "Channel you want to move in"))));
 
 		this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "target",
-						"Person you want to annoy"))));
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE,
+						"target", "Person you want to annoy"))));
 
-		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.ADMIN,
+		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.MODERATOR,
 				Arrays.asList()));
 
 		this.commands.add(new Rng("rng",
 				"Generate a random number using 'perfect and totally not rigged' random",
-				Permissions.ADMIN,
+				Permissions.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "lower_bound",
 								"The lower bound is included"),
 						new OptionData(OptionType.INTEGER, "upper_bound",
 								"The upper bound is included"))));
 
-		this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.ADMIN,
+		this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.NONE,
 				Arrays.asList()));
 
-		this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.ADMIN,
+		this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.NONE,
 				Arrays.asList()));
 
 		this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number",
-				Permissions.ADMIN, Arrays.asList(
+				Permissions.NONE, Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute"))));
 
 		this.commands.add(new Factorielle("factorielle", "Computes given factorial number",
-				Permissions.ADMIN, Arrays.asList(
+				Permissions.NONE, Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute"))));
 
 		this.commands.add(new Idea("what-should-i-do", "Use it when you do not know what to do",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(new Help("help", "Shows an help page listing each commands",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(new PictureInverse("picture-inverse",
-				"Inverse every colors of a given picture", Permissions.ADMIN, Arrays.asList()));
+				"Inverse every colors of a given picture", Permissions.NONE, Arrays.asList()));
 
 		this.commands.add(
-				new Profile("profile", "Show a user profile", Permissions.ADMIN, Arrays.asList()));
+				new Profile("profile", "Show a user profile", Permissions.NONE, Arrays.asList()));
 
-		this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.ADMIN,
+		this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.OWNER,
 				Arrays.asList()));
 
 		this.commands.add(new Role("role", "Generate buttons for members to clic on.",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
 						"Generates the join/leave button for the given role."))));
 
 		this.commands.add(new Connect("connect", "Summons GLaDOS in a vocal channel",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "channel",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "channel",
 						"The channel you want to invoke GLaDOS"))));
 
 		this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.MODERATOR, Arrays.asList()));
 
 		this.commands.add(new Backup("backup",
 				"Download a backup of the entire server. Admin privileges required",
-				Permissions.ADMIN, Arrays.asList()));
+				Permissions.MODERATOR, Arrays.asList()));
 
 		this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.",
-				Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
 						"The channel you want to inspect"))));
 
-		this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.ADMIN,
+		this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
 								"Can be [listening, playing, watching, streaming]"),
@@ -196,13 +197,13 @@ public class GLaDOS {
 
 		this.commands
 				.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
-						Permissions.ADMIN, Arrays.asList(new OptionData(OptionType.STRING, "status",
+						Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "status",
 								"Can be [online, idle, dnd]"))));
 
 		try {
 			// Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./config.json");
-			this.version = json.get("version").toString();
+			getVersion();
 			this.prefix = json.get("prefix").toString();
 			this.leveling = (boolean) json.get("leveling");
 			this.metricLogging = (boolean) json.get("metricLogging");
@@ -295,6 +296,10 @@ public class GLaDOS {
 		jda.updateCommands().addCommands(convertedCommands).queue();
 	}
 
+	public Account getAccountById(String id) {
+		return null;
+	}
+
 	// public Account getAccount(String accountId) {
 
 	// if(accountId.contains("<") || accountId.contains(">") ||
@@ -314,8 +319,22 @@ public class GLaDOS {
 	// return null;
 	// }
 
-	@Override
-	public String toString() {
-		return "Version: " + this.version;
+	/*
+	 * Reads the latest commit hash where the project is currently running
+	 */
+	public void getVersion() {
+		try {
+			ProcessBuilder builder = new ProcessBuilder("git", "rev-parse", "HEAD");
+			Process p = builder.start();
+			p.waitFor();
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			this.version = reader.readLine();
+
+			reader.close();
+		} catch (IOException | InterruptedException exception) {
+			exception.printStackTrace();
+		}
 	}
 }

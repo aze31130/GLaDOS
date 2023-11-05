@@ -18,19 +18,13 @@ public class Move extends Command {
 
 	@Override
 	public void execute(Argument args) {
-		if (PermissionsUtils.permissionLevel(args.member, 2)) {
-			try {
-				VoiceChannel dest = args.member.getJDA().getVoiceChannelById(args.arguments[0]);
-				for (Member m : args.member.getVoiceState().getChannel().getMembers()) {
-					args.member.getGuild().moveVoiceMember(m, dest).queue();
-				}
-			} catch (Exception e) {
-				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+		try {
+			VoiceChannel dest = args.member.getJDA().getVoiceChannelById(args.arguments[0]);
+			for (Member m : args.member.getVoiceState().getChannel().getMembers()) {
+				args.member.getGuild().moveVoiceMember(m, dest).queue();
 			}
-		} else {
-			args.channel.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("You need to have the Administrator role in order to execute that.")
-					.build()).queue();
+		} catch (Exception e) {
+			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }
