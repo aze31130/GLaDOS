@@ -23,7 +23,6 @@ public class SlashCommandInteraction extends ListenerAdapter {
 							.errorEmbed("You need to have the " + command.permissionLevel.toString()
 									+ " role in order to execute that.")
 							.build()).queue();
-
 					return;
 				}
 

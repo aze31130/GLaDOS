@@ -1,7 +1,6 @@
 package commands;
 
 import utils.BuildEmbed;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
@@ -45,16 +44,12 @@ public class Status extends Command {
 			}
 
 			if (isValidActivity) {
-				EmbedBuilder sucess =
-						new EmbedBuilder().setColor(0x22ff2a).setTitle("Successfully updated to"
-								+ args.arguments[0] + " " + activity + " activity.");
-				args.channel.sendMessageEmbeds(sucess.build()).queue();
+				args.channel.sendMessageEmbeds(BuildEmbed.successEmbed(
+						"Successfully updated to " + args.arguments[0] + activity + " activity.")
+						.build()).queue();
 			} else {
-				EmbedBuilder error = new EmbedBuilder().setColor(0xff3923)
-						.setTitle("Error in the command")
-						.setDescription("Unknown activity: " + args.arguments[0]
-								+ ". All activities are: <listening / playing / watching / streaming> <name>");
-				args.channel.sendMessageEmbeds(error.build()).queue();
+				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown activity").build())
+						.queue();
 			}
 		} else {
 			args.channel.sendMessageEmbeds(BuildEmbed

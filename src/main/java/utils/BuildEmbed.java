@@ -6,32 +6,6 @@ import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 public class BuildEmbed {
-	// Embed for permission level error
-	public static EmbedBuilder errorPermissionEmbed(int requiredPermissionLevel) {
-		String roleName = "";
-		switch (requiredPermissionLevel) {
-			case 1:
-				roleName = "Moderator";
-				break;
-			case 2:
-				roleName = "Administrator";
-				break;
-			case 3:
-				roleName = "Owner";
-				break;
-			default:
-				roleName = "None";
-				break;
-
-		}
-		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(Color.RED);
-		embed.setTitle("Error");
-		embed.setDescription(
-				"You need to have the " + roleName + " role in order to execute that.");
-		return embed;
-	}
-
 	public static EmbedBuilder gamerEmbed() {
 		String[] messages = {"Games don't make you violent, lag does",
 				"We are not players, we are gamerz",
@@ -179,7 +153,21 @@ public class BuildEmbed {
 					"Wishing [member] all the best as they venture beyond our server's boundaries. Goodbye!",
 					"We're saying goodbye to [member], but the memories we shared will remain. Take care!",
 					"It's with a heavy heart that we wave goodbye to [member]. You will always be welcome here!",
-					"As [member] leaves, we reflect on the good times and friendships formed. Farewell and best wishes!"};
+					"As [member] leaves, we reflect on the good times and friendships formed. Farewell and best wishes!",
+					"In the quiet of the night, [member] slips away. Farewell, and may your journey be filled with light.",
+					"As the sun sets on [member]'s time here, may a new dawn bring them endless possibilities. Goodbye and take care!",
+					"With every departure, a new chapter begins. Wishing [member] success and happiness in their next adventure.",
+					"The echoes of [member]'s presence will linger here, a reminder of the friendships and moments we shared. Farewell, dear friend.",
+					"Though parting is such sweet sorrow, we are grateful for the moments we've had with [member].",
+					"The server's stage dims a little as [member] takes their final bow. Thank you for the memories, and best wishes on your future stage.",
+					"As [member] leaves our virtual home, let us remember that goodbyes are just stepping stones to new beginnings.",
+					"Though [member] departs, the bonds of friendship remain unbroken. We'll miss you, and the server's doors will always be open to your return.",
+					"The universe awaits [member]'s next adventure. May it be filled with joy, success, and the same positive energy they brought to our server.",
+					"In the book of our server's history, [member] wrote beautiful chapters. It's time for a new page in their story.",
+					"Every goodbye is a chance for a new hello. [member], we'll cherish the times we've shared and look forward to reuniting someday.",
+					"The departure of [member] leaves a void, but it also opens up space for new friendships and experiences. Wishing you happiness on your journey.",
+					"Though [member] may be leaving our server, the ripples of their presence will forever touch our hearts. Farewell, and keep shining.",
+					"Life is a journey, and [member] is on to the next chapter. May it be a tale of triumph, adventure, and fulfillment. Goodbye and good luck!"};
 			message = messages[randomNumber];
 		}
 		EmbedBuilder embed = new EmbedBuilder();
@@ -193,6 +181,14 @@ public class BuildEmbed {
 		embed.setTitle("Error");
 		embed.setDescription(description);
 		embed.setColor(Color.RED);
+		return embed;
+	}
+
+	public static EmbedBuilder successEmbed(String description) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle("Success");
+		embed.setDescription(description);
+		embed.setColor(Color.GREEN);
 		return embed;
 	}
 }
