@@ -18,7 +18,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.FileUtils;
-import utils.TripletUtils;
 
 public class GLaDOS {
 	private static volatile GLaDOS instance = null;
@@ -131,81 +130,61 @@ public class GLaDOS {
 			// }
 
 			// Initialize command
-			// this.commands
-			// .add(new Call("call", "Triggers an internal event. Admin privileges
-			// required", Permissions.ADMIN));
-			// this.commands
-			// .add(new Clear("clear", "Clears the latests messages in a channel. Admin
-			// privileges required",
-			// Permissions.ADMIN));
-			// this.commands.add(
-			// new Translate("translate", "Translates the latests messages in a text
-			// channel", Permissions.ADMIN));
-			// this.commands
-			// .add(new Statistics("stats", "Generates statistics regarding a text channel",
-			// Permissions.ADMIN));
-			// this.commands.add(new Ping("ping", "Display ping between Discord gateway and
-			// glados", Permissions.ADMIN));
-			// this.commands
-			// .add(new Version("version", "Displays version alongside others indicators",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new CheGuevara("che-guevara", "Generate a random fact about
-			// Che-Guevara", Permissions.ADMIN));
-			// this.commands.add(new Status("activity", "Updates GLaDOS's activity",
-			// Permissions.ADMIN));
-			// this.commands.add(
-			// new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Move("move", "Move every voice connected users to another channel",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
-			// Permissions.ADMIN));
-			// this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Rng("rng", "Generate a random number using 'perfect and totally not
-			// rigged' random",
-			// Permissions.ADMIN));
-			// this.commands.add(new RandomCat("random-cat", "Displays a cat picture",
-			// Permissions.ADMIN));
-			// this.commands.add(new RandomDog("random-dog", "Display a dog picture",
-			// Permissions.ADMIN));
-
-			// this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci
-			// number", Permissions.ADMIN));
-
+			this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Clear("clear", "Clears the latests messages in a channel. Admin privileges required",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Translate("translate", "Translates the latests messages in a text channel",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Version("version", "Displays version alongside others indicators", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Move("move", "Move every voice connected users to another channel", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Rng("rng", "Generate a random number using 'perfect and totally not rigged' random",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
 			this.commands.add(new Factorielle("factorielle", "Computes given factorial number", Permissions.ADMIN,
 					new ArrayList<OptionData>(
 							Arrays.asList(new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")))));
-			// this.commands
-			// .add(new Idea("what-should-i-do", "Use it when you do not know what to do",
-			// Permissions.ADMIN));
-			// this.commands.add(new Help("help", "Shows an help page listing each
-			// commands", Permissions.ADMIN));
-			// this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors
-			// of a given picture",
-			// Permissions.ADMIN));
-			// this.commands.add(new Profile("profile", "Show a user profile",
-			// Permissions.ADMIN));
-			// this.commands.add(new Test("test", "Test command, nothing to see here",
-			// Permissions.ADMIN));
-			// this.commands.add(new Role("role", "Generate buttons for members to clic on",
-			// Permissions.ADMIN));
-			// this.commands.add(new Connect("connect", "Invoke GLaDOS in a vocal channel",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Backup("backup", "Download a backup of the entire server. Admin
-			// privileges required",
-			// Permissions.ADMIN));
-			// this.commands
-			// .add(new Statistics("statistics", "Generates statistics of the given
-			// channel.", Permissions.ADMIN));
+			this.commands.add(new Idea("what-should-i-do", "Use it when you do not know what to do", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Help("help", "Shows an help page listing each commands", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new PictureInverse("picture-inverse", "Inverse every colors of a given picture",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands
+					.add(new Profile("profile", "Show a user profile", Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Role("role", "Generate buttons for members to clic on", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Connect("connect", "Invoke GLaDOS in a vocal channel", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel", Permissions.ADMIN,
+					new ArrayList<OptionData>()));
+			this.commands.add(new Backup("backup", "Download a backup of the entire server. Admin privileges required",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
+			this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.",
+					Permissions.ADMIN, new ArrayList<OptionData>()));
 
 		} catch (Exception e) {
 			System.err.println("Error ! The given config file is invalid !");
