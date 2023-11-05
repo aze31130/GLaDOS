@@ -7,12 +7,13 @@ import utils.BuildEmbed;
 import utils.PermissionsUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Clear extends Command {
-	public Clear(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Clear(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

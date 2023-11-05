@@ -1,17 +1,20 @@
 package commands;
 
 import java.lang.management.ManagementFactory;
+import java.util.List;
+
 import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
 import utils.Converter;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Version extends Command {
-	public Version(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Version(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

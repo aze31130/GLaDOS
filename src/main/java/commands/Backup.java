@@ -12,13 +12,15 @@ import accounts.Permissions;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import utils.BuildEmbed;
 import utils.PermissionsUtils;
 
 public class Backup extends Command {
-	public Backup(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Backup(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	private void downloadChannel(MessageChannel tc) throws IOException {

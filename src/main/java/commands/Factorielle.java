@@ -1,14 +1,17 @@
 package commands;
 
 import java.math.BigInteger;
-import glados.GLaDOS;
-import utils.BuildEmbed;
+import java.util.List;
 
+import glados.GLaDOS;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import utils.BuildEmbed;
 import accounts.Permissions;
 
 public class Factorielle extends Command {
-	public Factorielle(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Factorielle(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

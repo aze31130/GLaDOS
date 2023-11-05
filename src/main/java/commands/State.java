@@ -3,12 +3,16 @@ package commands;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+
+import java.util.List;
 
 import accounts.Permissions;
 
 public class State extends Command {
-	public State(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public State(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

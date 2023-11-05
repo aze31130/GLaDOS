@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+
 import org.json.JSONObject;
 
 import glados.GLaDOS;
@@ -21,8 +23,9 @@ import java.util.List;
 import accounts.Permissions;
 
 public class Translate extends Command {
-	public Translate(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Translate(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

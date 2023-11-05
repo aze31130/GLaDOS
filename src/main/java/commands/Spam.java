@@ -3,11 +3,15 @@ package commands;
 import utils.BuildEmbed;
 import utils.PermissionsUtils;
 
+import java.util.List;
+
 import accounts.Permissions;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Spam extends Command {
-	public Spam(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Spam(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

@@ -1,14 +1,15 @@
 package commands;
 
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-import net.dv8tion.jda.api.managers.AudioManager;
-import utils.BuildEmbed;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+
+import java.util.List;
 
 import accounts.Permissions;
 
 public class Connect extends Command {
-	public Connect(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Connect(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

@@ -11,12 +11,13 @@ import java.util.List;
 import utils.EmoteCounter;
 import utils.StatsUtils;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Statistics extends Command {
-	public Statistics(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Statistics(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

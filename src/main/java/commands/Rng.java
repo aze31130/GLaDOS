@@ -1,13 +1,16 @@
 package commands;
 
+import java.util.List;
 import java.util.Random;
 import utils.BuildEmbed;
 
 import accounts.Permissions;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Rng extends Command {
-	public Rng(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Rng(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

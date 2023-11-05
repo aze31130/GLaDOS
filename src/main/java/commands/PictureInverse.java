@@ -4,15 +4,17 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import net.dv8tion.jda.api.entities.Message.Attachment;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class PictureInverse extends Command {
-	public PictureInverse(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public PictureInverse(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

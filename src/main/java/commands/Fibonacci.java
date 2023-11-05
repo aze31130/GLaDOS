@@ -1,14 +1,17 @@
 package commands;
 
 import java.math.BigInteger;
+import java.util.List;
+
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Fibonacci extends Command {
-	public Fibonacci(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public Fibonacci(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override

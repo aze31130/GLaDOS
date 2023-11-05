@@ -4,18 +4,21 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.BuildEmbed;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
-
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class RandomCat extends Command {
-	public RandomCat(String name, String description, Permissions permissionLevel) {
-		super(name, description, permissionLevel);
+	public RandomCat(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
 	}
 
 	@Override
