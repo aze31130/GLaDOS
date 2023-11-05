@@ -23,7 +23,6 @@ public class Call extends Command {
 
 	@Override
 	public void execute(Argument args) {
-
 		if (!PermissionsUtils.permissionLevel(args.member, 1)) {
 			args.channel.sendMessageEmbeds(
 					BuildEmbed.errorEmbed("You need to have the Moderator role in order to execute that.").build())
