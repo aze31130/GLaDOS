@@ -3,10 +3,8 @@ package commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.PermissionsUtils;
-import utils.TripletUtils;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 
