@@ -3,6 +3,7 @@ package commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
@@ -21,24 +22,13 @@ public class Call extends Command {
 		super(name, description, permissionLevel, arguments);
 	}
 
-	@Override
-	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
-		String trigger = event.getOption("trigger").getAsString();
-
-		if (trigger.isBlank() || trigger.isEmpty()) {
-			source.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
-			return;
-		}
-
-		GLaDOS g = GLaDOS.getInstance();
-
+	public static void callMessage(MessageChannel destination, String trigger) {
 		EmbedBuilder embed = null;
 
 		switch (trigger) {
 			case "Gamer":
-				source.sendMessage("<@&" + g.roleBroadcastMessenger + ">").queue();
+				destination.sendMessage("<@&" + GLaDOS.getInstance().roleBroadcastMessenger + ">")
+						.queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":
@@ -49,11 +39,12 @@ public class Call extends Command {
 					String quote = jsonObject.getString("content");
 
 					if (quote.length() > 256)
-						source.sendMessage(quote + author).queue();
+						destination.sendMessage(quote + author).queue();
 
 					embed = BuildEmbed.midnightQuote(quote, author);
 				} catch (Exception e) {
-					source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+					destination.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
+							.queue();
 				}
 				break;
 			default:
@@ -61,7 +52,20 @@ public class Call extends Command {
 				break;
 		}
 
-		source.sendMessageEmbeds(embed.build()).queue();
+		destination.sendMessageEmbeds(embed.build()).queue();
+	}
+
+	@Override
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		String trigger = event.getOption("trigger").getAsString();
+
+		if (trigger.isBlank() || trigger.isEmpty()) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
+			return;
+		}
+		Call.callMessage(source, trigger);
 	}
 
 	public static void MerryChristmas(JDA jda) {

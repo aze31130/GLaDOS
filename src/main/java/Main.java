@@ -2,22 +2,12 @@ import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import commands.Argument;
-import events.ButtonClick;
-import events.MemberJoin;
-import events.MemberRemove;
-import events.MessageReactionAdd;
-import events.MessageReactionRemove;
-import events.MessageReceived;
-import events.VoiceMute;
-import events.SlashCommandInteraction;
-import events.VoiceUpdate;
+import commands.Call;
+import events.*;
 import glados.GLaDOS;
 import utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -79,12 +69,7 @@ public class Main {
 							&& (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)) {
 						System.out.println(log + "Executed EpicGameAnnoune at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						glados.executeCommand("Call",
-								new Argument(
-										jda.getGuildById(glados.guildId)
-												.getMemberById(glados.ownerId),
-										jda.getTextChannelById(glados.channelGamer),
-										new String[] {"Gamer"}, null));
+						Call.callMessage(jda.getTextChannelById(glados.channelGamer), "Gamer");
 						glados.FreeGameAnnonce = true;
 					} else {
 						glados.FreeGameAnnonce = false;
@@ -95,12 +80,7 @@ public class Main {
 							&& (cal.get(Calendar.SECOND) <= 10)) {
 						System.out.println(log + "Executed Random Quote at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						glados.executeCommand("Call",
-								new Argument(
-										jda.getGuildById(glados.guildId)
-												.getMemberById(glados.ownerId),
-										jda.getTextChannelById(glados.channelGeneral),
-										new String[] {"Midnight"}, null));
+						Call.callMessage(jda.getTextChannelById(glados.channelGamer), "Midnight");
 
 						// if(glados.leveling) {
 						// Ranking.update();
@@ -123,6 +103,8 @@ public class Main {
 		}
 
 		/*
+		 * TODO: each day, compute midnight winner
+		 * 
 		 * Guild server = jda.getGuilds().get(1);
 		 * 
 		 * //TextChannel tc = server.getTextChannelById("676731153444765709"); for (TextChannel tc :

@@ -26,7 +26,6 @@ import utils.FileUtils;
 public class GLaDOS {
 	private static volatile GLaDOS instance = null;
 	public String version;
-	public String prefix;
 	public boolean leveling;
 	public boolean logMessages;
 	public boolean checkPrivateMessages;
@@ -192,7 +191,7 @@ public class GLaDOS {
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
 								"Can be [listening, playing, watching, streaming]"),
-						new OptionData(OptionType.INTEGER, "description",
+						new OptionData(OptionType.STRING, "description",
 								"The displayed activity"))));
 
 		this.commands
@@ -204,7 +203,6 @@ public class GLaDOS {
 			// Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./config.json");
 			getVersion();
-			this.prefix = json.get("prefix").toString();
 			this.leveling = (boolean) json.get("leveling");
 			this.metricLogging = (boolean) json.get("metricLogging");
 			this.logMessages = (boolean) json.get("logMessages");
@@ -245,15 +243,6 @@ public class GLaDOS {
 		} catch (JSONException e) {
 			e.printStackTrace();
 			System.exit(1);
-		}
-	}
-
-	public void executeCommand(String name, Argument args) {
-		for (Command command : GLaDOS.getInstance().commands) {
-			if (name.equalsIgnoreCase(command.name)) {
-				command.execute(args);
-				return;
-			}
 		}
 	}
 
