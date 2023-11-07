@@ -1,12 +1,12 @@
 package commands;
 
-import utils.BuildEmbed;
 import utils.Logger;
-import utils.PermissionsUtils;
 
 import java.util.List;
 
 import accounts.Permissions;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Shutdown extends Command {
@@ -16,10 +16,12 @@ public class Shutdown extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+
 		System.out.println(new Logger(true) + " Shutting down now !");
-		args.channel.sendMessage("Shutting down now !").queue();
-		args.member.getJDA().shutdown();
+		source.sendMessage("Shutting down now !").queue();
+		event.getJDA().shutdown();
 		System.exit(0);
 	}
 }

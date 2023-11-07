@@ -8,6 +8,8 @@ import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -18,21 +20,17 @@ public class CheGuevara extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		Integer amount = event.getOption("amount").getAsInt();
+
+		if (amount > 10)
+			amount = 10;
+
+		if (amount < 0)
+			amount = 0;
+
 		try {
-			long amount = 1;
-			if (args.arguments.length > 0) {
-				amount = Long.parseLong(args.arguments[0]);
-			}
-
-			if (amount > 10) {
-				amount = 10;
-			}
-
-			if (amount < 0) {
-				amount = 0;
-			}
-
 			while (amount > 0) {
 				JSONObject jsonObject =
 						JsonDownloader.getJson("https://api.chucknorris.io/jokes/random");
@@ -44,11 +42,11 @@ public class CheGuevara extends Command {
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Che_Guevara_vector_SVG_format.svg/1200px-Che_Guevara_vector_SVG_format.svg.png")
 						.setDescription(meme).setColor(Color.BLUE)
 						.setFooter("Request made at " + new Logger(false));
-				args.channel.sendMessageEmbeds(che.build()).queue();
+				source.sendMessageEmbeds(che.build()).queue();
 				amount--;
 			}
 		} catch (Exception e) {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }

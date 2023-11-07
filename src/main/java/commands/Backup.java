@@ -12,6 +12,7 @@ import accounts.Permissions;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 
@@ -58,36 +59,23 @@ public class Backup extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		Guild server = args.channel.getJDA().getGuilds().get(1);
+	public void execute(SlashCommandInteractionEvent event) {
+		Guild server = event.getGuild();
+		TextChannel source = event.getGuildChannel().asTextChannel();
 
-		// Check if the user provided a specific channel to download
-		if (args.arguments.length > 0) {
-			// Get the channel
-			TextChannel tc = server.getTextChannelsByName(args.arguments[0], true).get(0);
-			args.channel.sendMessage("Downloading channel " + tc.getAsMention()).queue();
-
-			// Download it
+		int i = 0;
+		List<TextChannel> channels = server.getTextChannels();
+		for (TextChannel tc : channels) {
+			source.sendMessage("Downloading channel " + tc.getAsMention() + "("
+					+ (100 * i / channels.size()) + "%)").queue();
 			try {
 				downloadChannel(tc);
 			} catch (Exception e) {
-				args.channel.sendMessage(e.toString()).queue();
+				source.sendMessage(e.toString()).queue();
 			}
-		} else {
-			List<TextChannel> channels = server.getTextChannels();
-			int i = 0;
-			// Iterate on every channel and download content sequentially
-			for (TextChannel tc : channels) {
-				args.channel.sendMessage("Downloading channel " + tc.getAsMention() + "("
-						+ (100 * i / channels.size()) + "%)").queue();
-				try {
-					downloadChannel(tc);
-				} catch (Exception e) {
-					args.channel.sendMessage(e.toString()).queue();
-				}
-				i++;
-			}
+			i++;
 		}
-		args.channel.sendMessage("Server's history has been downloaded !").queue();
+
+		source.sendMessage("Server's history has been downloaded !").queue();
 	}
 }

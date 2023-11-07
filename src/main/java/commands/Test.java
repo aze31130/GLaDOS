@@ -3,6 +3,7 @@ package commands;
 import java.util.List;
 
 import accounts.Permissions;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 /*
@@ -15,5 +16,5 @@ public class Test extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {}
+	public void execute(SlashCommandInteractionEvent event) {}
 }

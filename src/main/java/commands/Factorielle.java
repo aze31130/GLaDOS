@@ -3,7 +3,8 @@ package commands;
 import java.math.BigInteger;
 import java.util.List;
 
-import glados.GLaDOS;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import accounts.Permissions;
@@ -15,44 +16,23 @@ public class Factorielle extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		GLaDOS glados = GLaDOS.getInstance();
-		if (args.arguments.length > 0) {
-			int number = 0;
-			try {
-				number = Integer.parseInt(args.arguments[0]);
-			} catch (Exception e) {
-				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
-			}
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		Integer n = event.getOption("n").getAsInt();
 
-			if ((number >= 0) && (number <= 1000)) {
-				BigInteger f = new BigInteger("1");
-				for (int i = 2; i <= number; i++) {
-					f = f.multiply(BigInteger.valueOf(i));
-				}
-				args.channel.sendTyping().queue();
-				try {
-					args.channel.sendMessage("Factorial(" + number + ") = " + f).queue();
-				} catch (Exception e) {
-					// FileWriter fw = new FileWriter("output.txt", true);
-					// BufferedWriter bw = new BufferedWriter(fw);
-					// PrintWriter out = new PrintWriter(bw);
-					// out.print(f);
-					// out.close();
-					// event.getChannel().sendFile(new File("output.txt")).queue();
-					args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
-							.queue();
-				}
-			} else {
-				args.channel
-						.sendMessageEmbeds(BuildEmbed
-								.errorEmbed("Sorry, negative numbers cannot be handled.").build())
-						.queue();
-			}
-		} else {
-			args.channel.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("Usage: " + glados.prefix + "facto <positive integer>").build())
+		if (n < 0) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
 					.queue();
+			return;
 		}
+
+		source.sendTyping().queue();
+		BigInteger f = new BigInteger("1");
+		for (int i = 2; i <= n; i++) {
+			f = f.multiply(BigInteger.valueOf(i));
+		}
+
+		source.sendMessage("Factorial(" + n + ") = " + f).queue();
 	}
 }

@@ -3,9 +3,11 @@ package commands;
 import java.awt.Color;
 import java.util.List;
 
-import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import utils.Logger;
 import accounts.Permissions;
 
 public class Help extends Command {
@@ -15,19 +17,10 @@ public class Help extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-
-		// argument ?
-		if (args.arguments.length > 0) {
-			// TODO generate documentation on command name given in argument
-
-			// ex: ?help random-meme
-			// output: embed with example and command properties
-		} else {
-			// List every commands
-		}
-
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
 		EmbedBuilder info = new EmbedBuilder();
+
 		info.setColor(Color.ORANGE);
 		info.setTitle("Help page");
 		info.setDescription("Showing help page 1 of 1");
@@ -50,7 +43,7 @@ public class Help extends Command {
 		info.addField("what-should-i-do | wsid", "(Shows something to do)", true);
 		info.addField("random-dog | rd", "(Shows a random dog picture)", true);
 		info.addField("version | v", "(Shows version info)", true);
-		info.setFooter("Command prefix = " + GLaDOS.getInstance().prefix);
-		args.channel.sendMessageEmbeds(info.build()).queue();
+		info.setFooter("Request made at " + new Logger(false));
+		source.sendMessageEmbeds(info.build()).queue();
 	}
 }

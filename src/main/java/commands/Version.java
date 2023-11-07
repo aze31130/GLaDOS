@@ -8,6 +8,7 @@ import glados.GLaDOS;
 import utils.Converter;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -18,7 +19,7 @@ public class Version extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
+	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		OperatingSystemMXBean os = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 		EmbedBuilder info = new EmbedBuilder();
@@ -43,6 +44,6 @@ public class Version extends Command {
 				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);
 		info.setFooter("Request made at " + new Logger(false));
-		args.channel.sendMessageEmbeds(info.build()).queue();
+		event.getChannel().sendMessageEmbeds(info.build()).queue();
 	}
 }

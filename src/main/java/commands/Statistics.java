@@ -10,7 +10,9 @@ import java.util.Comparator;
 import java.util.List;
 import utils.EmoteCounter;
 import utils.StatsUtils;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -21,36 +23,31 @@ public class Statistics extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		List<EmoteCounter> ec = new ArrayList<EmoteCounter>();
-
+	public void execute(SlashCommandInteractionEvent event) {
 		/*
+		 * List<EmoteCounter> ec = new ArrayList<EmoteCounter>();
+		 * 
+		 * 
 		 * for(TextChannel ch : args.member.getJDA().getGuilds().get(1).getTextChannels()) {
 		 * System.out.println("Starting " + ch.getName()); Stats.ListChannelMessage(ch, ec);
 		 * System.out.println("DONE"); }
+		 * 
+		 * 
+		 * MessageChannel c = args.member.getJDA().getTextChannelById("709396567894786060");
+		 * c.sendMessage("Starting computing stats of channel <#" + c.getId() + ">").queue();
+		 * 
+		 * //
+		 * Stats.ListChannelMessage(args.member.getJDA().getTextChannelById("699751218179997816"),
+		 * // ec); StatsUtils.ListChannelMessage(c, ec);
+		 * 
+		 * ec.sort(Comparator.comparingInt(EmoteCounter::getAmount).reversed()); try { Writer out =
+		 * new BufferedWriter(new OutputStreamWriter( new
+		 * FileOutputStream("./stats-709396567894786060.txt"), "UTF-8"));
+		 * 
+		 * for (EmoteCounter e : ec) { out.write(e.name + ":" + e.count + "\n"); } out.close(); File
+		 * f = new File("./stats-709396567894786060.txt"); // c.sendFile(f,
+		 * "stats-709396567894786060.txt").queue(); } catch (Exception e) { e.printStackTrace(); }
 		 */
-
-		MessageChannel c = args.member.getJDA().getTextChannelById("709396567894786060");
-		c.sendMessage("Starting computing stats of channel <#" + c.getId() + ">").queue();
-
-		// Stats.ListChannelMessage(args.member.getJDA().getTextChannelById("699751218179997816"),
-		// ec);
-		StatsUtils.ListChannelMessage(c, ec);
-
-		ec.sort(Comparator.comparingInt(EmoteCounter::getAmount).reversed());
-		try {
-			Writer out = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream("./stats-709396567894786060.txt"), "UTF-8"));
-
-			for (EmoteCounter e : ec) {
-				out.write(e.name + ":" + e.count + "\n");
-			}
-			out.close();
-			File f = new File("./stats-709396567894786060.txt");
-			// c.sendFile(f, "stats-709396567894786060.txt").queue();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/*

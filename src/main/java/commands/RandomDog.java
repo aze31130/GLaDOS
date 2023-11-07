@@ -7,6 +7,8 @@ import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -17,15 +19,17 @@ public class RandomDog extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+
 		try {
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")
 					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random")
 							.getString("message"))
 					.setColor(Color.WHITE).setFooter("Request made at " + new Logger(false));
-			args.channel.sendMessageEmbeds(info.build()).queue();
+			source.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }

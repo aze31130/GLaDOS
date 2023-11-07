@@ -6,6 +6,7 @@ import java.util.List;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -16,8 +17,8 @@ public class Profile extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		args.channel.sendMessage("Command not implemented yet !").queue();
+	public void execute(SlashCommandInteractionEvent event) {
+		event.getChannel().sendMessage("Command not implemented yet !").queue();
 		// try {
 		// //get argument
 		// EmbedBuilder profile = new EmbedBuilder();

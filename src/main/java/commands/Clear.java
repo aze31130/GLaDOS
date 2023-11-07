@@ -1,11 +1,10 @@
 package commands;
 
-import java.awt.Color;
 import java.util.List;
-import glados.GLaDOS;
 import utils.BuildEmbed;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
@@ -16,25 +15,19 @@ public class Clear extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		GLaDOS glados = GLaDOS.getInstance();
-		if (args.arguments.length > 0) {
-			try {
-				List<Message> messages = args.channel.getHistory()
-						.retrievePast(Integer.parseInt(args.arguments[0])).complete();
-				// args.channel.dele.deleteMessages(messages).queue();
-				EmbedBuilder success = new EmbedBuilder().setColor(Color.GREEN)
-						.setTitle("Successfully deleted " + args.arguments[0] + " messages.");
-				args.channel.sendMessageEmbeds(success.build()).queue();
-			} catch (Exception exception) {
-				args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build())
-						.queue();
-			}
-		} else {
-			args.channel
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("Usage: " + glados.prefix + "clear [1-100]").build())
-					.queue();
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		Integer amount = event.getOption("amount").getAsInt();
+
+		// source.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: /clear [1-100]").build()).queue();
+		try {
+			List<Message> messages = source.getHistory().retrievePast(amount).complete();
+			source.deleteMessages(messages).queue();
+			source.sendMessageEmbeds(BuildEmbed
+					.successEmbed("Successfully deleted " + amount + " messages.").build()).queue();
+		} catch (Exception exception) {
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}
+
 	}
 }

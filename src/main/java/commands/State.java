@@ -1,8 +1,9 @@
 package commands;
 
 import utils.BuildEmbed;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.List;
@@ -16,39 +17,34 @@ public class State extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		if (args.arguments.length > 0) {
-			Boolean isValidState = true;
-			switch (args.arguments[0]) {
-				case "online":
-					args.channel.getJDA().getPresence().setStatus(OnlineStatus.ONLINE);
-					break;
-				case "idle":
-					args.channel.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
-					break;
-				case "dnd":
-					args.channel.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
-					break;
-				default:
-					isValidState = false;
-			}
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		String state = event.getOption("state").getAsString();
 
-			if (isValidState) {
-				EmbedBuilder sucess = new EmbedBuilder().setColor(0x22ff2a)
-						.setTitle("Successfully updated to " + args.arguments[0] + " state.");
-				args.channel.sendMessageEmbeds(sucess.build()).queue();
-			} else {
-				EmbedBuilder error =
-						new EmbedBuilder().setColor(0xff3923).setTitle("Error in the command");
-				error.setDescription("Unknown state: " + args.arguments[0]
-						+ ". All states are: <online / idle / dnd>");
-				args.channel.sendMessageEmbeds(error.build()).queue();
-			}
-		} else {
-			args.channel
-					.sendMessageEmbeds(
-							BuildEmbed.errorEmbed("Usage: state <online / idle / dnd>").build())
+		Boolean isValidState = true;
+		switch (state) {
+			case "online":
+				source.getJDA().getPresence().setStatus(OnlineStatus.ONLINE);
+				break;
+			case "idle":
+				source.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
+				break;
+			case "dnd":
+				source.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+				break;
+			default:
+				isValidState = false;
+		}
+
+		if (isValidState) {
+			source.sendMessageEmbeds(
+					BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build())
 					.queue();
+		} else {
+			source.sendMessageEmbeds(BuildEmbed
+					.errorEmbed(
+							"Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
+					.build()).queue();
 		}
 	}
 }

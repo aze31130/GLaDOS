@@ -1,9 +1,9 @@
 package commands;
 
-import utils.BuildEmbed;
-import utils.PermissionsUtils;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.List;
@@ -17,14 +17,13 @@ public class Move extends Command {
 	}
 
 	@Override
-	public void execute(Argument args) {
-		try {
-			VoiceChannel dest = args.member.getJDA().getVoiceChannelById(args.arguments[0]);
-			for (Member m : args.member.getVoiceState().getChannel().getMembers()) {
-				args.member.getGuild().moveVoiceMember(m, dest).queue();
-			}
-		} catch (Exception e) {
-			args.channel.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+	public void execute(SlashCommandInteractionEvent event) {
+		TextChannel source = event.getChannel().asTextChannel();
+		TextChannel destination = event.getOption("dst").getAsChannel().asTextChannel();
+
+		VoiceChannel dest = source.getJDA().getVoiceChannelById(destination.getId());
+		for (Member m : event.getMember().getVoiceState().getChannel().getMembers()) {
+			event.getMember().getGuild().moveVoiceMember(m, dest).queue();
 		}
 	}
 }

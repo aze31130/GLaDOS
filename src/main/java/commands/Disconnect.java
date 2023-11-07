@@ -1,5 +1,6 @@
 package commands;
 
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class Disconnect extends Command {
 	}
 
 	@Override
-	public void execute(Argument arguments) {
+	public void execute(SlashCommandInteractionEvent event) {
 		// AudioManager audioManager = event.getGuild().getAudioManager();
 		// audioManager.closeAudioConnection();
 	}

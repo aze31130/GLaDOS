@@ -3,6 +3,7 @@ package commands;
 import java.util.List;
 
 import accounts.Permissions;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public abstract class Command {
@@ -19,5 +20,5 @@ public abstract class Command {
 		this.arguments = arguments;
 	}
 
-	public abstract void execute(Argument arguments);
+	public abstract void execute(SlashCommandInteractionEvent event);
 }
