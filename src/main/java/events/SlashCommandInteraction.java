@@ -10,7 +10,7 @@ import utils.PermissionsUtils;
 
 public class SlashCommandInteraction extends ListenerAdapter {
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-		event.deferReply().queue();
+		// event.deferReply().queue();
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 
