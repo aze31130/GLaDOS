@@ -2,6 +2,7 @@ package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -20,6 +21,31 @@ public class Call extends Command {
 	public Call(String name, String description, Permissions permissionLevel,
 			List<OptionData> arguments) {
 		super(name, description, permissionLevel, arguments);
+	}
+
+	public static void midnightRank(MessageChannel generalChannel) {
+		EmbedBuilder midnightEmbed = BuildEmbed.midnightRankEmbed();
+
+		List<Message> latestMessages = generalChannel.getHistory().retrievePast(10).complete();
+
+		/*
+		 * Filters messages that aren't in the following time interval: [23:59:00 => 00:10:00]
+		 */
+		for (Message m : latestMessages) {
+			int hour = m.getTimeCreated().getHour();
+			int minutes = m.getTimeCreated().getMinute();
+			int seconds = m.getTimeCreated().getSecond();
+			int millis = m.getTimeCreated().getNano() / 1000000;
+
+			// TODO filters messages
+		}
+
+		for (Message m : latestMessages) {
+			midnightEmbed.addField(":medal: " + m.getAuthor().getName(), "**985**ms", true);
+			midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
+		}
+
+		generalChannel.sendMessageEmbeds(midnightEmbed.build()).queue();
 	}
 
 	public static void callMessage(MessageChannel destination, String trigger) {

@@ -92,12 +92,13 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder scoreEmbed(long score) {
-		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(Color.GREEN);
-		embed.setTitle("Tycoon Score");
-		embed.setDescription(score + " :ice_cube:");
-		return embed;
+	public static EmbedBuilder midnightRankEmbed() {
+		EmbedBuilder rankingEmbed = new EmbedBuilder();
+		rankingEmbed.setColor(Color.MAGENTA);
+		rankingEmbed.setTitle("Midnight Race");
+		rankingEmbed.setDescription("Will you be n°1 ?");
+		rankingEmbed.setFooter("Request made at " + new Logger(false));
+		return rankingEmbed;
 	}
 
 	public static EmbedBuilder maintenanceEmbed() {
