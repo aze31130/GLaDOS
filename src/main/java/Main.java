@@ -80,7 +80,7 @@ public class Main {
 							&& (cal.get(Calendar.SECOND) <= 10)) {
 						System.out.println(log + "Executed Random Quote at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						Call.callMessage(jda.getTextChannelById(glados.channelGamer), "Midnight");
+						Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 
 						// if(glados.leveling) {
 						// Ranking.update();
