@@ -124,8 +124,12 @@ public class GLaDOS {
 						"destination", "Channel you want to move in"))));
 
 		this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE,
-						"target", "Person you want to annoy"))));
+				Permissions.MODERATOR,
+				Arrays.asList(
+						new OptionData(OptionType.MENTIONABLE, "target",
+								"Person you want to annoy"),
+						new OptionData(OptionType.INTEGER, "amount",
+								"The amount of mention you want to generate"))));
 
 		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.MODERATOR,
 				Arrays.asList()));
@@ -173,8 +177,7 @@ public class GLaDOS {
 						"Generates the join/leave button for the given role."))));
 
 		this.commands.add(new Connect("connect", "Summons GLaDOS in a vocal channel",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "channel",
-						"The channel you want to invoke GLaDOS"))));
+				Permissions.MODERATOR, Arrays.asList()));
 
 		this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel",
 				Permissions.MODERATOR, Arrays.asList()));

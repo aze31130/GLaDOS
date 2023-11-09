@@ -19,7 +19,7 @@ public class Spam extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		TextChannel source = event.getChannel().asTextChannel();
 		Integer amount = event.getOption("amount").getAsInt();
-		String mention = event.getOption("member").getAsMember().getAsMention();
+		String mention = event.getOption("target").getAsMember().getAsMention();
 
 		if ((amount < 0) || (amount > 100)) {
 			source.sendMessageEmbeds(

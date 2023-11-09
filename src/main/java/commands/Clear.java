@@ -19,7 +19,6 @@ public class Clear extends Command {
 		TextChannel source = event.getChannel().asTextChannel();
 		Integer amount = event.getOption("amount").getAsInt();
 
-		// source.sendMessageEmbeds(BuildEmbed.errorEmbed("Usage: /clear [1-100]").build()).queue();
 		try {
 			List<Message> messages = source.getHistory().retrievePast(amount).complete();
 			source.deleteMessages(messages).queue();
