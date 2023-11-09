@@ -2,7 +2,7 @@ package commands;
 
 import java.awt.Color;
 import java.util.List;
-
+import utils.BuildEmbed;
 import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -18,10 +18,17 @@ public class Profile extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		event.getChannel().sendMessage("Command not implemented yet !").queue();
-		// try {
-		// //get argument
-		// EmbedBuilder profile = new EmbedBuilder();
+		EmbedBuilder profile =
+				BuildEmbed.profileEmbed(event.getUser().getName(), event.getUser().getAvatarUrl());
+
+		/*
+		 * TODO, Possible argument to check others profile. If empty, get user profile Check if
+		 * profile exists, Create if not exists
+		 */
+
+
+		event.getChannel().sendMessageEmbeds(profile.build()).queue();
+
 
 		// if(args.arguments.length == 0) {
 		// if(args.account != null) {
@@ -37,8 +44,6 @@ public class Profile extends Command {
 		// args.channel.getGuild().getMemberById(args.arguments[0]));
 		// }
 		// }
-
-		// //TODO: create default if not exist
 
 		// //:wave::eye::eyes::tickets::ticket::ring::crown::mortar_board::briefcase::full_moon::boom::zap::rainbow::star::rose::droplet::popcorn::beer::soccer::game_die::video_game::slot_machine::drum::mobile_phone::computer::desktop::dvd::floppy_disk::coin::crossed_swords::notepad_spiral::paperclip::tada::mega::black_joker::spades::clubs::hearts::diamonds::triangular_flag_on_post::magic_wand::robot::comet::fire::trident::recycle::infinity:
 
@@ -58,8 +63,6 @@ public class Profile extends Command {
 	// .setColor(Color.GREEN)
 	// .setAuthor("OurStory's profile",
 	// "https://discord.com/channels/676731153444765706/676731153444765709",
-	// "https://cdn.discordapp.com/icons/676731153444765706/078350d911e939323f8a70565a2cfc95.webp")
-	// .setThumbnail(m.getUser().getAvatarUrl())
 	// .setDescription(m.getAsMention())
 	// .addField(":sparkles: Level:", String.valueOf(a.level), true)
 	// .addField(":green_book: EXP " + Levels.getExperiencePercentage(a.level,
@@ -74,8 +77,6 @@ public class Profile extends Command {
 	// true)
 	// .addField(":trophy: Achievements:", "null", false)
 	// .setFooter("Request made at " + new Logger(false));
-	// return profile;
-	// }
 
 	// server total levels, experience, message sent, total experience obtained
 	private EmbedBuilder serverProfile(Guild g) {

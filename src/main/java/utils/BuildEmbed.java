@@ -100,20 +100,6 @@ public class BuildEmbed {
 		return rankingEmbed;
 	}
 
-	public static EmbedBuilder maintenanceEmbed() {
-		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(Color.ORANGE);
-		embed.setTitle("Scheduled maintenance");
-		embed.setDescription("GLaDOS won't be available between");
-		embed.setThumbnail(
-				"https://cdn.iconscout.com/icon/free/png-512/building-maintenance-2027068-1714203.png");
-		embed.addField("14/05/2021", "8:00 PM CEST", true);
-		embed.addField("16/05/2021", "12:00 PM CEST", true);
-		embed.setFooter("Thanks for your patience",
-				"https://image.flaticon.com/icons/png/512/777/777081.png");
-		return embed;
-	}
-
 	public static EmbedBuilder joinLeaveEmbed(String mention, Boolean joining) {
 		Random rng = new Random();
 		int randomNumber = rng.nextInt(5);
@@ -189,6 +175,16 @@ public class BuildEmbed {
 		embed.setTitle("Success");
 		embed.setDescription(description);
 		embed.setColor(Color.GREEN);
+		return embed;
+	}
+
+	public static EmbedBuilder profileEmbed(String username, String url) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle(username + "'s profile");
+		// embed.setDescription();
+		embed.setColor(Color.BLUE);
+		embed.setThumbnail(url);
+		embed.setFooter("Request made at " + new Logger(false));
 		return embed;
 	}
 }

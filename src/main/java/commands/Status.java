@@ -36,7 +36,7 @@ public class Status extends Command {
 				break;
 			case "streaming":
 				source.getJDA().getPresence()
-						.setActivity(Activity.streaming(activity, "https://www.twitch.tv/ "));
+						.setActivity(Activity.streaming(description, "https://www.twitch.tv/ "));
 				break;
 			default:
 				source.getJDA().getPresence()

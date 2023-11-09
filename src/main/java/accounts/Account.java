@@ -33,9 +33,8 @@ public class Account {
 		result.put("level", this.level);
 		result.put("experience", this.experience);
 		result.put("totalExperience", this.totalExperience);
+		result.put("trustFactor", this.trustLevel);
 		result.put("permission", this.permission);
-		result.put("version", "1");
-
 		return result;
 	}
 }

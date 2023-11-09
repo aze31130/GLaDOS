@@ -62,7 +62,7 @@ public class GLaDOS {
 	public boolean FreeGameAnnonce = false;
 	public boolean DailyQuote = false;
 
-	// public List<Account> accounts;
+	public List<Account> accounts;
 	public List<Command> commands = new ArrayList<Command>();
 
 	private GLaDOS() {
@@ -238,10 +238,8 @@ public class GLaDOS {
 			this.activityCounter = 0;
 			this.translationCooldown = LocalDateTime.now();
 
-			// Initialize accounts
-			// if(leveling) {
 			// this.accounts = JsonIO.loadAccounts();
-			// }
+
 
 		} catch (JSONException e) {
 			e.printStackTrace();
