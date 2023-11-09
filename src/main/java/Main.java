@@ -81,6 +81,7 @@ public class Main {
 						System.out.println(log + "Executed Random Quote at "
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
+						Call.midnightRank(jda.getTextChannelById(glados.channelGeneral));
 
 						// if(glados.leveling) {
 						// Ranking.update();

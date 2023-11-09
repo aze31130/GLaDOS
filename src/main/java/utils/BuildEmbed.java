@@ -96,7 +96,6 @@ public class BuildEmbed {
 		EmbedBuilder rankingEmbed = new EmbedBuilder();
 		rankingEmbed.setColor(Color.MAGENTA);
 		rankingEmbed.setTitle("Midnight Race");
-		rankingEmbed.setDescription("Will you be n°1 ?");
 		rankingEmbed.setFooter("Request made at " + new Logger(false));
 		return rankingEmbed;
 	}

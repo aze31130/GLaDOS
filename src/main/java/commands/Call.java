@@ -9,7 +9,10 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
-
+import utils.TimeUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -23,26 +26,37 @@ public class Call extends Command {
 		super(name, description, permissionLevel, arguments);
 	}
 
+	private static String getMedalEmoji(int rank) {
+		return switch (rank) {
+			case 1 -> ":first_place: ";
+			case 2 -> ":second_place: ";
+			case 3 -> ":third_place: ";
+			default -> " ";
+		};
+	}
+
+	/*
+	 * Ranks midnight messages and computes who is the winner
+	 */
 	public static void midnightRank(MessageChannel generalChannel) {
 		EmbedBuilder midnightEmbed = BuildEmbed.midnightRankEmbed();
-
 		List<Message> latestMessages = generalChannel.getHistory().retrievePast(10).complete();
 
-		/*
-		 * Filters messages that aren't in the following time interval: [23:59:00 => 00:10:00]
-		 */
-		for (Message m : latestMessages) {
-			int hour = m.getTimeCreated().getHour();
-			int minutes = m.getTimeCreated().getMinute();
-			int seconds = m.getTimeCreated().getSecond();
-			int millis = m.getTimeCreated().getNano() / 1000000;
+		Collections.sort(latestMessages, TimeUtils::compareTo);
 
-			// TODO filters messages
-		}
-
+		int rank = 1;
 		for (Message m : latestMessages) {
-			midnightEmbed.addField(":medal: " + m.getAuthor().getName(), "**985**ms", true);
-			midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
+			if (rank == 1) {
+				midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
+				midnightEmbed.setDescription("Winner is " + m.getAuthor().getAsMention());
+			}
+
+			long delta = TimeUtils.computeDelta(m.getTimeCreated());
+
+			if ((delta > -300000) && (delta < 300000))
+				midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(),
+						"**" + delta + "** ms", true);
+			rank++;
 		}
 
 		generalChannel.sendMessageEmbeds(midnightEmbed.build()).queue();
