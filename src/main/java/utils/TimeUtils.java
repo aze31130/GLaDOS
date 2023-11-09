@@ -11,7 +11,7 @@ public class TimeUtils {
 	 * This function computes the delta between midnight and the given timestamp. If the message has
 	 * been send before midnight, returns a negative delta
 	 */
-	private static long computeDelta(OffsetDateTime timestamp) {
+	public static long computeDelta(OffsetDateTime timestamp) {
 		LocalDate today = LocalDate.now();
 		OffsetDateTime midnight = today.atStartOfDay().atOffset(ZoneOffset.UTC);
 
