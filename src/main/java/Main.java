@@ -8,6 +8,7 @@ import glados.GLaDOS;
 import utils.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -26,28 +27,27 @@ public class Main {
 		try {
 			JDABuilder builder = JDABuilder.createDefault(glados.token);
 
-			builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
-			builder.enableIntents(GatewayIntent.GUILD_MESSAGES);
-			builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
-			builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
-			builder.enableIntents(GatewayIntent.GUILD_MESSAGE_REACTIONS);
-			builder.enableIntents(GatewayIntent.GUILD_EMOJIS_AND_STICKERS);
-			builder.enableIntents(GatewayIntent.GUILD_INVITES);
+			GatewayIntent intents[] = {GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES,
+					GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES,
+					GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS_AND_STICKERS,
+					GatewayIntent.GUILD_INVITES};
+
+			for (GatewayIntent intent : intents)
+				builder.enableIntents(intent);
 
 			builder.setChunkingFilter(ChunkingFilter.ALL);
 			builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 			JDA jda = builder.build();
 
 			jda.setAutoReconnect(true);
-			jda.addEventListener(new ButtonClick());
-			jda.addEventListener(new MemberJoin());
-			jda.addEventListener(new MemberRemove());
-			jda.addEventListener(new MessageReactionAdd());
-			jda.addEventListener(new MessageReactionRemove());
-			jda.addEventListener(new MessageReceived());
-			jda.addEventListener(new SlashCommandInteraction());
-			jda.addEventListener(new VoiceUpdate());
-			jda.addEventListener(new VoiceMute());
+
+			ListenerAdapter events[] = {new ButtonClick(), new MemberJoin(), new MemberRemove(),
+					new MessageReactionAdd(), new MessageReactionRemove(), new MessageReceived(),
+					new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute()};
+
+			for (ListenerAdapter event : events)
+				jda.addEventListener(event);
+
 			jda.awaitReady();
 
 			glados.registerCommands(jda);

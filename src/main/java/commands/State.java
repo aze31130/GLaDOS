@@ -19,7 +19,7 @@ public class State extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		TextChannel source = event.getChannel().asTextChannel();
-		String state = event.getOption("state").getAsString();
+		String state = event.getOption("status").getAsString();
 
 		Boolean isValidState = true;
 		switch (state) {

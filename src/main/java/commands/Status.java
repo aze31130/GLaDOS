@@ -19,7 +19,7 @@ public class Status extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		TextChannel source = event.getChannel().asTextChannel();
-		String activity = event.getOption("status").getAsString();
+		String activity = event.getOption("type").getAsString();
 		String description = event.getOption("description").getAsString();
 
 		Boolean isValidActivity = true;
