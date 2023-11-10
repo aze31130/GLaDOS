@@ -15,7 +15,8 @@ public class TimeUtils {
 		LocalDate today = LocalDate.now();
 		OffsetDateTime midnight = today.atStartOfDay().atOffset(ZoneOffset.UTC);
 
-		return Duration.between(midnight.toInstant(), timestamp.toInstant()).toMillis();
+		return Duration.between(midnight.toInstant(), timestamp.plusHours(1).toInstant())
+				.toMillis();
 	}
 
 	public static int compareTo(Message a, Message b) {
