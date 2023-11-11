@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import glados.GLaDOS;
@@ -49,8 +49,8 @@ public class Translate extends Command {
 		}
 		g.translationCooldown = LocalDateTime.now();
 
-		// Get the last 15 messages
-		List<Message> messages = event.getChannel().getHistory().retrievePast(10).complete();
+		// Get the last 30 messages TODO, get user parameter
+		List<Message> messages = event.getChannel().getHistory().retrievePast(30).complete();
 		Collections.reverse(messages);
 
 		for (Message m : messages) {
@@ -60,7 +60,7 @@ public class Translate extends Command {
 
 			JSONObject json = new JSONObject();
 			json.put("q", messageContent);
-			json.put("source", "fr");
+			json.put("source", "auto");
 			json.put("target", "en");
 
 			HttpClient client = HttpClient.newHttpClient();
@@ -77,7 +77,7 @@ public class Translate extends Command {
 				JSONObject responseJson = new JSONObject(response.body());
 				event.getChannel().sendMessage("`[Translated] <" + m.getMember().getEffectiveName()
 						+ ">`: " + responseJson.get("translatedText").toString()).queue();
-			} catch (IOException | InterruptedException e) {
+			} catch (IOException | InterruptedException | JSONException e) {
 				event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
 						.queue();
 			}

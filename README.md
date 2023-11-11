@@ -7,6 +7,8 @@ GLaDOS is a discord bot designed to perform and automate administrative tasks su
 This bot include multiple tools such as :
 * Many fun maths commands (fibonacci, factorial, ...)
 * Translation module using [Argos](https://www.argosopentech.com/) (**Huge thanks** to them !)
+* Quizz members on various subjects using [Opentdb](https://opentdb.com/) (**Huge thanks** to them too !)
+* Generates random cat / dog pictures
 * Member behavioral analysis (Still WIP)
 * Statistics tools (detailed contribution per members)
 

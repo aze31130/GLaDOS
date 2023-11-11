@@ -1,5 +1,6 @@
 package events;
 
+import java.util.HashMap;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -9,84 +10,51 @@ public class ButtonClick extends ListenerAdapter {
 	public void onButtonInteraction(ButtonInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
-		Boolean success = true;
-		switch (event.getComponentId()) {
-			case "+Broadcast":
-				event.getGuild()
-						.addRoleToMember(event.getMember().getUser(),
-								event.getGuild().getRoleById(glados.roleBroadcastMessenger))
-						.queue();
-				break;
-			case "-Broadcast":
-				event.getGuild()
-						.removeRoleFromMember(event.getMember().getUser(),
-								event.getGuild().getRoleById(glados.roleBroadcastMessenger))
-						.queue();
-				break;
-			case "+Gamer":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleGamer)).queue();
-				break;
-			case "-Gamer":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleGamer)).queue();
-				break;
-			case "+Member":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleMember)).queue();
-				break;
-			case "-Member":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleMember)).queue();
-				break;
-			case "+Artistic":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleArtistic)).queue();
-				break;
-			case "-Artistic":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleArtistic)).queue();
-				break;
-			case "+International":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleInternational)).queue();
-				break;
-			case "-International":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleInternational)).queue();
-				break;
-			case "+Developer":
-				event.getGuild().addRoleToMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleDeveloper)).queue();
-				break;
-			case "-Developer":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleDeveloper)).queue();
-				break;
-			case "-NSFW":
-				event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-						event.getGuild().getRoleById(glados.roleNsfw)).queue();
-				break;
-			default:
-				success = false;
-				break;
+
+		String trigger = event.getComponentId();
+
+		HashMap<String, String> dictionary = new HashMap<>();
+		dictionary.put("Broadcast", glados.roleBroadcastMessenger);
+		dictionary.put("Gamer", glados.roleGamer);
+		dictionary.put("Member", glados.roleMember);
+		dictionary.put("Artistic", glados.roleArtistic);
+		dictionary.put("International", glados.roleInternational);
+		dictionary.put("Developer", glados.roleDeveloper);
+		dictionary.put("NSFW", glados.roleNsfw);
+
+
+		// Check if action is add role
+		if (trigger.startsWith("+")) {
+			trigger = trigger.replace("+", "");
+			if (!dictionary.containsKey(trigger))
+				return;
+
+			trigger.replace("+", "");
+			event.getGuild().addRoleToMember(event.getMember().getUser(),
+					event.getGuild().getRoleById(dictionary.get(trigger))).queue();
+
+			event.reply("Successfully added role <@&" + dictionary.get(trigger) + "> !")
+					.setEphemeral(true).setSuppressedNotifications(true).queue();
+			return;
 		}
 
-		if (success) {
-			String action = "";
-			if (event.getComponentId().startsWith("+")) {
-				action = "added";
-			}
+		// Check if action is remove role
+		if (trigger.startsWith("-")) {
+			trigger = trigger.replace("-", "");
+			if (!dictionary.containsKey(trigger))
+				return;
 
-			if (event.getComponentId().startsWith("-")) {
-				action = "removed";
-			}
-			event.reply("Successfully " + action + " " + event.getComponentId().substring(1)
-					+ " role !").setEphemeral(true).queue();
-		} else {
-			event.getChannel().sendMessageEmbeds(BuildEmbed
-					.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
-					.queue();
+			event.getGuild().removeRoleFromMember(event.getMember().getUser(),
+					event.getGuild().getRoleById(dictionary.get(trigger))).queue();
+
+			event.reply("Successfully removed role <@&" + dictionary.get(trigger) + "> !")
+					.setEphemeral(true).setSuppressedNotifications(true).queue();
+			return;
 		}
+
+		// Else, check if the trigger is the good anwser
+		event.getChannel().sendMessageEmbeds(BuildEmbed
+				.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
+				.queue();
 	}
 }
