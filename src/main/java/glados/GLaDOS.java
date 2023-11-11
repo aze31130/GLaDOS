@@ -202,6 +202,10 @@ public class GLaDOS {
 						Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "status",
 								"Can be [online, idle, dnd]"))));
 
+		this.commands.add(new Question("question", "Challenges your general knowledge",
+				Permissions.OWNER, Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
+						"Can be [easy, normal, hard]. Default is random"))));
+
 		try {
 			// Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./config.json");

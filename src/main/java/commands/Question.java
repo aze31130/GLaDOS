@@ -1,43 +1,77 @@
 package commands;
 
-import java.awt.Color;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import accounts.Permissions;
+import glados.GLaDOS;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.components.ItemComponent;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import utils.BuildEmbed;
+import utils.JsonDownloader;
 
-public class Question {
-	public static void randomQuestion(MessageChannel ch) {
+/*
+ * This command will send an embed containing a question with buttons to answer. Warning, only the
+ * user that requested the question is allowed to anwser.
+ */
+public class Question extends Command {
+	public Question(String name, String description, Permissions permissionLevel,
+			List<OptionData> arguments) {
+		super(name, description, permissionLevel, arguments);
+	}
+
+	@Override
+	public void execute(SlashCommandInteractionEvent event) {
+		GLaDOS g = GLaDOS.getInstance();
+
+		// Deletes last question if not answered
+		// TODO
+
+		// Check if the user provided a difficulty
+		List<String> possibleDifficulties = Arrays.asList("easy", "normal", "hard");
+		String difficulty = "";
+
+		for (OptionMapping om : event.getOptions())
+			if (om != null && possibleDifficulties.contains(om.getAsString()))
+				difficulty = om.getAsString();
+
+
 		try {
-			// parameters:
-			// difficulty
-			// theme
-			// String apiUrl = "https://opentdb.com/api.php?amount=1";
-			// Buttons with answers
+			JSONObject response = JsonDownloader
+					.getJson("https://opentdb.com/api.php?amount=1&difficulty=" + difficulty);
 
-			String category = "";
-			String question = "";
-			String difficulty = "";
-			String correctAnswer = "";
+			JSONObject question = response.getJSONArray("results").getJSONObject(0);
+			List<ItemComponent> responses = new ArrayList<>();
+			responses.add(Button.primary(question.getString("correct_answer"),
+					question.getString("correct_answer")));
+			JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
 
-			System.out.println(category);
-			System.out.println(difficulty);
-			System.out.println(question);
-			System.out.println(correctAnswer);
+			for (int i = 0; i < wrongAnswers.length(); i++) {
+				System.out.println(wrongAnswers.getString(i));
+				responses.add(Button.primary(wrongAnswers.getString(i), wrongAnswers.getString(i)));
+			}
 
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			Date date = new Date();
-			EmbedBuilder info = new EmbedBuilder();
+			Collections.shuffle(responses);
 
-			info.setAuthor("Difficulty: " + difficulty);
-			info.setTitle("Question: " + question);
-			info.setDescription("Category" + category);
-			info.setColor(Color.ORANGE);
-			info.setFooter("Request made at " + formatter.format(date));
-			ch.sendMessageEmbeds(info.build()).queue();
+			// Post message with buttons with answers
+			event.getChannel()
+					.sendMessageEmbeds(BuildEmbed.questionEmbed(question.getString("question"),
+							question.getString("category"), question.getString("difficulty"))
+							.build())
+					.addActionRow(responses).queue();
 
-		} catch (Exception e) {
-			ch.sendMessage(e.toString()).queue();
+			// Save message id in glados variable
+
+		} catch (JSONException | IOException exception) {
+			exception.printStackTrace();
 		}
 	}
 }

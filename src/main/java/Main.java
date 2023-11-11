@@ -82,7 +82,7 @@ public class Main {
 								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 						Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 						try {
-							Thread.sleep(15000);
+							Thread.sleep(10000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}

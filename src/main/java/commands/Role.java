@@ -13,8 +13,5 @@ public class Role extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
-		// Kills the jvm
-		System.exit(0);
-	}
+	public void execute(SlashCommandInteractionEvent event) {}
 }

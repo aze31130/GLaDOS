@@ -187,4 +187,28 @@ public class BuildEmbed {
 		embed.setFooter("Request made at " + new Logger(false));
 		return embed;
 	}
+
+	public static EmbedBuilder questionEmbed(String question, String category, String difficulty) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle(category);
+		embed.setDescription(question);
+
+		switch (difficulty) {
+			case "easy":
+				embed.setColor(Color.GREEN);
+				break;
+			case "normal":
+				embed.setColor(Color.ORANGE);
+				break;
+			case "hard":
+				embed.setColor(Color.RED);
+				break;
+			default:
+				embed.setColor(Color.GRAY);
+				break;
+		}
+
+		embed.setFooter("Request made at " + new Logger(false));
+		return embed;
+	}
 }

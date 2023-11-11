@@ -3,6 +3,7 @@ package events;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import utils.BuildEmbed;
 
 public class ButtonClick extends ListenerAdapter {
 	public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -83,7 +84,9 @@ public class ButtonClick extends ListenerAdapter {
 			event.reply("Successfully " + action + " " + event.getComponentId().substring(1)
 					+ " role !").setEphemeral(true).queue();
 		} else {
-			event.deferEdit().queue();
+			event.getChannel().sendMessageEmbeds(BuildEmbed
+					.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
+					.queue();
 		}
 	}
 }
