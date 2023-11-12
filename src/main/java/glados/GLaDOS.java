@@ -205,7 +205,7 @@ public class GLaDOS {
 								"Can be [online, idle, dnd]"))));
 
 		this.commands.add(new Question("question", "Challenges your general knowledge",
-				Permissions.OWNER, Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
+				Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
 						"Can be [easy, normal, hard]. Default is random"))));
 
 		try {

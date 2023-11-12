@@ -32,6 +32,14 @@ public class Question extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS g = GLaDOS.getInstance();
 
+		if (g.goodAnswer.length() > 0) {
+			event.getChannel()
+					.sendMessageEmbeds(
+							BuildEmbed.errorEmbed("You have to anwser previous question").build())
+					.queue();
+			return;
+		}
+
 		// Check if the user provided a difficulty
 		List<String> possibleDifficulties = Arrays.asList("easy", "normal", "hard");
 		String difficulty = "";

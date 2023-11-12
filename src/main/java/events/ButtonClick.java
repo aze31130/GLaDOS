@@ -61,6 +61,7 @@ public class ButtonClick extends ListenerAdapter {
 						.queue();
 				// Removes buttons when good answer is triggered
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				glados.goodAnswer = "";
 			} else {
 				event.replyEmbeds(BuildEmbed
 						.errorEmbed("Wrong answer " + event.getButton().getLabel() + " !").build())
