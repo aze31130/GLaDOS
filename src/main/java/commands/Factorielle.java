@@ -1,13 +1,15 @@
 package commands;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
-
+import accounts.Permissions;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.utils.FileUpload;
 import utils.BuildEmbed;
-import accounts.Permissions;
 
 public class Factorielle extends Command {
 	public Factorielle(String name, String description, Permissions permissionLevel,
@@ -33,6 +35,13 @@ public class Factorielle extends Command {
 			f = f.multiply(BigInteger.valueOf(i));
 		}
 
-		source.sendMessage("Factorial(" + n + ") = " + f).queue();
+		// Write number to a file if too big
+		if (f.toString().length() >= 2000) {
+			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
+			source.sendMessage("Factorial(" + n + ") = ")
+					.addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
+		} else {
+			source.sendMessage("Factorial(" + n + ") = " + f).queue();
+		}
 	}
 }

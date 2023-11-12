@@ -10,8 +10,6 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

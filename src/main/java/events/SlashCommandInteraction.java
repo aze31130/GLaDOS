@@ -9,11 +9,10 @@ import utils.PermissionsUtils;
 
 public class SlashCommandInteraction extends ListenerAdapter {
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-		// event.deferReply().queue();
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.activityCounter++;
 
-		for (Command command : GLaDOS.getInstance().commands) {
+		for (Command command : glados.commands) {
 			if (event.getName().equalsIgnoreCase(command.name)) {
 				if (!PermissionsUtils.canExecute(event.getMember(), command.permissionLevel)) {
 					event.replyEmbeds(BuildEmbed
@@ -22,9 +21,8 @@ public class SlashCommandInteraction extends ListenerAdapter {
 							.build()).queue();
 					return;
 				}
-
+				// event.deferReply().queue();
 				event.reply("200 OK").queue();
-
 				command.execute(event);
 				return;
 			}

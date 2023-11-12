@@ -65,10 +65,13 @@ public class Question extends Command {
 			Collections.shuffle(responses);
 
 			// Post message with buttons with answers
-			event.getChannel().sendMessageEmbeds(BuildEmbed
-					.questionEmbed(question.getString("question").replace("&quot;", "'"),
+			event.getChannel()
+					.sendMessageEmbeds(BuildEmbed.questionEmbed(
+							question.getString("question").replace("&quot;", "'").replace("&#039;",
+									"'"),
 							question.getString("category"), question.getString("difficulty"))
-					.build()).addActionRow(responses).queue();
+							.build())
+					.addActionRow(responses).queue();
 
 			// Save good answer in glados variable
 			g.goodAnswer = "?" + question.getString("correct_answer");

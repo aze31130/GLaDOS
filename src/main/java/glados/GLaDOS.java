@@ -208,6 +208,10 @@ public class GLaDOS {
 				Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
 						"Can be [easy, normal, hard]. Default is random"))));
 
+		this.commands.add(
+				new Report("report", "Reports a bug, a feature request or any subject you want",
+						Permissions.NONE, Arrays.asList()));
+
 		try {
 			// Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./config.json");

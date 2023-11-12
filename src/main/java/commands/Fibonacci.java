@@ -1,5 +1,7 @@
 package commands;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.utils.FileUpload;
 import accounts.Permissions;
 
 public class Fibonacci extends Command {
@@ -43,6 +46,13 @@ public class Fibonacci extends Command {
 			f = b;
 		}
 
-		source.sendMessage("Fibonacci(" + n + ") = " + f).queue();
+		// Write number to a file if too big
+		if (f.toString().length() >= 2000) {
+			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
+			source.sendMessage("Fibonacci(" + n + ") = ")
+					.addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
+		} else {
+			source.sendMessage("Fibonacci(" + n + ") = " + f).queue();
+		}
 	}
 }

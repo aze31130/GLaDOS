@@ -63,6 +63,7 @@ public class Backup extends Command {
 		Guild server = event.getGuild();
 		TextChannel source = event.getGuildChannel().asTextChannel();
 
+		// event.getHook().sendMessage("Downloading server's history...").queue();
 		int i = 0;
 		List<TextChannel> channels = server.getTextChannels();
 		for (TextChannel tc : channels) {
