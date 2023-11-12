@@ -59,6 +59,8 @@ public class GLaDOS {
 	public int maxLevel;
 	public LocalDateTime translationCooldown;
 
+	// Temp variable
+	public String goodAnswer = "";
 	public boolean FreeGameAnnonce = false;
 	public boolean DailyQuote = false;
 

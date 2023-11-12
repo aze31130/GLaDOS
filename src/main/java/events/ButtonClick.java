@@ -1,5 +1,6 @@
 package events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -52,9 +53,26 @@ public class ButtonClick extends ListenerAdapter {
 			return;
 		}
 
+		// Check if action is question
+		if (trigger.startsWith("?")) {
+			if (glados.goodAnswer.equals(trigger)) {
+				event.replyEmbeds(BuildEmbed
+						.successEmbed("Good answer " + event.getButton().getLabel() + " !").build())
+						.queue();
+				// Removes buttons when good answer is triggered
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+			} else {
+				event.replyEmbeds(BuildEmbed
+						.errorEmbed("Wrong answer " + event.getButton().getLabel() + " !").build())
+						.queue();
+			}
+			return;
+		}
+
 		// Else, check if the trigger is the good anwser
-		event.getChannel().sendMessageEmbeds(BuildEmbed
+		event.replyEmbeds(BuildEmbed
 				.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
 				.queue();
+		event.getChannel().sendMessage(event.getMessage().getJumpUrl()).queue();
 	}
 }

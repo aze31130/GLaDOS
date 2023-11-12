@@ -32,9 +32,6 @@ public class Question extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS g = GLaDOS.getInstance();
 
-		// Deletes last question if not answered
-		// TODO
-
 		// Check if the user provided a difficulty
 		List<String> possibleDifficulties = Arrays.asList("easy", "normal", "hard");
 		String difficulty = "";
@@ -43,32 +40,30 @@ public class Question extends Command {
 			if (om != null && possibleDifficulties.contains(om.getAsString()))
 				difficulty = om.getAsString();
 
-
 		try {
 			JSONObject response = JsonDownloader
 					.getJson("https://opentdb.com/api.php?amount=1&difficulty=" + difficulty);
 
 			JSONObject question = response.getJSONArray("results").getJSONObject(0);
 			List<ItemComponent> responses = new ArrayList<>();
-			responses.add(Button.primary(question.getString("correct_answer"),
+			responses.add(Button.primary("?" + question.getString("correct_answer"),
 					question.getString("correct_answer")));
 			JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
 
-			for (int i = 0; i < wrongAnswers.length(); i++) {
-				System.out.println(wrongAnswers.getString(i));
-				responses.add(Button.primary(wrongAnswers.getString(i), wrongAnswers.getString(i)));
-			}
+			for (int i = 0; i < wrongAnswers.length(); i++)
+				responses.add(
+						Button.primary("?" + wrongAnswers.getString(i), wrongAnswers.getString(i)));
 
 			Collections.shuffle(responses);
 
 			// Post message with buttons with answers
-			event.getChannel()
-					.sendMessageEmbeds(BuildEmbed.questionEmbed(question.getString("question"),
+			event.getChannel().sendMessageEmbeds(BuildEmbed
+					.questionEmbed(question.getString("question").replace("&quot;", "'"),
 							question.getString("category"), question.getString("difficulty"))
-							.build())
-					.addActionRow(responses).queue();
+					.build()).addActionRow(responses).queue();
 
-			// Save message id in glados variable
+			// Save good answer in glados variable
+			g.goodAnswer = "?" + question.getString("correct_answer");
 
 		} catch (JSONException | IOException exception) {
 			exception.printStackTrace();
