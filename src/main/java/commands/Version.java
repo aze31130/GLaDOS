@@ -7,7 +7,6 @@ import java.util.List;
 import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
 import utils.Converter;
-import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -40,7 +39,7 @@ public class Version extends Command {
 		info.addField("JVM's total memory: ", "" + Runtime.getRuntime().totalMemory(), true);
 		info.addField("Available threads: ", "" + Runtime.getRuntime().availableProcessors(), true);
 		info.addField("Temp file path: ", System.getProperty("java.io.tmpdir"), true);
-		info.addField("Request amount: ", Integer.toString(glados.getRequests()), true);
+		info.addField("Request amount: ", Integer.toString(glados.requestsAmount), true);
 		info.addField("Uptime: ",
 				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);

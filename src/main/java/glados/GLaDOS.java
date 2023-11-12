@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.Account;
 import accounts.Permissions;
+import accounts.TrustFactor;
 import commands.*;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
@@ -64,8 +64,8 @@ public class GLaDOS {
 	public boolean FreeGameAnnonce = false;
 	public boolean DailyQuote = false;
 
-	public List<Account> accounts;
-	public List<Command> commands = new ArrayList<Command>();
+	public List<Account> accounts = new ArrayList<>();
+	public List<Command> commands = new ArrayList<>();
 
 	private GLaDOS() {
 		super();
@@ -196,17 +196,20 @@ public class GLaDOS {
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
 								"Can be [listening, playing, watching, streaming]"),
-						new OptionData(OptionType.STRING, "description",
-								"The displayed activity"))));
+						new OptionData(OptionType.STRING, "description", "The displayed activity")
+								.setAutoComplete(true))));
+
+		this.commands.add(new State("state",
+				"Updates GLaDOS's state (online, idle, do not disturb)", Permissions.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]")
+								.setAutoComplete(true))));
 
 		this.commands
-				.add(new State("state", "Updates GLaDOS's state (online, idle, do not disturb)",
-						Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "status",
-								"Can be [online, idle, dnd]"))));
-
-		this.commands.add(new Question("question", "Challenges your general knowledge",
-				Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
-						"Can be [easy, normal, hard]. Default is random"))));
+				.add(new Question("question", "Challenges your general knowledge", Permissions.NONE,
+						Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
+								"Can be [easy, normal, hard]. Default is random")
+										.setAutoComplete(true))));
 
 		this.commands.add(
 				new Report("report", "Reports a bug, a feature request or any subject you want",
@@ -263,19 +266,6 @@ public class GLaDOS {
 	// }
 	// }
 
-	public void addRequest() {
-		this.requestsAmount++;
-	}
-
-	public int getRequests() {
-		return this.requestsAmount;
-	}
-
-	public void checkAccounts() {
-		// Check the amount of registered accounts and compare it to the member list
-		// size
-	}
-
 	/*
 	 * This function registers discord slash commands according to the initialized command list
 	 */
@@ -297,27 +287,17 @@ public class GLaDOS {
 	}
 
 	public Account getAccountById(String id) {
-		return null;
+		// Check if account is registered
+		Account result = this.accounts.stream().filter(a -> a.id == id).findFirst().orElse(null);
+
+		// Create the account if not exist
+		if (result == null) {
+			result = new Account(id, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
+			this.accounts.add(result);
+		}
+
+		return result;
 	}
-
-	// public Account getAccount(String accountId) {
-
-	// if(accountId.contains("<") || accountId.contains(">") ||
-	// accountId.contains("@")) {
-	// accountId = accountId.replace("<", "").replace("@", "").replace("!",
-	// "").replace(">", "");
-	// }
-
-	// if(this.accounts != null) {
-	// for(Account a : this.accounts) {
-	// if(a.id.equals(accountId)) {
-	// return a;
-	// }
-	// }
-	// }
-
-	// return null;
-	// }
 
 	/*
 	 * Reads the latest commit hash where the project is currently running
