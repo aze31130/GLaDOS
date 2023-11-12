@@ -1,9 +1,11 @@
 package utils;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.Random;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 
 public class BuildEmbed {
 	public static EmbedBuilder gamerEmbed() {
@@ -79,7 +81,7 @@ public class BuildEmbed {
 				.setTitle(messages[randomNumber])
 				.setThumbnail(
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/1200px-Epic_Games_logo.svg.png")
-				.setFooter("Request made at " + new Logger(false));
+				.setTimestamp(Instant.now());
 		return embed;
 	}
 
@@ -88,7 +90,7 @@ public class BuildEmbed {
 		embed.setTitle(quote);
 		embed.setDescription(author);
 		embed.setColor(Color.CYAN);
-		embed.setFooter("Request made at " + new Logger(false));
+		embed.setTimestamp(Instant.now());
 		return embed;
 	}
 
@@ -96,7 +98,7 @@ public class BuildEmbed {
 		EmbedBuilder rankingEmbed = new EmbedBuilder();
 		rankingEmbed.setColor(Color.MAGENTA);
 		rankingEmbed.setTitle("Midnight Race");
-		rankingEmbed.setFooter("Request made at " + new Logger(false));
+		rankingEmbed.setTimestamp(Instant.now());
 		return rankingEmbed;
 	}
 
@@ -178,13 +180,25 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder profileEmbed(String username, String url) {
+	public static EmbedBuilder profileEmbed(Member m) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle(username + "'s profile");
-		// embed.setDescription();
-		embed.setColor(Color.BLUE);
-		embed.setThumbnail(url);
-		embed.setFooter("Request made at " + new Logger(false));
+		embed.setTitle(m.getUser().getName() + "'s profile");
+		embed.setDescription(m.getAsMention());
+		embed.setColor(Color.GREEN);
+		embed.setThumbnail(m.getUser().getAvatarUrl());
+
+		embed.addField(":sparkles: Level", "0", true);
+		embed.addField(":green_book: Experience", "0", true);
+		embed.addField(":shield: Trust Factor", "UNTRUSTED", true);
+		embed.addField(":wave: Fame", "0", true);
+		embed.addField(":clock: Joined Discord", m.getTimeCreated().toString(), true);
+		embed.addField(":timer: Member since", m.getTimeJoined().toString(), true);
+		embed.addField(":envelope: Messages", "0", true);
+		embed.addField(":tada: Reactions", "0", true);
+		embed.addField(":trophy: Achievements", "0", true);
+
+		embed.setTimestamp(Instant.now());
+
 		return embed;
 	}
 
@@ -208,7 +222,7 @@ public class BuildEmbed {
 				break;
 		}
 
-		embed.setFooter("Request made at " + new Logger(false));
+		embed.setTimestamp(Instant.now());
 		return embed;
 	}
 }

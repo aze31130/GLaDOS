@@ -1,6 +1,7 @@
 package commands;
 
 import java.lang.management.ManagementFactory;
+import java.time.Instant;
 import java.util.List;
 
 import com.sun.management.OperatingSystemMXBean;
@@ -43,7 +44,7 @@ public class Version extends Command {
 		info.addField("Uptime: ",
 				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);
-		info.setFooter("Request made at " + new Logger(false));
+		info.setTimestamp(Instant.now());
 		event.getChannel().sendMessageEmbeds(info.build()).queue();
 	}
 }

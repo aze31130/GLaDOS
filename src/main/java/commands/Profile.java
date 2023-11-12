@@ -1,9 +1,9 @@
 package commands;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.List;
 import utils.BuildEmbed;
-import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -18,9 +18,7 @@ public class Profile extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		EmbedBuilder profile =
-				BuildEmbed.profileEmbed(event.getUser().getName(), event.getUser().getAvatarUrl());
-
+		EmbedBuilder profile = BuildEmbed.profileEmbed(event.getMember());
 		/*
 		 * TODO, Possible argument to check others profile. If empty, get user profile Check if
 		 * profile exists, Create if not exists
@@ -58,26 +56,6 @@ public class Profile extends Command {
 		// }
 	}
 
-	// private EmbedBuilder getProfile(Account a, Member m) {
-	// EmbedBuilder profile = new EmbedBuilder()
-	// .setColor(Color.GREEN)
-	// .setAuthor("OurStory's profile",
-	// "https://discord.com/channels/676731153444765706/676731153444765709",
-	// .setDescription(m.getAsMention())
-	// .addField(":sparkles: Level:", String.valueOf(a.level), true)
-	// .addField(":green_book: EXP " + Levels.getExperiencePercentage(a.level,
-	// a.experience), String.valueOf(a.experience) + " / " +
-	// Levels.getRequiredExperience(a.level), true)
-	// .addField(":shield: Rank : ", a.rank.name, true)
-	// .addField(":clock: Created : ", a.created, true)
-	// .addField(":timer: Member since:", a.joined, true)
-	// .addField(":wave: Fame:", String.valueOf(a.fame), true)
-	// .addField(":envelope: Messages:", "0", true)
-	// .addField(":green_square: Experience:", String.valueOf(a.totalExperience),
-	// true)
-	// .addField(":trophy: Achievements:", "null", false)
-	// .setFooter("Request made at " + new Logger(false));
-
 	// server total levels, experience, message sent, total experience obtained
 	private EmbedBuilder serverProfile(Guild g) {
 		EmbedBuilder profile = new EmbedBuilder().setColor(Color.GREEN).setAuthor("GLaDOS")
@@ -86,7 +64,7 @@ public class Profile extends Command {
 				.addField("Server created on: ", g.getTimeCreated().toString(), true)
 				.addField("Server member counts: ", Integer.toString(g.getMemberCount()), true)
 				.addField("Server owner: ", g.getOwner().getAsMention(), true)
-				.setFooter("Request made at " + new Logger(false));
+				.setTimestamp(Instant.now());
 		return profile;
 	}
 }

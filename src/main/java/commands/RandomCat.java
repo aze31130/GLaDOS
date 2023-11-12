@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Instant;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -34,7 +35,7 @@ public class RandomCat extends Command {
 			JSONObject jsonObject = new JSONObject(jsonArray.get(0).toString());
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Cat Picture")
 					.setImage(jsonObject.getString("url")).setColor(Color.WHITE)
-					.setFooter("Request made at " + new Logger(false));
+					.setTimestamp(Instant.now());
 			source.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

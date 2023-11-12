@@ -1,6 +1,7 @@
 package commands;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.List;
 
 import utils.BuildEmbed;
@@ -26,7 +27,7 @@ public class RandomDog extends Command {
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")
 					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random")
 							.getString("message"))
-					.setColor(Color.WHITE).setFooter("Request made at " + new Logger(false));
+					.setColor(Color.WHITE).setTimestamp(Instant.now());
 			source.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

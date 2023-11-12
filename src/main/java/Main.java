@@ -109,9 +109,7 @@ public class Main {
 		}
 
 		/*
-		 * TODO: each day, compute midnight winner
 		 * 
-		 * Guild server = jda.getGuilds().get(1);
 		 * 
 		 * //TextChannel tc = server.getTextChannelById("676731153444765709"); for (TextChannel tc :
 		 * server.getTextChannels()) { jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).

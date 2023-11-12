@@ -1,6 +1,7 @@
 package commands;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class Idea extends Command {
 					new EmbedBuilder().setAuthor("What Should I Do ?").setTitle(activity)
 							.addField("Price: ", price + "", false).addField("Type: ", type, false)
 							.addField("Participants: ", participants + "", false)
-							.setColor(Color.CYAN).setFooter("Request made at " + new Logger(false));
+							.setColor(Color.CYAN).setTimestamp(Instant.now());
 			source.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

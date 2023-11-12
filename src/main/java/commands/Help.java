@@ -1,6 +1,7 @@
 package commands;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.List;
 
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -30,7 +31,7 @@ public class Help extends Command {
 		for (Command c : g.commands)
 			info.addField(c.name, c.description, true);
 
-		info.setFooter("Request made at " + new Logger(false));
+		info.setTimestamp(Instant.now());
 		source.sendMessageEmbeds(info.build()).queue();
 	}
 }

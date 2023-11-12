@@ -1,6 +1,7 @@
 package commands;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -40,8 +41,7 @@ public class CheGuevara extends Command {
 				meme = meme.replace("Norris", "Guevara");
 				EmbedBuilder che = new EmbedBuilder().setTitle("Che Guevara").setThumbnail(
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Che_Guevara_vector_SVG_format.svg/1200px-Che_Guevara_vector_SVG_format.svg.png")
-						.setDescription(meme).setColor(Color.BLUE)
-						.setFooter("Request made at " + new Logger(false));
+						.setDescription(meme).setColor(Color.BLUE).setTimestamp(Instant.now());
 				source.sendMessageEmbeds(che.build()).queue();
 				amount--;
 			}

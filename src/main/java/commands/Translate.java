@@ -49,8 +49,7 @@ public class Translate extends Command {
 		}
 		g.translationCooldown = LocalDateTime.now();
 
-		// Get the last 30 messages TODO, get user parameter
-		List<Message> messages = event.getChannel().getHistory().retrievePast(30).complete();
+		List<Message> messages = event.getChannel().getHistory().retrievePast(15).complete();
 		Collections.reverse(messages);
 
 		for (Message m : messages) {
