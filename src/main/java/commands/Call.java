@@ -38,7 +38,7 @@ public class Call extends Command {
 	 */
 	public static void midnightRank(MessageChannel generalChannel) {
 		EmbedBuilder midnightEmbed = BuildEmbed.midnightRankEmbed();
-		List<Message> latestMessages = generalChannel.getHistory().retrievePast(20).complete();
+		List<Message> latestMessages = generalChannel.getHistory().retrievePast(50).complete();
 
 		Collections.sort(latestMessages, TimeUtils::compareTo);
 

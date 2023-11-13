@@ -23,8 +23,6 @@ public class TimeUtils {
 		Long deltaA = computeDelta(a.getTimeCreated());
 		Long deltaB = computeDelta(a.getTimeCreated());
 
-		if (deltaA >= 0 && deltaB >= 0)
-			return deltaA < deltaB ? 1 : -1;
 		if (deltaA < 0 && deltaB < 0)
 			return deltaB.compareTo(deltaA);
 		return deltaA < deltaB ? 1 : -1;

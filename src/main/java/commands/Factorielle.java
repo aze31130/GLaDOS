@@ -3,6 +3,7 @@ package commands;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 import accounts.Permissions;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -25,6 +26,16 @@ public class Factorielle extends Command {
 		if (n < 0) {
 			source.sendMessageEmbeds(
 					BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
+					.queue();
+			return;
+		}
+
+		/*
+		 * Define a temporary limit to make sure midnight ranking is not affected
+		 */
+		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
+			source.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
 					.queue();
 			return;
 		}
