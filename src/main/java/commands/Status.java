@@ -26,13 +26,13 @@ public class Status extends Command {
 
 		switch (activity) {
 			case "listening":
-				source.getJDA().getPresence().setActivity(Activity.listening(activity));
+				source.getJDA().getPresence().setActivity(Activity.listening(description));
 				break;
 			case "playing":
-				source.getJDA().getPresence().setActivity(Activity.playing(activity));
+				source.getJDA().getPresence().setActivity(Activity.playing(description));
 				break;
 			case "watching":
-				source.getJDA().getPresence().setActivity(Activity.watching(activity));
+				source.getJDA().getPresence().setActivity(Activity.watching(description));
 				break;
 			case "streaming":
 				source.getJDA().getPresence()
@@ -46,8 +46,8 @@ public class Status extends Command {
 
 		if (isValidActivity) {
 			source.sendMessageEmbeds(BuildEmbed
-					.successEmbed("Successfully updated to " + description + " activity.").build())
-					.queue();
+					.successEmbed("Successfully updated to " + activity + " " + description)
+					.build()).queue();
 		} else {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown activity").build()).queue();
 		}

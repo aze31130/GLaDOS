@@ -20,8 +20,6 @@ public class FileUtils {
 	public static void createDefaultConfig() {
 		JSONObject defaultConfig = new JSONObject();
 		JSONArray bannedWords = new JSONArray();
-		defaultConfig.put("version", "1.0.0");
-		defaultConfig.put("prefix", "?");
 		defaultConfig.put("leveling", false);
 
 		defaultConfig.put("metricLogging", true);
