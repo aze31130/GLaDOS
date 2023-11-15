@@ -7,7 +7,6 @@ import java.util.List;
 import org.json.JSONObject;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
-import utils.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

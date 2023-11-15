@@ -165,9 +165,6 @@ public class GLaDOS {
 		this.commands.add(new Help("help", "Shows an help page listing each commands",
 				Permissions.NONE, Arrays.asList()));
 
-		this.commands.add(new PictureInverse("picture-inverse",
-				"Inverse every colors of a given picture", Permissions.NONE, Arrays.asList()));
-
 		this.commands.add(
 				new Profile("profile", "Show a user profile", Permissions.NONE, Arrays.asList()));
 

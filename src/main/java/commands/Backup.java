@@ -31,7 +31,7 @@ public class Backup extends Command {
 			JSONObject json = new JSONObject();
 			json.clear();
 			json.put("authorId", me.getAuthor().getIdLong());
-			json.put("authorName", me.getAuthor().getAsTag());
+			json.put("authorName", me.getAuthor().getName());
 			json.put("message", me.getContentRaw());
 			json.put("date", me.getTimeCreated());
 			messageArray.put(json);

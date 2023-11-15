@@ -19,29 +19,15 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class MessagesUtils {
-
-	/*
-	 * IDEAS TOP MESSAGER TOP EMOJIER TOP LINKER
-	 * 
-	 */
-
 	public static void get1000(MessageChannel channel, Consumer<List<Message>> callback) {
 		List<Message> messages = new ArrayList<>(1000);
 		channel.getIterableHistory().cache(false).forEachAsync((message) -> {
 			messages.add(message);
 			return messages.size() < 1000;
 		}).thenRun(() -> callback.accept(messages));
-	}
-
-	public static void sendPrivateMessage(MessageReceivedEvent event) {
-		User author = event.getJDA().getUserById("");
-
-		// author.openPrivateChannel().queue((channel) ->
-		// channel.sendMessage("Hello").addFile(null).queue());
 	}
 
 	public static void randomMessage(MessageChannel channel, Member member) {

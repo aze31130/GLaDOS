@@ -21,7 +21,6 @@ public class State extends Command {
 		TextChannel source = event.getChannel().asTextChannel();
 		String state = event.getOption("status").getAsString();
 
-		Boolean isValidState = true;
 		switch (state) {
 			case "online":
 				source.getJDA().getPresence().setStatus(OnlineStatus.ONLINE);
@@ -33,18 +32,14 @@ public class State extends Command {
 				source.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
 				break;
 			default:
-				isValidState = false;
+				source.sendMessageEmbeds(BuildEmbed.errorEmbed(
+						"Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
+						.build()).queue();
+				return;
 		}
 
-		if (isValidState) {
-			source.sendMessageEmbeds(
-					BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build())
-					.queue();
-		} else {
-			source.sendMessageEmbeds(BuildEmbed
-					.errorEmbed(
-							"Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
-					.build()).queue();
-		}
+		source.sendMessageEmbeds(
+				BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build())
+				.queue();
 	}
 }

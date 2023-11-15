@@ -24,7 +24,12 @@ public class Statistics extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		/*
-		 * List<EmoteCounter> ec = new ArrayList<EmoteCounter>();
+		 * TOP MESSAGER, TOP EMOJIER, TOP LINKER List<EmoteCounter> ec = new
+		 * 
+		 * tc.getIterableHistory().cache(false).forEachRemaining((me) -> { JSONObject json = new
+		 * JSONObject(); json.clear(); json.put("author", me.getAuthor().getIdLong());
+		 * json.put("message", me.getContentRaw()); json.put("date", me.getTimeCreated());
+		 * messageArray.put(json);
 		 * 
 		 * 
 		 * for(TextChannel ch : args.member.getJDA().getGuilds().get(1).getTextChannels()) {

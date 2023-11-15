@@ -22,8 +22,6 @@ public class Status extends Command {
 		String activity = event.getOption("type").getAsString();
 		String description = event.getOption("description").getAsString();
 
-		Boolean isValidActivity = true;
-
 		switch (activity) {
 			case "listening":
 				source.getJDA().getPresence().setActivity(Activity.listening(description));
@@ -41,15 +39,12 @@ public class Status extends Command {
 			default:
 				source.getJDA().getPresence()
 						.setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS, description));
-				isValidActivity = false;
+				source.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown activity").build()).queue();
+				return;
 		}
 
-		if (isValidActivity) {
-			source.sendMessageEmbeds(BuildEmbed
-					.successEmbed("Successfully updated to " + activity + " " + description)
-					.build()).queue();
-		} else {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown activity").build()).queue();
-		}
+		source.sendMessageEmbeds(BuildEmbed
+				.successEmbed("Successfully updated to " + activity + " " + description).build())
+				.queue();
 	}
 }

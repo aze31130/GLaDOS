@@ -108,27 +108,5 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		/*
-		 * 
-		 * 
-		 * //TextChannel tc = server.getTextChannelById("676731153444765709"); for (TextChannel tc :
-		 * server.getTextChannels()) { jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).
-		 * sendMessage("Downloading channel " + tc.getAsMention()).queue(); try { JSONArray
-		 * messageArray = new JSONArray();
-		 * tc.getIterableHistory().cache(false).forEachRemaining((me) -> { JSONObject json = new
-		 * JSONObject(); json.clear(); json.put("author", me.getAuthor().getIdLong());
-		 * json.put("message", me.getContentRaw()); json.put("date", me.getTimeCreated());
-		 * messageArray.put(json);
-		 * 
-		 * return true; });
-		 * 
-		 * FileWriter jsonFile = new FileWriter("./data/channels/" + tc.getName() + ".json");
-		 * jsonFile.write(messageArray.toString()); jsonFile.flush(); jsonFile.close(); }
-		 * catch(Exception e) {
-		 * jda.getTextChannelById(Channels.BOT_SNAPSHOT.id).sendMessage(e.toString()). queue(); } }
-		 * 
-		 * (Inserting April Joke...) Congratulations, the test is now over. Happy April Fool's Day!
-		 */
 	}
 }
