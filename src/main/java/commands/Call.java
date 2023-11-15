@@ -2,6 +2,7 @@ package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
@@ -10,9 +11,11 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.json.JSONObject;
 import accounts.Permissions;
 
@@ -38,20 +41,29 @@ public class Call extends Command {
 	 */
 	public static void midnightRank(MessageChannel generalChannel) {
 		EmbedBuilder midnightEmbed = BuildEmbed.midnightRankEmbed();
-		List<Message> latestMessages = generalChannel.getHistory().retrievePast(50).complete();
+		Map<String, Message> filteredLatestMessages = new HashMap<>();
 
-		Collections.sort(latestMessages, TimeUtils::compareTo);
+		// Download latest messages and removes duplicates but keep the lowest score of each member
+		for (Message m : generalChannel.getHistory().retrievePast(50).complete()) {
+			long delta = TimeUtils.computeDelta(m.getTimeCreated());
+			String authorId = m.getAuthor().getId();
+
+			// Adds to the hashmap only if not contains or if score is better
+			if (!filteredLatestMessages.containsKey(authorId) || delta < TimeUtils
+					.computeDelta(filteredLatestMessages.get(authorId).getTimeCreated()))
+				filteredLatestMessages.put(authorId, m);
+		}
 
 		int rank = 1;
-		for (Message m : latestMessages) {
+		for (Message m : filteredLatestMessages.values()) {
 			if (rank == 1) {
 				midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
 				midnightEmbed.setDescription("Winner is " + m.getAuthor().getAsMention());
 			}
-
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
 
-			if ((delta > -300000) && (delta < 300000))
+			// Only keeps the ones in the defined range
+			if ((delta > -15000) && (delta < 80000))
 				midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(),
 						"**" + delta + "** ms", true);
 			rank++;
@@ -85,6 +97,9 @@ public class Call extends Command {
 							.queue();
 				}
 				break;
+			case "Ranking":
+				midnightRank(destination);
+				return;
 			default:
 				embed = BuildEmbed.errorEmbed("This trigger has not been registered !");
 				break;

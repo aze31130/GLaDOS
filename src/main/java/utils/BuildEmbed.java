@@ -97,7 +97,7 @@ public class BuildEmbed {
 	public static EmbedBuilder midnightRankEmbed() {
 		EmbedBuilder rankingEmbed = new EmbedBuilder();
 		rankingEmbed.setColor(Color.MAGENTA);
-		rankingEmbed.setTitle("Midnight Race");
+		rankingEmbed.setTitle(":clock12: Midnight Race");
 		rankingEmbed.setTimestamp(Instant.now());
 		return rankingEmbed;
 	}
