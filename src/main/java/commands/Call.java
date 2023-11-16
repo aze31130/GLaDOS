@@ -10,6 +10,9 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,31 +41,29 @@ public class Call extends Command {
 	 */
 	public static void midnightRank(MessageChannel generalChannel) {
 		EmbedBuilder midnightEmbed = BuildEmbed.midnightRankEmbed();
-		Map<String, Message> filteredLatestMessages = new HashMap<>();
+		List<Message> sortedMessages = new ArrayList<>();
 
 		// Download latest messages and removes duplicates but keep the lowest score of each member
 		for (Message m : generalChannel.getHistory().retrievePast(50).complete()) {
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
-			String authorId = m.getAuthor().getId();
 
-			// Adds to the hashmap only if not contains or if score is better
-			if (!filteredLatestMessages.containsKey(authorId) || delta < TimeUtils
-					.computeDelta(filteredLatestMessages.get(authorId).getTimeCreated()))
-				filteredLatestMessages.put(authorId, m);
+			// Adds to the list only if message is in time range
+			if ((delta >= -15000) && (delta <= 60000))
+				sortedMessages.add(m);
 		}
 
+		Collections.sort(sortedMessages, TimeUtils::compareTo);
+
 		int rank = 1;
-		for (Message m : filteredLatestMessages.values()) {
+		for (Message m : sortedMessages) {
 			if (rank == 1) {
 				midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
 				midnightEmbed.setDescription("Winner is " + m.getAuthor().getAsMention());
 			}
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
 
-			// Only keeps the ones in the defined range
-			if ((delta > -15000) && (delta < 80000))
-				midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(),
-						"**" + delta + "** ms", true);
+			midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(),
+					"**" + delta + "** ms", true);
 			rank++;
 		}
 

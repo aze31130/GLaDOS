@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import net.dv8tion.jda.api.entities.Message;
 
 public class TimeUtils {
 	/*
@@ -17,6 +18,15 @@ public class TimeUtils {
 
 		return Duration.between(midnight.toInstant(), timestamp.plusHours(1).toInstant())
 				.toMillis();
+	}
+
+	public static int compareTo(Message a, Message b) {
+		Long deltaA = computeDelta(a.getTimeCreated());
+		Long deltaB = computeDelta(a.getTimeCreated());
+
+		if (deltaA < 0 && deltaB < 0)
+			return deltaB.compareTo(deltaA);
+		return deltaA < deltaB ? -1 : 1;
 	}
 
 	/*
