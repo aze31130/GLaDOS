@@ -26,7 +26,7 @@ public class TimeUtils {
 
 		if (deltaA < 0 && deltaB < 0)
 			return deltaB.compareTo(deltaA);
-		return deltaA < deltaB ? -1 : 1;
+		return deltaA < deltaB ? 1 : -1;
 	}
 
 	/*
