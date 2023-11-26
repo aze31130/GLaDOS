@@ -61,7 +61,6 @@ public class MessagesUtils {
 	}
 
 	public static void jsonChannel(MessageChannel channel) throws IOException {
-		Counter test = new Counter();
 		JSONArray messageArray = new JSONArray();
 
 		channel.getIterableHistory().cache(false).forEachRemaining((me) -> {
@@ -71,7 +70,6 @@ public class MessagesUtils {
 				json.put("message", me.getContentRaw());
 				messageArray.put(json);
 			}
-			test.add();
 			return true;
 		});
 
@@ -82,7 +80,6 @@ public class MessagesUtils {
 	}
 
 	public static void downloadChannel(MessageChannel channel, Member member) {
-		Counter test = new Counter();
 		channel.sendMessage("Downloading channel: " + channel.getAsMention()).queue();
 		// channel.getIterableHistory().cache(false).forEachAsync((me) -> {
 		channel.getIterableHistory().cache(false).forEachRemaining((me) -> {
@@ -96,10 +93,9 @@ public class MessagesUtils {
 			} catch (IOException e) {
 				channel.sendMessage(e.toString());
 			}
-			test.add();
 			return true;
 		});
-		channel.sendMessage("Successfully downloaded " + test.value() + " messages in ./"
+		channel.sendMessage("Successfully downloaded " + 0 + " messages in ./"
 				+ channel.getName().toLowerCase() + ".txt file").queue();
 	}
 

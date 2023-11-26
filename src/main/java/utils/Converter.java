@@ -1,40 +1,6 @@
 package utils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
 public class Converter {
-
-	public static long AmountOfLockdownDays() {
-		// First day: 30/10/2020
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(2020, 9, 29);
-		Date date2 = calendar.getTime();
-		Date date1 = new Date();
-		return ((date1.getTime() - date2.getTime()) / (86400000));
-	}
-
-	public static long AmountOfMinutesBeforeChristmas() {
-		Calendar calendar = Calendar.getInstance();
-		Calendar calendar2 = Calendar.getInstance();
-		// First day: 25/12/2020
-
-		calendar.set(2020, 11, 24, 0, 0, 0);
-		Date date2 = calendar.getTime();
-		calendar2.set(Calendar.HOUR_OF_DAY, Calendar.HOUR_OF_DAY);
-		calendar2.set(Calendar.MINUTE, 0);
-		calendar2.set(Calendar.SECOND, 0);
-
-
-		// Date date1 = new Date();
-		Date date1 = calendar2.getTime();
-		long duration = date2.getTime() - date1.getTime();
-		// return ((date2.getTime() - date1.getTime()) / (60000));
-		return TimeUnit.MILLISECONDS.toMinutes(duration);
-	}
-
 	public static String TimeConverter(long seconds) {
 
 		String upTime = "";

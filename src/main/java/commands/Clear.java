@@ -27,6 +27,5 @@ public class Clear extends Command {
 		} catch (Exception exception) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}
-
 	}
 }

@@ -31,6 +31,12 @@ public class Factorielle extends Command {
 		}
 
 		/*
+		 * Arbitrary limit to limit cpu usage
+		 */
+		if (n > 1000000)
+			n = 1000000;
+
+		/*
 		 * Define a temporary limit to make sure midnight ranking is not affected
 		 */
 		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
