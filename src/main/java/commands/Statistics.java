@@ -1,17 +1,6 @@
 package commands;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import utils.StatsUtils;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -21,11 +10,12 @@ public class Statistics extends Command {
 	public Statistics() {
 		super("statistics", "Generates statistics of the given channel.",
 				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
-						"The channel you want to inspect")));
+						"The channel you want to inspect").setRequired(true)));
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
+
 		/*
 		 * TOP MESSAGER, TOP EMOJIER, TOP LINKER List<EmoteCounter> ec = new
 		 * 

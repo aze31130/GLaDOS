@@ -27,8 +27,10 @@ public class Question extends Command {
 	public Question() {
 		super("question", "Challenges your general knowledge", Permissions.NONE,
 				Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
-						"Can be [easy, normal, hard]. Default is random").addChoice("type",
-								"listening")));
+						"Can be [easy, normal, hard]. Default is random")
+								.addChoice("easy", "easy")
+								.addChoice("normal", "normal")
+								.addChoice("hard", "hard")));
 	}
 
 	@Override

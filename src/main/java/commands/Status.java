@@ -15,9 +15,14 @@ public class Status extends Command {
 		super("activity", "Updates GLaDOS's activity", Permissions.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
-								"Can be [listening, playing, watching, streaming]"),
-						new OptionData(OptionType.STRING, "description", "The displayed activity")
-								.setAutoComplete(true)));
+								"Can be [listening, playing, watching, streaming]")
+										.setRequired(true)
+										.addChoice("listening", "listening")
+										.addChoice("playing", "playing")
+										.addChoice("watching", "watching")
+										.addChoice("streaming", "streaming"),
+						new OptionData(OptionType.STRING, "description",
+								"The displayed activity").setRequired(true)));
 	}
 
 	@Override

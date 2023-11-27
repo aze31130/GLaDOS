@@ -43,8 +43,7 @@ public class Main {
 
 			ListenerAdapter events[] = {new ButtonClick(), new MemberJoin(), new MemberRemove(),
 					new MessageReactionAdd(), new MessageReactionRemove(), new MessageReceived(),
-					new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute(),
-					new AutoComplete()};
+					new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute()};
 
 			for (ListenerAdapter event : events)
 				jda.addEventListener(event);

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,11 +14,10 @@ import accounts.Account;
 import accounts.Permissions;
 import accounts.TrustFactor;
 import commands.*;
+import commands.Shutdown;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.FileUtils;
 
@@ -94,33 +92,15 @@ public class GLaDOS {
 		/*
 		 * Initialize command
 		 */
-		this.commands.add(new Backup());
-		this.commands.add(new Call());
-		this.commands.add(new CheGuevara());
-		this.commands.add(new Clear());
-		this.commands.add(new Connect());
-		this.commands.add(new Disconnect());
-		this.commands.add(new Factorielle());
-		this.commands.add(new Fibonacci());
-		this.commands.add(new Help());
-		this.commands.add(new Idea());
-		this.commands.add(new Move());
-		this.commands.add(new Ping());
-		this.commands.add(new Profile());
-		this.commands.add(new Question());
-		this.commands.add(new RandomCat());
-		this.commands.add(new RandomDog());
-		this.commands.add(new Report());
-		this.commands.add(new Rng());
-		this.commands.add(new Role());
-		this.commands.add(new Shutdown());
-		this.commands.add(new Spam());
-		this.commands.add(new State());
-		this.commands.add(new Statistics());
-		this.commands.add(new Status());
-		this.commands.add(new Test());
-		this.commands.add(new Translate());
-		this.commands.add(new Version());
+		Command commands[] = {new Backup(), new Call(), new CheGuevara(), new Clear(),
+				new Connect(), new Disconnect(), new Factorielle(), new Fibonacci(), new Help(),
+				new Idea(), new Move(), new Ping(), new Play(), new Profile(), new Question(),
+				new RandomCat(), new RandomDog(), new Report(), new Rng(), new Role(),
+				new Shutdown(), new Spam(), new State(), new Statistics(), new Status(), new Test(),
+				new Translate(), new Version()};
+
+		for (Command c : commands)
+			this.commands.add(c);
 
 		try {
 			// Load the global variables
