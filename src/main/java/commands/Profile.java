@@ -2,20 +2,18 @@ package commands;
 
 import java.awt.Color;
 import java.time.Instant;
-import java.util.List;
+import java.util.Arrays;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Account;
 import accounts.Permissions;
 import glados.GLaDOS;
 
 public class Profile extends Command {
-	public Profile(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Profile() {
+		super("profile", "Show a user profile", Permissions.NONE, Arrays.asList());
 	}
 
 	@Override

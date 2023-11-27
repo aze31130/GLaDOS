@@ -3,16 +3,15 @@ package commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.time.Instant;
-import java.util.List;
+import java.util.Arrays;
 
 import accounts.Permissions;
 
 public class Ping extends Command {
-	public Ping(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Ping() {
+		super("ping", "Display ping between Discord gateway and glados",
+				Permissions.NONE, Arrays.asList());
 	}
 
 	@Override

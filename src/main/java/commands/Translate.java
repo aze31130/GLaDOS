@@ -11,22 +11,24 @@ import java.time.temporal.ChronoUnit;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import glados.GLaDOS;
 import utils.BuildEmbed;
-
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import accounts.Permissions;
 
 public class Translate extends Command {
-	public Translate(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Translate() {
+		super("translate", "Translates the latests messages in a text channel",
+				Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
+						"Amount of message you want to translate.")));
 	}
 
 	@Override

@@ -4,18 +4,20 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Arrays;
 import accounts.Permissions;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.utils.FileUpload;
 import utils.BuildEmbed;
 
 public class Factorielle extends Command {
-	public Factorielle(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Factorielle() {
+		super("factorielle", "Computes given factorial number",
+				Permissions.NONE, Arrays.asList(
+						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")));
 	}
 
 	@Override

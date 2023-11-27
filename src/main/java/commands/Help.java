@@ -2,19 +2,18 @@ package commands;
 
 import java.awt.Color;
 import java.time.Instant;
-import java.util.List;
+import java.util.Arrays;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 import glados.GLaDOS;
 
 public class Help extends Command {
-	public Help(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Help() {
+		super("help", "Shows an help page listing each commands",
+				Permissions.NONE, Arrays.asList());
 	}
 
 	@Override

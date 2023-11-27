@@ -4,5 +4,7 @@ import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInterac
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class AutoComplete extends ListenerAdapter {
-	public void onCommandAutoCompleteInteraction(CommandAutoCompleteInteractionEvent event) {}
+	public void onCommandAutoCompleteInteraction(CommandAutoCompleteInteractionEvent event) {
+		event.replyChoice("Test", 42).queue();
+	}
 }

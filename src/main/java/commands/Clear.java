@@ -1,17 +1,21 @@
 package commands;
 
+import java.util.Arrays;
 import java.util.List;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Clear extends Command {
-	public Clear(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Clear() {
+		super("clear",
+				"Clears the latests messages in a channel. Admin privileges required",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
+						"Amount of message you want to delete")));
 	}
 
 	@Override

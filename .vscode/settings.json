@@ -7,5 +7,6 @@
         "editor.insertSpaces": false,
 		"editor.detectIndentation": false
     },
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.format.settings.url": ".vscode/style.xml"
 }

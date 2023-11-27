@@ -3,6 +3,7 @@ package commands;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -13,13 +14,12 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 
 public class Backup extends Command {
-	public Backup(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Backup() {
+		super("backup", "Download a backup of the entire server. Admin privileges required",
+				Permissions.MODERATOR, Arrays.asList());
 	}
 
 	private void downloadChannel(MessageChannel tc) throws IOException {

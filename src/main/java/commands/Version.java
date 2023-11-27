@@ -2,20 +2,19 @@ package commands;
 
 import java.lang.management.ManagementFactory;
 import java.time.Instant;
-import java.util.List;
+import java.util.Arrays;
 
 import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
 import utils.Converter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import accounts.Permissions;
 
 public class Version extends Command {
-	public Version(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Version() {
+		super("version", "displays version alongside others indicators",
+				Permissions.NONE, Arrays.asList());
 	}
 
 	@Override

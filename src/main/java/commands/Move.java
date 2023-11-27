@@ -5,16 +5,17 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-
-import java.util.List;
+import java.util.Arrays;
 
 import accounts.Permissions;
 
 public class Move extends Command {
-	public Move(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Move() {
+		super("move", "Move every voice connected users to another channel",
+				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
+						"destination", "Channel you want to move in")));
 	}
 
 	@Override

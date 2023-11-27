@@ -94,123 +94,33 @@ public class GLaDOS {
 		/*
 		 * Initialize command
 		 */
-		this.commands.add(new Call("call", "Triggers an internal event. Admin privileges required",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.STRING, "trigger",
-						"Call name you want to trigger").setRequired(true))));
-
-		this.commands.add(new Clear("clear",
-				"Clears the latests messages in a channel. Admin privileges required",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
-						"Amount of message you want to delete"))));
-
-		this.commands
-				.add(new Translate("translate", "Translates the latests messages in a text channel",
-						Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
-								"Amount of message you want to translate."))));
-
-		this.commands.add(new Statistics("stats", "Generates statistics regarding a text channel",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
-						"Channel you want to compute stats of"))));
-
-		this.commands.add(new Ping("ping", "Display ping between Discord gateway and glados",
-				Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(new Version("version", "displays version alongside others indicators",
-				Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(new CheGuevara("che-guevara", "Generate a random fact about Che-Guevara",
-				Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(new Move("move", "Move every voice connected users to another channel",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
-						"destination", "Channel you want to move in"))));
-
-		this.commands.add(new Spam("spam", "Spam-mention a given user. Admin privileges required",
-				Permissions.MODERATOR,
-				Arrays.asList(
-						new OptionData(OptionType.MENTIONABLE, "target",
-								"Person you want to annoy"),
-						new OptionData(OptionType.INTEGER, "amount",
-								"The amount of mention you want to generate"))));
-
-		this.commands.add(new Shutdown("shutdown", "Gracely Shutdown GLaDOS", Permissions.MODERATOR,
-				Arrays.asList()));
-
-		this.commands.add(new Rng("rng",
-				"Generate a random number using 'perfect and totally not rigged' random",
-				Permissions.NONE,
-				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "lower_bound",
-								"The lower bound is included"),
-						new OptionData(OptionType.INTEGER, "upper_bound",
-								"The upper bound is included"))));
-
-		this.commands.add(new RandomCat("random-cat", "Displays a cat picture", Permissions.NONE,
-				Arrays.asList()));
-
-		this.commands.add(new RandomDog("random-dog", "Display a dog picture", Permissions.NONE,
-				Arrays.asList()));
-
-		this.commands.add(new Fibonacci("fibonacci", "Computes given fibonacci number",
-				Permissions.NONE, Arrays.asList(
-						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute"))));
-
-		this.commands.add(new Factorielle("factorielle", "Computes given factorial number",
-				Permissions.NONE, Arrays.asList(
-						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute"))));
-
-		this.commands.add(new Idea("what-should-i-do", "Use it when you do not know what to do",
-				Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(new Help("help", "Shows an help page listing each commands",
-				Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(
-				new Profile("profile", "Show a user profile", Permissions.NONE, Arrays.asList()));
-
-		this.commands.add(new Test("test", "Test command, nothing to see here", Permissions.OWNER,
-				Arrays.asList()));
-
-		this.commands.add(new Role("role", "Generate buttons for members to clic on.",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
-						"Generates the join/leave button for the given role."))));
-
-		this.commands.add(new Connect("connect", "Summons GLaDOS in a vocal channel",
-				Permissions.MODERATOR, Arrays.asList()));
-
-		this.commands.add(new Disconnect("disconnect", "Disconnects GLaDOS from a vocal channel",
-				Permissions.MODERATOR, Arrays.asList()));
-
-		this.commands.add(new Backup("backup",
-				"Download a backup of the entire server. Admin privileges required",
-				Permissions.MODERATOR, Arrays.asList()));
-
-		this.commands.add(new Statistics("statistics", "Generates statistics of the given channel.",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
-						"The channel you want to inspect"))));
-
-		this.commands.add(new Status("activity", "Updates GLaDOS's activity", Permissions.NONE,
-				Arrays.asList(
-						new OptionData(OptionType.STRING, "type",
-								"Can be [listening, playing, watching, streaming]"),
-						new OptionData(OptionType.STRING, "description", "The displayed activity")
-								.setAutoComplete(true))));
-
-		this.commands.add(new State("state",
-				"Updates GLaDOS's state (online, idle, do not disturb)", Permissions.NONE,
-				Arrays.asList(
-						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]")
-								.setAutoComplete(true))));
-
-		this.commands
-				.add(new Question("question", "Challenges your general knowledge", Permissions.NONE,
-						Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
-								"Can be [easy, normal, hard]. Default is random")
-										.setAutoComplete(true))));
-
-		this.commands.add(
-				new Report("report", "Reports a bug, a feature request or any subject you want",
-						Permissions.NONE, Arrays.asList()));
+		this.commands.add(new Backup());
+		this.commands.add(new Call());
+		this.commands.add(new CheGuevara());
+		this.commands.add(new Clear());
+		this.commands.add(new Connect());
+		this.commands.add(new Disconnect());
+		this.commands.add(new Factorielle());
+		this.commands.add(new Fibonacci());
+		this.commands.add(new Help());
+		this.commands.add(new Idea());
+		this.commands.add(new Move());
+		this.commands.add(new Ping());
+		this.commands.add(new Profile());
+		this.commands.add(new Question());
+		this.commands.add(new RandomCat());
+		this.commands.add(new RandomDog());
+		this.commands.add(new Report());
+		this.commands.add(new Rng());
+		this.commands.add(new Role());
+		this.commands.add(new Shutdown());
+		this.commands.add(new Spam());
+		this.commands.add(new State());
+		this.commands.add(new Statistics());
+		this.commands.add(new Status());
+		this.commands.add(new Test());
+		this.commands.add(new Translate());
+		this.commands.add(new Version());
 
 		try {
 			// Load the global variables

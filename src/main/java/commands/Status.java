@@ -4,16 +4,20 @@ import utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-
-import java.util.List;
+import java.util.Arrays;
 
 import accounts.Permissions;
 
 public class Status extends Command {
-	public Status(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Status() {
+		super("activity", "Updates GLaDOS's activity", Permissions.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "type",
+								"Can be [listening, playing, watching, streaming]"),
+						new OptionData(OptionType.STRING, "description", "The displayed activity")
+								.setAutoComplete(true)));
 	}
 
 	@Override

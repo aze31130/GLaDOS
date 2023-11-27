@@ -1,18 +1,16 @@
 package commands;
 
 import utils.Logger;
-
-import java.util.List;
+import java.util.Arrays;
 
 import accounts.Permissions;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Shutdown extends Command {
-	public Shutdown(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Shutdown() {
+		super("shutdown", "Gracely Shutdown GLaDOS", Permissions.MODERATOR,
+				Arrays.asList());
 	}
 
 	@Override

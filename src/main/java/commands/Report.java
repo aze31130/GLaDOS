@@ -1,18 +1,17 @@
 package commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
-import java.util.List;
+import java.util.Arrays;
 import accounts.Permissions;
 
 public class Report extends Command {
-	public Report(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Report() {
+		super("report", "Reports a bug, a feature request or any subject you want",
+				Permissions.NONE, Arrays.asList());
 	}
 
 	@Override

@@ -1,5 +1,11 @@
 package accounts;
 
 public enum TrustFactor {
-	TRUSTED, HIGH_TRUST, NEUTRAL, LOW_TRUST, UNTRUSTED
+	TRUSTED(4), HIGH_TRUST(3), NEUTRAL(2), LOW_TRUST(1), UNTRUSTED(0);
+
+	public final int level;
+
+	private TrustFactor(int level) {
+		this.level = level;
+	}
 }

@@ -1,18 +1,23 @@
 package commands;
 
 import utils.BuildEmbed;
-
-import java.util.List;
+import java.util.Arrays;
 
 import accounts.Permissions;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Spam extends Command {
-	public Spam(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Spam() {
+		super("spam", "Spam-mention a given user. Admin privileges required",
+				Permissions.MODERATOR,
+				Arrays.asList(
+						new OptionData(OptionType.MENTIONABLE, "target",
+								"Person you want to annoy"),
+						new OptionData(OptionType.INTEGER, "amount",
+								"The amount of mention you want to generate")));
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import accounts.Permissions;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ItemComponent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -23,9 +24,11 @@ import utils.JsonDownloader;
  * user that requested the question is allowed to anwser.
  */
 public class Question extends Command {
-	public Question(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Question() {
+		super("question", "Challenges your general knowledge", Permissions.NONE,
+				Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
+						"Can be [easy, normal, hard]. Default is random").addChoice("type",
+								"listening")));
 	}
 
 	@Override

@@ -6,11 +6,13 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONObject;
@@ -19,9 +21,19 @@ import accounts.Permissions;
 import glados.GLaDOS;
 
 public class Call extends Command {
-	public Call(String name, String description, Permissions permissionLevel,
-			List<OptionData> arguments) {
-		super(name, description, permissionLevel, arguments);
+	public Call() {
+		super(
+				"call",
+				"Triggers an internal event. Admin privileges required",
+				Permissions.MODERATOR,
+				Arrays.asList(
+						new OptionData(
+								OptionType.STRING,
+								"trigger",
+								"Call name you want to trigger").setRequired(true)
+										.addChoice("Gamer", "Gamer")
+										.addChoice("Midnight", "Midnight")
+										.addChoice("Ranking", "Ranking")));
 	}
 
 	private static String getMedalEmoji(int rank) {
