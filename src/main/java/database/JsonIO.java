@@ -128,26 +128,7 @@ public class JsonIO {
 	// return accounts;
 	// }
 
-	// Method to load an account object knowing its path
-	// public static Account loadAccount(String path) {
-	// JSONObject json = loadJsonObject(path);
-	// if(json == null) {
-	// return null;
-	// }
-	// return new Account(
-	// json.getString("id"),
-	// json.getString("name"),
-	// json.getString("nickname"),
-	// json.getString("tag"),
-	// json.getString("created"),
-	// json.getString("joined"),
-	// json.getInt("level"),
-	// json.getLong("experience"),
-	// json.getLong("totalExperience"),
-	// Ranks.valueOf(json.getString("rank")),
-	// Permissions.valueOf(json.getString("permission")),
-	// json.getInt("fame"));
-	// }
+
 
 	// Method to backup the entire database
 	public static void backup() {

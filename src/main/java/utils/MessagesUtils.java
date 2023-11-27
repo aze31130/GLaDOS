@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Consumer;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import database.JsonIO;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -28,18 +26,6 @@ public class MessagesUtils {
 			messages.add(message);
 			return messages.size() < 1000;
 		}).thenRun(() -> callback.accept(messages));
-	}
-
-	public static void randomMessage(MessageChannel channel, Member member) {
-		try {
-			Random rng = new Random();
-			JSONArray array = JsonIO.loadJsonArray("general");
-			JSONObject json = (JSONObject) array.get(rng.nextInt(array.length() - 1));
-			channel.sendMessage(json.get("message").toString()).queue();
-		} catch (Exception e) {
-			e.printStackTrace();
-			channel.sendMessage(e.toString()).queue();
-		}
 	}
 
 	public static void downloadServer(JDA jda) {
@@ -87,7 +73,7 @@ public class MessagesUtils {
 				FileWriter fw = new FileWriter(channel.getName() + ".txt", true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter out = new PrintWriter(bw);
-				out.print("[" + me.getTimeCreated() + "] [" + me.getAuthor().getAsTag() + "] "
+				out.print("[" + me.getTimeCreated() + "] [" + me.getAuthor().getAsMention() + "] "
 						+ me.getContentRaw() + "\n");
 				out.close();
 			} catch (IOException e) {

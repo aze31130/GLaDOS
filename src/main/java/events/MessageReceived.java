@@ -40,7 +40,7 @@ public class MessageReceived extends ListenerAdapter {
 		// }
 
 		if (event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
-			if (new Random().nextInt(100) >= 15) {
+			if (new Random().nextInt(100) >= 30) {
 				event.getChannel().sendMessage(Mention.randomAnswer()).queue();
 			}
 		}

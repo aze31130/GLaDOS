@@ -11,10 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.Account;
-import accounts.Permissions;
-import accounts.TrustFactor;
 import commands.*;
-import commands.Shutdown;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -139,19 +136,11 @@ public class GLaDOS {
 			this.translationCooldown = LocalDateTime.now();
 
 			// this.accounts = JsonIO.loadAccounts();
-
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}
-
-	// public void backup() {
-	// for(Account account : this.accounts) {
-	// account.save();
-	// }
-	// }
 
 	/*
 	 * This function registers discord slash commands according to the initialized command list
@@ -171,19 +160,6 @@ public class GLaDOS {
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();
-	}
-
-	public Account getAccountById(String id) {
-		// Check if account is registered
-		Account result = this.accounts.stream().filter(a -> a.id == id).findFirst().orElse(null);
-
-		// Create the account if not exist
-		if (result == null) {
-			result = new Account(id, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
-			this.accounts.add(result);
-		}
-
-		return result;
 	}
 
 	/*

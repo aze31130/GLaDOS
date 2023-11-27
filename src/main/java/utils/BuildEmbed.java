@@ -104,7 +104,7 @@ public class BuildEmbed {
 
 	public static EmbedBuilder joinLeaveEmbed(String mention, Boolean joining) {
 		Random rng = new Random();
-		int randomNumber = rng.nextInt(5);
+		int randomNumber = 0;
 		String message;
 		if (joining) {
 			String[] messages = {"[member] is here ! Now it's time to raise our hands !",
@@ -125,6 +125,7 @@ public class BuildEmbed {
 					"Breaking news, folks! Say hello to our latest epic member [member]",
 					"The arena awaits the grand entrance of [member]!",
 					"[member] arrived ! It's gaming time!"};
+			randomNumber = rng.nextInt(messages.length);
 			message = messages[randomNumber];
 		} else {
 			String[] messages = {"[member] may be gone, but he still lives on in our hearts.",
@@ -156,10 +157,11 @@ public class BuildEmbed {
 					"The departure of [member] leaves a void, but it also opens up space for new friendships and experiences. Wishing you happiness on your journey.",
 					"Though [member] may be leaving our server, the ripples of their presence will forever touch our hearts. Farewell, and keep shining.",
 					"Life is a journey, and [member] is on to the next chapter. May it be a tale of triumph, adventure, and fulfillment. Goodbye and good luck!"};
+			randomNumber = rng.nextInt(messages.length);
 			message = messages[randomNumber];
 		}
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(0x66d8ff);
+		embed.setColor(Color.CYAN);
 		embed.setDescription(message.replace("[member]", mention));
 		return embed;
 	}
