@@ -3,7 +3,6 @@ package utils;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import java.util.List;
-import accounts.Constants;
 import accounts.Permissions;
 import glados.GLaDOS;
 
@@ -15,7 +14,7 @@ public class PermissionsUtils {
 		if (requiredPermission == Permissions.NONE)
 			return true;
 
-		if (member.getId().equals(Constants.OwnerId))
+		if (member.getId().equals(GLaDOS.getInstance().ownerId))
 			return true;
 
 		GLaDOS g = GLaDOS.getInstance();

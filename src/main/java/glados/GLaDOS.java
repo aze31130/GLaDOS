@@ -21,40 +21,26 @@ import utils.FileUtils;
 public class GLaDOS {
 	private static volatile GLaDOS instance = null;
 	public String version;
-	public boolean leveling;
-	public boolean logMessages;
-	public boolean checkPrivateMessages;
-	public boolean metricLogging;
-	public String guildId;
-	public String ownerId;
+	public String token;
+
+	// Internal settings
+	public boolean leveling, logMessages, checkPrivateMessages, metricLogging;
+	public int maxLevel;
+	public String guildId, ownerId;
 
 	// Role attributes
-	public String roleAdministrator;
-	public String roleModerator;
-	public String roleGamer;
-	public String roleMember;
-	public String roleArtistic;
-	public String roleBroadcastMessenger;
-	public String roleInternational;
-	public String roleDeveloper;
-	public String roleNsfw;
+	public String roleAdministrator, roleModerator, roleGamer, roleMember,
+			roleArtistic, roleBroadcastMessenger, roleInternational, roleDeveloper, roleNsfw;
 
 	// Channel attributes
-	public String channelGeneral;
-	public String channelGamer;
-	public String channelBotSnapshot;
-	public String channelNsfw;
-	public String channelRole;
+	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole;
 
-	public String token;
-	public int requestsAmount;
-	public int activityCounter;
-	// public Ranking ranking;
+	public int requestsAmount, activityCounter;
+
 	public JSONArray bannedWords;
-	public int maxLevel;
-	public LocalDateTime translationCooldown;
 
 	// Temp variable
+	public LocalDateTime translationCooldown;
 	public String goodAnswer = "";
 	public boolean FreeGameAnnonce = false;
 	public boolean DailyQuote = false;
@@ -62,9 +48,7 @@ public class GLaDOS {
 	public List<Account> accounts = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
 
-	private GLaDOS() {
-		super();
-	}
+	private GLaDOS() {}
 
 	public final static GLaDOS getInstance() {
 		if (GLaDOS.instance == null) {
@@ -102,34 +86,35 @@ public class GLaDOS {
 		try {
 			// Load the global variables
 			JSONObject json = JsonIO.loadJsonObject("./config.json");
-			getVersion();
-			this.leveling = (boolean) json.get("leveling");
-			this.metricLogging = (boolean) json.get("metricLogging");
-			this.logMessages = (boolean) json.get("logMessages");
-			this.checkPrivateMessages = (boolean) json.get("checkPrivateMessages");
+			this.getVersion();
 
-			this.guildId = json.get("guildId").toString();
-			this.ownerId = json.get("ownerId").toString();
+			this.leveling = json.getBoolean("leveling");
+			this.metricLogging = json.getBoolean("metricLogging");
+			this.logMessages = json.getBoolean("logMessages");
+			this.checkPrivateMessages = json.getBoolean("checkPrivateMessages");
+
+			this.guildId = json.getString("guildId");
+			this.ownerId = json.getString("ownerId");
 
 			// Read role and channels attributes
-			this.roleAdministrator = json.get("role_administrator").toString();
-			this.roleModerator = json.get("role_moderator").toString();
-			this.roleGamer = json.get("role_gamer").toString();
-			this.roleMember = json.get("role_member").toString();
-			this.roleArtistic = json.get("role_artistic").toString();
-			this.roleBroadcastMessenger = json.get("role_broadcastMessenger").toString();
-			this.roleInternational = json.get("role_international").toString();
-			this.roleDeveloper = json.get("role_developer").toString();
-			this.roleNsfw = json.get("role_nsfw").toString();
+			this.roleAdministrator = json.getString("role_administrator");
+			this.roleModerator = json.getString("role_moderator");
+			this.roleGamer = json.getString("role_gamer");
+			this.roleMember = json.getString("role_member");
+			this.roleArtistic = json.getString("role_artistic");
+			this.roleBroadcastMessenger = json.getString("role_broadcastMessenger");
+			this.roleInternational = json.getString("role_international");
+			this.roleDeveloper = json.getString("role_developer");
+			this.roleNsfw = json.getString("role_nsfw");
 
-			this.channelGeneral = json.get("channel_general").toString();
-			this.channelGamer = json.get("channel_gamer").toString();
-			this.channelBotSnapshot = json.get("channel_botSnapshot").toString();
-			this.channelNsfw = json.get("channel_nsfw").toString();
-			this.channelRole = json.get("channel_role").toString();
+			this.channelGeneral = json.getString("channel_general");
+			this.channelGamer = json.getString("channel_gamer");
+			this.channelBotSnapshot = json.getString("channel_botSnapshot");
+			this.channelNsfw = json.getString("channel_nsfw");
+			this.channelRole = json.getString("channel_role");
 
 			this.bannedWords = (JSONArray) json.get("bannedWords");
-			this.token = json.get("token").toString();
+			this.token = json.getString("token");
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
 			this.activityCounter = 0;
