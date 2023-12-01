@@ -35,8 +35,8 @@ public class Factorielle extends Command {
 		/*
 		 * Arbitrary limit to limit cpu usage
 		 */
-		if (n > 1000000)
-			n = 1000000;
+		if (n > 100000)
+			n = 100000;
 
 		/*
 		 * Define a temporary limit to make sure midnight ranking is not affected

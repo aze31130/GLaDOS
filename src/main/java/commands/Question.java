@@ -3,6 +3,7 @@ package commands;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONArray;
@@ -55,34 +56,44 @@ public class Question extends Command {
 
 		try {
 			JSONObject response = JsonDownloader
-					.getJson("https://opentdb.com/api.php?amount=1&difficulty=" + difficulty);
+					.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty="
+							+ difficulty);
 
 			JSONObject question = response.getJSONArray("results").getJSONObject(0);
 			List<ItemComponent> responses = new ArrayList<>();
-			responses.add(Button.primary("?" + question.getString("correct_answer"),
-					question.getString("correct_answer")));
+			responses.add(Button.primary(
+					"?" + new String(
+							Base64.getDecoder().decode(question.getString("correct_answer"))),
+					new String(Base64.getDecoder().decode(question.getString("correct_answer")))));
 			JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
 
 			for (int i = 0; i < wrongAnswers.length(); i++)
 				responses.add(
-						Button.primary("?" + wrongAnswers.getString(i), wrongAnswers.getString(i)));
+						Button.primary(
+								"?" + new String(
+										Base64.getDecoder().decode(wrongAnswers.getString(i))),
+								new String(Base64.getDecoder().decode(wrongAnswers.getString(i)))));
 
 			Collections.shuffle(responses);
 
 			// Post message with buttons with answers
 			event.getChannel()
 					.sendMessageEmbeds(BuildEmbed.questionEmbed(
-							question.getString("question").replace("&quot;", "'").replace("&#039;",
-									"'"),
-							question.getString("category"), question.getString("difficulty"))
+							new String(Base64.getDecoder().decode(question.getString("question"))),
+							new String(Base64.getDecoder().decode(question.getString("category"))),
+							new String(
+									Base64.getDecoder().decode(question.getString("difficulty"))))
 							.build())
 					.addActionRow(responses).queue();
 
 			// Save good answer in glados variable
-			g.goodAnswer = "?" + question.getString("correct_answer");
+			g.goodAnswer = "?"
+					+ new String(Base64.getDecoder().decode(question.getString("correct_answer")));
 
 		} catch (JSONException | IOException exception) {
-			exception.printStackTrace();
+			event.getChannel()
+					.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build())
+					.queue();
 		}
 	}
 }
