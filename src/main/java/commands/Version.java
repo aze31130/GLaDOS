@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
-import utils.Converter;
+import utils.TimeUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permissions;
@@ -39,7 +39,7 @@ public class Version extends Command {
 		info.addField("Temp file path: ", System.getProperty("java.io.tmpdir"), true);
 		info.addField("Event amount: ", Integer.toString(glados.requestsAmount), true);
 		info.addField("Uptime: ",
-				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
+				TimeUtils.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);
 		info.setTimestamp(Instant.now());
 		event.getChannel().sendMessageEmbeds(info.build()).queue();

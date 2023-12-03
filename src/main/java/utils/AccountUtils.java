@@ -32,7 +32,7 @@ public class AccountUtils {
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(id, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
+			// result = new Account(id, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
 			g.accounts.add(result);
 		}
 

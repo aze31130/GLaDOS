@@ -22,7 +22,13 @@ public class ButtonClick extends ListenerAdapter {
 		dictionary.put("International", glados.roleInternational);
 		dictionary.put("Developer", glados.roleDeveloper);
 		dictionary.put("NSFW", glados.roleNsfw);
-
+		dictionary.put(glados.roleBroadcastMessenger, glados.roleBroadcastMessenger);
+		dictionary.put(glados.roleGamer, glados.roleGamer);
+		dictionary.put(glados.roleMember, glados.roleMember);
+		dictionary.put(glados.roleArtistic, glados.roleArtistic);
+		dictionary.put(glados.roleInternational, glados.roleInternational);
+		dictionary.put(glados.roleDeveloper, glados.roleDeveloper);
+		dictionary.put(glados.roleNsfw, glados.roleNsfw);
 
 		// Check if action is add role
 		if (trigger.startsWith("+")) {
