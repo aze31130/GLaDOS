@@ -1,61 +1,35 @@
 package utils;
 
 public class Converter {
+	/*
+	 * This function returns GLaDOS's uptime in a readable way
+	 */
 	public static String TimeConverter(long seconds) {
+		StringBuilder uptime = new StringBuilder();
+		int[] timeTable = {0, 0, 0, 0, 0};
+		int[] durations = {604800, 86400, 3600, 60, 1};
+		String[] labels = {"week", "day", "hour", "minute", "second"};
 
-		String upTime = "";
-		int[] TimeTable = {0, 0, 0, 0, 0};
-
-		// Add Weeks
-		while (seconds >= 604800) {
-			TimeTable[0]++;
-			seconds -= 604800;
+		for (int i = 0; i < durations.length; i++) {
+			while (seconds >= durations[i]) {
+				timeTable[i]++;
+				seconds -= durations[i];
+			}
 		}
 
-		// Add Days
-		while (seconds >= 86400) {
-			TimeTable[1]++;
-			seconds -= 86400;
+		for (int i = 0; i < timeTable.length; i++) {
+			if (timeTable[i] != 0) {
+				uptime.append(timeTable[i]).append(" ").append(labels[i]);
+				if (timeTable[i] > 1)
+					uptime.append("s");
+				uptime.append(", ");
+			}
 		}
 
-		// Add Hours
-		while (seconds >= 3600) {
-			TimeTable[2]++;
-			seconds -= 3600;
-		}
+		// Remove the trailing comma and space if any
+		if (uptime.length() > 0)
+			uptime.setLength(uptime.length() - 2);
 
-		// Add Minutes
-		while (seconds >= 60) {
-			TimeTable[3]++;
-			seconds -= 60;
-		}
-
-		// Add Seconds
-		while (seconds >= 0) {
-			TimeTable[4]++;
-			seconds -= 1;
-		}
-
-		if (TimeTable[0] != 0) {
-			upTime += TimeTable[0] + " week(s), ";
-		}
-
-		if (TimeTable[1] != 0) {
-			upTime += TimeTable[1] + " day(s), ";
-		}
-
-		if (TimeTable[2] != 0) {
-			upTime += TimeTable[2] + " hour(s), ";
-		}
-
-		if (TimeTable[3] != 0) {
-			upTime += TimeTable[3] + " minute(s), ";
-		}
-
-		if (TimeTable[4] != 0) {
-			upTime += TimeTable[4] + " second(s)";
-		}
-
-		return upTime;
+		return uptime.toString();
 	}
 }

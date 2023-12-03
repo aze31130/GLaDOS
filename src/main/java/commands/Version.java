@@ -3,7 +3,6 @@ package commands;
 import java.lang.management.ManagementFactory;
 import java.time.Instant;
 import java.util.Arrays;
-
 import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
 import utils.Converter;
@@ -24,7 +23,7 @@ public class Version extends Command {
 		EmbedBuilder info = new EmbedBuilder();
 		info.setColor(0x593695);
 		info.setTitle("GLaDOS info");
-		info.setDescription("GLaDOS is running on version: " + glados.version);
+		info.setDescription("Running on version git " + glados.version);
 		info.addField("OS name: ", System.getProperty("os.name"), true);
 		info.addField("OS version: ", System.getProperty("os.version"), true);
 		info.addField("OS architecture: ", System.getProperty("os.arch"), true);
@@ -38,7 +37,7 @@ public class Version extends Command {
 		info.addField("JVM's total memory: ", "" + Runtime.getRuntime().totalMemory(), true);
 		info.addField("Available threads: ", "" + Runtime.getRuntime().availableProcessors(), true);
 		info.addField("Temp file path: ", System.getProperty("java.io.tmpdir"), true);
-		info.addField("Request amount: ", Integer.toString(glados.requestsAmount), true);
+		info.addField("Event amount: ", Integer.toString(glados.requestsAmount), true);
 		info.addField("Uptime: ",
 				Converter.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
 				true);

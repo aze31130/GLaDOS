@@ -35,7 +35,7 @@ public class GLaDOS {
 	// Channel attributes
 	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole;
 
-	public int requestsAmount, activityCounter;
+	public int requestsAmount;
 
 	public JSONArray bannedWords;
 
@@ -115,7 +115,6 @@ public class GLaDOS {
 			this.token = json.getString("token");
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
-			this.activityCounter = 0;
 			this.translationCooldown = LocalDateTime.now();
 
 			// this.accounts = JsonIO.loadAccounts();

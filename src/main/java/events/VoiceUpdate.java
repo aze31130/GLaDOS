@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class VoiceUpdate extends ListenerAdapter {
 	public void onGuildVoiceUpdate(GuildVoiceUpdateEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		glados.activityCounter++;
+		glados.requestsAmount++;
 		// TextChannel channel = event.getJDA().getTextChannelById("");
 		// channel.sendMessage("User " + event.getMember().getEffectiveName() + "
 		// connected in " + event.getChannelJoined().getName()).queue();

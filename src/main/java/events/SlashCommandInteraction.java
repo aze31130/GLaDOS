@@ -10,7 +10,7 @@ import utils.PermissionsUtils;
 public class SlashCommandInteraction extends ListenerAdapter {
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		glados.activityCounter++;
+		glados.requestsAmount++;
 
 		for (Command command : glados.commands) {
 			if (event.getName().equalsIgnoreCase(command.name)) {

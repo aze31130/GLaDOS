@@ -12,7 +12,7 @@ public class MessageReceived extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		GLaDOS glados = GLaDOS.getInstance();
-		glados.activityCounter++;
+		glados.requestsAmount++;
 
 		if (glados.logMessages) {
 			System.out.println(new Logger(true) + "[" + event.getChannel().asTextChannel().getName()

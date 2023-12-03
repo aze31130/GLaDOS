@@ -10,7 +10,7 @@ import utils.BuildEmbed;
 public class ButtonClick extends ListenerAdapter {
 	public void onButtonInteraction(ButtonInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		glados.activityCounter++;
+		glados.requestsAmount++;
 
 		String trigger = event.getComponentId();
 
@@ -27,8 +27,11 @@ public class ButtonClick extends ListenerAdapter {
 		// Check if action is add role
 		if (trigger.startsWith("+")) {
 			trigger = trigger.replace("+", "");
-			if (!dictionary.containsKey(trigger))
+			if (!dictionary.containsKey(trigger)) {
+				event.reply("You cannot get this role by doing that !").setEphemeral(true)
+						.setSuppressedNotifications(true).queue();
 				return;
+			}
 
 			trigger.replace("+", "");
 			event.getGuild().addRoleToMember(event.getMember().getUser(),
@@ -42,8 +45,11 @@ public class ButtonClick extends ListenerAdapter {
 		// Check if action is remove role
 		if (trigger.startsWith("-")) {
 			trigger = trigger.replace("-", "");
-			if (!dictionary.containsKey(trigger))
+			if (!dictionary.containsKey(trigger)) {
+				event.reply("You cannot get rid of this role by doing that !").setEphemeral(true)
+						.setSuppressedNotifications(true).queue();
 				return;
+			}
 
 			event.getGuild().removeRoleFromMember(event.getMember().getUser(),
 					event.getGuild().getRoleById(dictionary.get(trigger))).queue();
