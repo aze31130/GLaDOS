@@ -37,12 +37,3 @@ public class Account {
 		return result;
 	}
 }
-
-// json.getString("name"),
-// json.getString("nickname"),
-// json.getString("tag"),
-// json.getString("created"),
-// json.getString("joined"),
-// Ranks.valueOf(json.getString("rank")),
-// Permissions.valueOf(json.getString("permission")),
-// json.getInt("fame"));

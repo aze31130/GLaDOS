@@ -1,7 +1,15 @@
 package accounts;
 
+/*
+ * @formatter:off
+ * Enumeration all TrustFactor 
+ */
 public enum TrustFactor {
-	TRUSTED(4), HIGH_TRUST(3), NEUTRAL(2), LOW_TRUST(1), UNTRUSTED(0);
+	TRUSTED(4),
+	HIGH_TRUST(3),
+	NEUTRAL(2),
+	LOW_TRUST(1),
+	UNTRUSTED(0);
 
 	public final int level;
 

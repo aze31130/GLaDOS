@@ -42,8 +42,6 @@ public class GLaDOS {
 	// Temp variable
 	public LocalDateTime translationCooldown;
 	public String goodAnswer = "";
-	public boolean FreeGameAnnonce = false;
-	public boolean DailyQuote = false;
 
 	public List<Account> accounts = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();

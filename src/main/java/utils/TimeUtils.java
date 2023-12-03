@@ -1,13 +1,41 @@
 package utils;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import net.dv8tion.jda.api.entities.Message;
 
 public class TimeUtils {
+	/*
+	 * This function returns the amount of millis seconds between current time to midnight
+	 */
+	public static long getMidnightDelay() {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime midnight = LocalDate.now().atTime(LocalTime.MIDNIGHT);
+
+		if (now.isAfter(midnight))
+			midnight = midnight.plusDays(1);
+
+		return Duration.between(now, midnight).toMillis();
+	}
+
+	/*
+	 * This function returns the amount of millis seconds between current time to thursday 5pm
+	 */
+	public static long getEpicGameDelay() {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime nextThursday = now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY))
+				.withHour(17).withMinute(0).withSecond(0).withNano(0);
+
+		return Duration.between(now, nextThursday).toMillis();
+	}
+
 	/*
 	 * This function computes the delta between midnight and the given timestamp. If the message has
 	 * been send before midnight, returns a negative delta

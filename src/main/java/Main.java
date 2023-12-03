@@ -1,11 +1,11 @@
-import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import commands.Call;
 import events.*;
+import tasks.*;
 import glados.GLaDOS;
 import utils.Logger;
+import utils.TimeUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -52,56 +52,16 @@ public class Main {
 
 			glados.registerCommands(jda);
 
-			ScheduledExecutorService clock = Executors.newSingleThreadScheduledExecutor();
-			clock.scheduleAtFixedRate(new Runnable() {
-				@Override
-				public void run() {
-					Calendar cal = Calendar.getInstance();
+			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
-					if ((glados.metricLogging && cal.get(Calendar.SECOND) <= 10)) {
-						// Log into the database every online account
-						// DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete()
-						// .getApproximatePresences());
-					}
+			scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 24,
+					TimeUnit.HOURS);
 
-					if (!glados.FreeGameAnnonce && (cal.get(Calendar.HOUR_OF_DAY) == 17)
-							&& (cal.get(Calendar.MINUTE) == 0) && (cal.get(Calendar.SECOND) <= 10)
-							&& (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)) {
-						System.out.println(log + "Executed EpicGameAnnoune at "
-								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						Call.callMessage(jda.getTextChannelById(glados.channelGamer), "Gamer");
-						glados.FreeGameAnnonce = true;
-					} else {
-						glados.FreeGameAnnonce = false;
-					}
+			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7,
+					TimeUnit.DAYS);
 
-					if (!glados.DailyQuote && (cal.get(Calendar.HOUR_OF_DAY) == 0)
-							&& (cal.get(Calendar.MINUTE) == 0)
-							&& (cal.get(Calendar.SECOND) <= 10)) {
-						System.out.println(log + "Executed Random Quote at "
-								+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-						Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
-						try {
-							Thread.sleep(10000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						Call.midnightRank(jda.getTextChannelById(glados.channelGeneral));
-
-						// if(glados.leveling) {
-						// Ranking.update();
-						// glados.backup();
-						// JsonIO.backup();
-						// }
-						glados.DailyQuote = true;
-					} else {
-						glados.DailyQuote = false;
-					}
-				}
-			}, 0, 10, TimeUnit.SECONDS);
 			System.out
 					.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");
-
 		} catch (InterruptedException e) {
 			System.err.println(log + "Thread interrupted !");
 		} catch (Exception e) {
