@@ -57,7 +57,7 @@ public class Call extends Command {
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
 
 			// Adds to the list only if message is in time range
-			if ((delta >= -15000) && (delta <= 60000))
+			if ((delta >= -15000) && (delta <= 15000))
 				sortedMessages.add(m);
 		}
 

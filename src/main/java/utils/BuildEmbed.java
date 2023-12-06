@@ -200,7 +200,6 @@ public class BuildEmbed {
 		embed.addField(":trophy: Achievements", "0", true);
 
 		embed.setTimestamp(Instant.now());
-
 		return embed;
 	}
 

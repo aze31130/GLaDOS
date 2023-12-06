@@ -26,14 +26,14 @@ public class TimeUtils {
 	}
 
 	/*
-	 * This function returns the amount of millis seconds between current time to thursday 5pm
+	 * This function returns the amount of seconds between current time to thursday 5pm
 	 */
 	public static long getEpicGameDelay() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime nextThursday = now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY))
 				.withHour(17).withMinute(0).withSecond(0).withNano(0);
 
-		return Duration.between(now, nextThursday).toMillis();
+		return Duration.between(now, nextThursday).toSeconds();
 	}
 
 	/*

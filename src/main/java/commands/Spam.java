@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Spam extends Command {
 	public Spam() {
-		super("spam", "Spam-mention a given user. Admin privileges required",
+		super("spam", "Spam-mention a given user. Moderator privileges required.",
 				Permissions.MODERATOR,
 				Arrays.asList(
 						new OptionData(OptionType.MENTIONABLE, "target",

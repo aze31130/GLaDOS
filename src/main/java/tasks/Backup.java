@@ -12,6 +12,6 @@ public class Backup implements Runnable {
 		// DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete()
 		// .getApproximatePresences());
 		// }
-		throw new UnsupportedOperationException("Unimplemented method 'run'");
+		System.out.println("Backup test task");
 	}
 }

@@ -20,7 +20,7 @@ public class Midnight implements Runnable {
 		Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

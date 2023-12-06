@@ -54,11 +54,11 @@ public class Main {
 
 			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
-			scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 24,
-					TimeUnit.HOURS);
+			scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000,
+					TimeUnit.MILLISECONDS);
 
-			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7,
-					TimeUnit.DAYS);
+			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
+					7 * 86400, TimeUnit.SECONDS);
 
 			System.out
 					.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");

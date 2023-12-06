@@ -18,7 +18,6 @@ public class Report extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		TextInput subject = TextInput.create("subject", "Subject", TextInputStyle.SHORT)
 				.setPlaceholder("Subject of this ticket").setMinLength(10).setMaxLength(100)
-
 				.build();
 
 		TextInput body = TextInput.create("body", "Body", TextInputStyle.PARAGRAPH)

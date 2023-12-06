@@ -12,7 +12,7 @@ import accounts.Permissions;
 
 public class Version extends Command {
 	public Version() {
-		super("version", "displays version alongside others indicators",
+		super("version", "Displays version alongside others indicators",
 				Permissions.NONE, Arrays.asList());
 	}
 
