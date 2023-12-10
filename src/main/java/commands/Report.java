@@ -17,11 +17,11 @@ public class Report extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		TextInput subject = TextInput.create("subject", "Subject", TextInputStyle.SHORT)
-				.setPlaceholder("Subject of this ticket").setMinLength(10).setMaxLength(100)
+				.setPlaceholder("Subject of this ticket").setMinLength(1).setMaxLength(100)
 				.build();
 
 		TextInput body = TextInput.create("body", "Body", TextInputStyle.PARAGRAPH)
-				.setPlaceholder("Your concerns go here").setMinLength(30).setMaxLength(1000)
+				.setPlaceholder("Your concerns go here").setMinLength(20).setMaxLength(1000)
 				.build();
 
 		Modal modal = Modal.create("report", "Report")

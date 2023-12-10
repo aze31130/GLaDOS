@@ -226,4 +226,16 @@ public class BuildEmbed {
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
+
+	public static EmbedBuilder modalEmbed(String subject, String description, String author) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle(subject);
+		embed.setDescription(description);
+		embed.setColor(Color.WHITE);
+
+		embed.setAuthor(author);
+
+		embed.setTimestamp(Instant.now());
+		return embed;
+	}
 }
