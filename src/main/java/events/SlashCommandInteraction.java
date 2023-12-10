@@ -22,7 +22,9 @@ public class SlashCommandInteraction extends ListenerAdapter {
 					return;
 				}
 				// event.deferReply().queue();
-				event.reply("200 OK").queue();
+				if (!command.name.equalsIgnoreCase("report"))
+					event.reply("200 OK").queue();
+
 				command.execute(event);
 				return;
 			}

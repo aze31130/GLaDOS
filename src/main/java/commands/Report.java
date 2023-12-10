@@ -24,7 +24,7 @@ public class Report extends Command {
 				.setPlaceholder("Your concerns go here").setMinLength(30).setMaxLength(1000)
 				.build();
 
-		Modal modal = Modal.create("modmail", "Modmail")
+		Modal modal = Modal.create("report", "Report")
 				.addComponents(ActionRow.of(subject), ActionRow.of(body)).build();
 
 		event.replyModal(modal).queue();
