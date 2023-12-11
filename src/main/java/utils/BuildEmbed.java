@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 
 public class BuildEmbed {
 	public static EmbedBuilder gamerEmbed() {
@@ -227,13 +228,15 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder modalEmbed(String subject, String description, String author) {
+	public static EmbedBuilder modalEmbed(String subject, String description, String reactions,
+			User author) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setTitle(subject);
 		embed.setDescription(description);
 		embed.setColor(Color.WHITE);
 
-		embed.setAuthor(author);
+		embed.setAuthor(author.getName(), author.getAvatarUrl(), author.getAvatarUrl());
+		embed.addField("Voting procedure", reactions, false);
 
 		embed.setTimestamp(Instant.now());
 		return embed;

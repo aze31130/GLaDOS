@@ -33,7 +33,8 @@ public class GLaDOS {
 			roleArtistic, roleBroadcastMessenger, roleInternational, roleDeveloper, roleNsfw;
 
 	// Channel attributes
-	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole;
+	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole,
+			channelVote;
 
 	public int requestsAmount;
 
@@ -74,9 +75,9 @@ public class GLaDOS {
 		Command commands[] = {new Backup(), new Call(), new CheGuevara(), new Clear(),
 				new Connect(), new Disconnect(), new Factorielle(), new Fibonacci(), new Help(),
 				new Idea(), new Move(), new Ping(), new Play(), new Profile(), new Question(),
-				new RandomCat(), new RandomDog(), new Report(), new Rng(), new Role(),
-				new Shutdown(), new Spam(), new State(), new Statistics(), new Status(), new Test(),
-				new Translate(), new Version()};
+				new RandomCat(), new RandomDog(), new Rng(), new Role(), new Shutdown(), new Spam(),
+				new State(), new Statistics(), new Status(), new Test(), new Translate(),
+				new Version(), new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
@@ -110,6 +111,7 @@ public class GLaDOS {
 			this.channelBotSnapshot = json.getString("channel_botSnapshot");
 			this.channelNsfw = json.getString("channel_nsfw");
 			this.channelRole = json.getString("channel_role");
+			this.channelVote = json.getString("channel_vote");
 
 			this.bannedWords = (JSONArray) json.get("bannedWords");
 			this.token = json.getString("token");
