@@ -2,8 +2,6 @@ package utils;
 
 import org.json.JSONArray;
 import accounts.Account;
-import accounts.Permissions;
-import accounts.TrustFactor;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;

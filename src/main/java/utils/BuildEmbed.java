@@ -241,4 +241,22 @@ public class BuildEmbed {
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
+
+	public static EmbedBuilder hashEmbed(String result, String algorithm) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle("Result");
+		embed.addField(algorithm, result, false);
+		embed.setColor(Color.GRAY);
+
+		embed.setTimestamp(Instant.now());
+		return embed;
+	}
+
+	public static EmbedBuilder tradeEmbed() {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle("Trade");
+
+		embed.setTimestamp(Instant.now());
+		return embed;
+	}
 }

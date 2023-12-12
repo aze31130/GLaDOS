@@ -72,12 +72,13 @@ public class GLaDOS {
 		/*
 		 * Initialize command
 		 */
-		Command commands[] = {new Backup(), new Call(), new CheGuevara(), new Clear(),
-				new Connect(), new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(),
-				new Help(), new Idea(), new Inventory(), new Move(), new Ping(), new Play(),
-				new Profile(), new Question(), new RandomCat(), new RandomDog(), new Rng(),
-				new Role(), new Shutdown(), new Spam(), new State(), new Statistics(), new Status(),
-				new Test(), new Translate(), new Upgrade(), new Version(), new Vote()};
+		Command commands[] = {new Backup(), new Call(), new Checksum(), new CheGuevara(),
+				new Clear(), new Connect(), new Disconnect(), new Drop(), new Factorielle(),
+				new Fibonacci(), new Help(), new Idea(), new Inventory(), new Move(), new Ping(),
+				new Play(), new Profile(), new Question(), new RandomCat(), new RandomDog(),
+				new Rng(), new Role(), new Shutdown(), new Spam(), new State(), new Statistics(),
+				new Status(), new Test(), new Trade(), new Translate(), new Upgrade(),
+				new Version(), new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
@@ -113,7 +114,7 @@ public class GLaDOS {
 			this.channelRole = json.getString("channel_role");
 			this.channelVote = json.getString("channel_vote");
 
-			this.bannedWords = (JSONArray) json.get("bannedWords");
+			this.bannedWords = json.getJSONArray("bannedWords");
 			this.token = json.getString("token");
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
