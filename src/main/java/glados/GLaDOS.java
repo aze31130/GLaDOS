@@ -73,11 +73,11 @@ public class GLaDOS {
 		 * Initialize command
 		 */
 		Command commands[] = {new Backup(), new Call(), new CheGuevara(), new Clear(),
-				new Connect(), new Disconnect(), new Factorielle(), new Fibonacci(), new Help(),
-				new Idea(), new Move(), new Ping(), new Play(), new Profile(), new Question(),
-				new RandomCat(), new RandomDog(), new Rng(), new Role(), new Shutdown(), new Spam(),
-				new State(), new Statistics(), new Status(), new Test(), new Translate(),
-				new Version(), new Vote()};
+				new Connect(), new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(),
+				new Help(), new Idea(), new Inventory(), new Move(), new Ping(), new Play(),
+				new Profile(), new Question(), new RandomCat(), new RandomDog(), new Rng(),
+				new Role(), new Shutdown(), new Spam(), new State(), new Statistics(), new Status(),
+				new Test(), new Translate(), new Upgrade(), new Version(), new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
