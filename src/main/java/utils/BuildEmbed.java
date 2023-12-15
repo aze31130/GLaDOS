@@ -3,9 +3,8 @@ package utils;
 import java.awt.Color;
 import java.time.Instant;
 import java.util.Random;
-
+import accounts.Account;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 
 public class BuildEmbed {
@@ -183,22 +182,22 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder profileEmbed(Member m) {
+	public static EmbedBuilder profileEmbed(Account account) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle(m.getUser().getName() + "'s profile");
-		embed.setDescription(m.getAsMention());
+		embed.setTitle(account.member.getUser().getName() + "'s profile");
+		embed.setDescription(account.member.getAsMention());
 		embed.setColor(Color.GREEN);
-		embed.setThumbnail(m.getUser().getAvatarUrl());
+		embed.setThumbnail(account.member.getUser().getAvatarUrl());
 
-		embed.addField(":sparkles: Level", "0", true);
-		embed.addField(":green_book: Experience", "0", true);
-		embed.addField(":shield: Trust Factor", "UNTRUSTED", true);
-		embed.addField(":wave: Fame", "0", true);
-		embed.addField(":clock: Joined Discord", m.getTimeCreated().toString(), true);
-		embed.addField(":timer: Member since", m.getTimeJoined().toString(), true);
-		embed.addField(":envelope: Messages", "0", true);
-		embed.addField(":tada: Reactions", "0", true);
-		embed.addField(":trophy: Achievements", "0", true);
+		embed.addField(":sparkles: Level", Integer.toString(account.level), true);
+		embed.addField(":green_book: Experience", Long.toString(account.experience), true);
+		embed.addField(":shield: Trust Factor", account.trustLevel.name(), true);
+		embed.addField(":wave: Fame", "WIP", true);
+		embed.addField(":clock: Joined Discord", account.member.getTimeCreated().toString(), true);
+		embed.addField(":timer: Member since", account.member.getTimeJoined().toString(), true);
+		embed.addField(":envelope: Messages", "WIP", true);
+		embed.addField(":tada: Reactions", "WIP", true);
+		embed.addField(":trophy: Achievements", "WIP", true);
 
 		embed.setTimestamp(Instant.now());
 		return embed;

@@ -12,10 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import utils.Logger;
-
 public class JsonIO {
-
 	/*
 	 * JSON FORMAT CONVENTION
 	 * 
@@ -127,16 +124,6 @@ public class JsonIO {
 	// accounts");
 	// return accounts;
 	// }
-
-
-
-	// Method to backup the entire database
-	public static void backup() {
-		System.out.println(new Logger(true) + "Executing backup operation...");
-		//// copy files from /home/pi/tmp to /media/Backup
-		System.out.println(new Logger(true) + "Successfully backed up !");
-	}
-
 
 	// ---------- Checking methods ----------
 	// Returns true if the data folder is created

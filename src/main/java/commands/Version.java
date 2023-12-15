@@ -24,7 +24,7 @@ public class Version extends Command {
 		info.setColor(0x593695);
 		info.setTitle("GLaDOS");
 		info.setUrl("https://github.com/aze31130/GLaDOS/tree/" + glados.version);
-		info.setDescription("GLaDOS's miscellaneous informations");
+		info.setDescription("Miscellaneous informations");
 		info.addField("Git commit: ", glados.version, true);
 		info.addField("CPU usage: ", os.getProcessCpuLoad() * 100 + "%", true);
 		info.addField("OS: ", System.getProperty("os.name") + " " + System.getProperty("os.version")

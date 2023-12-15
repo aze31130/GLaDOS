@@ -1,39 +1,36 @@
 package utils;
 
-import org.json.JSONArray;
 import accounts.Account;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 
 public class AccountUtils {
-	public static void createEveryAccount(Guild g) {
-		for (Member m : g.getMembers()) {
-			// createAccount here
-		}
+	public static void createEveryAccount(Guild guild) {
+		GLaDOS glados = GLaDOS.getInstance();
+
+		for (Member m : guild.getMembers())
+			glados.getAccountById(m);
 	}
 
-	public static void backupAccounts() {
-		GLaDOS g = GLaDOS.getInstance();
-		JSONArray accounts = new JSONArray();
-
-		for (Account a : g.accounts)
-			accounts.put(a.toJson());
-
-		FileUtils.writeRawFile("accounts.json", accounts.toString(4));
+	/*
+	 * Returns the amount of required exp for a given level. Note, total exp to level 100:
+	 * 20,503,333,300
+	 */
+	public static int getRequiredExperience(int level) {
+		int baseExp = 10;
+		double exponent = 4;
+		return (int) (baseExp * (Math.pow((level + 1), exponent)));
 	}
 
-	public static Account getAccountById(String id) {
-		GLaDOS g = GLaDOS.getInstance();
-		// Check if account is registered
-		Account result = g.accounts.stream().filter(a -> a.id == id).findFirst().orElse(null);
+	public static String getExperiencePercentage(int level, long experience) {
+		return (experience * 100 / getRequiredExperience(level)) + "%";
+	}
 
-		// Create the account if not exist
-		if (result == null) {
-			// result = new Account(id, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
-			g.accounts.add(result);
+	public static void checkLevelUp(Account account) {
+		while (account.experience >= getRequiredExperience(account.level)) {
+			account.experience -= getRequiredExperience(account.level);
+			account.level++;
 		}
-
-		return result;
 	}
 }

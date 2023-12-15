@@ -1,7 +1,6 @@
 package utils;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 
 public class StatsUtils {
@@ -14,14 +13,14 @@ public class StatsUtils {
 
 	public static void ReactPerMessage(Message m) {
 		System.out.println(m.getContentRaw() + " # " + m.getJumpUrl());
-		for (MessageReaction mr : m.getReactions()) {
+		// for (MessageReaction mr : m.getReactions()) {
 
-			// if (!isInEmote(emotes, mr.getReactionEmote().getName())) {
-			// emotes.add(new EmoteCounter(mr.getReactionEmote().getName()));
-			// }
+		// if (!isInEmote(emotes, mr.getReactionEmote().getName())) {
+		// emotes.add(new EmoteCounter(mr.getReactionEmote().getName()));
+		// }
 
-			// addEmote(emotes, mr.getReactionEmote().getName(), mr.getCount());
-		}
+		// addEmote(emotes, mr.getReactionEmote().getName(), mr.getCount());
+		// }
 	}
 
 	public int MemberAmount(Boolean includeBot) {

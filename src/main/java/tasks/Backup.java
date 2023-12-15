@@ -1,17 +1,37 @@
 package tasks;
 
-import java.util.Calendar;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import org.json.JSONArray;
+import glados.GLaDOS;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.utils.FileUpload;
+import utils.FileUtils;
 
 public class Backup implements Runnable {
+	public JDA jda;
+
+	public Backup(JDA jda) {
+		this.jda = jda;
+	}
+
 	@Override
 	public void run() {
-		Calendar cal = Calendar.getInstance();
+		/*
+		 * For now, GLaDOS will upload users data in a private channel. This ensures no data loss
+		 * while getting the new infrastructure coming for April 2024.
+		 */
+		System.out.println("Backing up all accounts !");
+		GLaDOS g = GLaDOS.getInstance();
+		JSONArray accounts = new JSONArray(g.accounts);
 
-		// if ((glados.metricLogging && cal.get(Calendar.SECOND) <= 10)) {
-		// Log into the database every online account
-		// DataLogger.log(jda.getGuildById(glados.guildId).retrieveMetaData().complete()
-		// .getApproximatePresences());
-		// }
-		System.out.println("Backup test task");
+		// Write backup file
+		FileUtils.writeRawFile("accounts.json", accounts.toString(4));
+		// Upload file to discord
+		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
+		jda.getTextChannelById(0).sendMessage("Backup")
+				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).queue();
+
+		System.out.println("Backup done !");
 	}
 }

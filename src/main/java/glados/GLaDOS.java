@@ -11,9 +11,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.Account;
+import accounts.Permissions;
+import accounts.TrustFactor;
 import commands.*;
+import commands.Shutdown;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.FileUtils;
@@ -145,6 +149,23 @@ public class GLaDOS {
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();
+	}
+
+	/*
+	 * Returns given account. Create if not exist
+	 */
+	public Account getAccountById(Member m) {
+		// Check if account is registered
+		Account result =
+				this.accounts.stream().filter(a -> a.id == m.getId()).findFirst().orElse(null);
+
+		// Create the account if not exist
+		if (result == null) {
+			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
+			this.accounts.add(result);
+		}
+
+		return result;
 	}
 
 	/*

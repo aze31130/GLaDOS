@@ -19,6 +19,10 @@ public class Shutdown extends Command {
 
 		System.out.println(new Logger(true) + " Shutting down now !");
 		source.sendMessage("Shutting down now !").queue();
+
+		// Triggers the backup task
+		new tasks.Backup(event.getJDA()).run();
+
 		event.getJDA().shutdown();
 		System.exit(0);
 	}
