@@ -44,6 +44,7 @@ public class FileUtils {
 		defaultConfig.put("role_moderator", "");
 		defaultConfig.put("role_administrator", "");
 
+		defaultConfig.put("maxExpPerDay", "1000");
 		defaultConfig.put("maxLevel", "100");
 		defaultConfig.put("bannedWords", bannedWords);
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");

@@ -29,7 +29,7 @@ public class GLaDOS {
 
 	// Internal settings
 	public boolean leveling, logMessages, checkPrivateMessages, metricLogging;
-	public int maxLevel;
+	public int maxLevel, maxExpPerDay;
 	public String guildId, ownerId;
 
 	// Role attributes
@@ -120,6 +120,8 @@ public class GLaDOS {
 
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.token = json.getString("token");
+
+			this.maxExpPerDay = json.getInt("maxExpPerDay");
 			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
 			this.translationCooldown = LocalDateTime.now();
@@ -161,7 +163,8 @@ public class GLaDOS {
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE);
+			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE,
+					true);
 			this.accounts.add(result);
 		}
 

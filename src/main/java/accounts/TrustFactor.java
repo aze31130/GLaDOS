@@ -2,7 +2,14 @@ package accounts;
 
 /*
  * @formatter:off
- * Enumeration all TrustFactor 
+ * Enumeration all TrustFactor.
+ * 
+ * TrustFactor Algorithm Parameters:
+ * - User level
+ * - User exp
+ * - User joined time
+ * - Amount of message
+ * - Amount of reaction
  */
 public enum TrustFactor {
 	TRUSTED(4),

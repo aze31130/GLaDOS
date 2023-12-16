@@ -58,14 +58,15 @@ public class TimeUtils {
 	}
 
 	/*
-	 * This function returns true if today is a special day.
+	 * This function returns true if today is a special day. Used to trigger Miracle Times.
 	 */
 	public static Boolean isSpecialDay() {
 		String[] specialDays = {"14-02", // Valentine's day
 				"01-04", // April's Fools
 				"31-10", // Halloween
 				"25-12", // Christmas
-				"01-01" // New year
+				"01-01", // New year
+				"10-06" // Server Anniversary
 		};
 
 		LocalDate currentDate = LocalDate.now();

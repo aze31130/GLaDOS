@@ -1,5 +1,12 @@
 package items;
 
+/*
+ * @formatter:off
+ */
 public enum ItemType {
-	BLOCK, WEAPON, TOOL, CONSUMABLE;
+	BLOCK,
+	ITEM,
+	WEAPON,
+	TOOL,
+	CONSUMABLE;
 }

@@ -12,8 +12,13 @@ public class Achievements {
 	 */
 
 	/*
-	 * title = Speak Up emote = :speaking_head: description = Send 1000 messages. experience =
+	 * title = Speak Up emote = :speaking_head: description = Send 10,000 messages. experience =
 	 * 20,000
+	 */
+
+	/*
+	 * title = A real superstar emote = :speaking_head: description = Receive 1000 reactions to your
+	 * messages. experience = 20,000
 	 */
 
 	/*
@@ -53,6 +58,10 @@ public class Achievements {
 
 	/*
 	 * title = Hey, I am MVP ! emote = description = Reach level 60 experience =
+	 */
+
+	/*
+	 * title = The old tree ! emote = description = Be a member since 3 years experience =
 	 */
 
 
