@@ -10,7 +10,7 @@ public class AccountUtils {
 		GLaDOS glados = GLaDOS.getInstance();
 
 		for (Member m : guild.getMembers())
-			glados.getAccountById(m);
+			glados.getAccount(m);
 	}
 
 	/*

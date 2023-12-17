@@ -18,7 +18,7 @@ public class Profile extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		Member author = event.getMember();
-		Account a = glados.getAccountById(author);
+		Account a = glados.getAccount(author);
 
 		EmbedBuilder profile = BuildEmbed.profileEmbed(a);
 

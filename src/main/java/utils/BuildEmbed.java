@@ -258,4 +258,13 @@ public class BuildEmbed {
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
+
+	public static EmbedBuilder moneyDropEmbed(int claimedMoney, long totalMoney) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle("Claimed !");
+		embed.setColor(Color.ORANGE);
+		embed.setDescription("Got " + claimedMoney + " (" + totalMoney + " total)");
+		embed.setTimestamp(Instant.now());
+		return embed;
+	}
 }

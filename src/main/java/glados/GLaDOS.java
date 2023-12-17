@@ -10,11 +10,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import accounts.Account;
-import accounts.Permissions;
-import accounts.TrustFactor;
+import accounts.*;
 import commands.*;
-import commands.Shutdown;
+import items.*;
 import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
@@ -49,6 +47,7 @@ public class GLaDOS {
 	public String goodAnswer = "";
 
 	public List<Account> accounts = new ArrayList<>();
+	public List<Item> items = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
 
 	private GLaDOS() {}
@@ -86,6 +85,15 @@ public class GLaDOS {
 
 		for (Command c : commands)
 			this.commands.add(c);
+
+
+		/*
+		 * Initialize items
+		 */
+		Item items[] = {new AttackSpeedScroll(), new Fatal(), new Lament(), new WarpStone()};
+
+		for (Item i : items)
+			this.items.add(i);
 
 		try {
 			// Load the global variables
@@ -156,7 +164,7 @@ public class GLaDOS {
 	/*
 	 * Returns given account. Create if not exist
 	 */
-	public Account getAccountById(Member m) {
+	public Account getAccount(Member m) {
 		// Check if account is registered
 		Account result =
 				this.accounts.stream().filter(a -> a.id == m.getId()).findFirst().orElse(null);
@@ -164,7 +172,7 @@ public class GLaDOS {
 		// Create the account if not exist
 		if (result == null) {
 			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE,
-					true);
+					true, 0);
 			this.accounts.add(result);
 		}
 

@@ -16,9 +16,10 @@ public class Account {
 	public Permissions permission;
 
 	public boolean canDrop;
+	public long money;
 
 	public Account(String id, Member member, int level, long experience, long totalExperience,
-			TrustFactor trustLevel, Permissions permission, boolean canDrop) {
+			TrustFactor trustLevel, Permissions permission, boolean canDrop, long money) {
 		this.id = id;
 		this.member = member;
 		this.level = level;
@@ -27,6 +28,7 @@ public class Account {
 		this.trustLevel = trustLevel;
 		this.permission = permission;
 		this.canDrop = canDrop;
+		this.money = money;
 	}
 
 	public JSONObject toJson() {
@@ -39,6 +41,7 @@ public class Account {
 		result.put("trustFactor", this.trustLevel);
 		result.put("permission", this.permission);
 		result.put("canDrop", this.canDrop);
+		result.put("money", this.money);
 		return result;
 	}
 }
