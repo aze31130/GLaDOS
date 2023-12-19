@@ -4,11 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import accounts.Permissions;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -27,11 +29,25 @@ public class Backup extends Command {
 	public void serverBackup(Guild server, TextChannel source) {
 		for (GuildChannel channel : server.getChannels()) {
 			source.sendMessage("Downloading " + channel.getAsMention()).queue();
-			// try {
-			// // downloadChannel(tc);
-			// } catch (Exception e) {
-			// source.sendMessage(e.toString()).queue();
-			// }
+			source.sendTyping().queue();
+			JSONArray messages = new JSONArray();
+
+			MessageChannel channel2 = (MessageChannel) channel;
+
+			channel2.getIterableHistory().cache(false).forEachRemaining(message -> {
+				JSONObject json = new JSONObject();
+				json.put("authorId", message.getAuthor().getIdLong());
+				json.put("authorName", message.getAuthor().getName());
+				json.put("message", message.getContentRaw());
+				json.put("date", message.getTimeCreated());
+				messages.put(json);
+
+				// for (Attachment a : me.getAttachments()) {
+				// linkedFilesArray.put(a.getUrl());
+				// linkedFilesArray.put(a.getProxyUrl());
+				// }
+				return true;
+			});
 		}
 	}
 
