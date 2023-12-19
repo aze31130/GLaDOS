@@ -1,82 +1,66 @@
 package commands;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
-import java.util.List;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import accounts.Permissions;
+import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.entities.Message.Attachment;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 public class Backup extends Command {
 	public Backup() {
 		super("backup", "Download a backup of the entire server. Admin privileges required",
-				Permissions.MODERATOR, Arrays.asList());
+				Permissions.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.STRING, "target",
+						"The target of the backup action")
+								.addChoice("server", "server")
+								.addChoice("accounts", "accounts")
+								.setRequired(true)));
 	}
 
-	private void downloadChannel(MessageChannel tc) throws IOException {
-		JSONArray channelArray = new JSONArray();
-		JSONArray messageArray = new JSONArray();
-		JSONArray linkedFilesArray = new JSONArray();
+	public void serverBackup(Guild server, TextChannel source) {
+		for (GuildChannel channel : server.getChannels()) {
+			source.sendMessage("Downloading " + channel.getAsMention()).queue();
+			// try {
+			// // downloadChannel(tc);
+			// } catch (Exception e) {
+			// source.sendMessage(e.toString()).queue();
+			// }
+		}
+	}
 
-		tc.getIterableHistory().cache(false).forEachRemaining((me) -> {
-			JSONObject json = new JSONObject();
-			json.clear();
-			json.put("authorId", me.getAuthor().getIdLong());
-			json.put("authorName", me.getAuthor().getName());
-			json.put("message", me.getContentRaw());
-			json.put("date", me.getTimeCreated());
-			messageArray.put(json);
+	public void accountBackup(GLaDOS glados, TextChannel backupChannel) {
+		JSONArray accounts = new JSONArray(glados.accounts);
+		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
 
-			for (Attachment a : me.getAttachments()) {
-				linkedFilesArray.put(a.getUrl());
-				linkedFilesArray.put(a.getProxyUrl());
-			}
-
-			return true;
-		});
-
-		channelArray.put(messageArray);
-		channelArray.put(linkedFilesArray);
-
-		File folder = new File("./backup");
-
-		if (!folder.exists())
-			folder.mkdir();
-
-		FileWriter jsonFile = new FileWriter("./backup/" + tc.getName() + ".json");
-		jsonFile.write(channelArray.toString(4));
-		jsonFile.flush();
-		jsonFile.close();
+		backupChannel.sendMessage("Account backup")
+				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).queue();
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		Guild server = event.getGuild();
+		String type = event.getOption("target").getAsString();
+		Guild guild = event.getGuild();
+		GLaDOS glados = GLaDOS.getInstance();
 		TextChannel source = event.getGuildChannel().asTextChannel();
 
-		// event.getHook().sendMessage("Downloading server's history...").queue();
-		int i = 0;
-		List<TextChannel> channels = server.getTextChannels();
-		for (TextChannel tc : channels) {
-			source.sendMessage("Downloading channel " + tc.getAsMention() + "("
-					+ (100 * i / channels.size()) + "%)").queue();
-			try {
-				downloadChannel(tc);
-			} catch (Exception e) {
-				source.sendMessage(e.toString()).queue();
-			}
-			i++;
+		if (type.equals("server")) {
+			source.sendMessage("Downloading server's history...").queue();
+			serverBackup(guild, source);
+			source.sendMessage("Backup action completed successfully.").queue();
+			return;
 		}
 
-		source.sendMessage("Server's history has been downloaded !").queue();
+		if (type.equals("accounts")) {
+			accountBackup(glados, event.getJDA().getTextChannelById(glados.channelBackup));
+			source.sendMessage("Successfully backed up account database.").queue();
+			return;
+		}
 	}
 }

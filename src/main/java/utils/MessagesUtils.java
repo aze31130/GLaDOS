@@ -2,6 +2,7 @@ package utils;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -26,6 +28,42 @@ public class MessagesUtils {
 			messages.add(message);
 			return messages.size() < 1000;
 		}).thenRun(() -> callback.accept(messages));
+	}
+
+	private void downloadChannel(MessageChannel tc) throws IOException {
+		JSONArray channelArray = new JSONArray();
+		JSONArray messageArray = new JSONArray();
+		JSONArray linkedFilesArray = new JSONArray();
+
+		tc.getIterableHistory().cache(false).forEachRemaining((me) -> {
+			JSONObject json = new JSONObject();
+			json.clear();
+			json.put("authorId", me.getAuthor().getIdLong());
+			json.put("authorName", me.getAuthor().getName());
+			json.put("message", me.getContentRaw());
+			json.put("date", me.getTimeCreated());
+			messageArray.put(json);
+
+			for (Attachment a : me.getAttachments()) {
+				linkedFilesArray.put(a.getUrl());
+				linkedFilesArray.put(a.getProxyUrl());
+			}
+
+			return true;
+		});
+
+		channelArray.put(messageArray);
+		channelArray.put(linkedFilesArray);
+
+		File folder = new File("./backup");
+
+		if (!folder.exists())
+			folder.mkdir();
+
+		FileWriter jsonFile = new FileWriter("./backup/" + tc.getName() + ".json");
+		jsonFile.write(channelArray.toString(4));
+		jsonFile.flush();
+		jsonFile.close();
 	}
 
 	public static void downloadServer(JDA jda) {

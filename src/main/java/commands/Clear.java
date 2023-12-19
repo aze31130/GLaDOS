@@ -13,7 +13,7 @@ import accounts.Permissions;
 public class Clear extends Command {
 	public Clear() {
 		super("clear",
-				"Clears the latests messages in a channel. Admin privileges required",
+				"Clears the latests messages in a channel. Moderator privileges required",
 				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
 						"Amount of message you want to delete")));
 	}

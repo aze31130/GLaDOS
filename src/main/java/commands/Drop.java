@@ -2,13 +2,14 @@ package commands;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
+import accounts.Account;
+import accounts.Permissions;
+import glados.GLaDOS;
+import items.Item;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
 import utils.TimeUtils;
-import accounts.Account;
-import accounts.Permissions;
-import glados.GLaDOS;
 
 public class Drop extends Command {
 	public Drop() {
@@ -49,12 +50,24 @@ public class Drop extends Command {
 			// TODO
 		}
 
-
 		// Drop item
+		long dropValue = random.nextLong(glados.itemTotalProb + 1);
+		long cumulativeProbability = 0;
+		Item droppedItem = null;
 
-		// Check for conditionnal drop
+		while (droppedItem == null) {
+			for (Item item : glados.items) {
+				cumulativeProbability += item.dropChance;
+				if (dropValue <= cumulativeProbability) {
+					droppedItem = item;
+					break;
+				}
+			}
 
-
+			// Check for conditionnal drop
+			if (!droppedItem.conditionnalDrop(authorAccount))
+				droppedItem = null;
+		}
 
 		authorAccount.canDrop = false;
 	}

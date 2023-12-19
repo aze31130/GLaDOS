@@ -8,5 +8,7 @@ public enum ItemType {
 	ITEM,
 	WEAPON,
 	TOOL,
-	CONSUMABLE;
+	POTION,
+	ENCHANT,
+	SCROLL;
 }

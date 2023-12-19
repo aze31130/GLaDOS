@@ -36,7 +36,7 @@ public class GLaDOS {
 
 	// Channel attributes
 	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole,
-			channelVote;
+			channelVote, channelBackup;
 
 	public int requestsAmount;
 
@@ -47,8 +47,10 @@ public class GLaDOS {
 	public String goodAnswer = "";
 
 	public List<Account> accounts = new ArrayList<>();
-	public List<Item> items = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
+	public List<Item> items = new ArrayList<>();
+	// Optimisation, holds the sum of each drop weight
+	public long itemTotalProb = 0;
 
 	private GLaDOS() {}
 
@@ -86,14 +88,15 @@ public class GLaDOS {
 		for (Command c : commands)
 			this.commands.add(c);
 
-
 		/*
 		 * Initialize items
 		 */
 		Item items[] = {new AttackSpeedScroll(), new Fatal(), new Lament(), new WarpStone()};
 
-		for (Item i : items)
+		for (Item i : items) {
 			this.items.add(i);
+			this.itemTotalProb += i.dropChance;
+		}
 
 		try {
 			// Load the global variables
@@ -125,6 +128,7 @@ public class GLaDOS {
 			this.channelNsfw = json.getString("channel_nsfw");
 			this.channelRole = json.getString("channel_role");
 			this.channelVote = json.getString("channel_vote");
+			this.channelBackup = json.getString("channel_backup");
 
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.token = json.getString("token");
