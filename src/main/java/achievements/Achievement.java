@@ -1,10 +1,12 @@
 package achievements;
 
-public class Achievements {
+public class Achievement {
 	public String title;
 	public String emote;
 	public String description;
 	public long experience;
+
+	public Achievement() {}
 
 	/*
 	 * title = Living As A Millionaire emote = :moneybag: description = Earn 1 million on the Tycoon

@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.utils.FileUpload;
+import utils.FileUtils;
 
 public class Backup extends Command {
 	public Backup() {
@@ -27,10 +28,11 @@ public class Backup extends Command {
 	}
 
 	public void serverBackup(Guild server, TextChannel source) {
+		JSONArray messages = new JSONArray();
+
 		for (GuildChannel channel : server.getChannels()) {
 			source.sendMessage("Downloading " + channel.getAsMention()).queue();
 			source.sendTyping().queue();
-			JSONArray messages = new JSONArray();
 
 			MessageChannel channel2 = (MessageChannel) channel;
 
@@ -39,31 +41,25 @@ public class Backup extends Command {
 				json.put("authorId", message.getAuthor().getIdLong());
 				json.put("authorName", message.getAuthor().getName());
 				json.put("message", message.getContentRaw());
-				json.put("date", message.getTimeCreated());
+				json.put("posted", message.getTimeCreated());
+				json.put("isEdited", message.isEdited());
+				json.put("attachments", message.getAttachments().size());
+				json.put("reactions", message.getReactions().size());
+				json.put("isPinned", message.isPinned());
+				json.put("channelId", message.getChannelId());
+				json.put("channelName", message.getChannel().getName());
 				messages.put(json);
-
-				// for (Attachment a : me.getAttachments()) {
-				// linkedFilesArray.put(a.getUrl());
-				// linkedFilesArray.put(a.getProxyUrl());
-				// }
 				return true;
 			});
 		}
-	}
 
-	public void accountBackup(GLaDOS glados, TextChannel backupChannel) {
-		JSONArray accounts = new JSONArray(glados.accounts);
-		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
-
-		backupChannel.sendMessage("Account backup")
-				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).queue();
+		FileUtils.writeRawFile("server.json", messages.toString(4));
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		String type = event.getOption("target").getAsString();
 		Guild guild = event.getGuild();
-		GLaDOS glados = GLaDOS.getInstance();
 		TextChannel source = event.getGuildChannel().asTextChannel();
 
 		if (type.equals("server")) {
@@ -74,8 +70,7 @@ public class Backup extends Command {
 		}
 
 		if (type.equals("accounts")) {
-			accountBackup(glados, event.getJDA().getTextChannelById(glados.channelBackup));
-			source.sendMessage("Successfully backed up account database.").queue();
+			new tasks.Backup(event.getJDA()).run();
 			return;
 		}
 	}

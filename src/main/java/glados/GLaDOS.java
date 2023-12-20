@@ -12,8 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
+import commands.Shutdown;
 import items.*;
-import database.JsonIO;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -100,7 +100,7 @@ public class GLaDOS {
 
 		try {
 			// Load the global variables
-			JSONObject json = JsonIO.loadJsonObject("./config.json");
+			JSONObject json = FileUtils.loadJsonObject("./config.json");
 			this.getVersion();
 
 			this.leveling = json.getBoolean("leveling");
@@ -163,6 +163,11 @@ public class GLaDOS {
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();
+	}
+
+	private void loadAccounts() {
+		System.out.println("Loading account...");
+		// TODO
 	}
 
 	/*

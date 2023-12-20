@@ -1,7 +1,9 @@
 package accounts;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONObject;
-
+import achievements.Achievement;
 import net.dv8tion.jda.api.entities.Member;
 
 public class Account {
@@ -15,6 +17,8 @@ public class Account {
 	public TrustFactor trustLevel;
 	public Permissions permission;
 
+	public List<Achievement> achievements;
+
 	public boolean canDrop;
 	public long money;
 
@@ -27,6 +31,7 @@ public class Account {
 		this.totalExperience = totalExperience;
 		this.trustLevel = trustLevel;
 		this.permission = permission;
+		this.achievements = new ArrayList<>();
 		this.canDrop = canDrop;
 		this.money = money;
 	}
@@ -35,6 +40,10 @@ public class Account {
 		// Generate a JSONObject with all the properties
 		JSONObject result = new JSONObject();
 		result.put("id", this.id);
+		result.put("name", this.member.getUser().getName());
+		result.put("created", this.member.getUser().getTimeCreated().toString());
+		result.put("joined", this.member.getTimeJoined().toString());
+		// Achievements: (JsonArray of achievements)
 		result.put("level", this.level);
 		result.put("experience", this.experience);
 		result.put("totalExperience", this.totalExperience);
@@ -42,6 +51,7 @@ public class Account {
 		result.put("permission", this.permission);
 		result.put("canDrop", this.canDrop);
 		result.put("money", this.money);
+		result.put("version", 1);
 		return result;
 	}
 }

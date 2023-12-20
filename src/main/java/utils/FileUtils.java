@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.json.JSONArray;
 
 public class FileUtils {
@@ -51,6 +52,28 @@ public class FileUtils {
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");
 
 		FileUtils.writeRawFile("config.json", defaultConfig.toString(4));
+	}
+
+	public static JSONArray loadJsonArray(String filename) {
+		if (!filename.endsWith(".json"))
+			filename.concat(".json");
+
+		String rawContent = FileUtils.readRawFile(filename);
+		JSONTokener jsonParser = new JSONTokener(rawContent);
+		JSONArray json = new JSONArray(jsonParser);
+
+		return json;
+	}
+
+	public static JSONObject loadJsonObject(String filename) {
+		if (!filename.endsWith(".json"))
+			filename.concat(".json");
+
+		String rawContent = FileUtils.readRawFile(filename);
+		JSONTokener jsonParser = new JSONTokener(rawContent);
+		JSONObject json = new JSONObject(jsonParser);
+
+		return json;
 	}
 
 	public static String readRawFile(String filename) {

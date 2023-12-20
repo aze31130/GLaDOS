@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.utils.FileUpload;
+import utils.BuildEmbed;
 import utils.FileUtils;
 
 public class Backup implements Runnable {
@@ -29,7 +30,8 @@ public class Backup implements Runnable {
 		FileUtils.writeRawFile("accounts.json", accounts.toString(4));
 		// Upload file to discord
 		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
-		jda.getTextChannelById(0).sendMessage("Backup")
+		jda.getTextChannelById(g.channelBackup)
+				.sendMessageEmbeds(BuildEmbed.successEmbed("Account backup").build())
 				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).queue();
 
 		System.out.println("Backup done !");
