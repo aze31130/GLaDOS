@@ -1,12 +1,9 @@
 package commands;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import accounts.Permissions;
-import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
@@ -14,7 +11,6 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.utils.FileUpload;
 import utils.FileUtils;
 
 public class Backup extends Command {

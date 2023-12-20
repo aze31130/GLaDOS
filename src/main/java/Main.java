@@ -58,8 +58,13 @@ public class Main {
 			scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000,
 					TimeUnit.MILLISECONDS);
 
+			// scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
+			// 7 * 86400, TimeUnit.SECONDS);
+
+			// ----- TO DELETE AFTER 4th of january -----
 			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
-					7 * 86400, TimeUnit.SECONDS);
+					24, TimeUnit.HOURS);
+			// ------------------------------------------
 
 			scheduler.scheduleAtFixedRate(new Status(jda), 0, 6, TimeUnit.HOURS);
 
