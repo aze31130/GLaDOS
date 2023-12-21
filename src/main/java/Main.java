@@ -63,7 +63,7 @@ public class Main {
 
 			// ----- TO DELETE AFTER 4th of january -----
 			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
-					24, TimeUnit.HOURS);
+					86400, TimeUnit.SECONDS);
 			// ------------------------------------------
 
 			scheduler.scheduleAtFixedRate(new Status(jda), 0, 6, TimeUnit.HOURS);
