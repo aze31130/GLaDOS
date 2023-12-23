@@ -12,12 +12,12 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.utils.FileUpload;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Fibonacci extends Command {
 	public Fibonacci() {
 		super("fibonacci", "Computes given fibonacci number",
-				Permissions.NONE, Arrays.asList(
+				Permission.NONE, Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")));
 	}
 

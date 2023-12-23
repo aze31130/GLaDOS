@@ -9,7 +9,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import accounts.Permissions;
+import accounts.Permission;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -26,7 +26,7 @@ import utils.JsonDownloader;
  */
 public class Question extends Command {
 	public Question() {
-		super("question", "Challenges your general knowledge", Permissions.NONE,
+		super("question", "Challenges your general knowledge", Permission.NONE,
 				Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
 						"Can be [easy, normal, hard]. Default is random")
 								.addChoice("easy", "easy")

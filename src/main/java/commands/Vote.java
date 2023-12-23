@@ -6,12 +6,12 @@ import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 import java.util.Arrays;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Vote extends Command {
 	public Vote() {
 		super("vote", "Submit a vote, for a feature request or any other subject you want",
-				Permissions.NONE, Arrays.asList());
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

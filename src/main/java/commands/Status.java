@@ -8,11 +8,11 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Status extends Command {
 	public Status() {
-		super("activity", "Updates GLaDOS's activity", Permissions.NONE,
+		super("activity", "Updates GLaDOS's activity", Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type",
 								"Can be [listening, playing, watching, streaming]")

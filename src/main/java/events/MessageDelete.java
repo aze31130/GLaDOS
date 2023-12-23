@@ -16,7 +16,7 @@ public class MessageDelete extends ListenerAdapter {
 		event.getJDA().getTextChannelById(g.channelSystem).sendMessageEmbeds(
 				BuildEmbed
 						.loggerEmbed("Message deletion",
-								event.getMessageId() + " (" + event.getChannel().getAsMention()
+								event.getJumpUrl() + " (" + event.getChannel().getAsMention()
 										+ ")")
 						.build())
 				.queue();

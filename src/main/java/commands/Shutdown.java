@@ -3,14 +3,14 @@ package commands;
 import utils.Logger;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 public class Shutdown extends Command {
 	public Shutdown() {
 		super("shutdown", "Gracely Shutdown GLaDOS. Moderator privileges required.",
-				Permissions.MODERATOR, Arrays.asList());
+				Permission.MODERATOR, Arrays.asList());
 	}
 
 	@Override

@@ -8,12 +8,12 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class State extends Command {
 	public State() {
 		super("state",
-				"Updates GLaDOS's state (online, idle, do not disturb)", Permissions.NONE,
+				"Updates GLaDOS's state (online, idle, do not disturb)", Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]")
 								.setRequired(true)

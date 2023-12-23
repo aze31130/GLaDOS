@@ -4,13 +4,13 @@ import java.util.Arrays;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Trade extends Command {
 	public Trade() {
 		super("trade",
 				"[WIP] Request a trade with another user. Admin privileges required",
-				Permissions.OWNER,
+				Permission.OWNER,
 				Arrays.asList(
 						new OptionData(OptionType.USER, "destination",
 								"The target of your trade offer").setRequired(true),

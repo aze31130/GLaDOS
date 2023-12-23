@@ -22,12 +22,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Translate extends Command {
 	public Translate() {
 		super("translate", "Translates the latests messages in a text channel",
-				Permissions.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
+				Permission.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
 						"Amount of message you want to translate.")));
 	}
 

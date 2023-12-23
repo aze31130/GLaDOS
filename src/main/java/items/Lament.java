@@ -4,9 +4,7 @@ import accounts.Account;
 
 public class Lament extends Item {
 	public Lament() {
-		super("Lament", "minecraft:diamond_sword",
-				"TODO",
-				Rarity.FABLED, 300, "https://TODO");
+		super(1, "Lament", "TODO", Rarity.FABLED, 300, "https://TODO");
 	}
 
 	@Override

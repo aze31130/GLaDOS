@@ -3,15 +3,15 @@ package utils;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import java.util.List;
-import accounts.Permissions;
+import accounts.Permission;
 import glados.GLaDOS;
 
 public class PermissionsUtils {
 	/*
 	 * Returns true if the given member has enough privileges
 	 */
-	public static Boolean canExecute(Member member, Permissions requiredPermission) {
-		if (requiredPermission == Permissions.NONE)
+	public static Boolean canExecute(Member member, Permission requiredPermission) {
+		if (requiredPermission == Permission.NONE)
 			return true;
 
 		if (member.getId().equals(GLaDOS.getInstance().ownerId))
@@ -20,14 +20,14 @@ public class PermissionsUtils {
 		GLaDOS g = GLaDOS.getInstance();
 		List<Role> roles = member.getRoles();
 
-		Permissions actualPermission = Permissions.NONE;
+		Permission actualPermission = Permission.NONE;
 		for (Role role : roles)
 			if (role.getId().equals(g.roleModerator))
-				actualPermission = Permissions.MODERATOR;
+				actualPermission = Permission.MODERATOR;
 
 		for (Role role : roles)
 			if (role.getId().equals(g.roleAdministrator))
-				actualPermission = Permissions.ADMINISTRATOR;
+				actualPermission = Permission.ADMINISTRATOR;
 
 		return actualPermission.level >= requiredPermission.level;
 	}

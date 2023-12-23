@@ -3,7 +3,7 @@ package commands;
 import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.User;
@@ -18,7 +18,7 @@ import utils.FileUtils;
 public class Backup extends Command {
 	public Backup() {
 		super("backup", "Download a backup of the entire server. Admin privileges required",
-				Permissions.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.STRING, "target",
+				Permission.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.STRING, "target",
 						"The target of the backup action")
 								.addChoice("server", "server")
 								.addChoice("accounts", "accounts")

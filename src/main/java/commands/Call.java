@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONObject;
-import accounts.Permissions;
+import accounts.Permission;
 
 import glados.GLaDOS;
 
@@ -25,7 +25,7 @@ public class Call extends Command {
 		super(
 				"call",
 				"Triggers an internal event. Admin privileges required",
-				Permissions.MODERATOR,
+				Permission.MODERATOR,
 				Arrays.asList(
 						new OptionData(
 								OptionType.STRING,

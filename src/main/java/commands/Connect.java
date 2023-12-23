@@ -7,12 +7,12 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import utils.BuildEmbed;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Connect extends Command {
 	public Connect() {
 		super("connect", "Summons GLaDOS in a vocal channel",
-				Permissions.MODERATOR, Arrays.asList());
+				Permission.MODERATOR, Arrays.asList());
 	}
 
 	@Override

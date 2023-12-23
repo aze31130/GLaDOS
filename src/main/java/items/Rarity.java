@@ -6,9 +6,11 @@ package items;
 public enum Rarity {
 	EVENT(0, 255, 128, 0), // Orange
 	COMMON(1, 157, 157, 157), // Gray
-	UNCOMMON(2, 192, 192, 192), // Gray light
+	UNUSUAL(2, 192, 192, 192), // Gray light
 	RARE(3, 75, 105, 255), // Blue
 	EPIC(4, 137, 71, 255), // Purple light
+	EXCEPTIONNAL(0, 0, 0, 0),
+	MARVELOUS(0, 0, 0, 0),
 	LEGENDARY(5, 43, 241, 14), // Green
 	FABLED(6, 235, 75, 75), // Red
 	MYTHICAL(7, 170, 0, 170), // Purple dark

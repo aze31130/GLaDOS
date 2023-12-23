@@ -2,7 +2,7 @@ package commands;
 
 import java.util.Arrays;
 import java.util.List;
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 public class Role extends Command {
 	public Role() {
 		super("role", "Generate buttons for members to clic on.",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
+				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
 						"Generates the join/leave button for the given role.")));
 	}
 

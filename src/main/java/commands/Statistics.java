@@ -4,12 +4,12 @@ import java.util.Arrays;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Statistics extends Command {
 	public Statistics() {
 		super("statistics", "Generates statistics of the given channel.",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
+				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
 						"The channel you want to inspect").setRequired(true)));
 	}
 

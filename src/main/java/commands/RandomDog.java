@@ -9,11 +9,11 @@ import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class RandomDog extends Command {
 	public RandomDog() {
-		super("random-dog", "Display a dog picture", Permissions.NONE,
+		super("random-dog", "Display a dog picture", Permission.NONE,
 				Arrays.asList());
 	}
 

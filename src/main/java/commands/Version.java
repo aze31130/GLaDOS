@@ -8,12 +8,12 @@ import glados.GLaDOS;
 import utils.TimeUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Version extends Command {
 	public Version() {
 		super("version", "Displays version alongside others indicators",
-				Permissions.NONE, Arrays.asList());
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

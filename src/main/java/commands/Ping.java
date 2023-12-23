@@ -6,12 +6,12 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import java.time.Instant;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Ping extends Command {
 	public Ping() {
 		super("ping", "Display ping between Discord gateway and glados",
-				Permissions.NONE, Arrays.asList());
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

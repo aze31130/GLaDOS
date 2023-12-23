@@ -4,9 +4,8 @@ import accounts.Account;
 
 public class Fatal extends Item {
 	public Fatal() {
-		super("Fatal", "minecraft:diamond_sword",
-				"TODO",
-				Rarity.FABLED, 300, "https://TODO");
+		super(1, "Fatal", "Deals an incredible amount of damage.", Rarity.UNIQUE, 300,
+				"https://TODO");
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package commands;
 import utils.BuildEmbed;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 public class Spam extends Command {
 	public Spam() {
 		super("spam", "Spam-mention a given user. Moderator privileges required.",
-				Permissions.MODERATOR,
+				Permission.MODERATOR,
 				Arrays.asList(
 						new OptionData(OptionType.MENTIONABLE, "target",
 								"Person you want to annoy"),

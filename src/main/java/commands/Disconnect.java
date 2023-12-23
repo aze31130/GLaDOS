@@ -4,12 +4,12 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.managers.AudioManager;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Disconnect extends Command {
 	public Disconnect() {
 		super("disconnect", "Disconnects GLaDOS from a vocal channel",
-				Permissions.MODERATOR, Arrays.asList());
+				Permission.MODERATOR, Arrays.asList());
 	}
 
 	@Override

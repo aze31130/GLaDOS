@@ -9,12 +9,12 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Move extends Command {
 	public Move() {
 		super("move", "Move every voice connected users to another channel",
-				Permissions.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
+				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
 						"destination", "Channel you want to move in")));
 	}
 

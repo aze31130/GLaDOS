@@ -7,13 +7,13 @@ import java.util.Arrays;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import accounts.Permissions;
+import accounts.Permission;
 import glados.GLaDOS;
 
 public class Help extends Command {
 	public Help() {
 		super("help", "Shows an help page listing each commands",
-				Permissions.NONE, Arrays.asList());
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

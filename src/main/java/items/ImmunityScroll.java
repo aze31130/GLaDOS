@@ -4,8 +4,7 @@ import accounts.Account;
 
 public class ImmunityScroll extends Item {
 	public ImmunityScroll() {
-		super("Immunity Scroll", "minecraft:paper",
-				"Makes you invincible for 10 seconds",
+		super(1, "Immunity Scroll", "Makes you invincible for 10 seconds",
 				Rarity.LEGENDARY, 50, "https://TODO");
 	}
 

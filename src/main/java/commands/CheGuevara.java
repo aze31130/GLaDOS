@@ -10,12 +10,12 @@ import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class CheGuevara extends Command {
 	public CheGuevara() {
 		super("che-guevara", "Generate a random fact about Che-Guevara",
-				Permissions.NONE, Arrays.asList());
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

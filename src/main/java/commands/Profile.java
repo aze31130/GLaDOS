@@ -6,12 +6,12 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Account;
-import accounts.Permissions;
+import accounts.Permission;
 import glados.GLaDOS;
 
 public class Profile extends Command {
 	public Profile() {
-		super("profile", "Show a user profile", Permissions.NONE, Arrays.asList());
+		super("profile", "Show a user profile", Permission.NONE, Arrays.asList());
 	}
 
 	@Override

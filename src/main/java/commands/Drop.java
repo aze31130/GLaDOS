@@ -3,7 +3,7 @@ package commands;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import accounts.Account;
-import accounts.Permissions;
+import accounts.Permission;
 import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.entities.Member;
@@ -15,7 +15,7 @@ public class Drop extends Command {
 	public Drop() {
 		super("drop",
 				"[WIP] Drops you a random item. Admin privileges required",
-				Permissions.OWNER, Arrays.asList());
+				Permission.OWNER, Arrays.asList());
 	}
 
 	@Override

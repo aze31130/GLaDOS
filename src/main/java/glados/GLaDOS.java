@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +19,8 @@ import commands.*;
 import items.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.FileUtils;
@@ -138,7 +144,6 @@ public class GLaDOS {
 			this.requestsAmount = 0;
 			this.translationCooldown = LocalDateTime.now();
 
-			// this.accounts = JsonIO.loadAccounts();
 		} catch (JSONException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -165,9 +170,48 @@ public class GLaDOS {
 		jda.updateCommands().addCommands(convertedCommands).queue();
 	}
 
-	private void loadAccounts() {
-		System.out.println("Loading account...");
-		// TODO
+	public void loadAccounts(JDA jda) {
+		System.out.println("Downloading account file from discord...");
+
+		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory()
+				.retrievePast(1).complete().get(0);
+
+		if (!latestMessage.getAuthor().isBot()) {
+			System.err.println("Inventory sender is not a bot. Aborting loading.");
+			return;
+		}
+
+		Attachment attachment = latestMessage.getAttachments().get(0);
+
+		try {
+			URL fileUrl = new URL(attachment.getUrl());
+			Files.copy(fileUrl.openStream(), Paths.get("accounts.json"),
+					StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Loading account from file...");
+		JSONArray jsonAccounts = FileUtils.loadJsonArray("accounts.json");
+
+		for (int i = 0; i < jsonAccounts.length(); i++) {
+			JSONObject jsonAccount = jsonAccounts.getJSONObject(i);
+
+			Account a = new Account(
+					jsonAccount.getString("id"),
+					jda.getGuilds().get(0).getMemberById(jsonAccount.getString("id")),
+					jsonAccount.getInt("level"),
+					jsonAccount.getInt("experience"),
+					jsonAccount.getInt("totalExperience"),
+					jsonAccount.getEnum(TrustFactor.class, "trustFactor"),
+					jsonAccount.getEnum(Permission.class, "permission"),
+					jsonAccount.getBoolean("canDrop"),
+					jsonAccount.getLong("money"));
+
+			this.accounts.add(a);
+		}
+
+		System.out.println("Loaded " + this.accounts.size() + " accounts.");
 	}
 
 	/*
@@ -176,11 +220,11 @@ public class GLaDOS {
 	public Account getAccount(Member m) {
 		// Check if account is registered
 		Account result =
-				this.accounts.stream().filter(a -> a.id == m.getId()).findFirst().orElse(null);
+				this.accounts.stream().filter(a -> a.id.equals(m.getId())).findFirst().orElse(null);
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permissions.NONE,
+			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
 					true, 0);
 			this.accounts.add(result);
 		}

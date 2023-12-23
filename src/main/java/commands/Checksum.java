@@ -9,13 +9,13 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class Checksum extends Command {
 	public Checksum() {
 		super("checksum",
 				"Compute the checksum of string input.",
-				Permissions.NONE,
+				Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "algorithm",
 								"The algorithm type")

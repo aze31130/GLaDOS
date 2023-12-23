@@ -3,7 +3,7 @@ package commands;
 import java.util.Arrays;
 import java.util.Random;
 
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -13,7 +13,7 @@ public class Rng extends Command {
 	public Rng() {
 		super("rng",
 				"Generate a random number using 'perfect and totally not rigged' random",
-				Permissions.NONE,
+				Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "lower_bound",
 								"The lower bound is included"),

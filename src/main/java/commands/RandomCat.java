@@ -14,11 +14,11 @@ import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import accounts.Permissions;
+import accounts.Permission;
 
 public class RandomCat extends Command {
 	public RandomCat() {
-		super("random-cat", "Displays a cat picture", Permissions.NONE,
+		super("random-cat", "Displays a cat picture", Permission.NONE,
 				Arrays.asList());
 	}
 

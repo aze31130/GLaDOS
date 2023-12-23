@@ -2,7 +2,7 @@ package commands;
 
 import java.util.Arrays;
 
-import accounts.Permissions;
+import accounts.Permission;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 /*
@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
  */
 public class Test extends Command {
 	public Test() {
-		super("test", "Test command, nothing to see here", Permissions.OWNER,
+		super("test", "Test command, nothing to see here", Permission.OWNER,
 				Arrays.asList());
 	}
 

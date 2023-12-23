@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
 import achievements.Achievement;
+import commands.Inventory;
 import net.dv8tion.jda.api.entities.Member;
 
 public class Account {
@@ -15,15 +16,18 @@ public class Account {
 	public long totalExperience;
 
 	public TrustFactor trustLevel;
-	public Permissions permission;
+	public Permission permission;
 
+	// TODO: TO IMPLEMENT
 	public List<Achievement> achievements;
+
+	public List<Inventory> inventory;
 
 	public boolean canDrop;
 	public long money;
 
 	public Account(String id, Member member, int level, long experience, long totalExperience,
-			TrustFactor trustLevel, Permissions permission, boolean canDrop, long money) {
+			TrustFactor trustLevel, Permission permission, boolean canDrop, long money) {
 		this.id = id;
 		this.member = member;
 		this.level = level;

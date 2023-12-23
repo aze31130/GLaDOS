@@ -4,7 +4,7 @@ package accounts;
  * @formatter:off
  * Enumeration of every permission level
  */
-public enum Permissions {
+public enum Permission {
 	OWNER(3),
 	ADMINISTRATOR(2),
 	MODERATOR(1),
@@ -12,7 +12,7 @@ public enum Permissions {
 
 	public final int level;
 
-	private Permissions(int level) {
+	private Permission(int level) {
 		this.level = level;
 	}
 }
