@@ -267,4 +267,13 @@ public class BuildEmbed {
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
+
+	public static EmbedBuilder loggerEmbed(String action, String content) {
+		EmbedBuilder event = new EmbedBuilder();
+		event.setTitle(action);
+		event.setColor(Color.GRAY);
+		event.setDescription(content);
+		event.setTimestamp(Instant.now());
+		return event;
+	}
 }

@@ -35,6 +35,7 @@ public class FileUtils {
 		defaultConfig.put("channel_role", "");
 		defaultConfig.put("channel_vote", "");
 		defaultConfig.put("channel_backup", "");
+		defaultConfig.put("channel_system", "");
 
 		defaultConfig.put("role_broadcastMessenger", "");
 		defaultConfig.put("role_gamer", "");

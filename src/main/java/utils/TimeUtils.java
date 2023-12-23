@@ -31,15 +31,10 @@ public class TimeUtils {
 	public static long getEpicGameDelay() {
 		LocalDateTime now = LocalDateTime.now();
 
-		// ----- TO DELETE AFTER 4th of january -----
-		LocalDateTime nextEpicAnnounce = now.plusDays(1)
-				.withHour(17).withMinute(0).withSecond(0).withNano(0);
-		// -------------------------------------------
-
 		LocalDateTime nextThursday = now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY))
 				.withHour(17).withMinute(0).withSecond(0).withNano(0);
 
-		return Duration.between(now, nextEpicAnnounce).toSeconds();
+		return Duration.between(now, nextThursday).toSeconds();
 	}
 
 	/*

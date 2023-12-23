@@ -42,9 +42,9 @@ public class Main {
 			jda.setAutoReconnect(true);
 
 			ListenerAdapter events[] = {new ButtonClick(), new MemberJoin(), new MemberRemove(),
-					new MessageReactionAdd(), new MessageReactionRemove(), new MessageReceived(),
-					new ModalReceived(), new SlashCommandInteraction(), new VoiceUpdate(),
-					new VoiceMute()};
+					new MessageDelete(), new MessageReactionAdd(), new MessageReactionRemove(),
+					new MessageReceived(), new ModalReceived(), new SlashCommandInteraction(),
+					new VoiceUpdate(), new VoiceMute()};
 
 			for (ListenerAdapter event : events)
 				jda.addEventListener(event);
@@ -58,17 +58,12 @@ public class Main {
 			scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000,
 					TimeUnit.MILLISECONDS);
 
-			// scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
-			// 7 * 86400, TimeUnit.SECONDS);
-
-			// ----- TO DELETE AFTER 4th of january -----
 			scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
-					86400, TimeUnit.SECONDS);
-			// ------------------------------------------
+					7 * 86400, TimeUnit.SECONDS);
 
-			scheduler.scheduleAtFixedRate(new Status(jda), 0, 6, TimeUnit.HOURS);
+			scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 
-			scheduler.scheduleAtFixedRate(new Backup(jda), 0, 12, TimeUnit.HOURS);
+			scheduler.scheduleAtFixedRate(new Backup(jda), 0, 24, TimeUnit.HOURS);
 
 			System.out
 					.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");

@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
-import commands.Shutdown;
 import items.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
@@ -36,7 +35,7 @@ public class GLaDOS {
 
 	// Channel attributes
 	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole,
-			channelVote, channelBackup;
+			channelVote, channelBackup, channelSystem;
 
 	public int requestsAmount;
 
@@ -129,6 +128,7 @@ public class GLaDOS {
 			this.channelRole = json.getString("channel_role");
 			this.channelVote = json.getString("channel_vote");
 			this.channelBackup = json.getString("channel_backup");
+			this.channelSystem = json.getString("channel_system");
 
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.token = json.getString("token");
