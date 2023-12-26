@@ -2,9 +2,10 @@ package accounts;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import achievements.Achievement;
-import commands.Inventory;
+import items.Item;
 import net.dv8tion.jda.api.entities.Member;
 
 public class Account {
@@ -18,16 +19,15 @@ public class Account {
 	public TrustFactor trustLevel;
 	public Permission permission;
 
-	// TODO: TO IMPLEMENT
+	public List<Item> inventory;
 	public List<Achievement> achievements;
-
-	public List<Inventory> inventory;
 
 	public boolean canDrop;
 	public long money;
 
 	public Account(String id, Member member, int level, long experience, long totalExperience,
-			TrustFactor trustLevel, Permission permission, boolean canDrop, long money) {
+			TrustFactor trustLevel, Permission permission, List<Item> inventory, boolean canDrop,
+			long money) {
 		this.id = id;
 		this.member = member;
 		this.level = level;
@@ -35,19 +35,32 @@ public class Account {
 		this.totalExperience = totalExperience;
 		this.trustLevel = trustLevel;
 		this.permission = permission;
+		this.inventory = inventory;
 		this.achievements = new ArrayList<>();
 		this.canDrop = canDrop;
 		this.money = money;
 	}
 
+	/*
+	 * Converts the current user to a jsonObject
+	 */
 	public JSONObject toJson() {
-		// Generate a JSONObject with all the properties
 		JSONObject result = new JSONObject();
+		JSONArray items = new JSONArray();
+		JSONArray achievements = new JSONArray();
+
+		for (Item item : this.inventory)
+			items.put(item.toJson());
+
+		for (Achievement achievement : this.achievements)
+			achievements.put(achievement);
+
 		result.put("id", this.id);
 		result.put("name", this.member.getUser().getName());
 		result.put("created", this.member.getUser().getTimeCreated().toString());
 		result.put("joined", this.member.getTimeJoined().toString());
-		// Achievements: (JsonArray of achievements)
+		result.put("inventory", items);
+		result.put("achievements", achievements);
 		result.put("level", this.level);
 		result.put("experience", this.experience);
 		result.put("totalExperience", this.totalExperience);

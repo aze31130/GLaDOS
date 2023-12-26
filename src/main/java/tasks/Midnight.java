@@ -1,7 +1,7 @@
 package tasks;
 
 import java.time.LocalDateTime;
-import commands.Call;
+import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
 
@@ -24,7 +24,7 @@ public class Midnight implements Runnable {
 		System.out.println("Executed Random Quote at " + LocalDateTime.now().toString());
 		GLaDOS glados = GLaDOS.getInstance();
 
-		Call.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
+		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 
 		//TOOD Reset drop capability
 
@@ -34,6 +34,6 @@ public class Midnight implements Runnable {
 			e.printStackTrace();
 		}
 
-		Call.midnightRank(jda.getTextChannelById(glados.channelGeneral));
+		Trigger.midnightRank(jda.getTextChannelById(glados.channelGeneral));
 	}
 }

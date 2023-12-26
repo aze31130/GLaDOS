@@ -44,8 +44,6 @@ public abstract class Item {
 		item.put("id", this.id);
 		item.put("starForceLevel", this.starForceLevel);
 
-
-
 		return item;
 	}
 

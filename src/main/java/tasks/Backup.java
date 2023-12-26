@@ -3,6 +3,7 @@ package tasks;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.json.JSONArray;
+import accounts.Account;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.utils.FileUpload;
@@ -24,7 +25,10 @@ public class Backup implements Runnable {
 		 */
 		System.out.println("Backing up all accounts !");
 		GLaDOS g = GLaDOS.getInstance();
-		JSONArray accounts = new JSONArray(g.accounts);
+		JSONArray accounts = new JSONArray();
+
+		for (Account a : g.accounts)
+			accounts.put(a.toJson());
 
 		// Write backup file
 		FileUtils.writeRawFile("accounts.json", accounts.toString(4));

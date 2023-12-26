@@ -48,6 +48,7 @@ public class Drop extends Command {
 		if (TimeUtils.isSpecialDay()) {
 			// Guaranteeing specific drops on event days
 			// TODO
+			return;
 		}
 
 		// Drop item
@@ -55,20 +56,17 @@ public class Drop extends Command {
 		long cumulativeProbability = 0;
 		Item droppedItem = null;
 
-		while (droppedItem == null) {
-			for (Item item : glados.items) {
-				cumulativeProbability += item.dropChance;
-				if (dropValue <= cumulativeProbability) {
-					droppedItem = item;
-					break;
-				}
+		for (Item item : glados.items) {
+			cumulativeProbability += item.dropChance;
+			if (dropValue <= cumulativeProbability) {
+				droppedItem = item;
+				break;
 			}
-
-			// Check for conditionnal drop
-			if (!droppedItem.conditionnalDrop(authorAccount))
-				droppedItem = null;
 		}
 
+		// Check if drop requirements are met
+		if (droppedItem.conditionnalDrop(authorAccount))
+			authorAccount.inventory.add(droppedItem);
 		authorAccount.canDrop = false;
 	}
 }

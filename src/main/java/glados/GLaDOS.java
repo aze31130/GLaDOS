@@ -23,6 +23,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
+import utils.BuildEmbed;
 import utils.FileUtils;
 
 public class GLaDOS {
@@ -82,7 +83,7 @@ public class GLaDOS {
 		/*
 		 * Initialize command
 		 */
-		Command commands[] = {new Backup(), new Call(), new Checksum(), new CheGuevara(),
+		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(),
 				new Clear(), new Connect(), new Disconnect(), new Drop(), new Factorielle(),
 				new Fibonacci(), new Help(), new Idea(), new Inventory(), new Move(), new Ping(),
 				new Play(), new Profile(), new Question(), new RandomCat(), new RandomDog(),
@@ -177,7 +178,10 @@ public class GLaDOS {
 				.retrievePast(1).complete().get(0);
 
 		if (!latestMessage.getAuthor().isBot()) {
-			System.err.println("Inventory sender is not a bot. Aborting loading.");
+			jda.getTextChannelById(this.channelSystem)
+					.sendMessageEmbeds(BuildEmbed
+							.errorEmbed("Inventory sender is not a bot. Aborting loading.").build())
+					.queue();
 			return;
 		}
 
@@ -196,6 +200,19 @@ public class GLaDOS {
 
 		for (int i = 0; i < jsonAccounts.length(); i++) {
 			JSONObject jsonAccount = jsonAccounts.getJSONObject(i);
+			JSONArray jsonInventory = jsonAccount.getJSONArray("inventory");
+			List<Item> userInventory = new ArrayList<>();
+
+			for (int j = 0; j < jsonInventory.length(); j++) {
+
+				int itemId = jsonInventory.getJSONObject(i).getInt("id");
+				int itemStarForceLevel = jsonInventory.getJSONObject(i).getInt("starForceLevel");
+
+				Item item =
+						this.items.stream().filter(it -> it.id == itemId).findFirst().orElse(null);
+				item.starForceLevel = itemStarForceLevel;
+				userInventory.add(item);
+			}
 
 			Account a = new Account(
 					jsonAccount.getString("id"),
@@ -205,6 +222,7 @@ public class GLaDOS {
 					jsonAccount.getInt("totalExperience"),
 					jsonAccount.getEnum(TrustFactor.class, "trustFactor"),
 					jsonAccount.getEnum(Permission.class, "permission"),
+					userInventory,
 					jsonAccount.getBoolean("canDrop"),
 					jsonAccount.getLong("money"));
 
@@ -224,8 +242,8 @@ public class GLaDOS {
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(m.getId(), m, 0, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
-					true, 0);
+			result = new Account(m.getId(), m, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
+					new ArrayList<Item>(), true, 0);
 			this.accounts.add(result);
 		}
 

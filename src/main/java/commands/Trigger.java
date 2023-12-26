@@ -16,15 +16,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONObject;
+import accounts.Account;
 import accounts.Permission;
 
 import glados.GLaDOS;
 
-public class Call extends Command {
-	public Call() {
+public class Trigger extends Command {
+	public Trigger() {
 		super(
-				"call",
-				"Triggers an internal event. Admin privileges required",
+				"trigger",
+				"Triggers an internal event. Moderator privileges required",
 				Permission.MODERATOR,
 				Arrays.asList(
 						new OptionData(
@@ -33,7 +34,8 @@ public class Call extends Command {
 								"Call name you want to trigger").setRequired(true)
 										.addChoice("Gamer", "Gamer")
 										.addChoice("Midnight", "Midnight")
-										.addChoice("Ranking", "Ranking")));
+										.addChoice("Ranking", "Ranking")
+										.addChoice("Reset", "Reset")));
 	}
 
 	private static String getMedalEmoji(int rank) {
@@ -107,6 +109,11 @@ public class Call extends Command {
 			case "Ranking":
 				midnightRank(destination);
 				return;
+			case "Reset":
+				// Resets the ability for all accounts to drop
+				for (Account a : GLaDOS.getInstance().accounts)
+					a.canDrop = true;
+				return;
 			default:
 				embed = BuildEmbed.errorEmbed("This trigger has not been registered !");
 				break;
@@ -125,7 +132,7 @@ public class Call extends Command {
 					BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
 			return;
 		}
-		Call.callMessage(source, trigger);
+		Trigger.callMessage(source, trigger);
 	}
 
 	public static void MerryChristmas(JDA jda) {
