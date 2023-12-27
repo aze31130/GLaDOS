@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.Arrays;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import accounts.Permission;
@@ -27,10 +28,15 @@ public class Backup extends Command {
 	}
 
 	public void serverBackup(Guild server, TextChannel source) {
-		for (TextChannel channel : server.getTextChannels()) {
+		int counter = 0;
+		List<TextChannel> channels = server.getTextChannels();
+
+		for (TextChannel channel : channels) {
 			JSONArray messages = new JSONArray();
 
-			source.sendMessage("Downloading " + channel.getAsMention()).queue();
+			source.sendMessage("Downloading " + channel.getAsMention() + " " + counter + " / "
+					+ channels.size())
+					.queue();
 
 			MessageChannel channel2 = (MessageChannel) channel;
 
@@ -46,7 +52,6 @@ public class Backup extends Command {
 				jsonMessage.put("isPinned", message.isPinned());
 				jsonMessage.put("channelId", message.getChannelIdLong());
 				jsonMessage.put("channelName", message.getChannel().getName());
-				jsonMessage.put("reactionCount", message.getReactions().size());
 
 				JSONArray attachments = new JSONArray();
 				for (Attachment attachment : message.getAttachments())
@@ -80,6 +85,7 @@ public class Backup extends Command {
 				return true;
 			});
 			FileUtils.writeRawFile(channel.getName() + ".json", messages.toString(4));
+			counter++;
 		}
 
 		source.sendMessageEmbeds(BuildEmbed.successEmbed("Backup completed successfully").build())
