@@ -7,6 +7,7 @@ import accounts.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -26,26 +27,31 @@ public class Backup extends Command {
 	}
 
 	public void serverBackup(Guild server, TextChannel source) {
-		JSONArray messages = new JSONArray();
 		for (TextChannel channel : server.getTextChannels()) {
+			JSONArray messages = new JSONArray();
+
 			source.sendMessage("Downloading " + channel.getAsMention()).queue();
-			source.sendTyping().queue();
 
 			MessageChannel channel2 = (MessageChannel) channel;
-			channel2.sendTyping().queue();
 
 			channel2.getIterableHistory().cache(false).forEachRemaining(message -> {
+				System.out.println(message.getContentRaw());
+
 				JSONObject jsonMessage = new JSONObject();
 				jsonMessage.put("authorId", message.getAuthor().getIdLong());
 				jsonMessage.put("authorName", message.getAuthor().getName());
 				jsonMessage.put("message", message.getContentRaw());
 				jsonMessage.put("posted", message.getTimeCreated());
 				jsonMessage.put("isEdited", message.isEdited());
-				jsonMessage.put("attachments", message.getAttachments().size());
 				jsonMessage.put("isPinned", message.isPinned());
 				jsonMessage.put("channelId", message.getChannelIdLong());
 				jsonMessage.put("channelName", message.getChannel().getName());
 				jsonMessage.put("reactionCount", message.getReactions().size());
+
+				JSONArray attachments = new JSONArray();
+				for (Attachment attachment : message.getAttachments())
+					attachments.put(attachment.getUrl());
+				jsonMessage.put("attachments", attachments);
 
 				JSONArray reactions = new JSONArray();
 				for (MessageReaction reaction : message.getReactions()) {
@@ -73,12 +79,11 @@ public class Backup extends Command {
 				messages.put(jsonMessage);
 				return true;
 			});
+			FileUtils.writeRawFile(channel.getName() + ".json", messages.toString(4));
 		}
 
 		source.sendMessageEmbeds(BuildEmbed.successEmbed("Backup completed successfully").build())
 				.queue();
-
-		FileUtils.writeRawFile("server.json", messages.toString(4));
 	}
 
 	@Override

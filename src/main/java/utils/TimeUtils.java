@@ -22,7 +22,7 @@ public class TimeUtils {
 		if (now.isAfter(midnight))
 			midnight = midnight.plusDays(1);
 
-		return Duration.between(now, midnight).minusMillis(500).toMillis();
+		return Duration.between(now, midnight).minusMillis(750).toMillis();
 	}
 
 	/*

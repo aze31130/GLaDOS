@@ -36,7 +36,7 @@ public class Backup implements Runnable {
 		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
 		jda.getTextChannelById(g.channelBackup)
 				.sendMessageEmbeds(BuildEmbed.successEmbed("Account backup").build())
-				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).queue();
+				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).complete();
 
 		System.out.println("Backup done !");
 	}
