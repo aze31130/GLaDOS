@@ -35,13 +35,12 @@ public class Backup extends Command {
 			JSONArray messages = new JSONArray();
 
 			source.sendMessage("Downloading " + channel.getAsMention() + " " + counter + " / "
-					+ channels.size())
-					.queue();
+					+ channels.size()).complete();
 
 			MessageChannel channel2 = (MessageChannel) channel;
 
 			channel2.getIterableHistory().cache(false).forEachRemaining(message -> {
-				System.out.println(message.getContentRaw());
+				System.out.println(message.getTimeCreated().toString());
 
 				JSONObject jsonMessage = new JSONObject();
 				jsonMessage.put("authorId", message.getAuthor().getIdLong());
