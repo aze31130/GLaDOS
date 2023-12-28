@@ -35,7 +35,8 @@ public class Trigger extends Command {
 										.addChoice("Gamer", "Gamer")
 										.addChoice("Midnight", "Midnight")
 										.addChoice("Ranking", "Ranking")
-										.addChoice("Reset", "Reset")));
+										.addChoice("Reset", "Reset")
+										.addChoice("Backup", "Backup")));
 	}
 
 	private static String getMedalEmoji(int rank) {
@@ -132,6 +133,12 @@ public class Trigger extends Command {
 					BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
 			return;
 		}
+
+		if (trigger.equals("Backup")) {
+			new tasks.Backup(event.getJDA()).run();
+			return;
+		}
+
 		Trigger.callMessage(source, trigger);
 	}
 
