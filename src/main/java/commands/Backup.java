@@ -1,14 +1,14 @@
 package commands;
 
 import java.util.Arrays;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import accounts.Permission;
-import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message.Attachment;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -18,70 +18,92 @@ import utils.FileUtils;
 public class Backup extends Command {
 	public Backup() {
 		super("backup", "Download a backup of the entire server. Admin privileges required",
-				Permission.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
-						"The targeted channel you want to backup")
+				Permission.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.STRING, "target",
+						"The target of the backup action")
+								.addChoice("server", "server")
+								.addChoice("accounts", "accounts")
 								.setRequired(true)));
 	}
 
-	public void channelBackup(MessageChannel source, MessageChannel channel) {
-		JSONArray messages = new JSONArray();
+	public void serverBackup(Guild server, TextChannel source) {
+		int counter = 0;
+		List<TextChannel> channels = server.getTextChannels();
 
-		channel.getIterableHistory().cache(true).forEachRemaining(message -> {
-			System.out.println(messages.length());
-			JSONObject jsonMessage = new JSONObject();
-			jsonMessage.put("authorId", message.getAuthor().getIdLong());
-			jsonMessage.put("authorName", message.getAuthor().getName());
-			jsonMessage.put("message", message.getContentRaw());
-			jsonMessage.put("posted", message.getTimeCreated());
-			jsonMessage.put("isEdited", message.isEdited());
-			jsonMessage.put("isPinned", message.isPinned());
-			jsonMessage.put("channelId", message.getChannelIdLong());
-			jsonMessage.put("channelName", message.getChannel().getName());
+		for (TextChannel channel : channels) {
+			JSONArray messages = new JSONArray();
 
-			JSONArray attachments = new JSONArray();
-			for (Attachment attachment : message.getAttachments())
-				attachments.put(attachment.getUrl());
-			jsonMessage.put("attachments", attachments);
+			source.sendMessage("Downloading " + channel.getAsMention() + " " + counter + " / "
+					+ channels.size()).complete();
 
-			JSONArray reactions = new JSONArray();
-			for (MessageReaction reaction : message.getReactions()) {
-				JSONObject jsonReaction = new JSONObject();
+			channel.getIterableHistory().forEachRemaining(message -> {
+				System.out.println(channel.getName() + " " + messages.length());
+				JSONObject jsonMessage = new JSONObject();
+				jsonMessage.put("authorId", message.getAuthor().getIdLong());
+				jsonMessage.put("authorName", message.getAuthor().getName());
+				jsonMessage.put("message", message.getContentRaw());
+				jsonMessage.put("posted", message.getTimeCreated());
+				jsonMessage.put("isEdited", message.isEdited());
+				jsonMessage.put("isPinned", message.isPinned());
+				jsonMessage.put("channelId", message.getChannelIdLong());
+				jsonMessage.put("channelName", message.getChannel().getName());
 
-				jsonReaction.put("emote", reaction.getEmoji().toString());
-				jsonReaction.put("count", reaction.getCount());
+				JSONArray attachments = new JSONArray();
+				for (Attachment attachment : message.getAttachments())
+					attachments.put(attachment.getUrl());
+				jsonMessage.put("attachments", attachments);
 
-				JSONArray jsonReactionAuthors = new JSONArray();
-				for (User reactor : reaction.retrieveUsers().complete()) {
-					JSONObject jsonReactionAuthor = new JSONObject();
+				JSONArray reactions = new JSONArray();
+				for (MessageReaction reaction : message.getReactions()) {
+					JSONObject jsonReaction = new JSONObject();
 
-					jsonReactionAuthor.put("authorId", reactor.getIdLong());
-					jsonReactionAuthor.put("authorName", reactor.getName());
+					jsonReaction.put("emote", reaction.getEmoji().toString());
+					jsonReaction.put("count", reaction.getCount());
 
-					jsonReactionAuthors.put(jsonReactionAuthor);
+					// JSONArray jsonReactionAuthors = new JSONArray();
+					// for (User reactor : reaction.retrieveUsers().complete()) {
+					// JSONObject jsonReactionAuthor = new JSONObject();
+
+					// jsonReactionAuthor.put("authorId", reactor.getIdLong());
+					// jsonReactionAuthor.put("authorName", reactor.getName());
+
+					// jsonReactionAuthors.put(jsonReactionAuthor);
+					// }
+
+					// jsonReaction.put("reactionAuthors", jsonReactionAuthors);
+					reactions.put(jsonReaction);
 				}
 
-				jsonReaction.put("reactionAuthors", jsonReactionAuthors);
-				reactions.put(jsonReaction);
-			}
+				jsonMessage.put("reactions", reactions);
 
-			jsonMessage.put("reactions", reactions);
+				messages.put(jsonMessage);
+				return true;
+			});
+			FileUtils.writeRawFile(channel.getName() + ".json", messages.toString(4));
+			counter++;
 
-			messages.put(jsonMessage);
-			return true;
-		});
-		FileUtils.writeRawFile(channel.getName() + ".json", messages.toString(4));
-
-		source.sendMessageEmbeds(
-				BuildEmbed.successEmbed("Channel backup completed successfully").build())
-				.queue();
+			source.sendMessageEmbeds(
+					BuildEmbed.successEmbed(channel.getName() + " backup completed successfully")
+							.build())
+					.queue();
+		}
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannel channel = (MessageChannel) event.getOption("target").getAsChannel();
+		String type = event.getOption("target").getAsString();
+		Guild guild = event.getGuild();
 		TextChannel source = event.getGuildChannel().asTextChannel();
 
-		source.sendMessage("Downloading " + channel.getAsMention()).complete();
-		channelBackup(source, channel);
+		if (type.equals("server")) {
+			source.sendMessage("Downloading server's history...").queue();
+			serverBackup(guild, source);
+			source.sendMessage("Full server backup action completed successfully.").queue();
+			return;
+		}
+
+		if (type.equals("accounts")) {
+			new tasks.Backup(event.getJDA()).run();
+			return;
+		}
 	}
 }
