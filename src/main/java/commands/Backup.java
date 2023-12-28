@@ -57,19 +57,12 @@ public class Backup extends Command {
 					JSONObject jsonReaction = new JSONObject();
 
 					jsonReaction.put("emote", reaction.getEmoji().toString());
-					jsonReaction.put("count", reaction.getCount());
-
-					// JSONArray jsonReactionAuthors = new JSONArray();
-					// for (User reactor : reaction.retrieveUsers().complete()) {
-					// JSONObject jsonReactionAuthor = new JSONObject();
-
-					// jsonReactionAuthor.put("authorId", reactor.getIdLong());
-					// jsonReactionAuthor.put("authorName", reactor.getName());
-
-					// jsonReactionAuthors.put(jsonReactionAuthor);
-					// }
-
-					// jsonReaction.put("reactionAuthors", jsonReactionAuthors);
+					try {
+						jsonReaction.put("count", reaction.getCount());
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+						jsonReaction.put("count", 0);
+					}
 					reactions.put(jsonReaction);
 				}
 
@@ -84,7 +77,7 @@ public class Backup extends Command {
 			source.sendMessageEmbeds(
 					BuildEmbed.successEmbed(channel.getName() + " backup completed successfully")
 							.build())
-					.queue();
+					.complete();
 		}
 	}
 
