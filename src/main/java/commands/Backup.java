@@ -45,7 +45,7 @@ public class Backup extends Command {
 				jsonMessage.put("isEdited", message.isEdited());
 				jsonMessage.put("isPinned", message.isPinned());
 				jsonMessage.put("channelId", message.getChannelIdLong());
-				jsonMessage.put("channelName", message.getChannel().getName());
+				jsonMessage.put("channelName", channel.getName());
 
 				JSONArray attachments = new JSONArray();
 				for (Attachment attachment : message.getAttachments())
@@ -75,7 +75,8 @@ public class Backup extends Command {
 			counter++;
 
 			source.sendMessageEmbeds(
-					BuildEmbed.successEmbed(channel.getName() + " backup completed successfully")
+					BuildEmbed
+							.successEmbed(channel.getAsMention() + " backup completed successfully")
 							.build())
 					.complete();
 		}
