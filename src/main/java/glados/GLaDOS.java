@@ -88,7 +88,7 @@ public class GLaDOS {
 				new Fibonacci(), new Help(), new Idea(), new Inventory(), new Move(), new Ping(),
 				new Play(), new Profile(), new Question(), new RandomCat(), new RandomDog(),
 				new Rng(), new Role(), new Shutdown(), new Spam(), new State(), new Statistics(),
-				new Status(), new Test(), new Trade(), new Translate(), new Upgrade(),
+				new Status(), new Trade(), new Translate(), new Upgrade(),
 				new Version(), new Vote()};
 
 		for (Command c : commands)
