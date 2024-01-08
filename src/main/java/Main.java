@@ -40,10 +40,11 @@ public class Main {
 
 		jda.setAutoReconnect(true);
 
-		ListenerAdapter events[] = {new ButtonClick(), new MemberJoin(), new MemberRemove(),
-				new MessageDelete(), new MessageReactionAdd(), new MessageReactionRemove(),
-				new MessageReceived(), new ModalReceived(), new SlashCommandInteraction(),
-				new VoiceUpdate(), new VoiceMute()};
+		ListenerAdapter events[] =
+				{new ButtonClick(), new ChannelCreate(), new ChannelDelete(), new MemberJoin(),
+						new MemberRemove(), new MessageDelete(), new MessageReactionAdd(),
+						new MessageReactionRemove(), new MessageReceived(), new ModalReceived(),
+						new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute()};
 
 		for (ListenerAdapter event : events)
 			jda.addEventListener(event);
