@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Holy Hand Grenade of Antioch",
+    "lore": "",
+    "rarity": "LEGENDARY",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

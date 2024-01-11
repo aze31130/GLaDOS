@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Immunity Scroll",
+    "lore": "Makes you invincible for 5 seconds.",
+    "rarity": "EPIC",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

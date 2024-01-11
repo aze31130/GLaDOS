@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Adventurer Helmet",
+    "lore": "",
+    "rarity": "UNUSUAL",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

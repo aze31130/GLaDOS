@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Silver Bracelet",
+    "lore": "",
+    "rarity": "EPIC",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

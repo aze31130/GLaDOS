@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Time Cube",
+    "lore": "",
+    "rarity": "UNIQUE",
+    "dropChance": 1000,
+    "conditionnalDrop": ["UNIQUE_ITEM"]
+}

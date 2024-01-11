@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "War Bicorne",
+    "lore": "",
+    "rarity": "FABLED",
+    "dropChance": 100,
+    "conditionnalDrop": []
+}

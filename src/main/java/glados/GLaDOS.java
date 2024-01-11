@@ -95,9 +95,9 @@ public class GLaDOS {
 			this.commands.add(c);
 
 		/*
-		 * Initialize items
+		 * Initialize items TODO: need to read all json files and instanciate items
 		 */
-		Item items[] = {new AttackSpeedScroll(), new Fatal(), new Lament(), new WarpStone()};
+		Item items[] = {};
 
 		for (Item i : items) {
 			this.items.add(i);

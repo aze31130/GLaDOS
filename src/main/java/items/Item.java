@@ -1,5 +1,6 @@
 package items;
 
+import java.util.List;
 import org.json.JSONObject;
 import accounts.Account;
 
@@ -28,14 +29,13 @@ public abstract class Item {
 	// public List<PairUtils<String, Integer>> Enchants;
 	// public int starForceCost;
 
-	public Item(int id, String name, String lore, Rarity rarity, int dropChance,
-			String url) {
+	public Item(int id, String name, String lore, Rarity rarity, int dropChance) {
 		this.id = id;
 		this.name = name;
 		this.lore = lore;
 		this.rarity = rarity;
 		this.dropChance = dropChance;
-		this.url = url;
+		this.url = "https://" + id;
 	}
 
 	public JSONObject toJson() {
@@ -46,6 +46,4 @@ public abstract class Item {
 
 		return item;
 	}
-
-	public abstract boolean conditionnalDrop(Account dropper);
 }

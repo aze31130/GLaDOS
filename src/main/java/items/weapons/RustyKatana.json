@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Rusty Katana",
+    "lore": "",
+    "rarity": "Common",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

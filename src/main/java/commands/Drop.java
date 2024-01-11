@@ -65,8 +65,8 @@ public class Drop extends Command {
 		}
 
 		// Check if drop requirements are met
-		if (droppedItem.conditionnalDrop(authorAccount))
-			authorAccount.inventory.add(droppedItem);
+		// if (droppedItem.conditionnalDrop(authorAccount, glados.accounts))
+		// authorAccount.inventory.add(droppedItem);
 		authorAccount.canDrop = false;
 	}
 }

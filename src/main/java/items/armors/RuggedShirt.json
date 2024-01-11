@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Rugged Shirt",
+    "lore": "",
+    "rarity": "COMMON",
+    "dropChance": 100,
+    "conditionnalDrop": []
+}
