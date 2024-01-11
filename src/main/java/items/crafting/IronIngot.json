@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Iron Ingot",
+    "lore": "Just a simple ingot made of Iron.",
+    "rarity": "COMMON",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

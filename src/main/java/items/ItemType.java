@@ -4,11 +4,16 @@ package items;
  * @formatter:off
  */
 public enum ItemType {
-	BLOCK,
+	NECKLACE,
+	BRACELET,
+	HELMET,
+	CHESTPLATE,
+	LEGGINGS,
+	BOOTS,
 	ITEM,
-	WEAPON,
-	TOOL,
+	RING,
 	POTION,
-	ENCHANT,
+	WAND,
+	SWORD,
 	SCROLL;
 }

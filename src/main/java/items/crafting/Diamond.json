@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Diamond",
+    "lore": "A very hard stone that you can look through.",
+    "rarity": "RARE",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

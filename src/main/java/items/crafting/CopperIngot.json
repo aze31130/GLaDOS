@@ -1,0 +1,8 @@
+{
+    "id": 10,
+    "name": "Copper Ingot",
+    "lore": "Just a simple ingot made of Copper.",
+    "rarity": "COMMON",
+    "dropChance": 1000,
+    "conditionnalDrop": []
+}

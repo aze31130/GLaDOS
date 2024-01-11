@@ -1,8 +1,6 @@
 package items;
 
-import java.util.List;
 import org.json.JSONObject;
-import accounts.Account;
 
 public abstract class Item {
 	public int id;
@@ -42,6 +40,7 @@ public abstract class Item {
 		JSONObject item = new JSONObject();
 
 		item.put("id", this.id);
+		item.put("name", this.name);
 		item.put("starForceLevel", this.starForceLevel);
 
 		return item;
