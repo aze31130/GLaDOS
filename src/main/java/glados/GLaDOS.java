@@ -16,7 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
-import items.*;
+import items.Item;
+import items.Rarity;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -25,6 +26,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.BuildEmbed;
 import utils.FileUtils;
+import utils.ItemUtils;
 
 public class GLaDOS {
 	private static volatile GLaDOS instance = null;
@@ -94,15 +96,7 @@ public class GLaDOS {
 		for (Command c : commands)
 			this.commands.add(c);
 
-		/*
-		 * Initialize items TODO: need to read all json files and instanciate items
-		 */
-		Item items[] = {};
-
-		for (Item i : items) {
-			this.items.add(i);
-			this.itemTotalProb += i.dropChance;
-		}
+		this.loadItems();
 
 		try {
 			// Load the global variables
@@ -149,6 +143,31 @@ public class GLaDOS {
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+
+	/*
+	 * Reads all item data contained in all json files
+	 */
+	public void loadItems() {
+		System.out.println("Loading Items...");
+
+		List<JSONObject> itemsJson = new ArrayList<>();
+
+		FileUtils.loadItems(new File("classes/items"), itemsJson);
+
+		for (JSONObject itemJson : itemsJson) {
+			Item i = new Item(
+					itemJson.getInt("id"),
+					itemJson.getString("name"),
+					itemJson.getString("lore"),
+					itemJson.getEnum(Rarity.class, "rarity"),
+					itemJson.getInt("dropChance"));
+			this.items.add(i);
+			this.itemTotalProb += i.dropChance;
+		}
+
+		System.out.println("Loaded " + this.items.size() + " items.");
+		ItemUtils.generateItemChart();
 	}
 
 	/*

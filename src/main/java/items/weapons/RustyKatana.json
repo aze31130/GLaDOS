@@ -2,7 +2,7 @@
     "id": 10,
     "name": "Rusty Katana",
     "lore": "",
-    "rarity": "Common",
+    "rarity": "COMMON",
     "dropChance": 1000,
     "conditionnalDrop": []
 }

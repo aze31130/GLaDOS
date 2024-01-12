@@ -9,6 +9,7 @@ This bot include multiple tools such as :
 * Translation module using [Argos](https://www.argosopentech.com/) (**Huge thanks** to them !)
 * Quizz members on various subjects using [Opentdb](https://opentdb.com/) (**Huge thanks** to them too !)
 * Generates random cat / dog pictures
+* Allows members to drop and gamble virtual money and items
 * Member behavioral analysis (Still WIP)
 * Statistics tools (detailed contribution per members)
 

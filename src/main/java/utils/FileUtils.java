@@ -1,11 +1,12 @@
 package utils;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.util.List;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.JSONArray;
@@ -53,6 +54,22 @@ public class FileUtils {
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");
 
 		FileUtils.writeRawFile("config.json", defaultConfig.toString(4));
+	}
+
+	public static void loadItems(File folder, List<JSONObject> items) {
+		File[] files = folder.listFiles();
+
+		if (files == null)
+			return;
+
+		for (File f : files) {
+			if (f.isDirectory()) {
+				loadItems(f, items);
+			} else if (f.getName().endsWith("json")) {
+				JSONObject object = loadJsonObject(f.getAbsolutePath());
+				items.add(object);
+			}
+		}
 	}
 
 	public static JSONArray loadJsonArray(String filename) {

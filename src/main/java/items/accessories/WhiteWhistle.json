@@ -2,7 +2,7 @@
     "id": 10,
     "name": "White Whistle",
     "lore": "",
-    "rarity": "MARVELOUS",
+    "rarity": "LEGENDARY",
     "dropChance": 1000,
     "conditionnalDrop": []
 }

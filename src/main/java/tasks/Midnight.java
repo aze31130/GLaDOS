@@ -1,6 +1,7 @@
 package tasks;
 
 import java.time.LocalDateTime;
+import accounts.Account;
 import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
@@ -25,8 +26,10 @@ public class Midnight implements Runnable {
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
-
-		//TOOD Reset drop capability
+		
+		// Resets the ability for all accounts to drop
+		for (Account a : glados.accounts)
+			a.canDrop = true;
 
 		try {
 			Thread.sleep(15000);

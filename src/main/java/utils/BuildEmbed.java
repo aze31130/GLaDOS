@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.time.Instant;
 import java.util.Random;
 import accounts.Account;
+import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 
@@ -264,6 +265,15 @@ public class BuildEmbed {
 		embed.setTitle("Claimed !");
 		embed.setColor(Color.ORANGE);
 		embed.setDescription("Got " + claimedMoney + " (" + totalMoney + " total)");
+		embed.setTimestamp(Instant.now());
+		return embed;
+	}
+
+	public static EmbedBuilder itemDropEmbed(Item item) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setTitle("You got:");
+		embed.setColor(item.rarity.color);
+		embed.setDescription("[**" + item.rarity.name() + "**] " + item.name);
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}

@@ -2,7 +2,7 @@ package items;
 
 import org.json.JSONObject;
 
-public abstract class Item {
+public class Item {
 	public int id;
 	public String name;
 	public ItemType type;
