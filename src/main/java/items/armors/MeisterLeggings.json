@@ -3,6 +3,6 @@
     "name": "Meister Leggings",
     "lore": "",
     "rarity": "EXCEPTIONNAL",
-    "dropChance": 100,
+    "dropChance": 10000,
     "conditionnalDrop": []
 }

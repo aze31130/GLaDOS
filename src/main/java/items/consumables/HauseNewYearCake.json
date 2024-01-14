@@ -3,6 +3,6 @@
     "name": "Hausemaster's New Year Cake",
     "lore": "During the annual new year party, Hause's creation crumbled into a buttery debacle, leaving the once-hopeful confection with a tale of woe and a legacy of poorly-cooked butter. Only droppable in december.",
     "rarity": "EVENT",
-    "dropChance": -1,
+    "dropChance": 1,
     "conditionnalDrop": []
 }

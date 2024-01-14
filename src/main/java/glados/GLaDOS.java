@@ -34,7 +34,7 @@ public class GLaDOS {
 	public String token;
 
 	// Internal settings
-	public boolean leveling, logMessages, checkPrivateMessages, metricLogging;
+	public boolean leveling, checkPrivateMessages, metricLogging;
 	public int maxLevel, maxExpPerDay;
 	public String guildId, ownerId;
 
@@ -58,7 +58,7 @@ public class GLaDOS {
 	public List<Command> commands = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
 	// Optimisation, holds the sum of each drop weight
-	public long itemTotalProb = 0;
+	public double itemTotalProb = 0;
 
 	private GLaDOS() {}
 
@@ -105,7 +105,6 @@ public class GLaDOS {
 
 			this.leveling = json.getBoolean("leveling");
 			this.metricLogging = json.getBoolean("metricLogging");
-			this.logMessages = json.getBoolean("logMessages");
 			this.checkPrivateMessages = json.getBoolean("checkPrivateMessages");
 
 			this.guildId = json.getString("guildId");
@@ -161,7 +160,7 @@ public class GLaDOS {
 					itemJson.getString("name"),
 					itemJson.getString("lore"),
 					itemJson.getEnum(Rarity.class, "rarity"),
-					itemJson.getInt("dropChance"));
+					itemJson.getDouble("dropChance"));
 			this.items.add(i);
 			this.itemTotalProb += i.dropChance;
 		}

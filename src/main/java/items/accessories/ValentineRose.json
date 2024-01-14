@@ -3,6 +3,6 @@
     "name": "Valentine's Rose",
     "lore": "",
     "rarity": "EVENT",
-    "dropChance": 1000,
+    "dropChance": 1,
     "conditionnalDrop": []
 }

@@ -3,6 +3,6 @@
     "name": "Overlord Boots",
     "lore": "",
     "rarity": "GODLY",
-    "dropChance": 100,
+    "dropChance": 1,
     "conditionnalDrop": []
 }

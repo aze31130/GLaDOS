@@ -3,6 +3,6 @@
     "name": "Boreal Chestplate",
     "lore": "",
     "rarity": "MYTHICAL",
-    "dropChance": 100,
+    "dropChance": 10,
     "conditionnalDrop": []
 }

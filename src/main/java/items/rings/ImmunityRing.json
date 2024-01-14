@@ -3,6 +3,6 @@
     "name": "Immunity Ring",
     "lore": "",
     "rarity": "UNIQUE",
-    "dropChance": -1,
+    "dropChance": 1,
     "conditionnalDrop": []
 }

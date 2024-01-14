@@ -22,7 +22,6 @@ public class Main implements Logging {
 
 		Logging.LOGGER.log(Level.INFO, "Starting GLaDOS");
 		glados.initialize();
-		Logging.LOGGER.log(Level.INFO, "Logging messages " + glados.logMessages);
 		Logging.LOGGER.log(Level.INFO, "Leveling " + glados.leveling);
 		Logging.LOGGER.log(Level.INFO, "Maximum level " + glados.maxLevel);
 

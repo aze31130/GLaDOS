@@ -3,6 +3,6 @@
     "name": "Lament",
     "lore": "",
     "rarity": "FABLED",
-    "dropChance": -1,
+    "dropChance": 100,
     "conditionnalDrop": []
 }

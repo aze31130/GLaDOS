@@ -3,6 +3,6 @@
     "name": "Novice Boots",
     "lore": "",
     "rarity": "COMMON",
-    "dropChance": 100,
+    "dropChance": 100000,
     "conditionnalDrop": []
 }

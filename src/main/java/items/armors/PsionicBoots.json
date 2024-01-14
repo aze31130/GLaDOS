@@ -3,6 +3,6 @@
     "name": "Psionic Boots",
     "lore": "",
     "rarity": "MYTHICAL",
-    "dropChance": 100,
+    "dropChance": 10,
     "conditionnalDrop": []
 }

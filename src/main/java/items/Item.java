@@ -8,7 +8,7 @@ public class Item {
 	public ItemType type;
 	public String lore;
 	public Rarity rarity;
-	public int dropChance;
+	public Double dropChance;
 
 	public int starForceLevel;
 	public int starForceMaxLevel;
@@ -27,7 +27,7 @@ public class Item {
 	// public List<PairUtils<String, Integer>> Enchants;
 	// public int starForceCost;
 
-	public Item(int id, String name, String lore, Rarity rarity, int dropChance) {
+	public Item(int id, String name, String lore, Rarity rarity, Double dropChance) {
 		this.id = id;
 		this.name = name;
 		this.lore = lore;

@@ -3,6 +3,6 @@
     "name": "Sweetwater Hat",
     "lore": "",
     "rarity": "LEGENDARY",
-    "dropChance": 100,
+    "dropChance": 500,
     "conditionnalDrop": []
 }

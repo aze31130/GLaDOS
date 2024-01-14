@@ -3,6 +3,6 @@
     "name": "Copper Ingot",
     "lore": "Just a simple ingot made of Copper.",
     "rarity": "COMMON",
-    "dropChance": 1000,
+    "dropChance": 100000,
     "conditionnalDrop": []
 }

@@ -3,6 +3,6 @@
     "name": "Psionic Helmet",
     "lore": "",
     "rarity": "MYTHICAL",
-    "dropChance": 100,
+    "dropChance": 10,
     "conditionnalDrop": []
 }

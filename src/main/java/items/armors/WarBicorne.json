@@ -3,6 +3,6 @@
     "name": "War Bicorne",
     "lore": "",
     "rarity": "FABLED",
-    "dropChance": 100,
+    "dropChance": 1000,
     "conditionnalDrop": []
 }

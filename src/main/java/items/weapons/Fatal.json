@@ -3,6 +3,6 @@
     "name": "Fatal",
     "lore": "Deals an incredible amount of damage.",
     "rarity": "UNIQUE",
-    "dropChance": -1,
+    "dropChance": 1,
     "conditionnalDrop": ["UNIQUE_ITEM"]
 }

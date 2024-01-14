@@ -53,7 +53,7 @@ public class Drop extends Command {
 		}
 
 		// Drop item
-		long dropValue = random.nextLong(glados.itemTotalProb + 1);
+		double dropValue = random.nextDouble(glados.itemTotalProb + 1);
 		long cumulativeProbability = 0;
 		Item droppedItem = null;
 
@@ -70,7 +70,6 @@ public class Drop extends Command {
 
 		authorAccount.inventory.add(droppedItem);
 		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(droppedItem).build()).queue();
-
 		authorAccount.canDrop = false;
 	}
 }

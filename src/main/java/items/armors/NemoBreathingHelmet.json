@@ -3,6 +3,6 @@
     "name": "Nemo's Breathing Helmet",
     "lore": "",
     "rarity": "EPIC",
-    "dropChance": 100,
+    "dropChance": 1500,
     "conditionnalDrop": []
 }

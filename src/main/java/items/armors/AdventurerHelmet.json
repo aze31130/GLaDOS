@@ -3,6 +3,6 @@
     "name": "Adventurer Helmet",
     "lore": "",
     "rarity": "UNUSUAL",
-    "dropChance": 1000,
+    "dropChance": 40000,
     "conditionnalDrop": []
 }

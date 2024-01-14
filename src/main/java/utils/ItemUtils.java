@@ -8,7 +8,7 @@ import java.util.Map;
 import glados.GLaDOS;
 import items.Item;
 
-public class ItemUtils {
+public class ItemUtils implements Logging {
 	/*
 	 * This private constructor hides the implicit public one
 	 */
@@ -19,17 +19,18 @@ public class ItemUtils {
 	public static void generateItemChart() {
 		GLaDOS glados = GLaDOS.getInstance();
 
-		List<Map.Entry<String, Double>> dropRate = new ArrayList<>();
+		List<Map.Entry<Item, Double>> dropRate = new ArrayList<>();
 
 		for (Item i : glados.items) {
-			dropRate.add(new AbstractMap.SimpleEntry<String, Double>(i.name,
-					(double) (100 * i.dropChance / glados.itemTotalProb)));
+			dropRate.add(new AbstractMap.SimpleEntry<Item, Double>(i,
+					(double) (100 * (i.dropChance / glados.itemTotalProb))));
 		}
 
 		dropRate.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
 
-		for (Map.Entry<String, Double> entry : dropRate) {
-			System.out.println(entry.getKey() + " : " + entry.getValue() + "%");
+		for (Map.Entry<Item, Double> entry : dropRate) {
+			Logging.LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
+					+ entry.getValue() + "%");
 		}
 	}
 }

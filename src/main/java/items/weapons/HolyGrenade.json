@@ -3,6 +3,6 @@
     "name": "Holy Hand Grenade of Antioch",
     "lore": "",
     "rarity": "LEGENDARY",
-    "dropChance": 1000,
+    "dropChance": 500,
     "conditionnalDrop": []
 }
