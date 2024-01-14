@@ -1,10 +1,11 @@
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import events.*;
 import tasks.*;
 import glados.GLaDOS;
-import utils.Logger;
+import utils.Logging;
 import utils.TimeUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -13,16 +14,17 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
-public class Main {
+public class Main implements Logging {
 	public static void main(String[] args) {
+		System.setProperty("java.util.logging.SimpleFormatter.format",
+				"[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
 		GLaDOS glados = GLaDOS.getInstance();
-		Logger log = new Logger(true);
 
-		System.out.println(log + "Starting GLaDOS");
+		Logging.LOGGER.log(Level.INFO, "Starting GLaDOS");
 		glados.initialize();
-		System.out.println(log + "Logging messages: " + glados.logMessages);
-		System.out.println(log + "Leveling: " + glados.leveling);
-		System.out.println(log + "Maximum level: " + glados.maxLevel);
+		Logging.LOGGER.log(Level.INFO, "Logging messages " + glados.logMessages);
+		Logging.LOGGER.log(Level.INFO, "Leveling " + glados.leveling);
+		Logging.LOGGER.log(Level.INFO, "Maximum level " + glados.maxLevel);
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 
@@ -66,6 +68,7 @@ public class Main {
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
 
-		System.out.println(log + "Done ! GLaDOS is running on version " + glados.version + " !");
+		Logging.LOGGER.log(Level.INFO,
+				"Done ! GLaDOS is running on version " + glados.version + " !");
 	}
 }

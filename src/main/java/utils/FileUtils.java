@@ -25,7 +25,6 @@ public class FileUtils {
 		defaultConfig.put("leveling", false);
 
 		defaultConfig.put("metricLogging", true);
-		defaultConfig.put("logMessages", false);
 		defaultConfig.put("checkPrivateMessages", false);
 		defaultConfig.put("guildId", "");
 		defaultConfig.put("ownerId", "");

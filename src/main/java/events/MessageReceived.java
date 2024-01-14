@@ -1,8 +1,6 @@
 package events;
 
-import java.util.Arrays;
 import java.util.Random;
-import utils.Logger;
 import utils.Mention;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -13,12 +11,6 @@ public class MessageReceived extends ListenerAdapter {
 		String[] message = event.getMessage().getContentRaw().split("\\s+");
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
-
-		if (glados.logMessages) {
-			System.out.println(new Logger(true) + "[" + event.getChannel().asTextChannel().getName()
-					+ "][#" + event.getChannel().getName() + "][" + event.getAuthor().getName()
-					+ "]" + Arrays.toString(message));
-		}
 
 		if ((message.length == 1) && !event.getChannel().asTextChannel().isNSFW()
 				&& !event.getChannel().getId().equals(glados.channelNsfw)) {
