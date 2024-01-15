@@ -1,6 +1,5 @@
 package events;
 
-import java.util.ArrayDeque;
 import java.util.List;
 import java.util.stream.Collectors;
 import glados.GLaDOS;
@@ -14,15 +13,15 @@ public class AutoComplete extends ListenerAdapter {
 
 		if (event.getName().equals("item")) {
 			List<Command.Choice> options = glados.items.stream()
-					.filter(item -> item.name.startsWith(event.getFocusedOption().getValue()))
+					.filter(item -> item.name.toLowerCase()
+							.contains(event.getFocusedOption().getValue().toLowerCase()))
 					.map(item -> new Command.Choice(item.name, item.name))
 					.collect(Collectors.toList());
 
-			if (options.size() > 25) {
-				event.replyChoices(new ArrayDeque<>()).queue();
-				return;
-			}
-			event.replyChoices(options).queue();
+			// Only keep 25 first elements at max
+			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
+
+			event.replyChoices(filtered).queue();
 		}
 	}
 }

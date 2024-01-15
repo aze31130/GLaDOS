@@ -291,16 +291,16 @@ public class BuildEmbed {
 	public static EmbedBuilder itemInfoEmbed(Item i) {
 		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder info = new EmbedBuilder();
-		info.setTitle(i.rarity.name() + " " + i.name);
+		info.setTitle("[" + i.rarity.name() + "] " + i.name);
 		info.setDescription(i.lore);
 		info.setColor(i.rarity.color);
 		if (i.untradable)
 			info.addField(":no_entry:  Untradable", "Trade banned", false);
-		info.addField(":identification_card: Type", i.type.toString(), false);
+		info.addField(i.type.emote + " Type", i.type.toString(), false);
 		info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
 		info.addField(":four_leaf_clover: Drop Chance",
-				Double.toString(i.dropChance / glados.itemTotalProb) + "%",
+				Double.toString(100 * (i.dropChance / glados.itemTotalProb)) + "%",
 				false);
 		info.setTimestamp(Instant.now());
 		return info;
