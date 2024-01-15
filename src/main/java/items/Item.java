@@ -16,7 +16,7 @@ public class Item {
 	public boolean claimable;
 	public boolean untradable;
 
-	public int soldValue;
+	public int value;
 
 	public String url;
 

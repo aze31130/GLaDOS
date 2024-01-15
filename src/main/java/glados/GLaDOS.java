@@ -87,10 +87,10 @@ public class GLaDOS {
 		 */
 		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(),
 				new Clear(), new Connect(), new Disconnect(), new Drop(), new Factorielle(),
-				new Fibonacci(), new Help(), new Idea(), new Inventory(), new Move(), new Ping(),
-				new Play(), new Profile(), new Question(), new RandomCat(), new RandomDog(),
-				new Rng(), new Role(), new Shutdown(), new Spam(), new State(), new Statistics(),
-				new Status(), new Trade(), new Translate(), new Upgrade(),
+				new Fibonacci(), new Help(), new Idea(), new Inventory(), new commands.Item(),
+				new Move(), new Ping(), new Play(), new Profile(), new Question(), new RandomCat(),
+				new RandomDog(), new Rng(), new Role(), new Shutdown(), new Spam(), new State(),
+				new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(),
 				new Version(), new Vote()};
 
 		for (Command c : commands)

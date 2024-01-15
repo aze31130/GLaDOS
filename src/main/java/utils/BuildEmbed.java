@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.time.Instant;
 import java.util.Random;
 import accounts.Account;
+import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
@@ -285,5 +286,22 @@ public class BuildEmbed {
 		event.setDescription(content);
 		event.setTimestamp(Instant.now());
 		return event;
+	}
+
+	public static EmbedBuilder itemInfoEmbed(Item i) {
+		GLaDOS glados = GLaDOS.getInstance();
+		EmbedBuilder info = new EmbedBuilder();
+		info.setTitle(i.name);
+		info.setDescription(i.lore);
+		info.setColor(i.rarity.color);
+		if (i.untradable)
+			info.addField("Untradable", "Trade banned", false);
+		info.addField("StarForce", "TODO", false);
+		info.addField("Value", "TODO", false);
+		info.addField("Type", "TODO", false);
+		info.addField("Drop Chance", Double.toString(i.dropChance / glados.itemTotalProb) + "%",
+				false);
+		info.setTimestamp(Instant.now());
+		return info;
 	}
 }
