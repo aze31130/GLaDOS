@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Boreal Chestplate",
+    "type": "CHESTPLATE",
     "lore": "",
     "rarity": "MYTHICAL",
     "dropChance": 10,
+    "starForceMaxLevel": 20,
+    "claimable": false,
+    "untradable": false,
+    "value": 95000000,
     "conditionnalDrop": []
 }

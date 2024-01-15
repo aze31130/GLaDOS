@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Novice Boots",
+    "type": "BOOTS",
     "lore": "",
     "rarity": "COMMON",
     "dropChance": 100000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 80,
     "conditionnalDrop": []
 }

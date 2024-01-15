@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Copper Ingot",
-    "lore": "Just a simple ingot made of Copper.",
+    "type": "ITEM",
+    "lore": "Just a simple ingot made of Copper, nothing more.",
     "rarity": "COMMON",
     "dropChance": 100000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 15,
     "conditionnalDrop": []
 }

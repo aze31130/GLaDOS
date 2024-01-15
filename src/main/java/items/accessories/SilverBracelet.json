@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Silver Bracelet",
+    "type": "BRACELET",
     "lore": "",
     "rarity": "EPIC",
     "dropChance": 1500,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 2500,
     "conditionnalDrop": []
 }

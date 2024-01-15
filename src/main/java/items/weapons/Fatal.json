@@ -1,8 +1,13 @@
 {
-    "id": 1,
+    "id": 10,
     "name": "Fatal",
+    "type": "WAND",
     "lore": "Deals an incredible amount of damage.",
     "rarity": "UNIQUE",
     "dropChance": 1,
+    "starForceMaxLevel": 30,
+    "claimable": false,
+    "untradable": false,
+    "value": 1,
     "conditionnalDrop": ["UNIQUE_ITEM"]
 }

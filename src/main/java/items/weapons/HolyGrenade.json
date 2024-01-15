@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Holy Hand Grenade of Antioch",
-    "lore": "",
+    "type": "ITEM",
+    "lore": "Deals an incredible amount of damage.",
     "rarity": "LEGENDARY",
     "dropChance": 500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 1,
     "conditionnalDrop": []
 }

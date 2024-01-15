@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Valentine's Rose",
+    "type": "ITEM",
     "lore": "",
     "rarity": "EVENT",
     "dropChance": 1,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": true,
+    "value": 1000,
     "conditionnalDrop": []
 }

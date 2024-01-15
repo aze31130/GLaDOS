@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Diamond Necklace",
+    "type": "NECKLACE",
     "lore": "",
     "rarity": "EPIC",
     "dropChance": 1500,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 5000,
     "conditionnalDrop": []
 }

@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Genesis Helmet",
+    "type": "HELMET",
     "lore": "",
     "rarity": "FABLED",
     "dropChance": 100,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 330000,
     "conditionnalDrop": []
 }

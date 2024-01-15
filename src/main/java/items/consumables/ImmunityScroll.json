@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Immunity Scroll",
+    "type": "SCROLL",
     "lore": "Makes you invincible for 5 seconds.",
     "rarity": "EPIC",
     "dropChance": 1500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 6000,
     "conditionnalDrop": []
 }

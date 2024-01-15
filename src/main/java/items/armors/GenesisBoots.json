@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Genesis Boots",
+    "type": "BOOTS",
     "lore": "",
     "rarity": "FABLED",
     "dropChance": 100,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 320000,
     "conditionnalDrop": []
 }

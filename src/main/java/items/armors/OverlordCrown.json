@@ -1,13 +1,13 @@
 {
     "id": 10,
-    "name": "Boreal Helmet",
+    "name": "Overlord Crown",
     "type": "HELMET",
     "lore": "",
-    "rarity": "MYTHICAL",
-    "dropChance": 10,
-    "starForceMaxLevel": 20,
+    "rarity": "GODLY",
+    "dropChance": 1,
+    "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 87000000,
+    "value": 1,
     "conditionnalDrop": []
 }

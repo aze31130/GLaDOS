@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Boreal Boots",
+    "type": "BOOTS",
     "lore": "",
     "rarity": "MYTHICAL",
     "dropChance": 10,
+    "starForceMaxLevel": 20,
+    "claimable": false,
+    "untradable": false,
+    "value": 80000000,
     "conditionnalDrop": []
 }

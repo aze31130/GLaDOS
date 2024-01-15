@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Iron Ingot",
+    "type": "ITEM",
     "lore": "Just a simple ingot made of Iron.",
     "rarity": "COMMON",
     "dropChance": 100000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 20,
     "conditionnalDrop": []
 }

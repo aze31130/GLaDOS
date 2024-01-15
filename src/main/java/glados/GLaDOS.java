@@ -16,7 +16,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
+import commands.Shutdown;
 import items.Item;
+import items.ItemType;
 import items.Rarity;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
@@ -155,12 +157,18 @@ public class GLaDOS {
 		FileUtils.loadItems(new File("classes/items"), itemsJson);
 
 		for (JSONObject itemJson : itemsJson) {
+			System.out.println(itemJson.toString(4));
 			Item i = new Item(
 					itemJson.getInt("id"),
 					itemJson.getString("name"),
+					itemJson.getEnum(ItemType.class, "type"),
 					itemJson.getString("lore"),
 					itemJson.getEnum(Rarity.class, "rarity"),
-					itemJson.getDouble("dropChance"));
+					itemJson.getDouble("dropChance"),
+					itemJson.getInt("starForceMaxLevel"),
+					itemJson.getBoolean("claimable"),
+					itemJson.getBoolean("untradable"),
+					itemJson.getInt("value"));
 			this.items.add(i);
 			this.itemTotalProb += i.dropChance;
 		}

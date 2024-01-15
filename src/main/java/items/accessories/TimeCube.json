@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Time Cube",
+    "type": "ITEM",
     "lore": "",
     "rarity": "UNIQUE",
     "dropChance": 1,
+    "starForceMaxLevel": 30,
+    "claimable": false,
+    "untradable": false,
+    "value": 100000000,
     "conditionnalDrop": ["UNIQUE_ITEM"]
 }

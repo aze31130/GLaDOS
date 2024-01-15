@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Nemo's Breathing Helmet",
+    "type": "HELMET",
     "lore": "",
     "rarity": "EPIC",
     "dropChance": 1500,
+    "starForceMaxLevel": 8,
+    "claimable": false,
+    "untradable": false,
+    "value": 9500,
     "conditionnalDrop": []
 }

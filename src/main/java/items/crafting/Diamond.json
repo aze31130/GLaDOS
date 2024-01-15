@@ -1,8 +1,13 @@
 {
     "id": 10,
     "name": "Diamond",
+    "type": "ITEM",
     "lore": "A very hard stone that you can look through.",
     "rarity": "RARE",
     "dropChance": 20000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 1500,
     "conditionnalDrop": []
 }
