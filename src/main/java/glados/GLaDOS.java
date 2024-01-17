@@ -174,7 +174,9 @@ public class GLaDOS {
 		}
 
 		System.out.println("Loaded " + this.items.size() + " items.");
-		ItemUtils.generateItemChart();
+		ItemUtils.generateItemChartDropRate();
+		System.out.println("----");
+		ItemUtils.generateItemChartValue();;
 	}
 
 	/*

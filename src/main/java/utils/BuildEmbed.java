@@ -305,4 +305,13 @@ public class BuildEmbed {
 		info.setTimestamp(Instant.now());
 		return info;
 	}
+
+	public static EmbedBuilder inventoryEmbed(int pageNumber, int totalPages) {
+		EmbedBuilder inventory = new EmbedBuilder();
+		inventory.setTitle("Your inventory");
+		inventory.setColor(Color.GRAY);
+		inventory.setFooter(pageNumber + " / " + totalPages);
+		inventory.setTimestamp(Instant.now());
+		return inventory;
+	}
 }

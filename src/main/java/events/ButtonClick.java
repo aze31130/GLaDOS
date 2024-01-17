@@ -2,10 +2,14 @@ package events;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import accounts.Account;
 import glados.GLaDOS;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
+import utils.ItemUtils;
 
 public class ButtonClick extends ListenerAdapter {
 	public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -29,6 +33,50 @@ public class ButtonClick extends ListenerAdapter {
 		dictionary.put(glados.roleInternational, glados.roleInternational);
 		dictionary.put(glados.roleDeveloper, glados.roleDeveloper);
 		dictionary.put(glados.roleNsfw, glados.roleNsfw);
+
+
+		// Check if action is NextInventory Page
+		if (trigger.equals("NextPage")) {
+			Member author = event.getMember();
+			Account authorAccount = glados.getAccount(author);
+
+			// Get the current page
+			int pageNumber = Integer.parseInt(
+					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
+							.split("/")[0]);
+
+			int totalPages = (int) Math.ceil((double) authorAccount.inventory.size() / 5);
+
+			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(pageNumber + 1, totalPages);
+
+			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber + 1)) {
+				inventory.addField(i.name, i.rarity.name(), false);
+			}
+
+			event.editMessageEmbeds(inventory.build()).queue();
+			return;
+		}
+
+		if (trigger.equals("PrevPage")) {
+			Member author = event.getMember();
+			Account authorAccount = glados.getAccount(author);
+
+			// Get the current page
+			int pageNumber = Integer.parseInt(
+					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
+							.split("/")[0]);
+
+			int totalPages = (int) Math.ceil((double) authorAccount.inventory.size() / 5);
+
+			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(pageNumber - 1, totalPages);
+
+			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber - 1)) {
+				inventory.addField(i.name, i.rarity.name(), false);
+			}
+
+			event.editMessageEmbeds(inventory.build()).queue();
+			return;
+		}
 
 		// Check if action is add role
 		if (trigger.startsWith("+")) {
@@ -86,6 +134,5 @@ public class ButtonClick extends ListenerAdapter {
 		event.replyEmbeds(BuildEmbed
 				.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
 				.queue();
-		event.getChannel().sendMessage(event.getMessage().getJumpUrl()).queue();
 	}
 }
