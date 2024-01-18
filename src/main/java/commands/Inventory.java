@@ -28,11 +28,11 @@ public class Inventory extends Command {
 		Member author = event.getMember();
 		Account authorAccount = glados.getAccount(author);
 
-		int totalPages = (int) Math.ceil((double) authorAccount.inventory.size() / 5);
+		int startingPage = 1;
 
-		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(1, totalPages);
+		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, startingPage);
 
-		for (items.Item i : ItemUtils.getUserInventory(authorAccount, 1)) {
+		for (items.Item i : ItemUtils.getUserInventory(authorAccount, startingPage)) {
 			inventory.addField(i.name, i.rarity.name(), false);
 		}
 

@@ -18,6 +18,14 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
+	 * This function checks if the drop conditions are fulfilled
+	 */
+	public static Boolean checkDropConditions(Item i) {
+		// for (ConditionnalDrop cd : i)
+		return true;
+	}
+
+	/*
 	 * This function returns the items (5 max) at the given page number.
 	 */
 	public static List<Item> getUserInventory(Account a, int inventoryPage) {

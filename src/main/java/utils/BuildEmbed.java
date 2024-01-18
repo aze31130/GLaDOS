@@ -306,9 +306,13 @@ public class BuildEmbed {
 		return info;
 	}
 
-	public static EmbedBuilder inventoryEmbed(int pageNumber, int totalPages) {
+	public static EmbedBuilder inventoryEmbed(Account sender, int pageNumber) {
+		int totalPages = (int) Math.ceil((double) sender.inventory.size() / 5);
+
 		EmbedBuilder inventory = new EmbedBuilder();
 		inventory.setTitle("Your inventory");
+		inventory.setAuthor(sender.member.getUser().getName());
+		inventory.setThumbnail(sender.member.getUser().getAvatarUrl());
 		inventory.setColor(Color.GRAY);
 		inventory.setFooter(pageNumber + " / " + totalPages);
 		inventory.setTimestamp(Instant.now());

@@ -1,16 +1,18 @@
 package commands;
 
 import java.util.Arrays;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import utils.BuildEmbed;
 import accounts.Permission;
 
 public class Trade extends Command {
 	public Trade() {
 		super("trade",
-				"[WIP] Request a trade with another user. Admin privileges required",
-				Permission.OWNER,
+				"Request a trade with another user.",
+				Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.USER, "destination",
 								"The target of your trade offer").setRequired(true),
@@ -25,5 +27,11 @@ public class Trade extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {}
+	public void execute(SlashCommandInteractionEvent event) {
+		MessageChannel source = event.getMessageChannel();
+
+		source.sendMessageEmbeds(
+				BuildEmbed.errorEmbed("This system has not been implemented yet !").build())
+				.queue();
+	}
 }

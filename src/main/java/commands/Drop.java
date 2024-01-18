@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
+import utils.ItemUtils;
 import utils.TimeUtils;
 
 public class Drop extends Command {
@@ -60,13 +61,15 @@ public class Drop extends Command {
 		for (Item item : glados.items) {
 			cumulativeProbability += item.dropChance;
 			if (dropValue <= cumulativeProbability) {
-				droppedItem = item;
-				break;
+				// Check if drop requirements are fulfilled
+				if (ItemUtils.checkDropConditions(droppedItem)) {
+					droppedItem = item;
+					break;
+				} else {
+					continue;
+				}
 			}
 		}
-
-		// Check if drop requirements are met
-		// TODO
 
 		authorAccount.inventory.add(droppedItem);
 		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(droppedItem).build()).queue();

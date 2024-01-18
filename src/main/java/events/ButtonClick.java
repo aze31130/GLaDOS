@@ -45,9 +45,7 @@ public class ButtonClick extends ListenerAdapter {
 					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
 							.split("/")[0]);
 
-			int totalPages = (int) Math.ceil((double) authorAccount.inventory.size() / 5);
-
-			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(pageNumber + 1, totalPages);
+			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, pageNumber + 1);
 
 			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber + 1)) {
 				inventory.addField(i.name, i.rarity.name(), false);
@@ -66,9 +64,7 @@ public class ButtonClick extends ListenerAdapter {
 					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
 							.split("/")[0]);
 
-			int totalPages = (int) Math.ceil((double) authorAccount.inventory.size() / 5);
-
-			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(pageNumber - 1, totalPages);
+			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, pageNumber - 1);
 
 			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber - 1)) {
 				inventory.addField(i.name, i.rarity.name(), false);
