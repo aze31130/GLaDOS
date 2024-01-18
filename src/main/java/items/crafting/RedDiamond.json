@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "A very rare diamond that turns light in magnificient red sparkles.",
     "rarity": "EPIC",
-    "dropChance": 1500,
+    "dropChance": 8000,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,

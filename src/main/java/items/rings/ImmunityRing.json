@@ -4,7 +4,7 @@
     "type": "RING",
     "lore": "",
     "rarity": "UNIQUE",
-    "dropChance": 1,
+    "dropChance": 3,
     "starForceMaxLevel": 30,
     "claimable": false,
     "untradable": false,
