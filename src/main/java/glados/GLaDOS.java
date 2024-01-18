@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +30,9 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.BuildEmbed;
 import utils.FileUtils;
 import utils.ItemUtils;
+import utils.Logging;
 
-public class GLaDOS {
+public class GLaDOS implements Logging {
 	private static volatile GLaDOS instance = null;
 	public String version;
 	public String token;
@@ -80,7 +82,7 @@ public class GLaDOS {
 
 		if (!config.exists()) {
 			FileUtils.createDefaultConfig();
-			System.out.println("You have to define your token inside your config file !");
+			LOGGER.log(Level.SEVERE, "You have to define your token inside your config file !");
 			System.exit(1);
 		}
 
@@ -150,14 +152,13 @@ public class GLaDOS {
 	 * Reads all item data contained in all json files
 	 */
 	public void loadItems() {
-		System.out.println("Loading Items...");
+		LOGGER.log(Level.INFO, "Loading Items...");
 
 		List<JSONObject> itemsJson = new ArrayList<>();
 
 		FileUtils.loadItems(new File("classes/items"), itemsJson);
 
 		for (JSONObject itemJson : itemsJson) {
-			System.out.println(itemJson.toString(4));
 			Item i = new Item(
 					itemJson.getInt("id"),
 					itemJson.getString("name"),
@@ -169,13 +170,21 @@ public class GLaDOS {
 					itemJson.getBoolean("claimable"),
 					itemJson.getBoolean("untradable"),
 					itemJson.getInt("value"));
+
+			// Check that there are no duplicate item id
+			if (this.items.stream().anyMatch(x -> x.id == i.id)) {
+				LOGGER.log(Level.WARNING,
+						"Duplicate item id detected ! Skiping " + itemJson.toString());
+				continue;
+			}
+
 			this.items.add(i);
 			this.itemTotalProb += i.dropChance;
 		}
 
-		System.out.println("Loaded " + this.items.size() + " items.");
+		LOGGER.log(Level.INFO, "Loaded " + this.items.size() + " items.");
 		ItemUtils.generateItemChartDropRate();
-		System.out.println("----");
+		LOGGER.log(Level.INFO, "----");
 		ItemUtils.generateItemChartValue();;
 	}
 
@@ -257,7 +266,7 @@ public class GLaDOS {
 			this.accounts.add(a);
 		}
 
-		System.out.println("Loaded " + this.accounts.size() + " accounts.");
+		LOGGER.log(Level.INFO, "Loaded " + this.accounts.size() + " accounts.");
 	}
 
 	/*
