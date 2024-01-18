@@ -3,7 +3,7 @@
     "name": "Meister Helmet",
     "type": "HELMET",
     "lore": "",
-    "rarity": "EXCEPTIONNAL",
+    "rarity": "EPIC",
     "dropChance": 10000,
     "starForceMaxLevel": 5,
     "claimable": false,

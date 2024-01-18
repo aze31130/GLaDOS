@@ -20,6 +20,12 @@ public class Upgrade extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		MessageChannel source = event.getMessageChannel();
 
+		// Check if the owner own the item
+
+		// Check if the item is upgradable
+
+		// Check if the user has enough money
+
 		source.sendMessageEmbeds(
 				BuildEmbed.errorEmbed("This system has not been implemented yet !").build())
 				.queue();

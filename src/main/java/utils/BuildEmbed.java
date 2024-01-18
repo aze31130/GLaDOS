@@ -197,6 +197,7 @@ public class BuildEmbed {
 		embed.addField(":wave: Fame", "WIP", true);
 		embed.addField(":clock: Joined Discord", account.member.getTimeCreated().toString(), true);
 		embed.addField(":timer: Member since", account.member.getTimeJoined().toString(), true);
+		embed.addField(":briefcase: Items", Integer.toString(account.inventory.size()), true);
 		embed.addField(":envelope: Messages", "WIP", true);
 		embed.addField(":tada: Reactions", "WIP", true);
 		embed.addField(":trophy: Achievements", "WIP", true);

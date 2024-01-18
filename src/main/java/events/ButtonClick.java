@@ -35,40 +35,36 @@ public class ButtonClick extends ListenerAdapter {
 		dictionary.put(glados.roleNsfw, glados.roleNsfw);
 
 
-		// Check if action is NextInventory Page
-		if (trigger.equals("NextPage")) {
+		// Check if action is Next or Previous Inventory Page
+		if (trigger.equals("NextPage") || trigger.equals("PrevPage")) {
 			Member author = event.getMember();
 			Account authorAccount = glados.getAccount(author);
+
+			/*
+			 * Check if the clicker owns the inventory. This is to make sure another user cannot
+			 * click on the inventory of someone else.
+			 */
+			String inventoryName = event.getMessage().getEmbeds().get(0).getAuthor().getName();
+			String clickerName = event.getUser().getName();
+			if (!inventoryName.equals(clickerName)) {
+				event.replyEmbeds(
+						BuildEmbed.errorEmbed("You cannot list other's inventory !").build())
+						.setEphemeral(true).queue();
+				return;
+			}
 
 			// Get the current page
 			int pageNumber = Integer.parseInt(
 					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
 							.split("/")[0]);
 
-			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, pageNumber + 1);
+			// Check if the event is Next Page
+			int newPageNumber = trigger.equals("NextPage") ? pageNumber + 1 : pageNumber - 1;
 
-			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber + 1)) {
+			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, newPageNumber);
+
+			for (items.Item i : ItemUtils.getUserInventory(authorAccount, newPageNumber))
 				inventory.addField(i.name, i.rarity.name(), false);
-			}
-
-			event.editMessageEmbeds(inventory.build()).queue();
-			return;
-		}
-
-		if (trigger.equals("PrevPage")) {
-			Member author = event.getMember();
-			Account authorAccount = glados.getAccount(author);
-
-			// Get the current page
-			int pageNumber = Integer.parseInt(
-					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
-							.split("/")[0]);
-
-			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, pageNumber - 1);
-
-			for (items.Item i : ItemUtils.getUserInventory(authorAccount, pageNumber - 1)) {
-				inventory.addField(i.name, i.rarity.name(), false);
-			}
 
 			event.editMessageEmbeds(inventory.build()).queue();
 			return;
