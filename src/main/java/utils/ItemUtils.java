@@ -3,11 +3,13 @@ package utils;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import accounts.Account;
 import glados.GLaDOS;
 import items.Item;
+import items.Rarity;
 
 public class ItemUtils implements Logging {
 	/*
@@ -51,16 +53,30 @@ public class ItemUtils implements Logging {
 
 		List<Map.Entry<Item, Double>> dropRate = new ArrayList<>();
 
+		Map<Rarity, Double> rarityPercentages = new HashMap<>();
+
 		for (Item i : glados.items) {
-			dropRate.add(new AbstractMap.SimpleEntry<Item, Double>(i,
-					(double) (100 * (i.dropChance / glados.itemTotalProb))));
+			Double dropPercentage = (double) (100 * (i.dropChance / glados.itemTotalProb));
+
+			if (rarityPercentages.containsKey(i.rarity)) {
+				rarityPercentages.put(i.rarity, rarityPercentages.get(i.rarity) + dropPercentage);
+			} else {
+				rarityPercentages.put(i.rarity, dropPercentage);
+			}
+
+			dropRate.add(new AbstractMap.SimpleEntry<>(i, dropPercentage));
 		}
 
 		dropRate.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
 
 		for (Map.Entry<Item, Double> entry : dropRate) {
-			Logging.LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
+			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
 					+ entry.getValue() + "%");
+		}
+
+		LOGGER.info("---");
+		for (Map.Entry<Rarity, Double> rarity : rarityPercentages.entrySet()) {
+			LOGGER.info(rarity.getKey() + " " + rarity.getValue());
 		}
 	}
 
@@ -76,7 +92,7 @@ public class ItemUtils implements Logging {
 		value.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
 
 		for (Map.Entry<Item, Integer> entry : value) {
-			Logging.LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
+			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
 					+ entry.getValue());
 		}
 	}

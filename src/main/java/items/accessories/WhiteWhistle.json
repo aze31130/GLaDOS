@@ -4,10 +4,10 @@
     "type": "ITEM",
     "lore": "",
     "rarity": "LEGENDARY",
-    "dropChance": 500,
+    "dropChance": 550,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 15000,
-    "conditionnalDrop": ["UNIQUE_ITEM"]
+    "conditionnalDrop": []
 }

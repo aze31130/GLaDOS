@@ -4,7 +4,7 @@
     "type": "BOOTS",
     "lore": "",
     "rarity": "MYTHICAL",
-    "dropChance": 10,
+    "dropChance": 120,
     "starForceMaxLevel": 20,
     "claimable": false,
     "untradable": false,

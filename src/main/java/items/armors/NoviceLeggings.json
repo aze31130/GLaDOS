@@ -4,7 +4,7 @@
     "type": "LEGGINGS",
     "lore": "",
     "rarity": "COMMON",
-    "dropChance": 100000,
+    "dropChance": 10000,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,

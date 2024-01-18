@@ -184,8 +184,6 @@ public class GLaDOS implements Logging {
 
 		LOGGER.log(Level.INFO, "Loaded " + this.items.size() + " items.");
 		ItemUtils.generateItemChartDropRate();
-		LOGGER.log(Level.INFO, "----");
-		ItemUtils.generateItemChartValue();;
 	}
 
 	/*

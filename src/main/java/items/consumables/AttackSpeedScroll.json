@@ -4,7 +4,7 @@
     "type": "SCROLL",
     "lore": "Written by an old scrib, this scroll holds a secret technique that will increase your attack speed.",
     "rarity": "EPIC",
-    "dropChance": 1500,
+    "dropChance": 2800,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,

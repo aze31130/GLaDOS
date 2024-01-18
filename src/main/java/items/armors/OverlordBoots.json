@@ -4,7 +4,7 @@
     "type": "BOOTS",
     "lore": "",
     "rarity": "GODLY",
-    "dropChance": 1,
+    "dropChance": 10,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,

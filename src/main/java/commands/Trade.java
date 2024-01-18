@@ -30,6 +30,12 @@ public class Trade extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		MessageChannel source = event.getMessageChannel();
 
+		// Ensure the trade is possible (src owns the item and money, dst owns the item and money)
+
+		// Build the embed
+
+		// Put the button accept and refuse trade
+
 		source.sendMessageEmbeds(
 				BuildEmbed.errorEmbed("This system has not been implemented yet !").build())
 				.queue();

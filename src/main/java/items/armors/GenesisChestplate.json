@@ -4,7 +4,7 @@
     "type": "CHESTPLATE",
     "lore": "",
     "rarity": "FABLED",
-    "dropChance": 100,
+    "dropChance": 200,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
