@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.Arrays;
+import java.util.Optional;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
@@ -29,14 +30,31 @@ public class Sell extends Command {
 		Member author = event.getMember();
 		Account authorAccount = glados.getAccount(author);
 
-		String itemName = event.getOption("name").getAsString();
+		String itemFQName = event.getOption("item").getAsString();
 
 		// Ensure the owner own the item
+		Optional<items.Item> pretendedItem =
+				authorAccount.inventory.stream().filter(it -> it.getFQName().equals(itemFQName))
+						.findFirst();
+
+		if (pretendedItem.isEmpty()) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("You cannot sell an item you do not own !").build())
+					.queue();
+			return;
+		}
 
 		// Sells the item
+		items.Item item = pretendedItem.get();
+
+		authorAccount.money += item.value;
+		authorAccount.inventory.remove(item);
 
 		source.sendMessageEmbeds(
-				BuildEmbed.errorEmbed("This system has not been implemented yet !").build())
+				BuildEmbed.successEmbed(
+						"Successfully sold " + item.getFQName() + " at " + item.value + " ("
+								+ authorAccount.money + " total)")
+						.build())
 				.queue();
 	}
 

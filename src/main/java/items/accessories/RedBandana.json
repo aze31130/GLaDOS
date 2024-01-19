@@ -5,7 +5,7 @@
     "lore": "",
     "rarity": "COMMON",
     "dropChance": 3932,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 1,
     "claimable": false,
     "untradable": false,
     "value": 20,

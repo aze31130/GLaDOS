@@ -3,6 +3,7 @@ package utils;
 import java.security.SecureRandom;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -39,16 +40,22 @@ public class ItemUtils implements Logging {
 	public static List<Item> getUserInventory(Account a, int inventoryPage) {
 		List<Item> result = new ArrayList<>();
 
+		List<Item> sortedInventory = a.inventory.stream()
+				.sorted(Comparator.comparingInt(item -> item.rarity.level))
+				.collect(Collectors.toList());
+		Collections.reverse(sortedInventory);
+
 		// Check if the given page is valid
-		int lastPage = (int) Math.ceil((double) a.inventory.size() / 5);
+		int lastPage = (int) Math.ceil((double) sortedInventory.size() / 5);
 
 		if ((inventoryPage <= 0) || (lastPage < inventoryPage))
 			return result;
 
-		for (int indexMin = (inventoryPage - 1) * 5; indexMin < a.inventory.size(); indexMin++) {
+		for (int indexMin = (inventoryPage - 1) * 5; indexMin < sortedInventory
+				.size(); indexMin++) {
 			if (result.size() == 5)
 				break;
-			result.add(a.inventory.get(indexMin));
+			result.add(sortedInventory.get(indexMin));
 		}
 
 		return result;
