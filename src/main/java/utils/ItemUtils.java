@@ -1,11 +1,13 @@
 package utils;
 
+import java.security.SecureRandom;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import accounts.Account;
 import glados.GLaDOS;
 import items.Item;
@@ -23,7 +25,11 @@ public class ItemUtils implements Logging {
 	 * This function checks if the drop conditions are fulfilled
 	 */
 	public static Boolean checkDropConditions(Item i) {
-		// for (ConditionnalDrop cd : i)
+		if (i.rarity.equals(Rarity.EVENT))
+			return false;
+
+		// TODO Add more checks here
+
 		return true;
 	}
 
@@ -46,6 +52,43 @@ public class ItemUtils implements Logging {
 		}
 
 		return result;
+	}
+
+	public static void simulateDrops(int amount) {
+		GLaDOS glados = GLaDOS.getInstance();
+		List<Item> virtualInventory = new ArrayList<>();
+		SecureRandom random = new SecureRandom();
+
+		for (int i = 0; i < amount; i++) {
+			// Drop item
+			double dropValue = random.nextDouble(glados.itemTotalProb + 1);
+			long cumulativeProbability = 0;
+			Item droppedItem = null;
+
+			for (Item item : glados.items) {
+				cumulativeProbability += item.dropChance;
+				if (dropValue <= cumulativeProbability) {
+					// Check if drop requirements are fulfilled
+					if (ItemUtils.checkDropConditions(item)) {
+						droppedItem = item;
+						break;
+					}
+				}
+			}
+
+			if (droppedItem != null)
+				virtualInventory.add(droppedItem);
+		}
+
+		Map<Rarity, Long> rarityCountMap = virtualInventory.stream()
+				.collect(Collectors.groupingBy(item -> item.rarity, Collectors.counting()));
+
+		List<Map.Entry<Rarity, Long>> sortedList = rarityCountMap.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toList());
+
+		for (Map.Entry<Rarity, Long> entry : sortedList)
+			LOGGER.info(entry.getKey() + ": " + entry.getValue());
 	}
 
 	public static void generateItemChartDropRate() {
@@ -75,9 +118,9 @@ public class ItemUtils implements Logging {
 		}
 
 		LOGGER.info("---");
-		for (Map.Entry<Rarity, Double> rarity : rarityPercentages.entrySet()) {
-			LOGGER.info(rarity.getKey() + " " + rarity.getValue());
-		}
+		rarityPercentages.entrySet().stream()
+				.sorted(Map.Entry.<Rarity, Double>comparingByValue().reversed())
+				.forEach(entry -> LOGGER.info(entry.getKey() + " " + entry.getValue()));
 	}
 
 	public static void generateItemChartValue() {

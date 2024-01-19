@@ -301,7 +301,7 @@ public class BuildEmbed {
 		info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
 		info.addField(":four_leaf_clover: Drop Chance",
-				Double.toString(100 * (i.dropChance / glados.itemTotalProb)) + "%",
+				String.format("%.2f%%", 100 * (i.dropChance / glados.itemTotalProb)),
 				false);
 		info.setTimestamp(Instant.now());
 		return info;

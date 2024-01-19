@@ -26,13 +26,13 @@ public class AutoComplete extends ListenerAdapter {
 			event.replyChoices(filtered).queue();
 		}
 
-		if (event.getName().equals("upgrade")) {
+		if (event.getName().equals("upgrade") || event.getName().equals("sell")) {
 			Member author = event.getMember();
 			Account authorAccount = glados.getAccount(author);
 			List<Command.Choice> options = authorAccount.inventory.stream()
-					.filter(item -> item.name.toLowerCase()
-							.contains(event.getFocusedOption().getValue().toLowerCase()))
-					.map(item -> new Command.Choice(item.name, item.name))
+					.filter(item -> item.getFQName()
+							.contains(event.getFocusedOption().getValue()))
+					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
 					.collect(Collectors.toList());
 
 			// Only keep 25 first elements at max

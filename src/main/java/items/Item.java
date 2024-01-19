@@ -28,18 +28,34 @@ public class Item {
 	// public int starForceCost;
 
 	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance,
-			int starForceMaxLevel, boolean claimable, boolean untradable, int value) {
+			int starForceLevel, int starForceMaxLevel, boolean claimable, boolean untradable,
+			int value) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.lore = lore;
 		this.rarity = rarity;
 		this.dropChance = dropChance;
+		this.starForceLevel = starForceLevel;
 		this.starForceMaxLevel = starForceMaxLevel;
 		this.claimable = claimable;
 		this.untradable = untradable;
 		this.value = value;
 		this.url = "https://" + id;
+	}
+
+	public String getFQName() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(this.name + " ");
+
+		for (int i = 0; i < this.starForceLevel; i++)
+			sb.append("★");
+
+		for (int i = starForceLevel; i < this.starForceMaxLevel; i++)
+			sb.append("☆");
+
+		return sb.toString();
 	}
 
 	public JSONObject toJson() {

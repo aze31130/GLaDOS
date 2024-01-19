@@ -93,9 +93,9 @@ public class GLaDOS implements Logging {
 				new Clear(), new Connect(), new Disconnect(), new Drop(), new Factorielle(),
 				new Fibonacci(), new Help(), new Idea(), new Inventory(), new commands.Item(),
 				new Move(), new Ping(), new Play(), new Profile(), new Question(), new RandomCat(),
-				new RandomDog(), new Rng(), new Role(), new Shutdown(), new Spam(), new State(),
-				new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(),
-				new Version(), new Vote()};
+				new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(),
+				new State(), new Statistics(), new Status(), new Trade(), new Translate(),
+				new Upgrade(), new Version(), new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
@@ -166,6 +166,7 @@ public class GLaDOS implements Logging {
 					itemJson.getString("lore"),
 					itemJson.getEnum(Rarity.class, "rarity"),
 					itemJson.getDouble("dropChance"),
+					0,
 					itemJson.getInt("starForceMaxLevel"),
 					itemJson.getBoolean("claimable"),
 					itemJson.getBoolean("untradable"),
@@ -182,8 +183,15 @@ public class GLaDOS implements Logging {
 			this.itemTotalProb += i.dropChance;
 		}
 
-		LOGGER.log(Level.INFO, "Loaded " + this.items.size() + " items.");
+		LOGGER.info("Loaded " + this.items.size() + " items.");
 		ItemUtils.generateItemChartDropRate();
+	}
+
+	/*
+	 * Returns the item given its id.
+	 */
+	public Item getItemById(int itemId) {
+		return this.items.stream().filter(it -> it.id == itemId).findFirst().orElse(null);
 	}
 
 	/*
@@ -207,7 +215,7 @@ public class GLaDOS implements Logging {
 	}
 
 	public void loadAccounts(JDA jda) {
-		System.out.println("Downloading account file from discord...");
+		LOGGER.info("Downloading account file from discord...");
 
 		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory()
 				.retrievePast(1).complete().get(0);
@@ -230,7 +238,7 @@ public class GLaDOS implements Logging {
 			e.printStackTrace();
 		}
 
-		System.out.println("Loading account from file...");
+		LOGGER.info("Loading account from file...");
 		JSONArray jsonAccounts = FileUtils.loadJsonArray("accounts.json");
 
 		for (int i = 0; i < jsonAccounts.length(); i++) {
@@ -239,12 +247,10 @@ public class GLaDOS implements Logging {
 			List<Item> userInventory = new ArrayList<>();
 
 			for (int j = 0; j < jsonInventory.length(); j++) {
+				int itemId = jsonInventory.getJSONObject(j).getInt("id");
+				int itemStarForceLevel = jsonInventory.getJSONObject(j).getInt("starForceLevel");
 
-				int itemId = jsonInventory.getJSONObject(i).getInt("id");
-				int itemStarForceLevel = jsonInventory.getJSONObject(i).getInt("starForceLevel");
-
-				Item item =
-						this.items.stream().filter(it -> it.id == itemId).findFirst().orElse(null);
+				Item item = this.getItemById(itemId);
 				item.starForceLevel = itemStarForceLevel;
 				userInventory.add(item);
 			}

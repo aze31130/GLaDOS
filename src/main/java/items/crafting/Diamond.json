@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "A very hard stone that you can look through.",
     "rarity": "RARE",
-    "dropChance": 12000,
+    "dropChance": 20000,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
