@@ -304,6 +304,14 @@ public class GLaDOS implements Logging {
 	}
 
 	/*
+	 * Returns the account associated to the given id. WARNING, if user is not found, it will not
+	 * create the account.
+	 */
+	public Account getAccountById(String accountId) {
+		return this.accounts.stream().filter(a -> a.id.equals(accountId)).findFirst().orElse(null);
+	}
+
+	/*
 	 * Reads the latest commit hash where the project is currently running
 	 */
 	public void getVersion() {

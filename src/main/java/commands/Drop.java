@@ -43,7 +43,8 @@ public class Drop extends Command {
 			authorAccount.money += acquiredMoney;
 			event.getMessageChannel()
 					.sendMessageEmbeds(
-							BuildEmbed.moneyDropEmbed(acquiredMoney, authorAccount.money).build())
+							BuildEmbed.moneyDropEmbed(author.getUser(), acquiredMoney,
+									authorAccount.money).build())
 					.queue();
 		}
 
@@ -84,7 +85,8 @@ public class Drop extends Command {
 
 
 		authorAccount.inventory.add(droppedItem);
-		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(droppedItem).build()).queue();
+		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author.getUser(), droppedItem).build())
+				.queue();
 		authorAccount.canDrop = false;
 	}
 }

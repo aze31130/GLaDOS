@@ -2,10 +2,14 @@ package commands;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ItemComponent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import utils.BuildEmbed;
@@ -18,7 +22,9 @@ public class Inventory extends Command {
 	public Inventory() {
 		super("inventory",
 				"Shows your inventory.",
-				Permission.NONE, Arrays.asList());
+				Permission.NONE,
+				Arrays.asList(new OptionData(OptionType.INTEGER, "page",
+						"The inventory page you want to open")));
 	}
 
 	@Override
@@ -28,7 +34,8 @@ public class Inventory extends Command {
 		Member author = event.getMember();
 		Account authorAccount = glados.getAccount(author);
 
-		int startingPage = 1;
+		int startingPage =
+				Optional.ofNullable(event.getOption("page")).map(OptionMapping::getAsInt).orElse(1);
 
 		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, startingPage);
 

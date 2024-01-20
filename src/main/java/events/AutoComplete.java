@@ -12,8 +12,9 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 public class AutoComplete extends ListenerAdapter {
 	public void onCommandAutoCompleteInteraction(CommandAutoCompleteInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
+		String eventName = event.getName();
 
-		if (event.getName().equals("item")) {
+		if (eventName.equals("item")) {
 			List<Command.Choice> options = glados.items.stream()
 					.filter(item -> item.name.toLowerCase()
 							.contains(event.getFocusedOption().getValue().toLowerCase()))
@@ -24,9 +25,10 @@ public class AutoComplete extends ListenerAdapter {
 			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
 
 			event.replyChoices(filtered).queue();
+			return;
 		}
 
-		if (event.getName().equals("upgrade") || event.getName().equals("sell")) {
+		if (eventName.equals("upgrade") || eventName.equals("sell")) {
 			Member author = event.getMember();
 			Account authorAccount = glados.getAccount(author);
 			List<Command.Choice> options = authorAccount.inventory.stream()
@@ -39,6 +41,51 @@ public class AutoComplete extends ListenerAdapter {
 			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
 
 			event.replyChoices(filtered).queue();
+			return;
+		}
+
+		if (eventName.equals("trade") && event.getOption("target") != null) {
+			String field = event.getFocusedOption().getName();
+
+			if (field.equals("srcitem")) {
+				Account authorAccount = glados.getAccount(event.getMember());
+
+				List<Command.Choice> options = authorAccount.inventory.stream()
+						.filter(item -> item.name.toLowerCase()
+								.contains(event.getFocusedOption().getValue().toLowerCase()))
+						.map(item -> new Command.Choice(item.name, item.name))
+						.collect(Collectors.toList());
+
+				// Only keep 25 first elements at max
+				List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
+
+				event.replyChoices(filtered).queue();
+				return;
+			}
+
+			if (field.equals("dstitem")) {
+				Account targetAccount =
+						glados.getAccountById(event.getOption("target").getAsString());
+
+				// Check if the user put a user with no account
+				if (targetAccount == null) {
+					// Return no choices
+					event.replyChoice("", "");
+					return;
+				}
+
+				List<Command.Choice> options = targetAccount.inventory.stream()
+						.filter(item -> item.name.toLowerCase()
+								.contains(event.getFocusedOption().getValue().toLowerCase()))
+						.map(item -> new Command.Choice(item.name, item.name))
+						.collect(Collectors.toList());
+
+				// Only keep 25 first elements at max
+				List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
+
+				event.replyChoices(filtered).queue();
+				return;
+			}
 		}
 	}
 }

@@ -191,17 +191,18 @@ public class BuildEmbed {
 		embed.setColor(Color.GREEN);
 		embed.setThumbnail(account.member.getUser().getAvatarUrl());
 
-		embed.addField(":sparkles: Level", Integer.toString(account.level), true);
-		embed.addField(":green_book: Experience", Long.toString(account.experience), true);
-		embed.addField(":shield: Trust Factor", account.trustLevel.name(), true);
-		embed.addField(":wave: Fame", "WIP", true);
-		embed.addField(":clock: Joined Discord", account.member.getTimeCreated().toString(), true);
-		embed.addField(":timer: Member since", account.member.getTimeJoined().toString(), true);
-		embed.addField(":moneybag: Money", Long.toString(account.money), true);
-		embed.addField(":briefcase: Items", Integer.toString(account.inventory.size()), true);
-		embed.addField(":envelope: Messages", "WIP", true);
-		embed.addField(":tada: Reactions", "WIP", true);
-		embed.addField(":trophy: Achievements", "WIP", true);
+		embed.addField(":sparkles: - Level", Integer.toString(account.level), true);
+		embed.addField(":green_book: - Experience", Long.toString(account.experience), true);
+		embed.addField(":shield: - Trust Factor", "WIP", true);
+		embed.addField(":wave: - Fame", "WIP", true);
+		embed.addField(":clock: - Joined Discord", account.member.getTimeCreated().toString(),
+				true);
+		embed.addField(":timer: - Member since", account.member.getTimeJoined().toString(), true);
+		embed.addField(":moneybag: - Money", Long.toString(account.money), true);
+		embed.addField(":briefcase: - Items", Integer.toString(account.inventory.size()), true);
+		embed.addField(":envelope: - Messages", "WIP", true);
+		embed.addField(":tada: - Reactions", "WIP", true);
+		embed.addField(":trophy: - Achievements", "WIP", true);
 
 		embed.setTimestamp(Instant.now());
 		return embed;
@@ -263,20 +264,22 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder moneyDropEmbed(int claimedMoney, long totalMoney) {
+	public static EmbedBuilder moneyDropEmbed(User dropper, int claimedMoney, long totalMoney) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setTitle("Claimed !");
+		embed.setAuthor(dropper.getName(), dropper.getAvatarUrl(), dropper.getAvatarUrl());
 		embed.setColor(Color.ORANGE);
 		embed.setDescription("Got " + claimedMoney + " (" + totalMoney + " total)");
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
 
-	public static EmbedBuilder itemDropEmbed(Item item) {
+	public static EmbedBuilder itemDropEmbed(User dropper, Item item) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setTitle("You got:");
+		embed.setAuthor(dropper.getName(), dropper.getAvatarUrl(), dropper.getAvatarUrl());
 		embed.setColor(item.rarity.color);
-		embed.setDescription("[**" + item.rarity.name() + "**] " + item.name);
+		embed.setDescription("[**" + item.rarity.name().toLowerCase() + "**] " + item.getFQName());
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}

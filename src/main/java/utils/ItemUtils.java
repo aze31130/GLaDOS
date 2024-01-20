@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import accounts.Account;
 import glados.GLaDOS;
@@ -32,6 +33,16 @@ public class ItemUtils implements Logging {
 		// TODO Add more checks here
 
 		return true;
+	}
+
+	/*
+	 * This function ensures that a given item is owned by a user
+	 */
+	public static boolean userOwnItem(Account account, String itemFQName) {
+		Optional<Item> item = account.inventory.stream()
+				.filter(i -> i.getFQName().equals(itemFQName)).findFirst();
+
+		return item.isPresent();
 	}
 
 	/*
