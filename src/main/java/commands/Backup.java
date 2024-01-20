@@ -13,8 +13,9 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 import utils.FileUtils;
+import utils.Logging;
 
-public class Backup extends Command {
+public class Backup extends Command implements Logging {
 	public Backup() {
 		super("backup", "Download a backup of the entire server. Admin privileges required",
 				Permission.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
@@ -32,7 +33,7 @@ public class Backup extends Command {
 		JSONArray messages = new JSONArray();
 
 		target.getIterableHistory().forEachRemaining(message -> {
-			System.out.println(target.getName() + " " + messages.length());
+			LOGGER.info(target.getName() + " " + messages.length());
 			JSONObject jsonMessage = new JSONObject();
 			jsonMessage.put("authorId", message.getAuthor().getIdLong());
 			jsonMessage.put("authorName", message.getAuthor().getName());

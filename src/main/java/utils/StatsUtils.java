@@ -12,7 +12,6 @@ public class StatsUtils {
 	}
 
 	public static void ReactPerMessage(Message m) {
-		System.out.println(m.getContentRaw() + " # " + m.getJumpUrl());
 		// for (MessageReaction mr : m.getReactions()) {
 
 		// if (!isInEmote(emotes, mr.getReactionEmote().getName())) {

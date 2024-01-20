@@ -25,7 +25,6 @@ public class Item {
 	 */
 	// public String potential;
 	// public List<PairUtils<String, Integer>> Enchants;
-	// public int starForceCost;
 
 	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance,
 			int starForceLevel, int starForceMaxLevel, boolean claimable, boolean untradable,
@@ -56,6 +55,22 @@ public class Item {
 			sb.append("☆");
 
 		return sb.toString();
+	}
+
+	public int getStarForceCost() {
+		return 0;
+	}
+
+	public int getStarForceSuccessChance() {
+		return 0;
+	}
+
+	public int getStarForceFailChance() {
+		return 0;
+	}
+
+	public int getStarForceDesctroyChance() {
+		return 0;
 	}
 
 	public JSONObject toJson() {

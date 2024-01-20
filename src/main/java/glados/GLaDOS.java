@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -184,7 +185,9 @@ public class GLaDOS implements Logging {
 		}
 
 		LOGGER.info("Loaded " + this.items.size() + " items.");
+		LOGGER.info("Last ID is " + this.getLastItemId());
 		ItemUtils.generateItemChartDropRate();
+		ItemUtils.simulateDrops(300);
 	}
 
 	/*
@@ -192,6 +195,15 @@ public class GLaDOS implements Logging {
 	 */
 	public Item getItemById(int itemId) {
 		return this.items.stream().filter(it -> it.id == itemId).findFirst().orElse(null);
+	}
+
+	public int getLastItemId() {
+		Optional<Item> lastItem =
+				this.items.stream().max((i1, i2) -> Integer.compare(i1.id, i2.id));
+
+		if (lastItem.isEmpty())
+			return 0;
+		return lastItem.get().id;
 	}
 
 	/*

@@ -16,8 +16,8 @@ import utils.TimeUtils;
 public class Drop extends Command {
 	public Drop() {
 		super("drop",
-				"[WIP] Drops you a random item. Admin privileges required",
-				Permission.OWNER, Arrays.asList());
+				"Drops you a random item.",
+				Permission.NONE, Arrays.asList());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import accounts.Account;
 import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import utils.Logging;
 
 /*
  * @formatter:off
@@ -13,7 +14,7 @@ import net.dv8tion.jda.api.JDA;
  * - Midnight ranking
  * - Reset drop capability on each account
  */
-public class Midnight implements Runnable {
+public class Midnight implements Runnable, Logging {
 	public JDA jda;
 
 	public Midnight(JDA jda) {
@@ -22,7 +23,7 @@ public class Midnight implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("Executed Random Quote at " + LocalDateTime.now().toString());
+		LOGGER.info("Executed Random Quote at " + LocalDateTime.now().toString());
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");

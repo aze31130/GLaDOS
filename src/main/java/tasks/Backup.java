@@ -9,8 +9,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.utils.FileUpload;
 import utils.BuildEmbed;
 import utils.FileUtils;
+import utils.Logging;
 
-public class Backup implements Runnable {
+public class Backup implements Runnable, Logging {
 	public JDA jda;
 
 	public Backup(JDA jda) {
@@ -23,7 +24,7 @@ public class Backup implements Runnable {
 		 * For now, GLaDOS will upload users data in a private channel. This ensures no data loss
 		 * while getting the new infrastructure coming for April 2024.
 		 */
-		System.out.println("Backing up all accounts !");
+		LOGGER.info("Backing up all accounts !");
 		GLaDOS g = GLaDOS.getInstance();
 		JSONArray accounts = new JSONArray();
 
@@ -38,6 +39,6 @@ public class Backup implements Runnable {
 				.sendMessageEmbeds(BuildEmbed.successEmbed("Account backup").build())
 				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).complete();
 
-		System.out.println("Backup done !");
+		LOGGER.info("Backup done !");
 	}
 }

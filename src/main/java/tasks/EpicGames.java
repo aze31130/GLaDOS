@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import utils.Logging;
 
-public class EpicGames implements Runnable {
+public class EpicGames implements Runnable, Logging {
 	public JDA jda;
 
 	public EpicGames(JDA jda) {
@@ -14,7 +15,7 @@ public class EpicGames implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("Executed EpicGameAnnoune at " + LocalDateTime.now().toString());
+		LOGGER.info("Executed EpicGameAnnoune at " + LocalDateTime.now().toString());
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Trigger.callMessage(jda.getTextChannelById(glados.channelGamer), "Gamer");
