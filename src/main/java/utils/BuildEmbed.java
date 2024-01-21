@@ -256,9 +256,12 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder tradeEmbed() {
+	public static EmbedBuilder tradeEmbed(String srcItem, int srcMoney, String dstItem,
+			int dstMoney) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle("Trade");
+		embed.setTitle("WIP Trade");
+
+		embed.setColor(Color.ORANGE);
 
 		embed.setTimestamp(Instant.now());
 		return embed;
@@ -301,7 +304,7 @@ public class BuildEmbed {
 		info.setColor(i.rarity.color);
 		if (i.untradable)
 			info.addField(":no_entry:  Untradable", "Trade banned", false);
-		info.addField(i.type.emote + " Type", i.type.toString(), false);
+		info.addField(i.type.emote + " Type", i.type.toString().toLowerCase(), false);
 		info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
 		info.addField(":four_leaf_clover: Drop Chance",

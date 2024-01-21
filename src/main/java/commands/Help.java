@@ -1,10 +1,7 @@
 package commands;
 
-import java.awt.Color;
-import java.time.Instant;
 import java.util.Arrays;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
@@ -19,17 +16,15 @@ public class Help extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		TextChannel source = event.getChannel().asTextChannel();
-		EmbedBuilder info = new EmbedBuilder();
 		GLaDOS g = GLaDOS.getInstance();
+		StringBuilder sb = new StringBuilder();
 
-		info.setColor(Color.ORANGE);
-		info.setTitle("Help page");
-		info.setDescription("Showing help page 1 of 1");
+		sb.append("Command list:\n");
 
 		for (Command c : g.commands)
-			info.addField(c.name, c.description, true);
+			sb.append(c.name + " " + c.description + " "
+					+ c.permissionLevel.toString().toLowerCase());
 
-		info.setTimestamp(Instant.now());
-		source.sendMessageEmbeds(info.build()).queue();
+		source.sendMessage(sb.toString()).queue();
 	}
 }

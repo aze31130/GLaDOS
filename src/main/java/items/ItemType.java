@@ -12,6 +12,7 @@ public enum ItemType {
 	BOOTS(":boot:"),
 	GLOVES(":gloves:"),
 	ITEM(""),
+	MEDAL(":medal:"),
 	RING(":ring:"),
 	POTION(":tropical_drink:"),
 	WAND(":magic_wand:"),

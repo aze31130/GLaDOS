@@ -9,5 +9,5 @@
     "claimable": false,
     "untradable": true,
     "value": 1000,
-    "conditionnalDrop": []
+    "conditionnalDrop": ["VALENTINE_ITEM"]
 }

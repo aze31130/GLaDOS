@@ -1,0 +1,13 @@
+{
+    "id": 73,
+    "name": "The Bug Hunter",
+    "type": "MEDAL",
+    "lore": "With you hacker skills, you discovered a major 0 day exploit in GLaDOS. This medal is only awarded to people that broke the entire system.",
+    "rarity": "EVENT",
+    "dropChance": 0,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": true,
+    "value": 1,
+    "conditionnalDrop": []
+}
