@@ -61,6 +61,18 @@ public class ButtonClick extends ListenerAdapter {
 			// Check if the event is Next Page
 			int newPageNumber = trigger.equals("NextPage") ? pageNumber + 1 : pageNumber - 1;
 
+			// Check if the new page is valid (aka the page exist)
+			int lastPage = (int) Math
+					.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
+
+			if ((newPageNumber > lastPage) || (newPageNumber <= 0)) {
+				event.replyEmbeds(
+						BuildEmbed.errorEmbed("You cannot see page " + newPageNumber + " !")
+								.build())
+						.setEphemeral(true).queue();
+				return;
+			}
+
 			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, newPageNumber);
 
 			for (items.Item i : ItemUtils.getUserInventory(authorAccount, newPageNumber))

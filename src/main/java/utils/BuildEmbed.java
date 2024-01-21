@@ -304,8 +304,9 @@ public class BuildEmbed {
 		info.setColor(i.rarity.color);
 		if (i.untradable)
 			info.addField(":no_entry:  Untradable", "Trade banned", false);
+		if (i.starForceMaxLevel > 0)
+			info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(i.type.emote + " Type", i.type.toString().toLowerCase(), false);
-		info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
 		info.addField(":four_leaf_clover: Drop Chance",
 				String.format("%.2f%%", 100 * (i.dropChance / glados.itemTotalProb)),

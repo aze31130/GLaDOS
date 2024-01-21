@@ -16,6 +16,9 @@ import items.Item;
 import items.Rarity;
 
 public class ItemUtils implements Logging {
+
+	public static final int AMOUNT_ITEM_PER_PAGE = 5;
+
 	/*
 	 * This private constructor hides the implicit public one
 	 */
@@ -46,7 +49,8 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
-	 * This function returns the items (5 max) at the given page number.
+	 * This function returns the items at the given page number. The item limit is defined in the
+	 * AMOUNT_ITEM_PER_PAGE static variable.
 	 */
 	public static List<Item> getUserInventory(Account a, int inventoryPage) {
 		List<Item> result = new ArrayList<>();
@@ -57,14 +61,14 @@ public class ItemUtils implements Logging {
 		Collections.reverse(sortedInventory);
 
 		// Check if the given page is valid
-		int lastPage = (int) Math.ceil((double) sortedInventory.size() / 5);
+		int lastPage = (int) Math.ceil((double) sortedInventory.size() / AMOUNT_ITEM_PER_PAGE);
 
 		if ((inventoryPage <= 0) || (lastPage < inventoryPage))
 			return result;
 
-		for (int indexMin = (inventoryPage - 1) * 5; indexMin < sortedInventory
+		for (int indexMin = (inventoryPage - 1) * AMOUNT_ITEM_PER_PAGE; indexMin < sortedInventory
 				.size(); indexMin++) {
-			if (result.size() == 5)
+			if (result.size() == AMOUNT_ITEM_PER_PAGE)
 				break;
 			result.add(sortedInventory.get(indexMin));
 		}

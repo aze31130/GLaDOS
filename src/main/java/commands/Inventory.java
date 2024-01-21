@@ -36,6 +36,16 @@ public class Inventory extends Command {
 
 		int startingPage =
 				Optional.ofNullable(event.getOption("page")).map(OptionMapping::getAsInt).orElse(1);
+		int lastPage = (int) Math
+				.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
+
+		if ((startingPage > lastPage) || (startingPage <= 0)) {
+			source.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("You do not have " + startingPage
+							+ " pages in your inventory ! You last page is " + lastPage + ".")
+					.build()).queue();
+			return;
+		}
 
 		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, startingPage);
 
