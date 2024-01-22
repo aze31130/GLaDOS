@@ -53,7 +53,7 @@ public class AutoComplete extends ListenerAdapter {
 				List<Command.Choice> options = authorAccount.inventory.stream()
 						.filter(item -> item.getFQName().toLowerCase()
 								.contains(event.getFocusedOption().getValue().toLowerCase()))
-						.map(item -> new Command.Choice(item.name, item.name))
+						.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
 						.collect(Collectors.toList());
 
 				// Only keep 25 first elements at max
@@ -77,7 +77,7 @@ public class AutoComplete extends ListenerAdapter {
 				List<Command.Choice> options = targetAccount.inventory.stream()
 						.filter(item -> item.getFQName().toLowerCase()
 								.contains(event.getFocusedOption().getValue().toLowerCase()))
-						.map(item -> new Command.Choice(item.name, item.name))
+						.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
 						.collect(Collectors.toList());
 
 				// Only keep 25 first elements at max
