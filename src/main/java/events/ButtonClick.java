@@ -82,6 +82,15 @@ public class ButtonClick extends ListenerAdapter {
 			return;
 		}
 
+		// Check if action is Accept or Refuse trade
+		if (trigger.equals("AcceptTrade") || trigger.equals("RefuseTrade")) {
+			event.replyEmbeds(
+					BuildEmbed.errorEmbed("This feature is Work In Progress. Wait a bit !")
+							.build())
+					.queue();
+			return;
+		}
+
 		// Check if action is add role
 		if (trigger.startsWith("+")) {
 			trigger = trigger.replace("+", "");

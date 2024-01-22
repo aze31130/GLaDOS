@@ -256,13 +256,16 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder tradeEmbed(String srcItem, int srcMoney, String dstItem,
-			int dstMoney) {
+	public static EmbedBuilder tradeEmbed(Account author, Account target, String srcItem,
+			int srcMoney, String dstItem, int dstMoney) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle("WIP Trade");
-
+		embed.setTitle("WIP Trade Offer");
+		embed.setDescription(author.member.getAsMention() + " =>" + target.member.getAsMention());
+		embed.addField("Item source", srcItem, false);
+		embed.addField("Money source", Integer.toString(srcMoney), false);
+		embed.addField("Item destination", dstItem, false);
+		embed.addField("Money destination", Integer.toString(dstMoney), false);
 		embed.setColor(Color.ORANGE);
-
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}
@@ -320,6 +323,7 @@ public class BuildEmbed {
 
 		EmbedBuilder inventory = new EmbedBuilder();
 		inventory.setTitle("Your inventory");
+		inventory.setDescription("You have " + sender.money + " :coin:");
 		inventory.setAuthor(sender.member.getUser().getName());
 		inventory.setThumbnail(sender.member.getUser().getAvatarUrl());
 		inventory.setColor(Color.GRAY);

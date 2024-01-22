@@ -46,7 +46,10 @@ public class Item {
 	public String getFQName() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(this.name + " ");
+		sb.append(this.name);
+
+		if (this.starForceMaxLevel > 0)
+			sb.append(" ");
 
 		for (int i = 0; i < this.starForceLevel; i++)
 			sb.append("★");

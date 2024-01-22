@@ -73,8 +73,7 @@ public class Trade extends Command {
 		}
 
 		// Check dst money and item
-		if (targetAccount == null || targetAccount.money < dstMoney
-				|| !ItemUtils.userOwnItem(targetAccount, dstItem)) {
+		if (targetAccount.money < dstMoney || !ItemUtils.userOwnItem(targetAccount, dstItem)) {
 			source.sendMessageEmbeds(
 					BuildEmbed.errorEmbed("The target does not have enough money or the dst item !")
 							.build())
@@ -88,7 +87,8 @@ public class Trade extends Command {
 				Button.danger("RefuseTrade", "Refuse Trade"));
 
 		source.sendMessageEmbeds(
-				BuildEmbed.tradeEmbed(srcItem, srcMoney, dstItem, dstMoney).build())
+				BuildEmbed.tradeEmbed(authorAccount, targetAccount, srcItem, srcMoney, dstItem,
+						dstMoney).build())
 				.addActionRow(buttons).queue();
 	}
 }

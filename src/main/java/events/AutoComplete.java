@@ -51,7 +51,7 @@ public class AutoComplete extends ListenerAdapter {
 				Account authorAccount = glados.getAccount(event.getMember());
 
 				List<Command.Choice> options = authorAccount.inventory.stream()
-						.filter(item -> item.name.toLowerCase()
+						.filter(item -> item.getFQName().toLowerCase()
 								.contains(event.getFocusedOption().getValue().toLowerCase()))
 						.map(item -> new Command.Choice(item.name, item.name))
 						.collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class AutoComplete extends ListenerAdapter {
 				}
 
 				List<Command.Choice> options = targetAccount.inventory.stream()
-						.filter(item -> item.name.toLowerCase()
+						.filter(item -> item.getFQName().toLowerCase()
 								.contains(event.getFocusedOption().getValue().toLowerCase()))
 						.map(item -> new Command.Choice(item.name, item.name))
 						.collect(Collectors.toList());
