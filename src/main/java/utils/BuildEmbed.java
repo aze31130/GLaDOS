@@ -331,4 +331,15 @@ public class BuildEmbed {
 		inventory.setTimestamp(Instant.now());
 		return inventory;
 	}
+
+	public static EmbedBuilder itemChartEmbed() {
+		EmbedBuilder result = new EmbedBuilder();
+		result.setTitle("Drop rates information");
+		result.setColor(Color.YELLOW);
+
+		// TODO
+
+		result.setTimestamp(Instant.now());
+		return result;
+	}
 }

@@ -5,7 +5,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -113,36 +112,36 @@ public class ItemUtils implements Logging {
 			LOGGER.info(entry.getKey() + ": " + entry.getValue());
 	}
 
-	public static void generateItemChartDropRate() {
+	public static double getRarityDropRate(Rarity r) {
 		GLaDOS glados = GLaDOS.getInstance();
 
-		List<Map.Entry<Item, Double>> dropRate = new ArrayList<>();
-
-		Map<Rarity, Double> rarityPercentages = new HashMap<>();
+		Double totalDropRate = 0.0;
 
 		for (Item i : glados.items) {
-			Double dropPercentage = (double) (100 * (i.dropChance / glados.itemTotalProb));
-
-			if (rarityPercentages.containsKey(i.rarity)) {
-				rarityPercentages.put(i.rarity, rarityPercentages.get(i.rarity) + dropPercentage);
-			} else {
-				rarityPercentages.put(i.rarity, dropPercentage);
+			if (i.rarity.equals(r)) {
+				Double dropPercentage = (double) (100 * (i.dropChance / glados.itemTotalProb));
+				totalDropRate += dropPercentage;
 			}
-
-			dropRate.add(new AbstractMap.SimpleEntry<>(i, dropPercentage));
 		}
 
-		dropRate.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
+		return totalDropRate;
+	}
 
-		for (Map.Entry<Item, Double> entry : dropRate) {
-			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
-					+ entry.getValue() + "%");
-		}
+	public static void generateItemChartDropRate() {
+		Rarity allRarity[] = {
+				Rarity.COMMON,
+				Rarity.UNUSUAL,
+				Rarity.RARE,
+				Rarity.EPIC,
+				Rarity.LEGENDARY,
+				Rarity.FABLED,
+				Rarity.MYTHICAL,
+				Rarity.GODLY,
+				Rarity.UNIQUE,
+		};
 
-		LOGGER.info("---");
-		rarityPercentages.entrySet().stream()
-				.sorted(Map.Entry.<Rarity, Double>comparingByValue().reversed())
-				.forEach(entry -> LOGGER.info(entry.getKey() + " " + entry.getValue()));
+		for (Rarity r : allRarity)
+			LOGGER.info(r.name() + " " + getRarityDropRate(r) + "%");
 	}
 
 	public static void generateItemChartValue() {
