@@ -36,5 +36,16 @@ public class MessageReceived extends ListenerAdapter {
 				event.getChannel().sendMessage(Mention.randomAnswer()).queue();
 			}
 		}
+
+		final String dropbotCommands[] = {
+				"|d",
+				"|c",
+				"|g -1"
+		};
+
+		for (String dropbotCommand : dropbotCommands)
+			if (event.getMessage().getContentRaw().contains(dropbotCommand)
+					&& (new Random().nextInt(100) >= 60))
+				event.getChannel().sendMessage(dropbotCommand).queue();
 	}
 }

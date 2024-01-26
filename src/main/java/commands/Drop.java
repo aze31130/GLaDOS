@@ -28,7 +28,8 @@ public class Drop extends Command {
 		Account authorAccount = glados.getAccount(author);
 
 		if (!authorAccount.canDrop) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You already dropped today !").build())
+			source.sendMessageEmbeds(BuildEmbed
+					.errorEmbed("You already dropped today ! Come back tomorrow :D").build())
 					.queue();
 			return;
 		}
