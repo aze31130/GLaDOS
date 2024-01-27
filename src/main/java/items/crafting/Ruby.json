@@ -4,10 +4,10 @@
     "type": "ITEM",
     "lore": "",
     "rarity": "RARE",
-    "dropChance": 3000,
+    "dropChance": 4000,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 1500,
+    "value": 1350,
     "conditionnalDrop": []
 }

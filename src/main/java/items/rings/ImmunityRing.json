@@ -8,6 +8,6 @@
     "starForceMaxLevel": 30,
     "claimable": false,
     "untradable": false,
-    "value": 1,
+    "value": 10000000,
     "conditionnalDrop": []
 }

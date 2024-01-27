@@ -312,7 +312,7 @@ public class BuildEmbed {
 		info.addField(i.type.emote + " Type", i.type.toString().toLowerCase(), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
 		info.addField(":four_leaf_clover: Drop Chance",
-				String.format("%.2f%%", 100 * (i.dropChance / glados.itemTotalProb)),
+				String.format("%.3f%%", 100 * (i.dropChance / glados.itemTotalProb)),
 				false);
 		info.setTimestamp(Instant.now());
 		return info;

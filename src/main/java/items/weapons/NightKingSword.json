@@ -2,12 +2,12 @@
     "id": 69,
     "name": "Night King's Permafrost Spear",
     "type": "SPEAR",
-    "lore": "",
+    "lore": "Forged from enchanted ice that will never melt, this spear is a symbol of terror through its icy glow and incredible hardness.",
     "rarity": "FABLED",
     "dropChance": 150,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 1,
+    "value": 95000,
     "conditionnalDrop": []
 }

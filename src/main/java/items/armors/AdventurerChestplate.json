@@ -4,10 +4,10 @@
     "type": "CHESTPLATE",
     "lore": "",
     "rarity": "UNUSUAL",
-    "dropChance": 7500,
+    "dropChance": 6000,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,
-    "value": 100,
+    "value": 330,
     "conditionnalDrop": []
 }

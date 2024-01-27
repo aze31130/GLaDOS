@@ -4,10 +4,10 @@
     "type": "BOOTS",
     "lore": "",
     "rarity": "UNUSUAL",
-    "dropChance": 8000,
+    "dropChance": 6000,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,
-    "value": 70,
+    "value": 320,
     "conditionnalDrop": []
 }

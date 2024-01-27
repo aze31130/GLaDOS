@@ -4,10 +4,10 @@
     "type": "LEGGINGS",
     "lore": "",
     "rarity": "LEGENDARY",
-    "dropChance": 375,
+    "dropChance": 400,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
-    "value": 180000,
+    "value": 48000,
     "conditionnalDrop": []
 }

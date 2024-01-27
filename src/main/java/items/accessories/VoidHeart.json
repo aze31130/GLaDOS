@@ -1,8 +1,8 @@
 {
-    "id": 52,
-    "name": "Sweetwater Hat",
-    "type": "HELMET",
-    "lore": "",
+    "id": 77,
+    "name": "Void Heart",
+    "type": "ITEM",
+    "lore": "An emptiness that was hidden within, now unconstrained. Unifies the void under the bearer's will.",
     "rarity": "LEGENDARY",
     "dropChance": 280,
     "starForceMaxLevel": 0,

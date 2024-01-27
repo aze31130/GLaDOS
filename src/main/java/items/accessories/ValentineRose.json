@@ -8,6 +8,6 @@
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": true,
-    "value": 1000,
+    "value": 1,
     "conditionnalDrop": ["VALENTINE_ITEM"]
 }

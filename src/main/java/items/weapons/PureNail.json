@@ -1,0 +1,13 @@
+{
+    "id": 75,
+    "name": "Pure Nail",
+    "type": "SWORD",
+    "lore": "The ultimate weapon of Hallownest. Crafted to perfection, this ancient nail reveals its true form.",
+    "rarity": "RARE",
+    "dropChance": 4000,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 1150,
+    "conditionnalDrop": []
+}

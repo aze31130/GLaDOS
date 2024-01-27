@@ -1,0 +1,13 @@
+{
+    "id": 76,
+    "name": "Delicate flower",
+    "type": "ITEM",
+    "lore": "A flower from a far away land, so fragile it could break at the faintest damage.",
+    "rarity": "UNUSUAL",
+    "dropChance": 6000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 320,
+    "conditionnalDrop": []
+}
