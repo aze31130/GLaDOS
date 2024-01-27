@@ -2,7 +2,7 @@ package commands;
 
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -27,7 +27,7 @@ public class Status extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 		String activity = event.getOption("type").getAsString();
 		String description = event.getOption("description").getAsString();
 

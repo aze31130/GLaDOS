@@ -7,7 +7,7 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
 import utils.ItemUtils;
@@ -22,7 +22,7 @@ public class Drop extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannel source = event.getMessageChannel();
+		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
 		Member author = event.getMember();
 		Account authorAccount = glados.getAccount(author);

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
 
@@ -19,7 +19,7 @@ public class RandomDog extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 
 		try {
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")

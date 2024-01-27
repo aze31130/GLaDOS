@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import accounts.Permission;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -22,7 +22,7 @@ public class Factorielle extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {

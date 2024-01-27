@@ -2,7 +2,7 @@ package commands;
 
 import java.util.Arrays;
 
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
 import glados.GLaDOS;
@@ -15,7 +15,7 @@ public class Help extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 		GLaDOS g = GLaDOS.getInstance();
 		StringBuilder sb = new StringBuilder();
 

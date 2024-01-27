@@ -3,7 +3,7 @@ package commands;
 import java.util.Arrays;
 import java.util.List;
 import accounts.Permission;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -19,7 +19,7 @@ public class Role extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 		net.dv8tion.jda.api.entities.Role argument = event.getOption("role").getAsRole();
 
 		List<ItemComponent> buttons = Arrays.asList(

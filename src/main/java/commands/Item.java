@@ -6,7 +6,7 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Rarity;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -21,7 +21,7 @@ public class Item extends Command {
 						"The item name you're searching for.", false, true)));
 	}
 
-	public void generateItemChart(TextChannel source) {
+	public void generateItemChart(MessageChannelUnion source) {
 		GLaDOS g = GLaDOS.getInstance();
 		EmbedBuilder rarityEmbed = BuildEmbed.itemChartEmbed();
 
@@ -49,7 +49,7 @@ public class Item extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		// Get item name from argument
-		TextChannel source = event.getChannel().asTextChannel();
+		MessageChannelUnion source = event.getChannel();
 		OptionMapping optionalItemName = event.getOption("name");
 
 		if (optionalItemName == null) {

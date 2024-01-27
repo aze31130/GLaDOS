@@ -12,7 +12,7 @@ public class MessageReceived extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
 
-		if ((message.length == 1) && !event.getChannel().asTextChannel().isNSFW()
+		if (event.isFromGuild() && !event.getChannel().asTextChannel().isNSFW()
 				&& !event.getChannel().getId().equals(glados.channelNsfw)) {
 			for (int i = 0; i < glados.bannedWords.length(); i++) {
 				if (message[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
@@ -42,10 +42,11 @@ public class MessageReceived extends ListenerAdapter {
 				"|c",
 				"|g -1"
 		};
-
+		// check self sender
 		for (String dropbotCommand : dropbotCommands)
-			if (event.getMessage().getContentRaw().contains(dropbotCommand)
-					&& (new Random().nextInt(100) >= 60))
+			if (!event.getAuthor().isBot()
+					&& event.getMessage().getContentRaw().contains(dropbotCommand)
+					&& (new Random().nextInt(100) >= 70))
 				event.getChannel().sendMessage(dropbotCommand).queue();
 	}
 }

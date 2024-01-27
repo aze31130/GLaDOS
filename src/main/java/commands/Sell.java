@@ -6,7 +6,7 @@ import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -25,7 +25,7 @@ public class Sell extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannel source = event.getMessageChannel();
+		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
 		Member author = event.getMember();
 		Account authorAccount = glados.getAccount(author);
