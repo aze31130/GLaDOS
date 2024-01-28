@@ -14,7 +14,7 @@ public class AutoComplete extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		String eventName = event.getName();
 
-		if (eventName.equals("item")) {
+		if (eventName.equals("item") || eventName.equals("give")) {
 			List<Command.Choice> options = glados.items.stream()
 					.filter(item -> item.name.toLowerCase()
 							.contains(event.getFocusedOption().getValue().toLowerCase()))
@@ -86,6 +86,30 @@ public class AutoComplete extends ListenerAdapter {
 				event.replyChoices(filtered).queue();
 				return;
 			}
+		}
+
+		if (eventName.equals("delete") && event.getOption("target") != null) {
+			Account targetAccount =
+					glados.getAccountById(event.getOption("target").getAsString());
+
+			// Check if the user put a user with no account
+			if (targetAccount == null) {
+				// Return no choices
+				event.replyChoice("", "");
+				return;
+			}
+
+			List<Command.Choice> options = targetAccount.inventory.stream()
+					.filter(item -> item.getFQName().toLowerCase()
+							.contains(event.getFocusedOption().getValue().toLowerCase()))
+					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
+					.collect(Collectors.toList());
+
+			// Only keep 25 first elements at max
+			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
+
+			event.replyChoices(filtered).queue();
+			return;
 		}
 	}
 }

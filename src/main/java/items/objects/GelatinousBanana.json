@@ -1,0 +1,13 @@
+{
+    "id": 78,
+    "name": "Gelatinous Banana",
+    "type": "ITEM",
+    "lore": "This very strange banana is melting into a green viscous slime. Next time, you will think twice before putting some into the microwave.",
+    "rarity": "UNUSUAL",
+    "dropChance": 3000,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 420,
+    "conditionnalDrop": []
+}

@@ -193,8 +193,15 @@ public class GLaDOS implements Logging {
 	/*
 	 * Returns the item given its id.
 	 */
-	public Item getItemById(int itemId) {
-		return this.items.stream().filter(it -> it.id == itemId).findFirst().orElse(null);
+	public Optional<Item> getItemById(int itemId) {
+		return this.items.stream().filter(it -> it.id == itemId).findFirst();
+	}
+
+	/*
+	 * Returns the item given its FQ name
+	 */
+	public Optional<Item> getItemByFQName(String fqname) {
+		return this.items.stream().filter(it -> it.getFQName().equals(fqname)).findFirst();
 	}
 
 	public int getLastItemId() {
@@ -262,9 +269,16 @@ public class GLaDOS implements Logging {
 				int itemId = jsonInventory.getJSONObject(j).getInt("id");
 				int itemStarForceLevel = jsonInventory.getJSONObject(j).getInt("starForceLevel");
 
-				Item item = this.getItemById(itemId);
-				item.starForceLevel = itemStarForceLevel;
-				userInventory.add(item);
+				Optional<Item> item = this.getItemById(itemId);
+
+				if (item.isEmpty()) {
+					LOGGER.warning("Skipped unknown item id in inventory " + jsonAccount);
+					continue;
+				}
+
+				Item it = item.get();
+				it.starForceLevel = itemStarForceLevel;
+				userInventory.add(it);
 			}
 
 			Account a = new Account(
@@ -282,7 +296,7 @@ public class GLaDOS implements Logging {
 			this.accounts.add(a);
 		}
 
-		LOGGER.log(Level.INFO, "Loaded " + this.accounts.size() + " accounts.");
+		LOGGER.info("Loaded " + this.accounts.size() + " accounts.");
 	}
 
 	/*
