@@ -6,7 +6,7 @@ import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
 import items.Item;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
@@ -24,7 +24,7 @@ public class Drop extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
-		Member author = event.getMember();
+		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 
 		if (!authorAccount.canDrop) {
@@ -44,7 +44,7 @@ public class Drop extends Command {
 			authorAccount.money += acquiredMoney;
 			event.getMessageChannel()
 					.sendMessageEmbeds(
-							BuildEmbed.moneyDropEmbed(author.getUser(), acquiredMoney,
+							BuildEmbed.moneyDropEmbed(author, acquiredMoney,
 									authorAccount.money).build())
 					.queue();
 		}
@@ -86,7 +86,7 @@ public class Drop extends Command {
 
 
 		authorAccount.inventory.add(droppedItem);
-		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author.getUser(), droppedItem).build())
+		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build())
 				.queue();
 		authorAccount.canDrop = false;
 	}

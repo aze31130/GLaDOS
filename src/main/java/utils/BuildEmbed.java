@@ -186,18 +186,17 @@ public class BuildEmbed {
 
 	public static EmbedBuilder profileEmbed(Account account) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle(account.member.getUser().getName() + "'s profile");
-		embed.setDescription(account.member.getAsMention());
+		embed.setTitle(account.user.getName() + "'s profile");
+		embed.setDescription(account.user.getAsMention());
 		embed.setColor(Color.GREEN);
-		embed.setThumbnail(account.member.getUser().getAvatarUrl());
+		embed.setThumbnail(account.user.getAvatarUrl());
 
 		embed.addField(":sparkles: - Level", Integer.toString(account.level), true);
 		embed.addField(":green_book: - Experience", Long.toString(account.experience), true);
 		embed.addField(":shield: - Trust Factor", "WIP", true);
 		embed.addField(":wave: - Fame", "WIP", true);
-		embed.addField(":clock: - Joined Discord", account.member.getTimeCreated().toString(),
+		embed.addField(":clock: :timer: - Joined Discord", account.user.getTimeCreated().toString(),
 				true);
-		embed.addField(":timer: - Member since", account.member.getTimeJoined().toString(), true);
 		embed.addField(":moneybag: - Money", Long.toString(account.money), true);
 		embed.addField(":briefcase: - Items", Integer.toString(account.inventory.size()), true);
 		embed.addField(":envelope: - Messages", "WIP", true);
@@ -260,7 +259,7 @@ public class BuildEmbed {
 			int srcMoney, String dstItem, int dstMoney) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setTitle("WIP Trade Offer");
-		embed.setDescription(author.member.getAsMention() + " =>" + target.member.getAsMention());
+		embed.setDescription(author.user.getAsMention() + " =>" + target.user.getAsMention());
 		embed.addField("Item source", srcItem, false);
 		embed.addField("Money source", Integer.toString(srcMoney), false);
 		embed.addField("Item destination", dstItem, false);
@@ -324,8 +323,8 @@ public class BuildEmbed {
 		EmbedBuilder inventory = new EmbedBuilder();
 		inventory.setTitle("Your inventory");
 		inventory.setDescription("You have " + sender.money + " :coin:");
-		inventory.setAuthor(sender.member.getUser().getName());
-		inventory.setThumbnail(sender.member.getUser().getAvatarUrl());
+		inventory.setAuthor(sender.user.getName());
+		inventory.setThumbnail(sender.user.getAvatarUrl());
 		inventory.setColor(Color.GRAY);
 		inventory.setFooter(pageNumber + " / " + totalPages);
 		inventory.setTimestamp(Instant.now());

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -31,7 +31,7 @@ public class Inventory extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
-		Member author = event.getMember();
+		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 
 		int startingPage =

@@ -23,8 +23,8 @@ import items.Item;
 import items.ItemType;
 import items.Rarity;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
@@ -91,12 +91,13 @@ public class GLaDOS implements Logging {
 		 * Initialize command
 		 */
 		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(),
-				new Clear(), new Connect(), new Disconnect(), new Drop(), new Factorielle(),
-				new Fibonacci(), new Help(), new Idea(), new Inventory(), new commands.Item(),
-				new Move(), new Ping(), new Play(), new Profile(), new Question(), new RandomCat(),
-				new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(),
-				new State(), new Statistics(), new Status(), new Trade(), new Translate(),
-				new Upgrade(), new Version(), new Vote()};
+				new Clear(), new Connect(), new Delete(), new Disconnect(), new Drop(),
+				new Factorielle(), new Fibonacci(), new Give(), new Help(), new Idea(),
+				new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(),
+				new Profile(), new Question(), new RandomCat(), new RandomDog(), new Rng(),
+				new Role(), new Sell(), new Shutdown(), new Spam(), new State(), new Statistics(),
+				new Status(), new Trade(), new Translate(), new Upgrade(), new Version(),
+				new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
@@ -268,7 +269,7 @@ public class GLaDOS implements Logging {
 
 			Account a = new Account(
 					jsonAccount.getString("id"),
-					jda.getGuilds().get(0).getMemberById(jsonAccount.getString("id")),
+					jda.getUserById(jsonAccount.getString("id")),
 					jsonAccount.getInt("level"),
 					jsonAccount.getInt("experience"),
 					jsonAccount.getInt("totalExperience"),
@@ -287,14 +288,14 @@ public class GLaDOS implements Logging {
 	/*
 	 * Returns given account. Create if not exist
 	 */
-	public Account getAccount(Member m) {
+	public Account getAccount(User u) {
 		// Check if account is registered
 		Account result =
-				this.accounts.stream().filter(a -> a.id.equals(m.getId())).findFirst().orElse(null);
+				this.accounts.stream().filter(a -> a.id.equals(u.getId())).findFirst().orElse(null);
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(m.getId(), m, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
+			result = new Account(u.getId(), u, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
 					new ArrayList<Item>(), true, 0);
 			this.accounts.add(result);
 		}

@@ -3,7 +3,7 @@ package commands;
 import java.util.Arrays;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Account;
 import accounts.Permission;
@@ -17,7 +17,7 @@ public class Profile extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		Member author = event.getMember();
+		User author = event.getUser();
 		Account a = glados.getAccount(author);
 
 		EmbedBuilder profile = BuildEmbed.profileEmbed(a);

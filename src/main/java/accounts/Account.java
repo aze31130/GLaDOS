@@ -6,11 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import achievements.Achievement;
 import items.Item;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 
 public class Account {
 	public String id;
-	public Member member;
+	public User user;
 
 	public int level;
 	public long experience;
@@ -25,11 +25,11 @@ public class Account {
 	public boolean canDrop;
 	public long money;
 
-	public Account(String id, Member member, int level, long experience, long totalExperience,
+	public Account(String id, User user, int level, long experience, long totalExperience,
 			TrustFactor trustLevel, Permission permission, List<Item> inventory, boolean canDrop,
 			long money) {
 		this.id = id;
-		this.member = member;
+		this.user = user;
 		this.level = level;
 		this.experience = experience;
 		this.totalExperience = totalExperience;
@@ -56,9 +56,9 @@ public class Account {
 			achievements.put(achievement);
 
 		result.put("id", this.id);
-		result.put("name", this.member.getUser().getName());
-		result.put("created", this.member.getUser().getTimeCreated().toString());
-		result.put("joined", this.member.getTimeJoined().toString());
+		result.put("name", this.user.getName());
+		result.put("created", this.user.getTimeCreated().toString());
+		result.put("joined", this.user.getTimeCreated().toString());
 		result.put("inventory", items);
 		result.put("achievements", achievements);
 		result.put("level", this.level);

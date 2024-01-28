@@ -3,7 +3,7 @@ package commands;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -46,9 +46,10 @@ public class Trade extends Command {
 					.queue();
 			return;
 		}
+		// TODO: trade is only possible in a server, not in private message
 
 		GLaDOS glados = GLaDOS.getInstance();
-		Member author = event.getMember();
+		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 		Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
 

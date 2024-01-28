@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import accounts.Account;
 import glados.GLaDOS;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
@@ -29,7 +29,7 @@ public class AutoComplete extends ListenerAdapter {
 		}
 
 		if (eventName.equals("upgrade") || eventName.equals("sell")) {
-			Member author = event.getMember();
+			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
 			List<Command.Choice> options = authorAccount.inventory.stream()
 					.filter(item -> item.getFQName()
@@ -48,7 +48,7 @@ public class AutoComplete extends ListenerAdapter {
 			String field = event.getFocusedOption().getName();
 
 			if (field.equals("srcitem")) {
-				Account authorAccount = glados.getAccount(event.getMember());
+				Account authorAccount = glados.getAccount(event.getUser());
 
 				List<Command.Choice> options = authorAccount.inventory.stream()
 						.filter(item -> item.getFQName().toLowerCase()

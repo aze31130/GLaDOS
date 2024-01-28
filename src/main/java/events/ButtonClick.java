@@ -5,7 +5,7 @@ import java.util.HashMap;
 import accounts.Account;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
@@ -37,7 +37,7 @@ public class ButtonClick extends ListenerAdapter {
 
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("NextPage") || trigger.equals("PrevPage")) {
-			Member author = event.getMember();
+			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
 
 			/*
