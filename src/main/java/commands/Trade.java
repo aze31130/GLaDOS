@@ -46,14 +46,20 @@ public class Trade extends Command {
 					.queue();
 			return;
 		}
-		// TODO: trade is only possible in a server, not in private message
+
+		// Ensures trade is performed in a server, not in private message
+		if (!event.isFromGuild()) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("You can only trade in a server !").build())
+					.queue();
+			return;
+		}
 
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 		Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
-		// Ensure the trade is possible (src owns the item and money, dst owns the item and money)
 		String srcItem =
 				Optional.ofNullable(event.getOption("srcitem")).map(OptionMapping::getAsString)
 						.orElse("");
@@ -65,18 +71,11 @@ public class Trade extends Command {
 		int dstMoney = Optional.ofNullable(event.getOption("dstmoney")).map(OptionMapping::getAsInt)
 				.orElse(0);
 
-		// Check src money and item
-		if ((authorAccount.money < srcMoney) || !ItemUtils.userOwnItem(authorAccount, srcItem)) {
+		// Ensure the trade is possible
+		if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem,
+				dstMoney)) {
 			source.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("You do not own enough money or the src item !").build())
-					.queue();
-			return;
-		}
-
-		// Check dst money and item
-		if (targetAccount.money < dstMoney || !ItemUtils.userOwnItem(targetAccount, dstItem)) {
-			source.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("The target does not have enough money or the dst item !")
+					BuildEmbed.errorEmbed("Illegal trade ! Ensures the trade is possible !")
 							.build())
 					.queue();
 			return;

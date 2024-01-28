@@ -258,12 +258,12 @@ public class BuildEmbed {
 	public static EmbedBuilder tradeEmbed(Account author, Account target, String srcItem,
 			int srcMoney, String dstItem, int dstMoney) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle("WIP Trade Offer");
-		embed.setDescription(author.user.getAsMention() + " =>" + target.user.getAsMention());
+		embed.setTitle("Trade Offer");
+		embed.setDescription(author.user.getAsMention() + "=>" + target.user.getAsMention());
 		embed.addField("Item source", srcItem, false);
-		embed.addField("Money source", Integer.toString(srcMoney), false);
+		embed.addField("Money source", Integer.toString(srcMoney) + " :coin:", false);
 		embed.addField("Item destination", dstItem, false);
-		embed.addField("Money destination", Integer.toString(dstMoney), false);
+		embed.addField("Money destination", Integer.toString(dstMoney) + " :coin:", false);
 		embed.setColor(Color.ORANGE);
 		embed.setTimestamp(Instant.now());
 		return embed;
@@ -334,10 +334,9 @@ public class BuildEmbed {
 	public static EmbedBuilder itemChartEmbed() {
 		EmbedBuilder result = new EmbedBuilder();
 		result.setTitle("Drop rates information");
+		result.setDescription(
+				"This list is dynamically generated, theses are the actuals rates currently in use.");
 		result.setColor(Color.YELLOW);
-
-		// TODO
-
 		result.setTimestamp(Instant.now());
 		return result;
 	}

@@ -36,18 +36,15 @@ public class Drop extends Command {
 
 		SecureRandom random = new SecureRandom();
 
-		// 50% chance to get daily money
-		if (random.nextBoolean()) {
-			// Get random amount of money [1 - 1000]
-			int acquiredMoney = random.nextInt(1001);
+		// Get random amount of money [1 - 1000]
+		int acquiredMoney = random.nextInt(1001);
 
-			authorAccount.money += acquiredMoney;
-			event.getMessageChannel()
-					.sendMessageEmbeds(
-							BuildEmbed.moneyDropEmbed(author, acquiredMoney,
-									authorAccount.money).build())
-					.queue();
-		}
+		authorAccount.money += acquiredMoney;
+		event.getMessageChannel()
+				.sendMessageEmbeds(
+						BuildEmbed.moneyDropEmbed(author, acquiredMoney,
+								authorAccount.money).build())
+				.queue();
 
 		if (TimeUtils.isSpecialDay()) {
 			// Guaranteeing specific drops on event days

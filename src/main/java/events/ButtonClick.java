@@ -2,10 +2,13 @@ package events;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import accounts.Account;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.MessageEmbed.Field;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
@@ -48,7 +51,7 @@ public class ButtonClick extends ListenerAdapter {
 			String clickerName = event.getUser().getName();
 			if (!inventoryName.equals(clickerName)) {
 				event.replyEmbeds(
-						BuildEmbed.errorEmbed("You cannot list other's inventory !").build())
+						BuildEmbed.errorEmbed("You cannot explore other's inventory !").build())
 						.setEphemeral(true).queue();
 				return;
 			}
@@ -82,12 +85,84 @@ public class ButtonClick extends ListenerAdapter {
 			return;
 		}
 
-		// Check if action is Accept or Refuse trade
 		if (trigger.equals("AcceptTrade") || trigger.equals("RefuseTrade")) {
-			event.replyEmbeds(
-					BuildEmbed.errorEmbed("This feature is Work In Progress. Wait a bit !")
-							.build())
-					.queue();
+			/*
+			 * In order to match the trade author and trade target, we will read the description
+			 * field that should look like that: <@AuthorID>=><@TargetID>. To achieve this, we can
+			 * use the following regex:
+			 */
+			final String pattern = "<@(\\d+)>";
+			Pattern r = Pattern.compile(pattern);
+			Matcher m = r.matcher(event.getMessage().getEmbeds().get(0).getDescription());
+			m.find();
+			String tradeAuthor = m.group(1);
+			m.find();
+			String tradeTarget = m.group(1);
+
+			// Ensure the target clicked the button and no one else
+			String clickerId = event.getUser().getId();
+
+			if (!clickerId.equals(tradeTarget)) {
+				event.replyEmbeds(
+						BuildEmbed.errorEmbed(
+								"Only the trade target can accept or refuse the trade offer.")
+								.build())
+						.setEphemeral(true).queue();
+				return;
+			}
+
+			// Check if trade is refused and removed buttons if refused
+			if (trigger.equals("RefuseTrade")) {
+				event.editMessageEmbeds(BuildEmbed
+						.successEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
+						.build()).queue();
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				return;
+			}
+
+			Account authorAccount = glados.getAccountById(tradeAuthor);
+			Account targetAccount = glados.getAccountById(tradeTarget);
+
+			String srcItem = "";
+			int srcMoney = 0;
+			String dstItem = "";
+			int dstMoney = 0;
+
+			for (Field f : event.getMessage().getEmbeds().get(0).getFields()) {
+				switch (f.getName()) {
+					case "Item source":
+						srcItem = f.getValue();
+						break;
+					case "Money source":
+						srcMoney = Integer.parseInt(f.getValue());
+						break;
+					case "Item destination":
+						dstItem = f.getValue();
+						break;
+					case "Money destination":
+						dstMoney = Integer.parseInt(f.getValue());
+						break;
+					default:
+						break;
+				}
+			}
+
+			// Checks again if the trade is still possible
+			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem,
+					dstMoney)) {
+				event.editMessageEmbeds(BuildEmbed
+						.errorEmbed("The trade is not longer possible ! Operation cancelled !")
+						.build()).queue();
+				return;
+			}
+
+			// Performs the trade
+			// TODO
+
+			// Updates the embed
+			event.editMessageEmbeds(BuildEmbed
+					.successEmbed("WIP ! Operation cancelled !")
+					.build()).queue();
 			return;
 		}
 

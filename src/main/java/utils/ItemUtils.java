@@ -26,6 +26,35 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
+	 * This function checks if a given trade is possible or not.
+	 */
+	public static boolean isTradePossible(Account author, Account target, String srcItem,
+			int srcMoney, String dstItem, int dstMoney) {
+
+		// Check if the author is the target
+		if (author.user.getId().equals(target.user.getId()))
+			return false;
+
+		// Check src money
+		if (author.money < srcMoney)
+			return false;
+
+		// Check src item
+		if ((srcItem.length() > 0) && !ItemUtils.userOwnItem(author, srcItem))
+			return false;
+
+		// Check dst money
+		if (target.money < dstMoney)
+			return false;
+
+		// Check src item
+		if ((dstItem.length() > 0) && !ItemUtils.userOwnItem(target, dstItem))
+			return false;
+
+		return true;
+	}
+
+	/*
 	 * This function checks if the drop conditions are fulfilled
 	 */
 	public static Boolean checkDropConditions(Item i) {
