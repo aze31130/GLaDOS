@@ -26,9 +26,8 @@ public class Item {
 	// public String potential;
 	// public List<PairUtils<String, Integer>> Enchants;
 
-	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance,
-			int starForceLevel, int starForceMaxLevel, boolean claimable, boolean untradable,
-			int value) {
+	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance, int starForceLevel,
+			int starForceMaxLevel, boolean claimable, boolean untradable, int value) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -54,7 +53,7 @@ public class Item {
 		for (int i = 0; i < this.starForceLevel; i++)
 			sb.append("★");
 
-		for (int i = starForceLevel; i < this.starForceMaxLevel; i++)
+		for (int i = this.starForceLevel; i < this.starForceMaxLevel; i++)
 			sb.append("☆");
 
 		return sb.toString();
@@ -72,7 +71,7 @@ public class Item {
 		return 0;
 	}
 
-	public int getStarForceDesctroyChance() {
+	public int getStarForceDestroyChance() {
 		return 0;
 	}
 

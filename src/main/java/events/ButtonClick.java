@@ -97,38 +97,44 @@ public class ButtonClick extends ListenerAdapter {
 			// Ensure the target clicked the button and no one else
 			String clickerId = event.getUser().getId();
 
-			if (!clickerId.equals(tradeTarget)) {
+			if (!(clickerId.equals(tradeAuthor) || clickerId.equals(tradeTarget))) {
 				event.replyEmbeds(BuildEmbed.errorEmbed("Only the trade target can accept or refuse the trade offer.").build())
 						.setEphemeral(true).queue();
 				return;
 			}
 
-			// Check if trade is refused and removed buttons if refused
+			// Check if trade is refused and remove buttons if refused
 			if (trigger.equals("RefuseTrade")) {
-				event.editMessageEmbeds(BuildEmbed.successEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
 						.build()).queue();
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				return;
+			}
+
+			if (trigger.equals("AcceptTrade") && !clickerId.equals(tradeTarget)) {
+				event.replyEmbeds(BuildEmbed.errorEmbed("Only the trade target can accept the trade !").build())
+						.setEphemeral(true).queue();
 				return;
 			}
 
 			Account authorAccount = glados.getAccountById(tradeAuthor);
 			Account targetAccount = glados.getAccountById(tradeTarget);
 
-			String srcItem = "";
+			String srcItemFQName = "";
 			int srcMoney = 0;
-			String dstItem = "";
+			String dstItemFQName = "";
 			int dstMoney = 0;
 
 			for (Field f : event.getMessage().getEmbeds().get(0).getFields()) {
 				switch (f.getName()) {
 					case "Item source":
-						srcItem = f.getValue();
+						srcItemFQName = f.getValue();
 						break;
 					case "Money source":
 						srcMoney = Integer.parseInt(f.getValue());
 						break;
 					case "Item destination":
-						dstItem = f.getValue();
+						dstItemFQName = f.getValue();
 						break;
 					case "Money destination":
 						dstMoney = Integer.parseInt(f.getValue());
@@ -139,18 +145,35 @@ public class ButtonClick extends ListenerAdapter {
 			}
 
 			// Checks again if the trade is still possible
-			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem,
-					dstMoney)) {
-				event.editMessageEmbeds(BuildEmbed.errorEmbed("The trade is not longer possible ! Operation cancelled !").build())
+			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItemFQName, srcMoney, dstItemFQName, dstMoney)) {
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("The trade is no longer possible ! Operation cancelled !").build())
 						.queue();
 				return;
 			}
 
-			// Performs the trade
-			// TODO
+			// Check presence of src item
+			if (srcItemFQName.length() > 1) {
+				items.Item srcItem = authorAccount.getItemByFQName(srcItemFQName).get();
+				authorAccount.inventory.remove(srcItem);
+				targetAccount.inventory.add(srcItem);
+			}
+
+			// Check presence of dst item
+			if (dstItemFQName.length() > 1) {
+				items.Item dstItem = targetAccount.getItemByFQName(dstItemFQName).get();
+				targetAccount.inventory.remove(dstItem);
+				authorAccount.inventory.add(dstItem);
+			}
+
+			// Exchange money
+			authorAccount.money -= srcMoney;
+			targetAccount.money += srcMoney;
+			targetAccount.money -= dstMoney;
+			authorAccount.money += dstMoney;
 
 			// Updates the embed
-			event.editMessageEmbeds(BuildEmbed.successEmbed("WIP ! Operation cancelled !").build()).queue();
+			event.editMessageEmbeds(BuildEmbed.successEmbed("Trade completed !").build()).queue();
+			event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 			return;
 		}
 

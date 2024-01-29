@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
-import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -201,9 +200,15 @@ public class GLaDOS implements Logging {
 		return this.items.stream().filter(it -> it.getFQName().equals(fqname)).findFirst();
 	}
 
+	/*
+	 * Returns the item given its name
+	 */
+	public Optional<Item> getItemByName(String name) {
+		return this.items.stream().filter(it -> it.name.equals(name)).findFirst();
+	}
+
 	public int getLastItemId() {
-		Optional<Item> lastItem =
-				this.items.stream().max((i1, i2) -> Integer.compare(i1.id, i2.id));
+		Optional<Item> lastItem = this.items.stream().max((i1, i2) -> Integer.compare(i1.id, i2.id));
 
 		if (lastItem.isEmpty())
 			return 0;

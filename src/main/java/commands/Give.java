@@ -39,7 +39,7 @@ public class Give extends Command {
 		// Check if it's an item give
 		if (itemName.isPresent()) {
 			// Check if the given item name exist
-			Optional<items.Item> item = glados.getItemByFQName(itemName.get());
+			Optional<items.Item> item = glados.getItemByName(itemName.get());
 
 			if (item.isEmpty()) {
 				source.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown item " + itemName.get()).build()).queue();

@@ -2,6 +2,7 @@ package accounts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import achievements.Achievement;
@@ -25,7 +26,8 @@ public class Account {
 	public boolean canDrop;
 	public long money;
 
-	public Account(String id, User user, int level, long experience, long totalExperience, TrustFactor trustLevel, Permission permission,
+	public Account(String id, User user, int level, long experience, long totalExperience, TrustFactor trustLevel,
+			Permission permission,
 			List<Item> inventory, boolean canDrop, long money) {
 		this.id = id;
 		this.user = user;
@@ -38,6 +40,13 @@ public class Account {
 		this.achievements = new ArrayList<>();
 		this.canDrop = canDrop;
 		this.money = money;
+	}
+
+	/*
+	 * Returns an item from inventory.
+	 */
+	public Optional<Item> getItemByFQName(String itemFQName) {
+		return this.inventory.stream().filter(i -> i.getFQName().equals(itemFQName)).findFirst();
 	}
 
 	/*

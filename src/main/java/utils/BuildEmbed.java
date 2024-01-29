@@ -261,9 +261,9 @@ public class BuildEmbed {
 		embed.setTitle("Trade Offer");
 		embed.setDescription(author.user.getAsMention() + "=>" + target.user.getAsMention());
 		embed.addField("Item source", srcItem, false);
-		embed.addField("Money source", Integer.toString(srcMoney) + " :coin:", false);
+		embed.addField("Money source", Integer.toString(srcMoney), false);
 		embed.addField("Item destination", dstItem, false);
-		embed.addField("Money destination", Integer.toString(dstMoney) + " :coin:", false);
+		embed.addField("Money destination", Integer.toString(dstMoney), false);
 		embed.setColor(Color.ORANGE);
 		embed.setTimestamp(Instant.now());
 		return embed;
