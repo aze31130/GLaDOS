@@ -15,8 +15,11 @@ import utils.BuildEmbed;
 
 public class Factorielle extends Command {
 	public Factorielle() {
-		super("factorielle", "Computes given factorial number",
-				Permission.NONE, Arrays.asList(
+		super(
+				"factorielle",
+				"Computes given factorial number",
+				Permission.NONE,
+				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")));
 	}
 
@@ -26,9 +29,7 @@ public class Factorielle extends Command {
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {
-			source.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
-					.queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build()).queue();
 			return;
 		}
 
@@ -42,23 +43,20 @@ public class Factorielle extends Command {
 		 * Define a temporary limit to make sure midnight ranking is not affected
 		 */
 		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
-			source.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
 					.queue();
 			return;
 		}
 
 		source.sendTyping().queue();
 		BigInteger f = new BigInteger("1");
-		for (int i = 2; i <= n; i++) {
+		for (int i = 2; i <= n; i++)
 			f = f.multiply(BigInteger.valueOf(i));
-		}
 
 		// Write number to a file if too big
 		if (f.toString().length() >= 2000) {
 			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
-			source.sendMessage("Factorial(" + n + ") = ")
-					.addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
+			source.sendMessage("Factorial(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
 		} else {
 			source.sendMessage("Factorial(" + n + ") = " + f).queue();
 		}

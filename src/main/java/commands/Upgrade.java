@@ -10,10 +10,12 @@ import accounts.Permission;
 
 public class Upgrade extends Command {
 	public Upgrade() {
-		super("upgrade",
+		super(
+				"upgrade",
 				"Upgrade an item from your inventory.",
-				Permission.NONE, Arrays.asList(new OptionData(OptionType.STRING, "name",
-						"The item name you want to upgrade.", true, true)));
+				Permission.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "name", "The item name you want to upgrade.", true, true)));
 	}
 
 	@Override
@@ -26,8 +28,6 @@ public class Upgrade extends Command {
 
 		// Check if the user has enough money
 
-		source.sendMessageEmbeds(
-				BuildEmbed.errorEmbed("This system has not been implemented yet !").build())
-				.queue();
+		source.sendMessageEmbeds(BuildEmbed.errorEmbed("This system has not been implemented yet !").build()).queue();
 	}
 }

@@ -15,14 +15,14 @@ import utils.ItemUtils;
 
 public class Delete extends Command {
 	public Delete() {
-		super("delete", "Deletes an item from someone's inventory. Owner privileges required.",
-				Permission.OWNER, Arrays.asList(
-						new OptionData(OptionType.USER, "target",
-								"The user you want to remove an item").setRequired(true),
-						new OptionData(OptionType.STRING, "item",
-								"The item you want to remove").setAutoComplete(true),
-						new OptionData(OptionType.INTEGER, "money",
-								"The amount of money you want to remove")));
+		super(
+				"delete",
+				"Deletes an item from someone's inventory. Owner privileges required.",
+				Permission.OWNER,
+				Arrays.asList(
+						new OptionData(OptionType.USER, "target", "The user you want to remove an item").setRequired(true),
+						new OptionData(OptionType.STRING, "item", "The item you want to remove").setAutoComplete(true),
+						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to remove")));
 	}
 
 	@Override
@@ -32,41 +32,32 @@ public class Delete extends Command {
 
 		Account target = glados.getAccountById(event.getOption("target").getAsString());
 
-		Optional<String> itemName =
-				Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
+		Optional<String> itemName = Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
 
-		Optional<Integer> moneyAmount =
-				Optional.ofNullable(event.getOption("money")).map(OptionMapping::getAsInt);
+		Optional<Integer> moneyAmount = Optional.ofNullable(event.getOption("money")).map(OptionMapping::getAsInt);
 
 
 		// Check if it's an item give
 		if (itemName.isPresent()) {
 			// Check if the user owns the item
 			if (!ItemUtils.userOwnItem(target, itemName.get())) {
-				source.sendMessageEmbeds(
-						BuildEmbed.errorEmbed("The user does not own this item !")
-								.build())
-						.queue();
+				source.sendMessageEmbeds(BuildEmbed.errorEmbed("The user does not own this item !").build()).queue();
 				return;
 			}
 
 			// Remove the item
-			target.inventory.removeIf(it -> it.getFQName().equals(itemName.get()));
+			items.Item it = target.inventory.stream().filter(i -> i.getFQName().equals(itemName.get())).findFirst().get();
+			target.inventory.remove(it);
 
 			source.sendMessageEmbeds(
-					BuildEmbed.successEmbed("Removed " + itemName.get() + " to user "
-							+ target.user.getAsMention()).build())
+					BuildEmbed.successEmbed("Removed " + itemName.get() + " to user " + target.user.getAsMention()).build())
 					.queue();
 		}
 
 		// Check if it's a money give
 		if (moneyAmount.isPresent()) {
-
 			if (moneyAmount.get() <= 0) {
-				source.sendMessageEmbeds(
-						BuildEmbed.errorEmbed("You cannot remove a negative amount of money !")
-								.build())
-						.queue();
+				source.sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot remove a negative amount of money !").build()).queue();
 				return;
 			}
 
@@ -76,8 +67,7 @@ public class Delete extends Command {
 				target.money = 0;
 
 			source.sendMessageEmbeds(
-					BuildEmbed.successEmbed("Removed " + moneyAmount.get() + " to user "
-							+ target.user.getAsMention()).build())
+					BuildEmbed.successEmbed("Removed " + moneyAmount.get() + " to user " + target.user.getAsMention()).build())
 					.queue();
 		}
 	}

@@ -14,8 +14,11 @@ import accounts.Permission;
 
 public class Idea extends Command {
 	public Idea() {
-		super("what-should-i-do", "Use it when you do not know what to do",
-				Permission.NONE, Arrays.asList());
+		super(
+				"what-should-i-do",
+				"Use it when you do not know what to do",
+				Permission.NONE,
+				Arrays.asList());
 	}
 
 	@Override

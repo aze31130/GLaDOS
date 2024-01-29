@@ -44,12 +44,12 @@ public class GLaDOS implements Logging {
 	public String guildId, ownerId;
 
 	// Role attributes
-	public String roleAdministrator, roleModerator, roleGamer, roleMember,
-			roleArtistic, roleBroadcastMessenger, roleInternational, roleDeveloper, roleNsfw;
+	public String roleAdministrator, roleModerator, roleGamer, roleMember, roleArtistic, roleBroadcastMessenger,
+			roleInternational, roleDeveloper, roleNsfw;
 
 	// Channel attributes
-	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole,
-			channelVote, channelBackup, channelSystem;
+	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole, channelVote, channelBackup,
+			channelSystem;
 
 	public int requestsAmount;
 
@@ -90,13 +90,11 @@ public class GLaDOS implements Logging {
 		/*
 		 * Initialize command
 		 */
-		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(),
-				new Clear(), new Connect(), new Delete(), new Disconnect(), new Drop(),
-				new Factorielle(), new Fibonacci(), new Give(), new Help(), new Idea(),
-				new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(),
-				new Profile(), new Question(), new RandomCat(), new RandomDog(), new Rng(),
-				new Role(), new Sell(), new Shutdown(), new Spam(), new State(), new Statistics(),
-				new Status(), new Trade(), new Translate(), new Upgrade(), new Version(),
+		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(), new Clear(), new Connect(),
+				new Delete(), new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(), new Give(), new Help(),
+				new Idea(), new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(), new Profile(),
+				new Question(), new RandomCat(), new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(),
+				new State(), new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(), new Version(),
 				new Vote()};
 
 		for (Command c : commands)
@@ -176,8 +174,7 @@ public class GLaDOS implements Logging {
 
 			// Check that there are no duplicate item id
 			if (this.items.stream().anyMatch(x -> x.id == i.id)) {
-				LOGGER.log(Level.WARNING,
-						"Duplicate item id detected ! Skiping " + itemJson.toString());
+				LOGGER.warning("Duplicate item id detected ! Skiping " + itemJson.toString());
 				continue;
 			}
 
@@ -226,8 +223,7 @@ public class GLaDOS implements Logging {
 			if (c.arguments.isEmpty())
 				convertedCommands.add(Commands.slash(c.name, c.description));
 			else
-				convertedCommands
-						.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
+				convertedCommands.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();
@@ -236,14 +232,11 @@ public class GLaDOS implements Logging {
 	public void loadAccounts(JDA jda) {
 		LOGGER.info("Downloading account file from discord...");
 
-		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory()
-				.retrievePast(1).complete().get(0);
+		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory().retrievePast(1).complete().get(0);
 
 		if (!latestMessage.getAuthor().isBot()) {
 			jda.getTextChannelById(this.channelSystem)
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("Inventory sender is not a bot. Aborting loading.").build())
-					.queue();
+					.sendMessageEmbeds(BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
 			return;
 		}
 
@@ -251,8 +244,7 @@ public class GLaDOS implements Logging {
 
 		try {
 			URL fileUrl = new URL(attachment.getUrl());
-			Files.copy(fileUrl.openStream(), Paths.get("accounts.json"),
-					StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(fileUrl.openStream(), Paths.get("accounts.json"), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -304,13 +296,11 @@ public class GLaDOS implements Logging {
 	 */
 	public Account getAccount(User u) {
 		// Check if account is registered
-		Account result =
-				this.accounts.stream().filter(a -> a.id.equals(u.getId())).findFirst().orElse(null);
+		Account result = this.accounts.stream().filter(a -> a.id.equals(u.getId())).findFirst().orElse(null);
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(u.getId(), u, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE,
-					new ArrayList<Item>(), true, 0);
+			result = new Account(u.getId(), u, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE, new ArrayList<Item>(), true, 0);
 			this.accounts.add(result);
 		}
 
@@ -318,8 +308,8 @@ public class GLaDOS implements Logging {
 	}
 
 	/*
-	 * Returns the account associated to the given id. WARNING, if user is not found, it will not
-	 * create the account.
+	 * Returns the account associated to the given id. WARNING, if user is not found, it will not create
+	 * the account.
 	 */
 	public Account getAccountById(String accountId) {
 		return this.accounts.stream().filter(a -> a.id.equals(accountId)).findFirst().orElse(null);

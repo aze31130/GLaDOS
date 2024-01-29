@@ -13,9 +13,12 @@ import accounts.Permission;
 
 public class Move extends Command {
 	public Move() {
-		super("move", "Move every voice connected users to another channel",
-				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.CHANNEL,
-						"destination", "Channel you want to move in")));
+		super(
+				"move",
+				"Move every voice connected users to another channel",
+				Permission.MODERATOR,
+				Arrays.asList(
+						new OptionData(OptionType.CHANNEL, "destination", "Channel you want to move in")));
 	}
 
 	@Override
@@ -24,8 +27,7 @@ public class Move extends Command {
 		AudioChannel destination = event.getOption("destination").getAsChannel().asAudioChannel();
 
 		VoiceChannel dest = source.getJDA().getVoiceChannelById(destination.getId());
-		for (Member m : event.getMember().getVoiceState().getChannel().getMembers()) {
+		for (Member m : event.getMember().getVoiceState().getChannel().getMembers())
 			event.getMember().getGuild().moveVoiceMember(m, dest).queue();
-		}
 	}
 }

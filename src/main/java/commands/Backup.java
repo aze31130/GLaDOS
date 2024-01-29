@@ -17,10 +17,12 @@ import utils.Logging;
 
 public class Backup extends Command implements Logging {
 	public Backup() {
-		super("backup", "Download a backup of the entire server. Admin privileges required",
-				Permission.ADMINISTRATOR, Arrays.asList(new OptionData(OptionType.CHANNEL, "target",
-						"The channel you want to backup.")
-								.setRequired(true)));
+		super(
+				"backup",
+				"Download a backup of the entire server. Admin privileges required",
+				Permission.ADMINISTRATOR,
+				Arrays.asList(
+						new OptionData(OptionType.CHANNEL, "target", "The channel you want to backup.").setRequired(true)));
 	}
 
 	@Override
@@ -70,10 +72,7 @@ public class Backup extends Command implements Logging {
 		});
 		FileUtils.writeRawFile(target.getName() + ".json", messages.toString(4));
 
-		source.sendMessageEmbeds(
-				BuildEmbed
-						.successEmbed("Downloaded " + target.getAsMention() + " successfully")
-						.build())
+		source.sendMessageEmbeds(BuildEmbed.successEmbed("Downloaded " + target.getAsMention() + " successfully").build())
 				.complete();
 	}
 }

@@ -11,14 +11,13 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 public class Rng extends Command {
 	public Rng() {
-		super("rng",
+		super(
+				"rng",
 				"Generate a random number using 'perfect and totally not rigged' random",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "lower_bound",
-								"The lower bound is included"),
-						new OptionData(OptionType.INTEGER, "upper_bound",
-								"The upper bound is included")));
+						new OptionData(OptionType.INTEGER, "lower_bound", "The lower bound is included"),
+						new OptionData(OptionType.INTEGER, "upper_bound", "The upper bound is included")));
 	}
 
 	@Override
@@ -29,9 +28,9 @@ public class Rng extends Command {
 
 		long rng = new Random().nextLong() % up;
 
-		if (rng < 0) {
+		if (rng < 0)
 			rng *= -1;
-		}
+
 		source.sendMessage("The rng is: " + rng + " [ " + down + " - " + up + " ]").queue();
 	}
 }

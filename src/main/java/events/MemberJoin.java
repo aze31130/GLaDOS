@@ -10,8 +10,6 @@ public class MemberJoin extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
 		event.getGuild().getDefaultChannel().asTextChannel()
-				.sendMessageEmbeds(
-						BuildEmbed.joinLeaveEmbed(event.getUser().getAsMention(), true).build())
-				.queue();
+				.sendMessageEmbeds(BuildEmbed.joinLeaveEmbed(event.getUser().getAsMention(), true).build()).queue();
 	}
 }

@@ -12,8 +12,7 @@ public abstract class Command {
 	public Permission permissionLevel;
 	public List<OptionData> arguments;
 
-	public Command(String name, String description, Permission permissionLevel,
-			List<OptionData> arguments) {
+	public Command(String name, String description, Permission permissionLevel, List<OptionData> arguments) {
 		this.name = name;
 		this.description = description;
 		this.permissionLevel = permissionLevel;

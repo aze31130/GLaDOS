@@ -310,8 +310,7 @@ public class BuildEmbed {
 			info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(i.type.emote + " Type", i.type.toString().toLowerCase(), false);
 		info.addField(":coin: Value", Integer.toString(i.value), false);
-		info.addField(":four_leaf_clover: Drop Chance",
-				String.format("%.3f%%", 100 * (i.dropChance / glados.itemTotalProb)),
+		info.addField(":four_leaf_clover: Drop Chance", String.format("%.3f%%", 100 * (i.dropChance / glados.itemTotalProb)),
 				false);
 		info.setTimestamp(Instant.now());
 		return info;
@@ -334,8 +333,7 @@ public class BuildEmbed {
 	public static EmbedBuilder itemChartEmbed() {
 		EmbedBuilder result = new EmbedBuilder();
 		result.setTitle("Drop rates information");
-		result.setDescription(
-				"This list is dynamically generated, theses are the actuals rates currently in use.");
+		result.setDescription("This list is dynamically generated, theses are the actuals rates currently in use.");
 		result.setColor(Color.YELLOW);
 		result.setTimestamp(Instant.now());
 		return result;

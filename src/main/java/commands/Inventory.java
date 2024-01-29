@@ -20,11 +20,12 @@ import glados.GLaDOS;
 
 public class Inventory extends Command {
 	public Inventory() {
-		super("inventory",
+		super(
+				"inventory",
 				"Shows your inventory.",
 				Permission.NONE,
-				Arrays.asList(new OptionData(OptionType.INTEGER, "page",
-						"The inventory page you want to open")));
+				Arrays.asList(
+						new OptionData(OptionType.INTEGER, "page", "The inventory page you want to open")));
 	}
 
 	@Override
@@ -40,10 +41,9 @@ public class Inventory extends Command {
 				.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
 
 		if ((startingPage > lastPage) || (startingPage <= 0)) {
-			source.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("You do not have " + startingPage
-							+ " pages in your inventory ! You last page is " + lastPage + ".")
-					.build()).queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed(
+					"You do not have " + startingPage + " pages in your inventory ! You last page is " + lastPage + ".").build())
+					.queue();
 			return;
 		}
 

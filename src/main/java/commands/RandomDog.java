@@ -13,7 +13,10 @@ import accounts.Permission;
 
 public class RandomDog extends Command {
 	public RandomDog() {
-		super("random-dog", "Display a dog picture", Permission.NONE,
+		super(
+				"random-dog",
+				"Display a dog picture",
+				Permission.NONE,
 				Arrays.asList());
 	}
 
@@ -23,8 +26,7 @@ public class RandomDog extends Command {
 
 		try {
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")
-					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random")
-							.getString("message"))
+					.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random").getString("message"))
 					.setColor(Color.WHITE).setTimestamp(Instant.now());
 			source.sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {

@@ -14,8 +14,11 @@ import accounts.Permission;
 
 public class CheGuevara extends Command {
 	public CheGuevara() {
-		super("che-guevara", "Generate a random fact about Che-Guevara",
-				Permission.NONE, Arrays.asList());
+		super(
+				"che-guevara",
+				"Generate a random fact about Che-Guevara",
+				Permission.NONE,
+				Arrays.asList());
 	}
 
 	@Override
@@ -23,8 +26,7 @@ public class CheGuevara extends Command {
 		MessageChannelUnion source = event.getChannel();
 
 		try {
-			JSONObject jsonObject =
-					JsonDownloader.getJson("https://api.chucknorris.io/jokes/random");
+			JSONObject jsonObject = JsonDownloader.getJson("https://api.chucknorris.io/jokes/random");
 			String meme = jsonObject.getString("value");
 			meme = meme.replace("Chuck Norris", "Che Guevara");
 			meme = meme.replace("Chuck", "Che");

@@ -28,15 +28,12 @@ public class Trigger extends Command {
 				"Triggers an internal event. Moderator privileges required",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(
-								OptionType.STRING,
-								"trigger",
-								"Call name you want to trigger").setRequired(true)
-										.addChoice("Gamer", "Gamer")
-										.addChoice("Midnight", "Midnight")
-										.addChoice("Ranking", "Ranking")
-										.addChoice("Reset", "Reset")
-										.addChoice("Backup", "Backup")));
+						new OptionData(OptionType.STRING, "trigger", "Call name you want to trigger").setRequired(true)
+								.addChoice("Gamer", "Gamer")
+								.addChoice("Midnight", "Midnight")
+								.addChoice("Ranking", "Ranking")
+								.addChoice("Reset", "Reset")
+								.addChoice("Backup", "Backup")));
 	}
 
 	private static String getMedalEmoji(int rank) {
@@ -74,8 +71,7 @@ public class Trigger extends Command {
 			}
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
 
-			midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(),
-					"**" + delta + "** ms", true);
+			midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(), "**" + delta + "** ms", true);
 			rank++;
 		}
 
@@ -87,14 +83,12 @@ public class Trigger extends Command {
 
 		switch (trigger) {
 			case "Gamer":
-				destination.sendMessage("<@&" + GLaDOS.getInstance().roleBroadcastMessenger + ">")
-						.queue();
+				destination.sendMessage("<@&" + GLaDOS.getInstance().roleBroadcastMessenger + ">").queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":
 				try {
-					JSONObject jsonObject =
-							JsonDownloader.getJson("https://api.quotable.io/random");
+					JSONObject jsonObject = JsonDownloader.getJson("https://api.quotable.io/random");
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
@@ -103,8 +97,7 @@ public class Trigger extends Command {
 
 					embed = BuildEmbed.midnightQuote(quote, author);
 				} catch (Exception e) {
-					destination.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
-							.queue();
+					destination.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 				}
 				break;
 			case "Ranking":
@@ -129,8 +122,7 @@ public class Trigger extends Command {
 		String trigger = event.getOption("trigger").getAsString();
 
 		if (trigger.isBlank() || trigger.isEmpty()) {
-			source.sendMessageEmbeds(
-					BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
 			return;
 		}
 

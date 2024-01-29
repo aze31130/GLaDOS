@@ -12,9 +12,12 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 public class Role extends Command {
 	public Role() {
-		super("role", "Generate buttons for members to clic on.",
-				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.MENTIONABLE, "role",
-						"Generates the join/leave button for the given role.")));
+		super(
+				"role",
+				"Generate buttons for members to clic on.",
+				Permission.MODERATOR,
+				Arrays.asList(
+						new OptionData(OptionType.MENTIONABLE, "role", "Generates the join/leave button for the given role.")));
 	}
 
 	@Override

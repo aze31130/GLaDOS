@@ -44,8 +44,8 @@ public class ButtonClick extends ListenerAdapter {
 			Account authorAccount = glados.getAccount(author);
 
 			/*
-			 * Check if the clicker owns the inventory. This is to make sure another user cannot
-			 * click on the inventory of someone else.
+			 * Check if the clicker owns the inventory. This is to make sure another user cannot click on the
+			 * inventory of someone else.
 			 */
 			String inventoryName = event.getMessage().getEmbeds().get(0).getAuthor().getName();
 			String clickerName = event.getUser().getName();
@@ -57,22 +57,18 @@ public class ButtonClick extends ListenerAdapter {
 			}
 
 			// Get the current page
-			int pageNumber = Integer.parseInt(
-					event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "")
-							.split("/")[0]);
+			int pageNumber =
+					Integer.parseInt(event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "").split("/")[0]);
 
 			// Check if the event is Next Page
 			int newPageNumber = trigger.equals("NextPage") ? pageNumber + 1 : pageNumber - 1;
 
 			// Check if the new page is valid (aka the page exist)
-			int lastPage = (int) Math
-					.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
+			int lastPage = (int) Math.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
 
 			if ((newPageNumber > lastPage) || (newPageNumber <= 0)) {
-				event.replyEmbeds(
-						BuildEmbed.errorEmbed("You cannot see page " + newPageNumber + " !")
-								.build())
-						.setEphemeral(true).queue();
+				event.replyEmbeds(BuildEmbed.errorEmbed("You cannot see page " + newPageNumber + " !")
+						.build()).setEphemeral(true).queue();
 				return;
 			}
 
@@ -87,9 +83,8 @@ public class ButtonClick extends ListenerAdapter {
 
 		if (trigger.equals("AcceptTrade") || trigger.equals("RefuseTrade")) {
 			/*
-			 * In order to match the trade author and trade target, we will read the description
-			 * field that should look like that: <@AuthorID>=><@TargetID>. To achieve this, we can
-			 * use the following regex:
+			 * In order to match the trade author and trade target, we will read the description field that
+			 * should look like that: <@AuthorID>=><@TargetID>. To achieve this, we can use the following regex:
 			 */
 			final String pattern = "<@(\\d+)>";
 			Pattern r = Pattern.compile(pattern);
@@ -103,18 +98,14 @@ public class ButtonClick extends ListenerAdapter {
 			String clickerId = event.getUser().getId();
 
 			if (!clickerId.equals(tradeTarget)) {
-				event.replyEmbeds(
-						BuildEmbed.errorEmbed(
-								"Only the trade target can accept or refuse the trade offer.")
-								.build())
+				event.replyEmbeds(BuildEmbed.errorEmbed("Only the trade target can accept or refuse the trade offer.").build())
 						.setEphemeral(true).queue();
 				return;
 			}
 
 			// Check if trade is refused and removed buttons if refused
 			if (trigger.equals("RefuseTrade")) {
-				event.editMessageEmbeds(BuildEmbed
-						.successEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
+				event.editMessageEmbeds(BuildEmbed.successEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
 						.build()).queue();
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
@@ -150,9 +141,8 @@ public class ButtonClick extends ListenerAdapter {
 			// Checks again if the trade is still possible
 			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem,
 					dstMoney)) {
-				event.editMessageEmbeds(BuildEmbed
-						.errorEmbed("The trade is not longer possible ! Operation cancelled !")
-						.build()).queue();
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("The trade is not longer possible ! Operation cancelled !").build())
+						.queue();
 				return;
 			}
 
@@ -160,9 +150,7 @@ public class ButtonClick extends ListenerAdapter {
 			// TODO
 
 			// Updates the embed
-			event.editMessageEmbeds(BuildEmbed
-					.successEmbed("WIP ! Operation cancelled !")
-					.build()).queue();
+			event.editMessageEmbeds(BuildEmbed.successEmbed("WIP ! Operation cancelled !").build()).queue();
 			return;
 		}
 
@@ -170,17 +158,17 @@ public class ButtonClick extends ListenerAdapter {
 		if (trigger.startsWith("+")) {
 			trigger = trigger.replace("+", "");
 			if (!dictionary.containsKey(trigger)) {
-				event.reply("You cannot get this role by doing that !").setEphemeral(true)
-						.setSuppressedNotifications(true).queue();
+				event.reply("You cannot get this role by doing that !").setEphemeral(true).setSuppressedNotifications(true)
+						.queue();
 				return;
 			}
 
 			trigger.replace("+", "");
-			event.getGuild().addRoleToMember(event.getMember().getUser(),
-					event.getGuild().getRoleById(dictionary.get(trigger))).queue();
+			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(dictionary.get(trigger)))
+					.queue();
 
-			event.reply("Successfully added role <@&" + dictionary.get(trigger) + "> !")
-					.setEphemeral(true).setSuppressedNotifications(true).queue();
+			event.reply("Successfully added role <@&" + dictionary.get(trigger) + "> !").setEphemeral(true)
+					.setSuppressedNotifications(true).queue();
 			return;
 		}
 
@@ -193,34 +181,29 @@ public class ButtonClick extends ListenerAdapter {
 				return;
 			}
 
-			event.getGuild().removeRoleFromMember(event.getMember().getUser(),
-					event.getGuild().getRoleById(dictionary.get(trigger))).queue();
+			event.getGuild()
+					.removeRoleFromMember(event.getMember().getUser(), event.getGuild().getRoleById(dictionary.get(trigger)))
+					.queue();
 
-			event.reply("Successfully removed role <@&" + dictionary.get(trigger) + "> !")
-					.setEphemeral(true).setSuppressedNotifications(true).queue();
+			event.reply("Successfully removed role <@&" + dictionary.get(trigger) + "> !").setEphemeral(true)
+					.setSuppressedNotifications(true).queue();
 			return;
 		}
 
 		// Check if action is question
 		if (trigger.startsWith("?")) {
 			if (glados.goodAnswer.equals(trigger)) {
-				event.replyEmbeds(BuildEmbed
-						.successEmbed("Good answer " + event.getButton().getLabel() + " !").build())
-						.queue();
+				event.replyEmbeds(BuildEmbed.successEmbed("Good answer " + event.getButton().getLabel() + " !").build()).queue();
 				// Removes buttons when good answer is triggered
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				glados.goodAnswer = "";
 			} else {
-				event.replyEmbeds(BuildEmbed
-						.errorEmbed("Wrong answer " + event.getButton().getLabel() + " !").build())
-						.queue();
+				event.replyEmbeds(BuildEmbed.errorEmbed("Wrong answer " + event.getButton().getLabel() + " !").build()).queue();
 			}
 			return;
 		}
 
 		// Else, check if the trigger is the good anwser
-		event.replyEmbeds(BuildEmbed
-				.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build())
-				.queue();
+		event.replyEmbeds(BuildEmbed.errorEmbed("Unknown signal " + event.getButton().getLabel() + " !").build()).queue();
 	}
 }

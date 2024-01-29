@@ -15,10 +15,8 @@ public class SlashCommandInteraction extends ListenerAdapter {
 		for (Command command : glados.commands) {
 			if (event.getName().equalsIgnoreCase(command.name)) {
 				if (!PermissionsUtils.canExecute(event.getMember(), command.permissionLevel)) {
-					event.replyEmbeds(BuildEmbed
-							.errorEmbed("You need to have the " + command.permissionLevel.toString()
-									+ " role in order to execute that.")
-							.build()).queue();
+					event.replyEmbeds(BuildEmbed.errorEmbed("You need to have the " + command.permissionLevel.toString()
+							+ " role in order to execute that.").build()).queue();
 					return;
 				}
 				// event.deferReply().queue();

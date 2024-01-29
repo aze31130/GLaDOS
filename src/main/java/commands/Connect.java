@@ -11,25 +11,24 @@ import accounts.Permission;
 
 public class Connect extends Command {
 	public Connect() {
-		super("connect", "Summons GLaDOS in a vocal channel",
-				Permission.MODERATOR, Arrays.asList());
+		super(
+				"connect",
+				"Summons GLaDOS in a vocal channel",
+				Permission.MODERATOR,
+				Arrays.asList());
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		try {
-			VoiceChannel voiceChannel =
-					event.getMember().getVoiceState().getChannel().asVoiceChannel();
+			VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel().asVoiceChannel();
 			AudioManager audioManager = event.getGuild().getAudioManager();
 			AudioSendHandler test = null;
 			audioManager.setSendingHandler(test);
 			audioManager.openAudioConnection(voiceChannel);
 		} catch (IllegalArgumentException e) {
-			event.getChannel()
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed(e.toString()
-									+ "You need to be connected in a voice channel first !")
-							.build())
+			event.getChannel().sendMessageEmbeds(
+					BuildEmbed.errorEmbed(e.toString() + "You need to be connected in a voice channel first !").build())
 					.queue();
 		}
 	}

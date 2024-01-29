@@ -12,10 +12,12 @@ import accounts.Permission;
 
 public class Clear extends Command {
 	public Clear() {
-		super("clear",
+		super(
+				"clear",
 				"Clears the latests messages in a channel. Moderator privileges required",
-				Permission.MODERATOR, Arrays.asList(new OptionData(OptionType.INTEGER, "amount",
-						"Amount of message you want to delete")));
+				Permission.MODERATOR,
+				Arrays.asList(
+						new OptionData(OptionType.INTEGER, "amount", "Amount of message you want to delete")));
 	}
 
 	@Override
@@ -26,8 +28,7 @@ public class Clear extends Command {
 		try {
 			List<Message> messages = source.getHistory().retrievePast(amount).complete();
 			source.deleteMessages(messages).queue();
-			source.sendMessageEmbeds(BuildEmbed
-					.successEmbed("Successfully deleted " + amount + " messages.").build()).queue();
+			source.sendMessageEmbeds(BuildEmbed.successEmbed("Successfully deleted " + amount + " messages.").build()).queue();
 		} catch (Exception exception) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}

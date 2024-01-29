@@ -15,9 +15,11 @@ import utils.TimeUtils;
 
 public class Drop extends Command {
 	public Drop() {
-		super("drop",
+		super(
+				"drop",
 				"Drops you a random item.",
-				Permission.NONE, Arrays.asList());
+				Permission.NONE,
+				Arrays.asList());
 	}
 
 	@Override
@@ -28,9 +30,7 @@ public class Drop extends Command {
 		Account authorAccount = glados.getAccount(author);
 
 		if (!authorAccount.canDrop) {
-			source.sendMessageEmbeds(BuildEmbed
-					.errorEmbed("You already dropped today ! Come back tomorrow :D").build())
-					.queue();
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You already dropped today ! Come back tomorrow :D").build()).queue();
 			return;
 		}
 
@@ -40,10 +40,7 @@ public class Drop extends Command {
 		int acquiredMoney = random.nextInt(1001);
 
 		authorAccount.money += acquiredMoney;
-		event.getMessageChannel()
-				.sendMessageEmbeds(
-						BuildEmbed.moneyDropEmbed(author, acquiredMoney,
-								authorAccount.money).build())
+		event.getMessageChannel().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build())
 				.queue();
 
 		if (TimeUtils.isSpecialDay()) {
@@ -69,22 +66,19 @@ public class Drop extends Command {
 		}
 
 		/*
-		 * Very rare edge case: if the last item has been skipped due to unsuffisient drop
-		 * conditions. In this case, we simply send an error message and allow the user to drop
-		 * again.
+		 * Very rare edge case: if the last item has been skipped due to unsuffisient drop conditions. In
+		 * this case, we simply send an error message and allow the user to drop again.
 		 */
 		if (droppedItem == null) {
-			source.sendMessageEmbeds(BuildEmbed
-					.errorEmbed(
-							"An error occured during item generation. Your daily record has not been updated: you can drop again normaly right now.")
+			source.sendMessageEmbeds(BuildEmbed.errorEmbed(
+					"An error occured during item generation. Your daily record has not been updated: you can drop again normaly right now.")
 					.build()).queue();
 			return;
 		}
 
 
 		authorAccount.inventory.add(droppedItem);
-		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build())
-				.queue();
+		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
 		authorAccount.canDrop = false;
 	}
 }

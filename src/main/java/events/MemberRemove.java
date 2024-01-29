@@ -10,8 +10,6 @@ public class MemberRemove extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
 		event.getGuild().getDefaultChannel().asTextChannel()
-				.sendMessageEmbeds(
-						BuildEmbed.joinLeaveEmbed(event.getUser().getGlobalName(), false).build())
-				.queue();
+				.sendMessageEmbeds(BuildEmbed.joinLeaveEmbed(event.getUser().getGlobalName(), false).build()).queue();
 	}
 }

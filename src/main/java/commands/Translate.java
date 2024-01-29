@@ -26,9 +26,12 @@ import accounts.Permission;
 
 public class Translate extends Command {
 	public Translate() {
-		super("translate", "Translates the latests messages in a text channel",
-				Permission.NONE, Arrays.asList(new OptionData(OptionType.STRING, "amount",
-						"Amount of message you want to translate.")));
+		super(
+				"translate",
+				"Translates the latests messages in a text channel",
+				Permission.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "amount", "Amount of message you want to translate.")));
 	}
 
 	@Override
@@ -38,15 +41,10 @@ public class Translate extends Command {
 		int delay = 300;
 
 		// Check cooldown
-		long secondsSinceLastExecution =
-				g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
+		long secondsSinceLastExecution = g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
 		if (secondsSinceLastExecution < delay) {
-			event.getChannel()
-					.sendMessageEmbeds(BuildEmbed
-							.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution)
-									+ " seconds until using this command !")
-							.build())
-					.queue();
+			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution)
+					+ " seconds until using this command !").build()).queue();
 			return;
 		}
 		g.translationCooldown = LocalDateTime.now();
@@ -76,11 +74,10 @@ public class Translate extends Command {
 				HttpResponse<String> response =
 						client.send(request, HttpResponse.BodyHandlers.ofString());
 				JSONObject responseJson = new JSONObject(response.body());
-				event.getChannel().sendMessage("`[Translated] <" + m.getMember().getEffectiveName()
-						+ ">`: " + responseJson.get("translatedText").toString()).queue();
+				event.getChannel().sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: "
+						+ responseJson.get("translatedText").toString()).queue();
 			} catch (IOException | InterruptedException | JSONException e) {
-				event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build())
-						.queue();
+				event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
 		}
 	}

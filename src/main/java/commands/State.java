@@ -12,8 +12,10 @@ import accounts.Permission;
 
 public class State extends Command {
 	public State() {
-		super("state",
-				"Updates GLaDOS's state (online, idle, do not disturb)", Permission.NONE,
+		super(
+				"state",
+				"Updates GLaDOS's state (online, idle, do not disturb)",
+				Permission.NONE,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]")
 								.setRequired(true)
@@ -38,14 +40,13 @@ public class State extends Command {
 				source.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
 				break;
 			default:
-				source.sendMessageEmbeds(BuildEmbed.errorEmbed(
-						"Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
-						.build()).queue();
+				source.sendMessageEmbeds(
+						BuildEmbed.errorEmbed("Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
+								.build())
+						.queue();
 				return;
 		}
 
-		source.sendMessageEmbeds(
-				BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build())
-				.queue();
+		source.sendMessageEmbeds(BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build()).queue();
 	}
 }

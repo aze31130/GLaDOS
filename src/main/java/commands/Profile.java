@@ -11,7 +11,11 @@ import glados.GLaDOS;
 
 public class Profile extends Command {
 	public Profile() {
-		super("profile", "Show a user profile", Permission.NONE, Arrays.asList());
+		super(
+				"profile",
+				"Show a user profile",
+				Permission.NONE,
+				Arrays.asList());
 	}
 
 	@Override

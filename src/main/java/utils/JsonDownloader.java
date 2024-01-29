@@ -10,7 +10,7 @@ import org.json.JSONTokener;
 
 public class JsonDownloader {
 	public static JSONObject getJson(String url) throws JSONException, IOException {
-		return new JSONObject(new JSONTokener(new BufferedReader(
-				new InputStreamReader(new URL(url).openConnection().getInputStream()))));
+		return new JSONObject(
+				new JSONTokener(new BufferedReader(new InputStreamReader(new URL(url).openConnection().getInputStream()))));
 	}
 }

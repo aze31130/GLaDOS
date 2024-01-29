@@ -8,8 +8,11 @@ import accounts.Permission;
 
 public class Disconnect extends Command {
 	public Disconnect() {
-		super("disconnect", "Disconnects GLaDOS from a vocal channel",
-				Permission.MODERATOR, Arrays.asList());
+		super(
+				"disconnect",
+				"Disconnects GLaDOS from a vocal channel",
+				Permission.MODERATOR,
+				Arrays.asList());
 	}
 
 	@Override

@@ -18,7 +18,10 @@ import accounts.Permission;
 
 public class RandomCat extends Command {
 	public RandomCat() {
-		super("random-cat", "Displays a cat picture", Permission.NONE,
+		super(
+				"random-cat",
+				"Displays a cat picture",
+				Permission.NONE,
 				Arrays.asList());
 	}
 
@@ -28,8 +31,8 @@ public class RandomCat extends Command {
 
 		try {
 			String apiUrl = "https://api.thecatapi.com/v1/images/search";
-			JSONArray jsonArray = new JSONArray(new JSONTokener(new BufferedReader(
-					new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
+			JSONArray jsonArray = new JSONArray(new JSONTokener(
+					new BufferedReader(new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
 			JSONObject jsonObject = new JSONObject(jsonArray.get(0).toString());
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Cat Picture")
 					.setImage(jsonObject.getString("url")).setColor(Color.WHITE)

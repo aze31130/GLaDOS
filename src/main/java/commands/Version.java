@@ -12,8 +12,11 @@ import accounts.Permission;
 
 public class Version extends Command {
 	public Version() {
-		super("version", "Displays version alongside others indicators",
-				Permission.NONE, Arrays.asList());
+		super(
+				"version",
+				"Displays version alongside others indicators",
+				Permission.NONE,
+				Arrays.asList());
 	}
 
 	@Override
@@ -27,21 +30,20 @@ public class Version extends Command {
 		info.setDescription("Miscellaneous informations");
 		info.addField("Git commit: ", glados.version, true);
 		info.addField("CPU usage: ", os.getProcessCpuLoad() * 100 + "%", true);
-		info.addField("OS: ", System.getProperty("os.name") + " " + System.getProperty("os.version")
-				+ " (" + System.getProperty("os.arch") + ")", true);
+		info.addField("OS: ", System.getProperty("os.name") + " " + System.getProperty("os.version") + " ("
+				+ System.getProperty("os.arch") + ")", true);
 		info.addField("Java version: ", System.getProperty("java.runtime.version"), true);
 		info.addField("Java class version: ", System.getProperty("java.class.version"), true);
 		info.addField("JVM's version: ", System.getProperty("java.vm.version"), true);
-		info.addField("JVM's available memory: ", Runtime.getRuntime().freeMemory() + " ("
-				+ Runtime.getRuntime().freeMemory() * 100 / Runtime.getRuntime().totalMemory()
-				+ "% free)", true);
+		info.addField("JVM's available memory: ",
+				Runtime.getRuntime().freeMemory() + " ("
+						+ Runtime.getRuntime().freeMemory() * 100 / Runtime.getRuntime().totalMemory() + "% free)",
+				true);
 		info.addField("JVM's total memory: ", "" + Runtime.getRuntime().totalMemory(), true);
 		info.addField("Available threads: ", "" + Runtime.getRuntime().availableProcessors(), true);
 		info.addField("Temp file path: ", System.getProperty("java.io.tmpdir"), true);
 		info.addField("Event registered: ", Integer.toString(glados.requestsAmount), true);
-		info.addField("Uptime: ",
-				TimeUtils.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000),
-				true);
+		info.addField("Uptime: ", TimeUtils.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000), true);
 		info.setTimestamp(Instant.now());
 		event.getChannel().sendMessageEmbeds(info.build()).queue();
 	}

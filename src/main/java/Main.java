@@ -16,8 +16,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class Main implements Logging {
 	public static void main(String[] args) {
-		System.setProperty("java.util.logging.SimpleFormatter.format",
-				"[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
+		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Logging.LOGGER.log(Level.INFO, "Starting GLaDOS");
@@ -27,10 +26,10 @@ public class Main implements Logging {
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 
-		GatewayIntent intents[] = {GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES,
-				GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES,
-				GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS_AND_STICKERS,
-				GatewayIntent.GUILD_INVITES};
+		GatewayIntent intents[] =
+				{GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT,
+						GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS,
+						GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_INVITES};
 
 		for (GatewayIntent intent : intents)
 			builder.enableIntents(intent);
@@ -42,11 +41,10 @@ public class Main implements Logging {
 		jda.setAutoReconnect(true);
 
 		ListenerAdapter events[] =
-				{new AutoComplete(), new ButtonClick(), new ChannelCreate(), new ChannelDelete(),
-						new MemberJoin(),
-						new MemberRemove(), new MessageDelete(), new MessageReactionAdd(),
-						new MessageReactionRemove(), new MessageReceived(), new ModalReceived(),
-						new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute()};
+				{new AutoComplete(), new ButtonClick(), new ChannelCreate(), new ChannelDelete(), new MemberJoin(),
+						new MemberRemove(), new MessageDelete(), new MessageReactionAdd(), new MessageReactionRemove(),
+						new MessageReceived(), new ModalReceived(), new SlashCommandInteraction(), new VoiceUpdate(),
+						new VoiceMute()};
 
 		for (ListenerAdapter event : events)
 			jda.addEventListener(event);
@@ -61,14 +59,11 @@ public class Main implements Logging {
 		glados.loadAccounts(jda);
 
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
-		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000,
-				TimeUnit.MILLISECONDS);
-		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(),
-				7 * 86400, TimeUnit.SECONDS);
+		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
+		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
 
-		Logging.LOGGER.log(Level.INFO,
-				"Done ! GLaDOS is running on version " + glados.version + " !");
+		Logging.LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}
 }

@@ -31,8 +31,6 @@ public class ModalReceived extends ListenerAdapter {
 					}
 				});
 
-		event.replyEmbeds(
-				BuildEmbed.successEmbed("Vote successfully posted in survey channel").build())
-				.queue();
+		event.replyEmbeds(BuildEmbed.successEmbed("Vote successfully posted in survey channel").build()).queue();
 	}
 }

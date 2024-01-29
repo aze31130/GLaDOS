@@ -26,9 +26,12 @@ import utils.JsonDownloader;
  */
 public class Question extends Command {
 	public Question() {
-		super("question", "Challenges your general knowledge", Permission.NONE,
-				Arrays.asList(new OptionData(OptionType.STRING, "difficulty",
-						"Can be [easy, normal, hard]. Default is random")
+		super(
+				"question",
+				"Challenges your general knowledge",
+				Permission.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "difficulty", "Can be [easy, normal, hard]. Default is random")
 								.addChoice("easy", "easy")
 								.addChoice("normal", "normal")
 								.addChoice("hard", "hard")));
@@ -39,10 +42,7 @@ public class Question extends Command {
 		GLaDOS g = GLaDOS.getInstance();
 
 		if (g.goodAnswer.length() > 0) {
-			event.getChannel()
-					.sendMessageEmbeds(
-							BuildEmbed.errorEmbed("You have to anwser previous question").build())
-					.queue();
+			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed("You have to anwser previous question").build()).queue();
 			return;
 		}
 
@@ -55,45 +55,33 @@ public class Question extends Command {
 				difficulty = om.getAsString();
 
 		try {
-			JSONObject response = JsonDownloader
-					.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty="
-							+ difficulty);
+			JSONObject response =
+					JsonDownloader.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty=" + difficulty);
 
 			JSONObject question = response.getJSONArray("results").getJSONObject(0);
 			List<ItemComponent> responses = new ArrayList<>();
-			responses.add(Button.primary(
-					"?" + new String(
-							Base64.getDecoder().decode(question.getString("correct_answer"))),
+			responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(question.getString("correct_answer"))),
 					new String(Base64.getDecoder().decode(question.getString("correct_answer")))));
 			JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
 
 			for (int i = 0; i < wrongAnswers.length(); i++)
-				responses.add(
-						Button.primary(
-								"?" + new String(
-										Base64.getDecoder().decode(wrongAnswers.getString(i))),
-								new String(Base64.getDecoder().decode(wrongAnswers.getString(i)))));
+				responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(wrongAnswers.getString(i))),
+						new String(Base64.getDecoder().decode(wrongAnswers.getString(i)))));
 
 			Collections.shuffle(responses);
 
 			// Post message with buttons with answers
-			event.getChannel()
-					.sendMessageEmbeds(BuildEmbed.questionEmbed(
-							new String(Base64.getDecoder().decode(question.getString("question"))),
-							new String(Base64.getDecoder().decode(question.getString("category"))),
-							new String(
-									Base64.getDecoder().decode(question.getString("difficulty"))))
-							.build())
-					.addActionRow(responses).queue();
+			event.getChannel().sendMessageEmbeds(BuildEmbed.questionEmbed(
+					new String(Base64.getDecoder().decode(question.getString("question"))),
+					new String(Base64.getDecoder().decode(question.getString("category"))),
+					new String(Base64.getDecoder().decode(question.getString("difficulty"))))
+					.build()).addActionRow(responses).queue();
 
 			// Save good answer in glados variable
-			g.goodAnswer = "?"
-					+ new String(Base64.getDecoder().decode(question.getString("correct_answer")));
+			g.goodAnswer = "?" + new String(Base64.getDecoder().decode(question.getString("correct_answer")));
 
 		} catch (JSONException | IOException exception) {
-			event.getChannel()
-					.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build())
-					.queue();
+			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}
 	}
 }

@@ -16,8 +16,7 @@ public class AutoComplete extends ListenerAdapter {
 
 		if (eventName.equals("item") || eventName.equals("give")) {
 			List<Command.Choice> options = glados.items.stream()
-					.filter(item -> item.name.toLowerCase()
-							.contains(event.getFocusedOption().getValue().toLowerCase()))
+					.filter(item -> item.name.toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))
 					.map(item -> new Command.Choice(item.name, item.name))
 					.collect(Collectors.toList());
 
@@ -32,8 +31,7 @@ public class AutoComplete extends ListenerAdapter {
 			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
 			List<Command.Choice> options = authorAccount.inventory.stream()
-					.filter(item -> item.getFQName()
-							.contains(event.getFocusedOption().getValue()))
+					.filter(item -> item.getFQName().contains(event.getFocusedOption().getValue()))
 					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
 					.collect(Collectors.toList());
 
@@ -64,8 +62,7 @@ public class AutoComplete extends ListenerAdapter {
 			}
 
 			if (field.equals("dstitem")) {
-				Account targetAccount =
-						glados.getAccountById(event.getOption("target").getAsString());
+				Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 				// Check if the user put a user with no account
 				if (targetAccount == null) {
@@ -89,8 +86,7 @@ public class AutoComplete extends ListenerAdapter {
 		}
 
 		if (eventName.equals("delete") && event.getOption("target") != null) {
-			Account targetAccount =
-					glados.getAccountById(event.getOption("target").getAsString());
+			Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 			// Check if the user put a user with no account
 			if (targetAccount == null) {
@@ -100,8 +96,7 @@ public class AutoComplete extends ListenerAdapter {
 			}
 
 			List<Command.Choice> options = targetAccount.inventory.stream()
-					.filter(item -> item.getFQName().toLowerCase()
-							.contains(event.getFocusedOption().getValue().toLowerCase()))
+					.filter(item -> item.getFQName().toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))
 					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
 					.collect(Collectors.toList());
 

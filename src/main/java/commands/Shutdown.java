@@ -9,8 +9,11 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 
 public class Shutdown extends Command implements Logging {
 	public Shutdown() {
-		super("shutdown", "Gracely Shutdown GLaDOS. Moderator privileges required.",
-				Permission.MODERATOR, Arrays.asList());
+		super(
+				"shutdown",
+				"Gracely Shutdown GLaDOS. Moderator privileges required.",
+				Permission.MODERATOR,
+				Arrays.asList());
 	}
 
 	@Override

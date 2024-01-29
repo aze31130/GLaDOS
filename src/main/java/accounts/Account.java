@@ -25,9 +25,8 @@ public class Account {
 	public boolean canDrop;
 	public long money;
 
-	public Account(String id, User user, int level, long experience, long totalExperience,
-			TrustFactor trustLevel, Permission permission, List<Item> inventory, boolean canDrop,
-			long money) {
+	public Account(String id, User user, int level, long experience, long totalExperience, TrustFactor trustLevel, Permission permission,
+			List<Item> inventory, boolean canDrop, long money) {
 		this.id = id;
 		this.user = user;
 		this.level = level;

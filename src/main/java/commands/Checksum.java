@@ -13,22 +13,21 @@ import accounts.Permission;
 
 public class Checksum extends Command {
 	public Checksum() {
-		super("checksum",
+		super(
+				"checksum",
 				"Compute the checksum of string input.",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "algorithm",
-								"The algorithm type")
-										.addChoice("md2", "md2")
-										.addChoice("md5", "md5")
-										.addChoice("sha1", "sha1")
-										.addChoice("sha224", "sha224")
-										.addChoice("sha256", "sha256")
-										.addChoice("sha384", "sha384")
-										.addChoice("sha512", "sha512")
-										.setRequired(true),
-						new OptionData(OptionType.STRING, "content",
-								"The content you want to hash").setRequired(true)));
+						new OptionData(OptionType.STRING, "algorithm", "The algorithm type")
+								.addChoice("md2", "md2")
+								.addChoice("md5", "md5")
+								.addChoice("sha1", "sha1")
+								.addChoice("sha224", "sha224")
+								.addChoice("sha256", "sha256")
+								.addChoice("sha384", "sha384")
+								.addChoice("sha512", "sha512")
+								.setRequired(true),
+						new OptionData(OptionType.STRING, "content", "The content you want to hash").setRequired(true)));
 	}
 
 	@Override
@@ -45,8 +44,7 @@ public class Checksum extends Command {
 			for (byte b : digest.digest())
 				result.append(String.format("%02x", b));
 
-			source.sendMessageEmbeds(BuildEmbed.hashEmbed(result.toString(), algorithm).build())
-					.queue();
+			source.sendMessageEmbeds(BuildEmbed.hashEmbed(result.toString(), algorithm).build()).queue();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

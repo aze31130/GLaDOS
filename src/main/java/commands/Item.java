@@ -16,9 +16,12 @@ import utils.ItemUtils;
 
 public class Item extends Command {
 	public Item() {
-		super("item", "Get information about an item",
-				Permission.NONE, Arrays.asList(new OptionData(OptionType.STRING, "name",
-						"The item name you're searching for.", false, true)));
+		super(
+				"item",
+				"Get information about an item",
+				Permission.NONE,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "name", "The item name you're searching for.", false, true)));
 	}
 
 	public void generateItemChart(MessageChannelUnion source) {
@@ -38,10 +41,8 @@ public class Item extends Command {
 		};
 
 		for (Rarity r : allRarity)
-			rarityEmbed.addField(
-					r.name().toLowerCase() + " : " + ItemUtils.getRarityDropRate(r) + "%",
-					"Registered Items: " + g.items.stream().filter(i -> i.rarity.equals(r)).count(),
-					false);
+			rarityEmbed.addField(r.name().toLowerCase() + " : " + ItemUtils.getRarityDropRate(r) + "%",
+					"Registered Items: " + g.items.stream().filter(i -> i.rarity.equals(r)).count(), false);
 
 		source.sendMessageEmbeds(rarityEmbed.build()).queue();
 	}
@@ -60,8 +61,7 @@ public class Item extends Command {
 		String itemName = optionalItemName.getAsString();
 
 		// Search item
-		Optional<items.Item> searchingItem = GLaDOS.getInstance().items.stream()
-				.filter(i -> i.name.equals(itemName)).findFirst();
+		Optional<items.Item> searchingItem = GLaDOS.getInstance().items.stream().filter(i -> i.name.equals(itemName)).findFirst();
 
 		if (searchingItem.isEmpty()) {
 			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Item not found !").build()).queue();
