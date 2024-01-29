@@ -1,0 +1,13 @@
+{
+    "id": 86,
+    "name": "Scary Page",
+    "type": "ITEM",
+    "lore": "You detached this page from a tree and clearly read 'ALWAYS WATCHES NO EYES' hugely written. How scary...",
+    "rarity": "EPIC",
+    "dropChance": 500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 2200,
+    "conditionnalDrop": []
+}

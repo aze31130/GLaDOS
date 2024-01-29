@@ -18,6 +18,7 @@ public enum ItemType {
 	WAND(":magic_wand:"),
 	SWORD(":dagger:"),
 	SPEAR(""),
+	GUN(":gun:"),
 	SCROLL(":scroll:");
 
 	public final String emote;

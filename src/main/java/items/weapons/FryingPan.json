@@ -1,13 +1,13 @@
 {
-    "id": 61,
-    "name": "Copper Ingot",
+    "id": 92,
+    "name": "Frying Pan",
     "type": "ITEM",
-    "lore": "Just a simple ingot made of Copper, nothing more.",
+    "lore": "A perfect item to cook, or to smash someone with.",
     "rarity": "COMMON",
     "dropChance": 3539,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 15,
+    "value": 60,
     "conditionnalDrop": []
 }

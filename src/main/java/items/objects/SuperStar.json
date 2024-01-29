@@ -1,0 +1,13 @@
+{
+    "id": 90,
+    "name": "Super Star",
+    "type": "ITEM",
+    "lore": "This shiny star gives you a few seconds of invincibility. You quickly need to find all 120 of them.",
+    "rarity": "EPIC",
+    "dropChance": 500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 3600,
+    "conditionnalDrop": []
+}

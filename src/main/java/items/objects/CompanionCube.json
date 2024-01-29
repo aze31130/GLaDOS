@@ -1,13 +1,13 @@
 {
-    "id": 64,
-    "name": "Red Diamond",
+    "id": 87,
+    "name": "Companion Cube",
     "type": "ITEM",
-    "lore": "A very rare diamond that turns light in magnificient red sparkles.",
+    "lore": "Ayyy a lovely cube that seems to be friend with you. How cute.",
     "rarity": "EPIC",
     "dropChance": 500,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 6500,
+    "value": 3600,
     "conditionnalDrop": []
 }

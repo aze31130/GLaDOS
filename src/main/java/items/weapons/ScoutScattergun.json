@@ -1,0 +1,13 @@
+{
+    "id": 82,
+    "name": "Scout's Scatter Gun",
+    "type": "GUN",
+    "lore": "This gun has been shooting since 2012, always making enemies crying",
+    "rarity": "RARE",
+    "dropChance": 2500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 840,
+    "conditionnalDrop": []
+}

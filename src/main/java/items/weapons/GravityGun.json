@@ -1,0 +1,13 @@
+{
+    "id": 80,
+    "name": "Gravity Gun",
+    "type": "ITEM",
+    "lore": "The Zero Point Energy Field Manipulator (or Gravity Gun) allows you to handle hazardous materials. At least that's why their designed it for in the first place.",
+    "rarity": "RARE",
+    "dropChance": 2500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 1350,
+    "conditionnalDrop": []
+}

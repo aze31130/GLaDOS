@@ -1,0 +1,13 @@
+{
+    "id": 79,
+    "name": "Diamond Pickaxe",
+    "type": "ITEM",
+    "lore": "'Belongs to Steve', that's the only thing written on this dusty, but increadibly hard, blue pickaxe",
+    "rarity": "RARE",
+    "dropChance": 2500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 930,
+    "conditionnalDrop": []
+}

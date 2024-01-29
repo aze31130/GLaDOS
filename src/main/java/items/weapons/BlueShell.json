@@ -1,13 +1,13 @@
 {
-    "id": 64,
-    "name": "Red Diamond",
+    "id": 91,
+    "name": "Blue Shell",
     "type": "ITEM",
-    "lore": "A very rare diamond that turns light in magnificient red sparkles.",
+    "lore": "This wingy shell is able to target with increadible accuracy someone far away. Use it wisely.",
     "rarity": "EPIC",
     "dropChance": 500,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
-    "value": 6500,
+    "value": 3600,
     "conditionnalDrop": []
 }

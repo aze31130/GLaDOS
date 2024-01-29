@@ -1,0 +1,13 @@
+{
+    "id": 84,
+    "name": "Portal Gun",
+    "type": "GUN",
+    "lore": "This strange portal device shoots blue and orange portals. You still wonder how to use it to solve this room...",
+    "rarity": "EPIC",
+    "dropChance": 500,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 1350,
+    "conditionnalDrop": []
+}
