@@ -1,6 +1,7 @@
 package events;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import accounts.Account;
 import glados.GLaDOS;
@@ -62,14 +63,16 @@ public class AutoComplete extends ListenerAdapter {
 			}
 
 			if (field.equals("dstitem")) {
-				Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
+				Optional<Account> optionalTargetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 				// Check if the user put a user with no account
-				if (targetAccount == null) {
+				if (optionalTargetAccount.isEmpty()) {
 					// Return no choices
 					event.replyChoice("", "");
 					return;
 				}
+
+				Account targetAccount = optionalTargetAccount.get();
 
 				List<Command.Choice> options = targetAccount.inventory.stream()
 						.filter(item -> item.getFQName().toLowerCase()
@@ -86,14 +89,16 @@ public class AutoComplete extends ListenerAdapter {
 		}
 
 		if (eventName.equals("delete") && event.getOption("target") != null) {
-			Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
+			Optional<Account> optionalTargetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 			// Check if the user put a user with no account
-			if (targetAccount == null) {
+			if (optionalTargetAccount.isEmpty()) {
 				// Return no choices
 				event.replyChoice("", "");
 				return;
 			}
+
+			Account targetAccount = optionalTargetAccount.get();
 
 			List<Command.Choice> options = targetAccount.inventory.stream()
 					.filter(item -> item.getFQName().toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))

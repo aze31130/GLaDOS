@@ -29,7 +29,15 @@ public class Give extends Command {
 		GLaDOS glados = GLaDOS.getInstance();
 		MessageChannelUnion source = event.getChannel();
 
-		Account target = glados.getAccountById(event.getOption("target").getAsString());
+		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());
+
+		if (optionalTarget.isEmpty()) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("This user does not have an account. He needs to /drop first !").build()).queue();
+			return;
+		}
+
+		Account target = optionalTarget.get();
 
 		Optional<String> itemName = Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
 

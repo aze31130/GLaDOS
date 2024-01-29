@@ -51,7 +51,15 @@ public class Trade extends Command {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
-		Account targetAccount = glados.getAccountById(event.getOption("target").getAsString());
+		Optional<Account> optionnalTargetAccount = glados.getAccountById(event.getOption("target").getAsString());
+
+		if (optionnalTargetAccount.isEmpty()) {
+			source.sendMessageEmbeds(
+					BuildEmbed.errorEmbed("This user does not have an account. He needs to /drop first !").build()).queue();
+			return;
+		}
+
+		Account targetAccount = optionnalTargetAccount.get();
 
 		String srcItem = Optional.ofNullable(event.getOption("srcitem")).map(OptionMapping::getAsString).orElse("");
 		int srcMoney = Optional.ofNullable(event.getOption("srcmoney")).map(OptionMapping::getAsInt).orElse(0);

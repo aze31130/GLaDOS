@@ -316,8 +316,8 @@ public class GLaDOS implements Logging {
 	 * Returns the account associated to the given id. WARNING, if user is not found, it will not create
 	 * the account.
 	 */
-	public Account getAccountById(String accountId) {
-		return this.accounts.stream().filter(a -> a.id.equals(accountId)).findFirst().orElse(null);
+	public Optional<Account> getAccountById(String accountId) {
+		return this.accounts.stream().filter(a -> a.id.equals(accountId)).findFirst();
 	}
 
 	/*

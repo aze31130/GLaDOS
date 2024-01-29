@@ -2,6 +2,7 @@ package events;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import accounts.Account;
@@ -117,8 +118,19 @@ public class ButtonClick extends ListenerAdapter {
 				return;
 			}
 
-			Account authorAccount = glados.getAccountById(tradeAuthor);
-			Account targetAccount = glados.getAccountById(tradeTarget);
+			Optional<Account> optionalAuthorAccount = glados.getAccountById(tradeAuthor);
+			Optional<Account> optionalTargetAccount = glados.getAccountById(tradeTarget);
+
+			if (optionalAuthorAccount.isEmpty() || optionalTargetAccount.isEmpty()) {
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("One of the user does not have an inventory ! Operation cancelled")
+						.build()).queue();
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				return;
+			}
+
+
+			Account authorAccount = optionalAuthorAccount.get();
+			Account targetAccount = optionalTargetAccount.get();
 
 			String srcItemFQName = "";
 			int srcMoney = 0;
