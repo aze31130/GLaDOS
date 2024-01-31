@@ -5,7 +5,7 @@
     "lore": "Ayyy a lovely cube that seems to be friend with you. How cute.",
     "rarity": "EPIC",
     "dropChance": 500,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 3600,

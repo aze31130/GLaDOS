@@ -5,7 +5,7 @@
     "lore": "",
     "rarity": "FABLED",
     "dropChance": 150,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,
     "value": 90000,

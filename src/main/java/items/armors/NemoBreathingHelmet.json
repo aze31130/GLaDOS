@@ -5,7 +5,7 @@
     "lore": "",
     "rarity": "EPIC",
     "dropChance": 500,
-    "starForceMaxLevel": 8,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 5000,

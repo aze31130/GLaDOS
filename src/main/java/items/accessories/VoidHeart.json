@@ -5,7 +5,7 @@
     "lore": "An emptiness that was hidden within, now unconstrained. Unifies the void under the bearer's will.",
     "rarity": "LEGENDARY",
     "dropChance": 250,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 35000,

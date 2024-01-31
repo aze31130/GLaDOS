@@ -5,7 +5,7 @@
     "lore": "According to Ch. 2:9-21 of the Book of Armaments, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three. No more. No less. [...] then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in My sight, shall snuff it.'",
     "rarity": "LEGENDARY",
     "dropChance": 250,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 35000,

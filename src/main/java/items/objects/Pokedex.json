@@ -5,7 +5,7 @@
     "lore": "Commonly known as ポケモン図鑑, this device records every monster you encounter in a database for analysis. In sort, it's like TikTok",
     "rarity": "EPIC",
     "dropChance": 500,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 4300,

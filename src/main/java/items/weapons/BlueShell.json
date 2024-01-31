@@ -5,7 +5,7 @@
     "lore": "This wingy shell is able to target with increadible accuracy someone far away. Use it wisely.",
     "rarity": "EPIC",
     "dropChance": 500,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 3600,

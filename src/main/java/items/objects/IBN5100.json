@@ -5,7 +5,7 @@
     "lore": "This insanely rare computer comes from another time.",
     "rarity": "LEGENDARY",
     "dropChance": 250,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 45000,

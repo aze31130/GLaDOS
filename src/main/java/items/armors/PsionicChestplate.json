@@ -5,7 +5,7 @@
     "lore": "",
     "rarity": "MYTHICAL",
     "dropChance": 64,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 20,
     "claimable": false,
     "untradable": false,
     "value": 480000,

@@ -5,7 +5,7 @@
     "lore": "Deep within this stone, a glimmer of light seems to call you. The Warp Stone enables adventurers to teleport to an alternate reality unpredictable precision. Use at your own risk.",
     "rarity": "UNIQUE",
     "dropChance": 2,
-    "starForceMaxLevel": 10,
+    "starForceMaxLevel": 30,
     "claimable": false,
     "untradable": false,
     "value": 12000000,

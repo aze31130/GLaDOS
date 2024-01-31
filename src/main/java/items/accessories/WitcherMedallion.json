@@ -5,7 +5,7 @@
     "lore": "This black medallion has a long history behind... The increadible story of a true hero fighting for a coin.",
     "rarity": "LEGENDARY",
     "dropChance": 250,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 48000,

@@ -5,7 +5,7 @@
     "lore": "",
     "rarity": "EVENT",
     "dropChance": 0,
-    "starForceMaxLevel": 10,
+    "starForceMaxLevel": 20,
     "claimable": false,
     "untradable": true,
     "value": 1,

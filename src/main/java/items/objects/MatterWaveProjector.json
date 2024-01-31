@@ -5,7 +5,7 @@
     "lore": "A strange device that seems to emit a wierd light. As you listen closely, you can hear many voices screaming of terror. You should avoid touching it too much.",
     "rarity": "EPIC",
     "dropChance": 500,
-    "starForceMaxLevel": 0,
+    "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
     "value": 9000,
