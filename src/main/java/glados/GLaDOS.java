@@ -89,12 +89,11 @@ public class GLaDOS implements Logging {
 		/*
 		 * Initialize command
 		 */
-		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(), new Clear(), new Connect(),
-				new Delete(), new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(), new Give(), new Help(),
-				new Idea(), new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(), new Profile(),
-				new Question(), new RandomCat(), new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(),
-				new State(), new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(), new Version(),
-				new Vote()};
+		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(), new Clear(), new Delete(),
+				new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(), new Give(), new Help(), new Idea(),
+				new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(), new Profile(), new Question(),
+				new RandomCat(), new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(), new State(),
+				new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(), new Version(), new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
