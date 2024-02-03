@@ -92,8 +92,9 @@ public class GLaDOS implements Logging {
 		Command commands[] = {new Backup(), new Trigger(), new Checksum(), new CheGuevara(), new Clear(), new Delete(),
 				new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(), new Give(), new Help(), new Idea(),
 				new Inventory(), new commands.Item(), new Move(), new Ping(), new Play(), new Profile(), new Question(),
-				new RandomCat(), new RandomDog(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(), new State(),
-				new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(), new Version(), new Vote()};
+				new RandomCat(), new RandomDog(), new Reroll(), new Rng(), new Role(), new Sell(), new Shutdown(), new Spam(),
+				new State(), new Statistics(), new Status(), new Trade(), new Translate(), new Upgrade(), new Version(),
+				new Vote()};
 
 		for (Command c : commands)
 			this.commands.add(c);
@@ -168,6 +169,8 @@ public class GLaDOS implements Logging {
 					itemJson.getInt("starForceMaxLevel"),
 					itemJson.getBoolean("claimable"),
 					itemJson.getBoolean("untradable"),
+					false,
+					1.0,
 					itemJson.getInt("value"));
 
 			// Check that there are no duplicate item id
@@ -264,6 +267,8 @@ public class GLaDOS implements Logging {
 			for (int j = 0; j < jsonInventory.length(); j++) {
 				int itemId = jsonInventory.getJSONObject(j).getInt("id");
 				int itemStarForceLevel = jsonInventory.getJSONObject(j).getInt("starForceLevel");
+				Boolean itemBroken = jsonInventory.getJSONObject(j).getBoolean("broken");
+				Double itemQuality = jsonInventory.getJSONObject(j).getDouble("quality");
 
 				Optional<Item> item = this.getItemById(itemId);
 
@@ -274,6 +279,8 @@ public class GLaDOS implements Logging {
 
 				Item it = item.get();
 				it.starForceLevel = itemStarForceLevel;
+				it.broken = itemBroken;
+				it.quality = itemQuality;
 				userInventory.add(it);
 			}
 

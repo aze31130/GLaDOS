@@ -1,7 +1,6 @@
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import events.*;
 import tasks.*;
 import glados.GLaDOS;
@@ -19,10 +18,10 @@ public class Main implements Logging {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
 		GLaDOS glados = GLaDOS.getInstance();
 
-		Logging.LOGGER.log(Level.INFO, "Starting GLaDOS");
+		Logging.LOGGER.info("Starting GLaDOS");
 		glados.initialize();
-		Logging.LOGGER.log(Level.INFO, "Leveling " + glados.leveling);
-		Logging.LOGGER.log(Level.INFO, "Maximum level " + glados.maxLevel);
+		Logging.LOGGER.info("Leveling " + glados.leveling);
+		Logging.LOGGER.info("Maximum level " + glados.maxLevel);
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 
@@ -64,6 +63,6 @@ public class Main implements Logging {
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
 
-		Logging.LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
+		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}
 }

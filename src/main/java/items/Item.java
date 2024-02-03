@@ -16,6 +16,9 @@ public class Item {
 	public boolean claimable;
 	public boolean untradable;
 
+	public boolean broken;
+	public Double quality;
+
 	public int value;
 
 	public String url;
@@ -27,7 +30,7 @@ public class Item {
 	// public List<PairUtils<String, Integer>> Enchants;
 
 	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance, int starForceLevel,
-			int starForceMaxLevel, boolean claimable, boolean untradable, int value) {
+			int starForceMaxLevel, boolean claimable, boolean untradable, boolean broken, Double quality, int value) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -38,6 +41,8 @@ public class Item {
 		this.starForceMaxLevel = starForceMaxLevel;
 		this.claimable = claimable;
 		this.untradable = untradable;
+		this.broken = broken;
+		this.quality = quality;
 		this.value = value;
 		this.url = "https://" + id;
 	}
@@ -45,6 +50,7 @@ public class Item {
 	public String getFQName() {
 		StringBuilder sb = new StringBuilder();
 
+		sb.append("(" + String.format("%.2f%%", 100 * this.quality) + ") ");
 		sb.append(this.name);
 
 		if (this.starForceMaxLevel > 0)
@@ -81,6 +87,8 @@ public class Item {
 		item.put("id", this.id);
 		item.put("name", this.name);
 		item.put("starForceLevel", this.starForceLevel);
+		item.put("broken", this.broken);
+		item.put("quality", this.quality);
 
 		return item;
 	}

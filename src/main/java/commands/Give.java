@@ -2,6 +2,7 @@ package commands;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
@@ -40,7 +41,6 @@ public class Give extends Command {
 		Account target = optionalTarget.get();
 
 		Optional<String> itemName = Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
-
 		Optional<Integer> moneyAmount = Optional.ofNullable(event.getOption("money")).map(OptionMapping::getAsInt);
 
 
@@ -54,8 +54,12 @@ public class Give extends Command {
 				return;
 			}
 
-			target.inventory.add(item.get());
-			source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, item.get()).build()).queue();
+			items.Item i = item.get();
+
+			i.quality = new Random().nextDouble();
+
+			target.inventory.add(i);
+			source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
 		}
 
 		// Check if it's a money give

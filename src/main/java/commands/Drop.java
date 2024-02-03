@@ -76,6 +76,8 @@ public class Drop extends Command {
 			return;
 		}
 
+		// Asign random quality
+		droppedItem.quality = random.nextDouble();
 
 		authorAccount.inventory.add(droppedItem);
 		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
