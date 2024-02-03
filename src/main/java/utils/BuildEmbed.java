@@ -284,9 +284,7 @@ public class BuildEmbed {
 		embed.setTitle("You got:");
 		embed.setAuthor(dropper.getName(), dropper.getAvatarUrl(), dropper.getAvatarUrl());
 		embed.setColor(item.rarity.color);
-		embed.setDescription(
-				"[**" + item.rarity.name().toLowerCase() + "**] [**" + String.format("%.2f%%", 100 * item.quality) + "**] "
-						+ item.getFQName());
+		embed.setDescription("[**" + item.rarity.name().toLowerCase() + "**] " + item.getFQName());
 		embed.setTimestamp(Instant.now());
 		return embed;
 	}

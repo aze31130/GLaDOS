@@ -1,6 +1,8 @@
 package items;
 
+import java.util.Map;
 import org.json.JSONObject;
+import utils.UpgradeRatesUtils;
 
 public class Item {
 	public int id;
@@ -22,6 +24,62 @@ public class Item {
 	public int value;
 
 	public String url;
+
+	private static final UpgradeRatesUtils rates[] = {
+			// 0 -> 5 stars
+			new UpgradeRatesUtils(95, 5, 0, 0),
+			new UpgradeRatesUtils(90, 10, 0, 0),
+			new UpgradeRatesUtils(85, 15, 0, 0),
+			new UpgradeRatesUtils(80, 20, 0, 0),
+			new UpgradeRatesUtils(75, 25, 0, 0),
+
+			// 5 -> 10 stars
+			new UpgradeRatesUtils(70, 25, 5, 0),
+			new UpgradeRatesUtils(65, 25, 10, 0),
+			new UpgradeRatesUtils(60, 25, 15, 0),
+			new UpgradeRatesUtils(55, 25, 20, 0),
+			new UpgradeRatesUtils(50, 25, 25, 0),
+
+			// 10 -> 15 stars
+			new UpgradeRatesUtils(45, 55, 0, 0),
+			new UpgradeRatesUtils(40, 0, 60, 0),
+			new UpgradeRatesUtils(35, 0, 65, 0),
+			new UpgradeRatesUtils(30, 0, 70, 0),
+			new UpgradeRatesUtils(30, 0, 70, 0),
+
+			// 15 -> 20 stars
+			new UpgradeRatesUtils(30, 0, 69, 1),
+			new UpgradeRatesUtils(30, 0, 68, 2),
+			new UpgradeRatesUtils(30, 0, 67, 3),
+			new UpgradeRatesUtils(30, 0, 66, 4),
+			new UpgradeRatesUtils(30, 0, 65, 5),
+
+			// 20 -> 25 stars
+			new UpgradeRatesUtils(20, 70, 0, 10),
+			new UpgradeRatesUtils(20, 0, 68, 12),
+			new UpgradeRatesUtils(20, 0, 65, 15),
+			new UpgradeRatesUtils(20, 0, 63, 17),
+			new UpgradeRatesUtils(20, 0, 62, 18),
+
+			// 25 -> 30 stars
+			new UpgradeRatesUtils(10, 0, 70, 20),
+			new UpgradeRatesUtils(5, 0, 70, 25),
+			new UpgradeRatesUtils(3, 0, 67, 30),
+			new UpgradeRatesUtils(2, 0, 63, 35),
+			new UpgradeRatesUtils(1, 0, 59, 40),
+	};
+
+	private static final Map<Rarity, int[]> upgradePrices = Map.of(
+			Rarity.UNUSUAL, new int[] {400, 650, 800},
+			Rarity.RARE, new int[] {750, 1200, 1800, 2300, 2800},
+			Rarity.EPIC, new int[] {1300, 2100, 3400, 4500, 6700, 9500, 11000, 18000, 25000, 31000},
+			Rarity.LEGENDARY, new int[] {2500, 3450, 5200, 7500, 9600, 15000, 27100, 35000, 42000, 56000},
+			Rarity.FABLED, new int[] {5000},
+			Rarity.MYTHICAL, new int[] {12000},
+			Rarity.GODLY, new int[] {20000},
+			Rarity.UNIQUE, new int[] {30000},
+			Rarity.EVENT, new int[] {500, 700, 1200, 1800, 2300, 3100, 4500, 6100, 7900, 9000, 10000, 12000, 13000, 14000, 16000,
+					19000, 25000, 30000, 37000, 44000, 50000});
 
 	/*
 	 * Specials bonuses that can be rerolled. This includes flat raw stats alongside % based stats.
@@ -50,6 +108,9 @@ public class Item {
 	public String getFQName() {
 		StringBuilder sb = new StringBuilder();
 
+		if (this.broken)
+			sb.append("[BROKEN] ");
+
 		sb.append("(" + String.format("%.2f%%", 100 * this.quality) + ") ");
 		sb.append(this.name);
 
@@ -66,19 +127,23 @@ public class Item {
 	}
 
 	public int getStarForceCost() {
-		return 0;
+		return Item.upgradePrices.get(this.rarity)[this.starForceLevel];
 	}
 
 	public int getStarForceSuccessChance() {
-		return 0;
+		return Item.rates[this.starForceLevel].success();
+	}
+
+	public int getStarForceKeepChance() {
+		return Item.rates[this.starForceLevel].keep();
 	}
 
 	public int getStarForceFailChance() {
-		return 0;
+		return Item.rates[this.starForceLevel].down();
 	}
 
 	public int getStarForceDestroyChance() {
-		return 0;
+		return Item.rates[this.starForceLevel].boom();
 	}
 
 	public JSONObject toJson() {
