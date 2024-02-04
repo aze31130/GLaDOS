@@ -34,8 +34,7 @@ import utils.Logging;
 
 public class GLaDOS implements Logging {
 	private static volatile GLaDOS instance = null;
-	public String version;
-	public String token;
+	public String version, token;
 
 	// Internal settings
 	public boolean leveling, checkPrivateMessages, metricLogging;
@@ -54,6 +53,8 @@ public class GLaDOS implements Logging {
 
 	public JSONArray bannedWords;
 
+	public JSONArray epicgameQuotes, joinQuote, leaveQuote, randomQuote;
+
 	// Temp variable
 	public LocalDateTime translationCooldown;
 	public String goodAnswer = "";
@@ -61,7 +62,7 @@ public class GLaDOS implements Logging {
 	public List<Account> accounts = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
-	// Optimisation, holds the sum of each drop weight
+	// Optimisation, holds the sum of each drop weight so that we avoid recalculating it
 	public double itemTotalProb = 0;
 
 	private GLaDOS() {}
@@ -82,7 +83,7 @@ public class GLaDOS implements Logging {
 
 		if (!config.exists()) {
 			FileUtils.createDefaultConfig();
-			LOGGER.log(Level.SEVERE, "You have to define your token inside your config file !");
+			LOGGER.severe("You have to define your token inside your config file !");
 			System.exit(1);
 		}
 
@@ -102,6 +103,12 @@ public class GLaDOS implements Logging {
 		this.loadItems();
 
 		try {
+			// Load quotes
+			this.epicgameQuotes = FileUtils.loadJsonArray("./epicgameQuote.json");
+			this.joinQuote = FileUtils.loadJsonArray("./joinQuote.json");
+			this.leaveQuote = FileUtils.loadJsonArray("./leaveQuote.json");
+			this.randomQuote = FileUtils.loadJsonArray("./randomAnswer.json");
+
 			// Load the global variables
 			JSONObject json = FileUtils.loadJsonObject("./config.json");
 			this.getVersion();

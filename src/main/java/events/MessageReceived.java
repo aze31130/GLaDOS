@@ -1,7 +1,6 @@
 package events;
 
 import java.util.Random;
-import utils.Mention;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,7 +32,8 @@ public class MessageReceived extends ListenerAdapter {
 
 		if (event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
 			if (new Random().nextInt(100) >= 30) {
-				event.getChannel().sendMessage(Mention.randomAnswer()).queue();
+				event.getChannel().sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length())))
+						.queue();
 			}
 		}
 
@@ -42,7 +42,7 @@ public class MessageReceived extends ListenerAdapter {
 				"|c",
 				"|g -1"
 		};
-		// check self sender
+		// Check self sender
 		for (String dropbotCommand : dropbotCommands)
 			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand)
 					&& (new Random().nextInt(100) >= 80))
