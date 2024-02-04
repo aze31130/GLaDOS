@@ -82,6 +82,17 @@ public class ButtonClick extends ListenerAdapter {
 			return;
 		}
 
+		// Check if action is Next or Previous Inventory Page
+		if (trigger.equals("Upgrade") || trigger.equals("Exit")) {
+			// Check if the user own the item
+
+			// Check if the user has enough money
+
+			// Rng, check if upgrade passed and update embed
+			event.editMessageEmbeds(BuildEmbed.errorEmbed("This feature is still WIP").build()).queue();
+			return;
+		}
+
 		if (trigger.equals("AcceptTrade") || trigger.equals("RefuseTrade")) {
 			/*
 			 * In order to match the trade author and trade target, we will read the description field that

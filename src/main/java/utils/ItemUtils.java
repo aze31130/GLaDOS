@@ -92,8 +92,7 @@ public class ItemUtils implements Logging {
 		if ((inventoryPage <= 0) || (lastPage < inventoryPage))
 			return result;
 
-		for (int indexMin = (inventoryPage - 1) * AMOUNT_ITEM_PER_PAGE; indexMin < sortedInventory
-				.size(); indexMin++) {
+		for (int indexMin = (inventoryPage - 1) * AMOUNT_ITEM_PER_PAGE; indexMin < sortedInventory.size(); indexMin++) {
 			if (result.size() == AMOUNT_ITEM_PER_PAGE)
 				break;
 			result.add(sortedInventory.get(indexMin));
@@ -128,8 +127,8 @@ public class ItemUtils implements Logging {
 				virtualInventory.add(droppedItem);
 		}
 
-		Map<Rarity, Long> rarityCountMap = virtualInventory.stream()
-				.collect(Collectors.groupingBy(item -> item.rarity, Collectors.counting()));
+		Map<Rarity, Long> rarityCountMap =
+				virtualInventory.stream().collect(Collectors.groupingBy(item -> item.rarity, Collectors.counting()));
 
 		List<Map.Entry<Rarity, Long>> sortedList = rarityCountMap.entrySet().stream()
 				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
@@ -176,15 +175,12 @@ public class ItemUtils implements Logging {
 
 		List<Map.Entry<Item, Integer>> value = new ArrayList<>();
 
-		for (Item i : glados.items) {
+		for (Item i : glados.items)
 			value.add(new AbstractMap.SimpleEntry<Item, Integer>(i, i.value));
-		}
 
 		value.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
 
-		for (Map.Entry<Item, Integer> entry : value) {
-			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : "
-					+ entry.getValue());
-		}
+		for (Map.Entry<Item, Integer> entry : value)
+			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : " + entry.getValue());
 	}
 }
