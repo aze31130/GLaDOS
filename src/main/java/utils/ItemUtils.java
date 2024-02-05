@@ -68,8 +68,7 @@ public class ItemUtils implements Logging {
 	 * This function ensures that a given item is owned by a user
 	 */
 	public static boolean userOwnItem(Account account, String itemFQName) {
-		Optional<Item> item = account.inventory.stream()
-				.filter(i -> i.getFQName().equals(itemFQName)).findFirst();
+		Optional<Item> item = account.inventory.stream().filter(i -> i.getFQName().equals(itemFQName)).findFirst();
 
 		return item.isPresent();
 	}

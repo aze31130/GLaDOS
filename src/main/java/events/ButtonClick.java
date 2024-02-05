@@ -1,5 +1,6 @@
 package events;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import accounts.Account;
 import glados.GLaDOS;
+import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
@@ -84,12 +86,52 @@ public class ButtonClick extends ListenerAdapter {
 
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("Upgrade") || trigger.equals("Exit")) {
+			String authorName = event.getMessage().getEmbeds().get(0).getAuthor().getName();
+			String clickerName = event.getUser().getName();
+
+			if (!authorName.equals(clickerName)) {
+				event.replyEmbeds(BuildEmbed.errorEmbed("You cannot upgrade other's items !").build()).setEphemeral(true).queue();
+				return;
+			}
+
+			if (trigger.equals("Exit")) {
+				event.editMessageEmbeds(BuildEmbed.successEmbed("Closed upgrade session").build()).queue();
+				return;
+			}
+
+			User author = event.getUser();
+			Account authorAccount = glados.getAccount(author);
+
+			String itemFQName = event.getMessage().getEmbeds().get(0).getTitle();
+			Optional<Item> item = authorAccount.getItemByFQName(itemFQName);
+
 			// Check if the user own the item
+			if (item.isEmpty()) {
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own this item anymore !").build()).queue();
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				return;
+			}
 
 			// Check if the user has enough money
+			if (authorAccount.money < item.get().getStarForceCost()) {
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own enough money to upgrade !").build()).queue();
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				return;
+			}
 
-			// Rng, check if upgrade passed and update embed
-			event.editMessageEmbeds(BuildEmbed.errorEmbed("This feature is still WIP").build()).queue();
+			int randomValue = new SecureRandom().nextInt(0, 101);
+
+			// Check if success
+			if (randomValue < item.get().getStarForceSuccessChance()) {
+				// TODO
+			}
+
+			// Check if fail (keep)
+
+			// Check if fail (down)
+
+			// Check if boom
+
 			return;
 		}
 
@@ -117,8 +159,8 @@ public class ButtonClick extends ListenerAdapter {
 
 			// Check if trade is refused and remove buttons if refused
 			if (trigger.equals("RefuseTrade")) {
-				event.editMessageEmbeds(BuildEmbed.errorEmbed("Trade refused by " + event.getUser().getAsMention() + " !")
-						.build()).queue();
+				event.editMessageEmbeds(
+						BuildEmbed.errorEmbed("Trade refused by " + event.getUser().getAsMention() + " !").build()).queue();
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
@@ -138,7 +180,6 @@ public class ButtonClick extends ListenerAdapter {
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
-
 
 			Account authorAccount = optionalAuthorAccount.get();
 			Account targetAccount = optionalTargetAccount.get();

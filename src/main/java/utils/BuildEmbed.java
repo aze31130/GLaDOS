@@ -221,8 +221,8 @@ public class BuildEmbed {
 
 	public static EmbedBuilder upgradeEmbed(Account author, Item i) {
 		EmbedBuilder upgrade = new EmbedBuilder()
-				.setAuthor(author.user.getName(), author.user.getAvatarUrl(), author.user.getAvatarUrl())
-				.setTitle(":hammer_pick: Upgrade " + i.getFQName())
+				.setAuthor(author.user.getName())
+				.setTitle(i.getFQName())
 				.setDescription("You have " + author.money + " :coin:")
 				.addField("Upgrade", i.starForceLevel + " :star: => " + (i.starForceLevel + 1) + " :star2: ", true)
 				.addField(":moneybag: Cost", Integer.toString(i.getStarForceCost()), true)
