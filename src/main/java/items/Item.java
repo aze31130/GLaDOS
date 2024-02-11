@@ -4,7 +4,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import utils.UpgradeRatesUtils;
 
-public class Item {
+public class Item implements Cloneable {
 	public int id;
 	public String name;
 	public ItemType type;
@@ -156,5 +156,10 @@ public class Item {
 		item.put("quality", this.quality);
 
 		return item;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

@@ -59,7 +59,11 @@ public class Drop extends Command {
 			if (dropValue <= cumulativeProbability) {
 				// Check if drop requirements are fulfilled
 				if (ItemUtils.checkDropConditions(item)) {
-					droppedItem = item;
+					try {
+						droppedItem = (Item) item.clone();
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
 					break;
 				}
 			}
@@ -78,6 +82,11 @@ public class Drop extends Command {
 
 		// Asign random quality
 		droppedItem.quality = random.nextDouble();
+
+		if (droppedItem.quality > 0.9999)
+			droppedItem.quality = 1.0;
+		if (droppedItem.quality < 0.0001)
+			droppedItem.quality = 0.0;
 
 		authorAccount.inventory.add(droppedItem);
 		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
