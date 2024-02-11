@@ -17,16 +17,15 @@ public class Checksum extends Command {
 				"Compute the checksum of string input.",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "algorithm", "The algorithm type")
+						new OptionData(OptionType.STRING, "algorithm", "The algorithm type", true)
 								.addChoice("md2", "md2")
 								.addChoice("md5", "md5")
 								.addChoice("sha1", "sha1")
 								.addChoice("sha224", "sha224")
 								.addChoice("sha256", "sha256")
 								.addChoice("sha384", "sha384")
-								.addChoice("sha512", "sha512")
-								.setRequired(true),
-						new OptionData(OptionType.STRING, "content", "The content you want to hash").setRequired(true)));
+								.addChoice("sha512", "sha512"),
+						new OptionData(OptionType.STRING, "content", "The content you want to hash", true)));
 	}
 
 	@Override

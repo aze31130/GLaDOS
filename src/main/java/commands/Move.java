@@ -18,7 +18,7 @@ public class Move extends Command {
 				"Move every voice connected users to another channel",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "destination", "Channel you want to move in").setRequired(true)));
+						new OptionData(OptionType.CHANNEL, "destination", "Channel you want to move in", true)));
 	}
 
 	@Override

@@ -15,8 +15,8 @@ public class Rng extends Command {
 				"Generate a random number using 'perfect and totally not rigged' random",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "lower_bound", "The lower bound is included"),
-						new OptionData(OptionType.INTEGER, "upper_bound", "The upper bound is included")));
+						new OptionData(OptionType.INTEGER, "lower_bound", "The lower bound is included", true),
+						new OptionData(OptionType.INTEGER, "upper_bound", "The upper bound is included", true)));
 	}
 
 	@Override

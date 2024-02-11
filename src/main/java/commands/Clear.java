@@ -17,7 +17,7 @@ public class Clear extends Command {
 				"Clears the latests messages in a channel. Moderator privileges required",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "amount", "Amount of message you want to delete")));
+						new OptionData(OptionType.INTEGER, "amount", "Amount of message you want to delete", true)));
 	}
 
 	@Override

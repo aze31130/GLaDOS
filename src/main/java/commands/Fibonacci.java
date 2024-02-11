@@ -20,7 +20,7 @@ public class Fibonacci extends Command {
 				"Computes given fibonacci number",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")));
+						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute", true)));
 	}
 
 	@Override

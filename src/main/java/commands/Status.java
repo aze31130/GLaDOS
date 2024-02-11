@@ -16,13 +16,12 @@ public class Status extends Command {
 				"Updates GLaDOS's activity",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "type", "Can be [listening, playing, watching, streaming]")
-								.setRequired(true)
+						new OptionData(OptionType.STRING, "type", "Can be [listening, playing, watching, streaming]", true)
 								.addChoice("listening", "listening")
 								.addChoice("playing", "playing")
 								.addChoice("watching", "watching")
 								.addChoice("streaming", "streaming"),
-						new OptionData(OptionType.STRING, "description", "The displayed activity").setRequired(true)));
+						new OptionData(OptionType.STRING, "description", "The displayed activity", true)));
 	}
 
 	@Override

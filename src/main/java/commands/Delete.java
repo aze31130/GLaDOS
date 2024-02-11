@@ -19,8 +19,8 @@ public class Delete extends Command {
 				"Deletes an item from someone's inventory. Owner privileges required.",
 				Permission.OWNER,
 				Arrays.asList(
-						new OptionData(OptionType.USER, "target", "The user you want to remove an item").setRequired(true),
-						new OptionData(OptionType.STRING, "item", "The item you want to remove").setAutoComplete(true),
+						new OptionData(OptionType.USER, "target", "The user you want to remove an item", true),
+						new OptionData(OptionType.STRING, "item", "The item you want to remove", true),
 						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to remove")));
 	}
 

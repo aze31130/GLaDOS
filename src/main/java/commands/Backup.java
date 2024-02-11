@@ -21,7 +21,7 @@ public class Backup extends Command implements Logging {
 				"Download a backup of the entire server. Admin privileges required",
 				Permission.ADMINISTRATOR,
 				Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "target", "The channel you want to backup.").setRequired(true)));
+						new OptionData(OptionType.CHANNEL, "target", "The channel you want to backup.", true)));
 	}
 
 	@Override

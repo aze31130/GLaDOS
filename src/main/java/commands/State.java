@@ -16,8 +16,7 @@ public class State extends Command {
 				"Updates GLaDOS's state (online, idle, do not disturb)",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]")
-								.setRequired(true)
+						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]", true)
 								.addChoice("online", "online")
 								.addChoice("idle", "idle")
 								.addChoice("dnd", "dnd")));

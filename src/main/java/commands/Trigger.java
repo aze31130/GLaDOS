@@ -28,7 +28,7 @@ public class Trigger extends Command {
 				"Triggers an internal event. Moderator privileges required",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "trigger", "Call name you want to trigger").setRequired(true)
+						new OptionData(OptionType.STRING, "trigger", "Call name you want to trigger", true)
 								.addChoice("Gamer", "Gamer")
 								.addChoice("Midnight", "Midnight")
 								.addChoice("Ranking", "Ranking")

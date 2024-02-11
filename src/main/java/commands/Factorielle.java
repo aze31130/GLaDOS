@@ -19,7 +19,7 @@ public class Factorielle extends Command {
 				"Computes given factorial number",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute")));
+						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute", true)));
 	}
 
 	@Override

@@ -19,8 +19,8 @@ public class Give extends Command {
 				"Gives an item to someone. Owner privileges required.",
 				Permission.OWNER,
 				Arrays.asList(
-						new OptionData(OptionType.USER, "target", "The user you want to give an item").setRequired(true),
-						new OptionData(OptionType.STRING, "item", "The item you want to give").setAutoComplete(true),
+						new OptionData(OptionType.USER, "target", "The user you want to give an item", false),
+						new OptionData(OptionType.STRING, "item", "The item you want to give", false, true),
 						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to give")));
 	}
 

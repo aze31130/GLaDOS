@@ -23,11 +23,10 @@ public class Trade extends Command {
 				"Request a trade with another user.",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.USER, "target", "The target of your trade offer").setRequired(true),
-						new OptionData(OptionType.STRING, "srcitem", "The item you want to give").setAutoComplete(true),
+						new OptionData(OptionType.USER, "target", "The target of your trade offer", true),
+						new OptionData(OptionType.STRING, "srcitem", "The item you want to give", false, true),
 						new OptionData(OptionType.INTEGER, "srcmoney", "The amount of money you want to give"),
-						new OptionData(OptionType.STRING, "dstitem", "What item the target gives you in exchange")
-								.setAutoComplete(true),
+						new OptionData(OptionType.STRING, "dstitem", "What item the target gives you in exchange", false, true),
 						new OptionData(OptionType.INTEGER, "dstmoney", "The amount of money the target gives you")));
 	}
 

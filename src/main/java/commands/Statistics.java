@@ -13,7 +13,7 @@ public class Statistics extends Command {
 				"Generates statistics of the given channel.",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(OptionType.CHANNEL, "target", "The channel you want to inspect").setRequired(true)));
+						new OptionData(OptionType.CHANNEL, "target", "The channel you want to inspect", true)));
 	}
 
 	@Override

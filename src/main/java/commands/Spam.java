@@ -15,8 +15,8 @@ public class Spam extends Command {
 				"Spam-mention a given user. Moderator privileges required.",
 				Permission.MODERATOR,
 				Arrays.asList(
-						new OptionData(OptionType.MENTIONABLE, "target", "Person you want to annoy"),
-						new OptionData(OptionType.INTEGER, "amount", "The amount of mention you want to generate")));
+						new OptionData(OptionType.MENTIONABLE, "target", "Person you want to annoy", true),
+						new OptionData(OptionType.INTEGER, "amount", "The amount of mention you want to generate", true)));
 	}
 
 	@Override

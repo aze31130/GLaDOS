@@ -18,8 +18,7 @@ public class Sell extends Command {
 				"Sells an item.",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "item", "The item you want to sell").setRequired(true)
-								.setAutoComplete(true)));
+						new OptionData(OptionType.STRING, "item", "The item you want to sell", true, true)));
 	}
 
 	@Override
