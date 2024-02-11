@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import accounts.Permission;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -25,30 +24,30 @@ public class Factorielle extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
+					.queue();
 			return;
 		}
 
 		/*
 		 * Arbitrary limit to limit cpu usage
 		 */
-		if (n > 10000)
-			n = 10000;
+		if (n > 100000)
+			n = 100000;
 
 		/*
 		 * Define a temporary limit to make sure midnight ranking is not affected
 		 */
 		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
+			event.getHook()
+					.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
 					.queue();
 			return;
 		}
 
-		source.sendTyping().queue();
 		BigInteger f = new BigInteger("1");
 		for (int i = 2; i <= n; i++)
 			f = f.multiply(BigInteger.valueOf(i));
@@ -56,9 +55,10 @@ public class Factorielle extends Command {
 		// Write number to a file if too big
 		if (f.toString().length() >= 2000) {
 			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
-			source.sendMessage("Factorial(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
+			event.getHook().sendMessage("Factorial(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt"))
+					.queue();
 		} else {
-			source.sendMessage("Factorial(" + n + ") = " + f).queue();
+			event.getHook().sendMessage("Factorial(" + n + ") = " + f).queue();
 		}
 	}
 }

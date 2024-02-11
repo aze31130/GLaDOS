@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -30,18 +29,15 @@ public class Inventory extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 
-		int startingPage =
-				Optional.ofNullable(event.getOption("page")).map(OptionMapping::getAsInt).orElse(1);
-		int lastPage = (int) Math
-				.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
+		int startingPage = Optional.ofNullable(event.getOption("page")).map(OptionMapping::getAsInt).orElse(1);
+		int lastPage = (int) Math.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
 
 		if ((startingPage > lastPage) || (startingPage <= 0)) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(
 					"You do not have " + startingPage + " pages in your inventory ! You last page is " + lastPage + ".").build())
 					.queue();
 			return;
@@ -56,6 +52,6 @@ public class Inventory extends Command {
 				Button.primary("PrevPage", "Previous Page"),
 				Button.primary("NextPage", "Next Page"));
 
-		source.sendMessageEmbeds(inventory.build()).addActionRow(buttons).queue();
+		event.getHook().sendMessageEmbeds(inventory.build()).addActionRow(buttons).queue();
 	}
 }

@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import accounts.Permission;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -28,9 +27,8 @@ public class Backup extends Command implements Logging {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		MessageChannel target = (MessageChannel) event.getOption("target").getAsChannel();
-		TextChannel source = event.getGuildChannel().asTextChannel();
 
-		source.sendMessage("Downloading channel " + target.getAsMention() + "...").complete();
+		event.getHook().sendMessage("Downloading channel " + target.getAsMention() + "...").complete();
 
 		JSONArray messages = new JSONArray();
 
@@ -72,7 +70,7 @@ public class Backup extends Command implements Logging {
 		});
 		FileUtils.writeRawFile(target.getName() + ".json", messages.toString(4));
 
-		source.sendMessageEmbeds(BuildEmbed.successEmbed("Downloaded " + target.getAsMention() + " successfully").build())
-				.complete();
+		event.getHook().sendMessageEmbeds(
+				BuildEmbed.successEmbed("Downloaded " + target.getAsMention() + " successfully").build()).complete();
 	}
 }

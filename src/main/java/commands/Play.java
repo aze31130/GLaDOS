@@ -29,8 +29,10 @@ public class Play extends Command {
 
 			audioManager.setSendingHandler(test);
 			audioManager.openAudioConnection(voiceChannel);
+
+			event.getHook().sendMessage("200 OK").queue();
 		} catch (IllegalArgumentException e) {
-			event.getChannel().sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.errorEmbed(e.toString() + "You need to be connected in a voice channel first !").build()).queue();
 		}
 	}

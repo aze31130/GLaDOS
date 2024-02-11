@@ -122,7 +122,7 @@ public class Trigger extends Command {
 		String trigger = event.getOption("trigger").getAsString();
 
 		if (trigger.isBlank() || trigger.isEmpty()) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You need to provide a trigger name !").build()).queue();
 			return;
 		}
 

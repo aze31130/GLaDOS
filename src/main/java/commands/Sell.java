@@ -6,7 +6,6 @@ import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -25,7 +24,6 @@ public class Sell extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
@@ -37,7 +35,7 @@ public class Sell extends Command {
 				authorAccount.inventory.stream().filter(it -> it.getFQName().equals(itemFQName)).findFirst();
 
 		if (pretendedItem.isEmpty()) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot sell an item you do not own !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot sell an item you do not own !").build()).queue();
 			return;
 		}
 
@@ -47,7 +45,7 @@ public class Sell extends Command {
 		authorAccount.money += item.value;
 		authorAccount.inventory.remove(item);
 
-		source.sendMessageEmbeds(BuildEmbed.successEmbed(
+		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed(
 				"Successfully sold " + item.getFQName() + " at " + item.value + " (" + authorAccount.money + " total)").build())
 				.queue();
 	}

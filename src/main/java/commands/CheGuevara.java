@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
 
@@ -23,8 +22,6 @@ public class CheGuevara extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
-
 		try {
 			JSONObject jsonObject = JsonDownloader.getJson("https://api.chucknorris.io/jokes/random");
 			String meme = jsonObject.getString("value");
@@ -34,9 +31,9 @@ public class CheGuevara extends Command {
 			EmbedBuilder che = new EmbedBuilder().setTitle("Che Guevara").setThumbnail(
 					"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Che_Guevara_vector_SVG_format.svg/1200px-Che_Guevara_vector_SVG_format.svg.png")
 					.setDescription(meme).setColor(Color.BLUE).setTimestamp(Instant.now());
-			source.sendMessageEmbeds(che.build()).queue();
+			event.getHook().sendMessageEmbeds(che.build()).queue();
 		} catch (Exception e) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }

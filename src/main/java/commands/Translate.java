@@ -43,7 +43,7 @@ public class Translate extends Command {
 		// Check cooldown
 		long secondsSinceLastExecution = g.translationCooldown.until(LocalDateTime.now(), ChronoUnit.SECONDS);
 		if (secondsSinceLastExecution < delay) {
-			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution)
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You need to wait " + (delay - secondsSinceLastExecution)
 					+ " seconds until using this command !").build()).queue();
 			return;
 		}
@@ -74,10 +74,10 @@ public class Translate extends Command {
 				HttpResponse<String> response =
 						client.send(request, HttpResponse.BodyHandlers.ofString());
 				JSONObject responseJson = new JSONObject(response.body());
-				event.getChannel().sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: "
+				event.getHook().sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: "
 						+ responseJson.get("translatedText").toString()).queue();
 			} catch (IOException | InterruptedException | JSONException e) {
-				event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 			}
 		}
 	}

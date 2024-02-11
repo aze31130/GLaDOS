@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import utils.BuildEmbed;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -26,11 +25,11 @@ public class Fibonacci extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
+					.queue();
 			return;
 		}
 
@@ -44,12 +43,12 @@ public class Fibonacci extends Command {
 		 * Define a temporary limit to make sure midnight ranking is not affected
 		 */
 		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
+			event.getHook()
+					.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
 					.queue();
 			return;
 		}
 
-		source.sendTyping().queue();
 		BigInteger f = new BigInteger("1");
 		if (n < 2) {
 			f = BigInteger.ONE;
@@ -68,9 +67,10 @@ public class Fibonacci extends Command {
 		// Write number to a file if too big
 		if (f.toString().length() >= 2000) {
 			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
-			source.sendMessage("Fibonacci(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
+			event.getHook().sendMessage("Fibonacci(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt"))
+					.queue();
 		} else {
-			source.sendMessage("Fibonacci(" + n + ") = " + f).queue();
+			event.getHook().sendMessage("Fibonacci(" + n + ") = " + f).queue();
 		}
 	}
 }

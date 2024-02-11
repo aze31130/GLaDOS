@@ -42,7 +42,7 @@ public class Question extends Command {
 		GLaDOS g = GLaDOS.getInstance();
 
 		if (g.goodAnswer.length() > 0) {
-			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed("You have to anwser previous question").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You have to anwser previous question").build()).queue();
 			return;
 		}
 
@@ -71,7 +71,7 @@ public class Question extends Command {
 			Collections.shuffle(responses);
 
 			// Post message with buttons with answers
-			event.getChannel().sendMessageEmbeds(BuildEmbed.questionEmbed(
+			event.getHook().sendMessageEmbeds(BuildEmbed.questionEmbed(
 					new String(Base64.getDecoder().decode(question.getString("question"))),
 					new String(Base64.getDecoder().decode(question.getString("category"))),
 					new String(Base64.getDecoder().decode(question.getString("difficulty"))))
@@ -81,7 +81,7 @@ public class Question extends Command {
 			g.goodAnswer = "?" + new String(Base64.getDecoder().decode(question.getString("correct_answer")));
 
 		} catch (JSONException | IOException exception) {
-			event.getChannel().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}
 	}
 }

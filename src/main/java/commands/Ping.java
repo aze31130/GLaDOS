@@ -1,8 +1,8 @@
 package commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import java.awt.Color;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -19,11 +19,11 @@ public class Ping extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
-
-		EmbedBuilder ping = new EmbedBuilder().setColor(0x22ff2a).setTitle("Ping: " + event.getJDA().getGatewayPing() + "ms")
+		EmbedBuilder ping = new EmbedBuilder()
+				.setColor(Color.green)
+				.setTitle("Ping: " + event.getJDA().getGatewayPing() + "ms")
 				.setThumbnail(event.getJDA().getGuildById("676731153444765706").getIconUrl())
 				.setTimestamp(Instant.now());
-		source.sendMessageEmbeds(ping.build()).queue();
+		event.getHook().sendMessageEmbeds(ping.build()).queue();
 	}
 }

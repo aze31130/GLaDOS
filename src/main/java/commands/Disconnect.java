@@ -19,5 +19,6 @@ public class Disconnect extends Command {
 	public void execute(SlashCommandInteractionEvent event) {
 		AudioManager audioManager = event.getGuild().getAudioManager();
 		audioManager.closeAudioConnection();
+		event.getHook().sendMessage("200 OK").queue();
 	}
 }

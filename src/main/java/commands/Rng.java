@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 import accounts.Permission;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -22,7 +21,6 @@ public class Rng extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		Integer up = event.getOption("upperbound").getAsInt();
 		Integer down = event.getOption("downbound").getAsInt();
 
@@ -31,6 +29,6 @@ public class Rng extends Command {
 		if (rng < 0)
 			rng *= -1;
 
-		source.sendMessage("The rng is: " + rng + " [ " + down + " - " + up + " ]").queue();
+		event.getHook().sendMessage("The rng is: " + rng + " [ " + down + " - " + up + " ]").queue();
 	}
 }

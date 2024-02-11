@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
 
@@ -27,8 +26,6 @@ public class RandomCat extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
-
 		try {
 			String apiUrl = "https://api.thecatapi.com/v1/images/search";
 			JSONArray jsonArray = new JSONArray(new JSONTokener(
@@ -37,9 +34,9 @@ public class RandomCat extends Command {
 			EmbedBuilder info = new EmbedBuilder().setTitle("Random Cat Picture")
 					.setImage(jsonObject.getString("url")).setColor(Color.WHITE)
 					.setTimestamp(Instant.now());
-			source.sendMessageEmbeds(info.build()).queue();
+			event.getHook().sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }

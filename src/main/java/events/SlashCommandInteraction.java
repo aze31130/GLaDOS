@@ -19,9 +19,11 @@ public class SlashCommandInteraction extends ListenerAdapter {
 							+ " role in order to execute that.").build()).queue();
 					return;
 				}
-				// event.deferReply().queue();
-				if (!command.name.equalsIgnoreCase("vote"))
-					event.reply("200 OK").queue();
+
+				if (!command.name.equalsIgnoreCase("vote")) {
+					event.deferReply().queue();
+					event.getChannel().sendTyping().queue();
+				}
 
 				command.execute(event);
 				return;

@@ -2,7 +2,6 @@ package commands;
 
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -26,27 +25,27 @@ public class State extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		String state = event.getOption("status").getAsString();
 
 		switch (state) {
 			case "online":
-				source.getJDA().getPresence().setStatus(OnlineStatus.ONLINE);
+				event.getJDA().getPresence().setStatus(OnlineStatus.ONLINE);
 				break;
 			case "idle":
-				source.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
+				event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 				break;
 			case "dnd":
-				source.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+				event.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
 				break;
 			default:
-				source.sendMessageEmbeds(
+				event.getHook().sendMessageEmbeds(
 						BuildEmbed.errorEmbed("Unknown state (" + state + ") ! All states are: <online / idle / dnd>")
 								.build())
 						.queue();
 				return;
 		}
 
-		source.sendMessageEmbeds(BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build()).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Successfully updated to " + state + " state.").build())
+				.queue();
 	}
 }

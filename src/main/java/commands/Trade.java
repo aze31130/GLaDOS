@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -34,17 +33,15 @@ public class Trade extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
-
 		// Check if the target is valid
 		if (event.getOption("target") == null) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("The target account does not exist !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("The target account does not exist !").build()).queue();
 			return;
 		}
 
 		// Ensures trade is performed in a server, not in private message
 		if (!event.isFromGuild()) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You can only trade in a server !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You can only trade in a server !").build()).queue();
 			return;
 		}
 
@@ -54,7 +51,7 @@ public class Trade extends Command {
 		Optional<Account> optionnalTargetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 		if (optionnalTargetAccount.isEmpty()) {
-			source.sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.errorEmbed("This user does not have an account. He needs to /drop first !").build()).queue();
 			return;
 		}
@@ -68,7 +65,8 @@ public class Trade extends Command {
 
 		// Ensure the trade is possible
 		if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem, dstMoney)) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Illegal trade ! Ensures the trade is possible !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Illegal trade ! Ensures the trade is possible !").build())
+					.queue();
 			return;
 		}
 
@@ -77,7 +75,7 @@ public class Trade extends Command {
 				Button.primary("AcceptTrade", "Accept Trade"),
 				Button.danger("RefuseTrade", "Refuse Trade"));
 
-		source.sendMessageEmbeds(
+		event.getHook().sendMessageEmbeds(
 				BuildEmbed.tradeEmbed(authorAccount, targetAccount, srcItem, srcMoney, dstItem, dstMoney).build())
 				.addActionRow(buttons).queue();
 	}

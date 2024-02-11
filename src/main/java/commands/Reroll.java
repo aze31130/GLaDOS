@@ -23,5 +23,6 @@ public class Reroll extends Command {
 		// Ensure the user has enough money
 
 		// Send the embed
+		event.getHook().sendMessage("WIP").queue();
 	}
 }

@@ -26,7 +26,7 @@ public class Profile extends Command {
 
 		EmbedBuilder profile = BuildEmbed.profileEmbed(a);
 
-		event.getChannel().sendMessageEmbeds(profile.build()).queue();
+		event.getHook().sendMessageEmbeds(profile.build()).queue();
 		// //:wave::eye::eyes::tickets::ticket::ring::crown::mortar_board::briefcase::full_moon::boom::zap::rainbow::star::rose::droplet::popcorn::beer::soccer::game_die::video_game::slot_machine::drum::mobile_phone::computer::desktop::dvd::floppy_disk::coin::crossed_swords::notepad_spiral::paperclip::tada::mega::black_joker::spades::clubs::hearts::diamonds::triangular_flag_on_post::magic_wand::robot::comet::fire::trident::recycle::infinity:
 	}
 }

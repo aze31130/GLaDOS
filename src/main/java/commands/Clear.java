@@ -28,9 +28,10 @@ public class Clear extends Command {
 		try {
 			List<Message> messages = source.getHistory().retrievePast(amount).complete();
 			source.deleteMessages(messages).queue();
-			source.sendMessageEmbeds(BuildEmbed.successEmbed("Successfully deleted " + amount + " messages.").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Successfully deleted " + amount + " messages.").build())
+					.queue();
 		} catch (Exception exception) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
 		}
 	}
 }

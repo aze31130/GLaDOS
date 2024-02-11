@@ -6,7 +6,6 @@ import java.util.Random;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -28,12 +27,11 @@ public class Give extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		MessageChannelUnion source = event.getChannel();
 
 		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());
 
 		if (optionalTarget.isEmpty()) {
-			source.sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.errorEmbed("This user does not have an account. He needs to /drop first !").build()).queue();
 			return;
 		}
@@ -50,7 +48,7 @@ public class Give extends Command {
 			Optional<items.Item> item = glados.getItemByName(itemName.get());
 
 			if (item.isEmpty()) {
-				source.sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown item " + itemName.get()).build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Unknown item " + itemName.get()).build()).queue();
 				return;
 			}
 
@@ -59,19 +57,21 @@ public class Give extends Command {
 			i.quality = new Random().nextDouble();
 
 			target.inventory.add(i);
-			source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
 		}
 
 		// Check if it's a money give
 		if (moneyAmount.isPresent()) {
 
 			if (moneyAmount.get() <= 0) {
-				source.sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot give this amount of money !").build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot give this amount of money !").build())
+						.queue();
 				return;
 			}
 
 			target.money += moneyAmount.get();
-			source.sendMessageEmbeds(BuildEmbed.moneyDropEmbed(target.user, moneyAmount.get(), target.money).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(target.user, moneyAmount.get(), target.money).build())
+					.queue();
 		}
 	}
 }

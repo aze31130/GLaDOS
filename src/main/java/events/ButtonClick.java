@@ -96,6 +96,7 @@ public class ButtonClick extends ListenerAdapter {
 
 			if (trigger.equals("Exit")) {
 				event.editMessageEmbeds(BuildEmbed.successEmbed("Closed upgrade session").build()).queue();
+				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
@@ -103,17 +104,19 @@ public class ButtonClick extends ListenerAdapter {
 			Account authorAccount = glados.getAccount(author);
 
 			String itemFQName = event.getMessage().getEmbeds().get(0).getTitle();
-			Optional<Item> item = authorAccount.getItemByFQName(itemFQName);
+			Optional<Item> perhapsItem = authorAccount.getItemByFQName(itemFQName);
 
 			// Check if the user own the item
-			if (item.isEmpty()) {
+			if (perhapsItem.isEmpty()) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own this item anymore !").build()).queue();
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
+			Item item = perhapsItem.get();
+
 			// Check if the user has enough money
-			if (authorAccount.money < item.get().getStarForceCost()) {
+			if (authorAccount.money < item.getStarForceCost()) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own enough money to upgrade !").build()).queue();
 				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
 				return;
@@ -122,15 +125,32 @@ public class ButtonClick extends ListenerAdapter {
 			int randomValue = new SecureRandom().nextInt(0, 101);
 
 			// Check if success
-			if (randomValue < item.get().getStarForceSuccessChance()) {
-				// TODO
+			if (randomValue < item.getStarForceSuccessChance()) {
+				System.out.println("Success");
+				item.starForceLevel++;
+				return;
 			}
 
 			// Check if fail (keep)
+			if (randomValue < item.getStarForceSuccessChance() + item.getStarForceKeepChance()) {
+				System.out.println("Keep !");
+				return;
+			}
 
 			// Check if fail (down)
+			if (randomValue < item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()) {
+				System.out.println("Fail !");
+				item.starForceLevel--;
+				return;
+			}
 
 			// Check if boom
+			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()
+					+ item.getStarForceDestroyChance()) {
+				System.out.println("Boom !");
+				item.broken = true;
+				return;
+			}
 
 			return;
 		}

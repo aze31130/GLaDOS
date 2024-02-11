@@ -6,8 +6,8 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Rarity;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -24,7 +24,7 @@ public class Item extends Command {
 						new OptionData(OptionType.STRING, "name", "The item name you're searching for.", false, true)));
 	}
 
-	public void generateItemChart(MessageChannelUnion source) {
+	public void generateItemChart(InteractionHook source) {
 		GLaDOS g = GLaDOS.getInstance();
 		EmbedBuilder rarityEmbed = BuildEmbed.itemChartEmbed();
 
@@ -50,11 +50,10 @@ public class Item extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		// Get item name from argument
-		MessageChannelUnion source = event.getChannel();
 		OptionMapping optionalItemName = event.getOption("name");
 
 		if (optionalItemName == null) {
-			generateItemChart(source);
+			generateItemChart(event.getHook());
 			return;
 		}
 
@@ -64,11 +63,11 @@ public class Item extends Command {
 		Optional<items.Item> searchingItem = GLaDOS.getInstance().items.stream().filter(i -> i.name.equals(itemName)).findFirst();
 
 		if (searchingItem.isEmpty()) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("Item not found !").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Item not found !").build()).queue();
 			return;
 		}
 
 		// Display it
-		source.sendMessageEmbeds(BuildEmbed.itemInfoEmbed(searchingItem.get()).build()).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.itemInfoEmbed(searchingItem.get()).build()).queue();
 	}
 }

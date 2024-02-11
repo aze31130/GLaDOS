@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import accounts.Permission;
 
@@ -23,8 +22,6 @@ public class Idea extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
-
 		try {
 			JSONObject jsonObject = JsonDownloader.getJson("https://www.boredapi.com/api/activity");
 			String activity = jsonObject.getString("activity");
@@ -37,9 +34,9 @@ public class Idea extends Command {
 							.addField("Price: ", price + "", false).addField("Type: ", type, false)
 							.addField("Participants: ", participants + "", false)
 							.setColor(Color.CYAN).setTimestamp(Instant.now());
-			source.sendMessageEmbeds(info.build()).queue();
+			event.getHook().sendMessageEmbeds(info.build()).queue();
 		} catch (Exception e) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 		}
 	}
 }

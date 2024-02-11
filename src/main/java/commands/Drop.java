@@ -7,7 +7,6 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
 import utils.ItemUtils;
@@ -24,13 +23,13 @@ public class Drop extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		MessageChannelUnion source = event.getChannel();
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 
 		if (!authorAccount.canDrop) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed("You already dropped today ! Come back tomorrow :D").build()).queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You already dropped today ! Come back tomorrow :D").build())
+					.queue();
 			return;
 		}
 
@@ -74,7 +73,7 @@ public class Drop extends Command {
 		 * this case, we simply send an error message and allow the user to drop again.
 		 */
 		if (droppedItem == null) {
-			source.sendMessageEmbeds(BuildEmbed.errorEmbed(
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(
 					"An error occured during item generation. Your daily record has not been updated: you can drop again normaly right now.")
 					.build()).queue();
 			return;
@@ -89,7 +88,7 @@ public class Drop extends Command {
 			droppedItem.quality = 0.0;
 
 		authorAccount.inventory.add(droppedItem);
-		source.sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
 		authorAccount.canDrop = false;
 	}
 }

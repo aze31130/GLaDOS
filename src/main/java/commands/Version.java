@@ -45,6 +45,6 @@ public class Version extends Command {
 		info.addField("Event registered: ", Integer.toString(glados.requestsAmount), true);
 		info.addField("Uptime: ", TimeUtils.TimeConverter(ManagementFactory.getRuntimeMXBean().getUptime() / 1000), true);
 		info.setTimestamp(Instant.now());
-		event.getChannel().sendMessageEmbeds(info.build()).queue();
+		event.getHook().sendMessageEmbeds(info.build()).queue();
 	}
 }

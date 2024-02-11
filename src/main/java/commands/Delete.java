@@ -5,7 +5,6 @@ import java.util.Optional;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -28,12 +27,11 @@ public class Delete extends Command {
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-		MessageChannelUnion source = event.getChannel();
 
 		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());
 
 		if (optionalTarget.isEmpty()) {
-			source.sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.errorEmbed("This user does not have an account. He needs to /drop first !").build()).queue();
 			return;
 		}
@@ -49,7 +47,7 @@ public class Delete extends Command {
 		if (itemName.isPresent()) {
 			// Check if the user owns the item
 			if (!ItemUtils.userOwnItem(target, itemName.get())) {
-				source.sendMessageEmbeds(BuildEmbed.errorEmbed("The user does not own this item !").build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("The user does not own this item !").build()).queue();
 				return;
 			}
 
@@ -57,7 +55,7 @@ public class Delete extends Command {
 			items.Item it = target.inventory.stream().filter(i -> i.getFQName().equals(itemName.get())).findFirst().get();
 			target.inventory.remove(it);
 
-			source.sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.successEmbed("Removed " + itemName.get() + " to user " + target.user.getAsMention()).build())
 					.queue();
 		}
@@ -65,7 +63,8 @@ public class Delete extends Command {
 		// Check if it's a money give
 		if (moneyAmount.isPresent()) {
 			if (moneyAmount.get() <= 0) {
-				source.sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot remove a negative amount of money !").build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot remove a negative amount of money !").build())
+						.queue();
 				return;
 			}
 
@@ -74,7 +73,7 @@ public class Delete extends Command {
 			if (target.money < 0)
 				target.money = 0;
 
-			source.sendMessageEmbeds(
+			event.getHook().sendMessageEmbeds(
 					BuildEmbed.successEmbed("Removed " + moneyAmount.get() + " to user " + target.user.getAsMention()).build())
 					.queue();
 		}
