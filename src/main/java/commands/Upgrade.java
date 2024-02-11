@@ -21,7 +21,8 @@ public class Upgrade extends Command {
 				"upgrade",
 				"Upgrade an item from your inventory.",
 				Permission.NONE,
-				Arrays.asList(new OptionData(OptionType.STRING, "name", "The item name you want to upgrade.", true, true)));
+				Arrays.asList(new OptionData(OptionType.STRING, "name", "The item full qualified name you want to upgrade.", true,
+						true)));
 	}
 
 	@Override
@@ -33,12 +34,7 @@ public class Upgrade extends Command {
 		String itemName = event.getOption("name").getAsString();
 
 		// Search item
-		Optional<items.Item> searchingItem = glados.items.stream().filter(i -> i.getFQName().equals(itemName)).findFirst();
-
-		if (searchingItem.isEmpty()) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("This item does not exist !").build()).queue();
-			return;
-		}
+		Optional<items.Item> searchingItem = authorAccount.getItemByFQName(itemName);
 
 		// Check if the owner own the item
 		if (!ItemUtils.userOwnItem(authorAccount, itemName)) {

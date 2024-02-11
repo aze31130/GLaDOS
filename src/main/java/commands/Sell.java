@@ -30,8 +30,7 @@ public class Sell extends Command {
 		String itemFQName = event.getOption("item").getAsString();
 
 		// Ensure the owner own the item
-		Optional<items.Item> pretendedItem =
-				authorAccount.inventory.stream().filter(it -> it.getFQName().equals(itemFQName)).findFirst();
+		Optional<items.Item> pretendedItem = authorAccount.getItemByFQName(itemFQName);
 
 		if (pretendedItem.isEmpty()) {
 			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot sell an item you do not own !").build()).queue();

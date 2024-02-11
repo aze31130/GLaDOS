@@ -285,11 +285,16 @@ public class GLaDOS implements Logging {
 					continue;
 				}
 
-				Item it = item.get();
-				it.starForceLevel = itemStarForceLevel;
-				it.broken = itemBroken;
-				it.quality = itemQuality;
-				userInventory.add(it);
+				try {
+					Item it = (Item) item.get().clone();
+					it.starForceLevel = itemStarForceLevel;
+					it.broken = itemBroken;
+					it.quality = itemQuality;
+					userInventory.add(it);
+				} catch (CloneNotSupportedException e) {
+					LOGGER.severe("Cannot clone item " + itemId);
+					e.printStackTrace();
+				}
 			}
 
 			Account a = new Account(

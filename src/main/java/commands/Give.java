@@ -52,12 +52,15 @@ public class Give extends Command {
 				return;
 			}
 
-			items.Item i = item.get();
+			try {
+				items.Item i = (items.Item) item.get().clone();
+				i.quality = new Random().nextDouble();
+				target.inventory.add(i);
 
-			i.quality = new Random().nextDouble();
-
-			target.inventory.add(i);
-			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// Check if it's a money give
