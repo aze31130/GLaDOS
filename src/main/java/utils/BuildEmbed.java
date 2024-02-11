@@ -71,6 +71,38 @@ public class BuildEmbed {
 		return embed;
 	}
 
+	public static EmbedBuilder upgradeSuccessEmbed(int level) {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setTitle("Success")
+				.setDescription("Upgraded to  " + level + " :star:")
+				.setColor(Color.GREEN);
+		return embed;
+	}
+
+	public static EmbedBuilder upgradeKeepEmbed(int level) {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setTitle("Failed ! (Keep)")
+				.setDescription("Keep " + level + " :star:")
+				.setColor(Color.ORANGE);
+		return embed;
+	}
+
+	public static EmbedBuilder upgradeFailEmbed(int level) {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setTitle("Failed ! (Down)")
+				.setDescription("Downgraded to " + level + " :star:")
+				.setColor(Color.RED);
+		return embed;
+	}
+
+	public static EmbedBuilder upgradeDestroyEmbed() {
+		EmbedBuilder embed = new EmbedBuilder()
+				.setTitle("Destroyed !")
+				.setDescription("The item is now broken an not upgradable anymore !")
+				.setColor(Color.BLACK);
+		return embed;
+	}
+
 	public static EmbedBuilder profileEmbed(Account account) {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle(account.user.getName() + "'s profile")

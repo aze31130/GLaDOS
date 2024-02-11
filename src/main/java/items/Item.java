@@ -74,10 +74,11 @@ public class Item implements Cloneable {
 			Rarity.RARE, new int[] {750, 1200, 1800, 2300, 2800},
 			Rarity.EPIC, new int[] {1300, 2100, 3400, 4500, 6700, 9500, 11000, 18000, 25000, 31000},
 			Rarity.LEGENDARY, new int[] {2500, 3450, 5200, 7500, 9600, 15000, 27100, 35000, 42000, 56000},
-			Rarity.FABLED, new int[] {5000},
-			Rarity.MYTHICAL, new int[] {12000},
-			Rarity.GODLY, new int[] {20000},
-			Rarity.UNIQUE, new int[] {30000},
+			Rarity.FABLED, new int[] {5000, 9500, 13500, 16000, 21000, 29000, 32000, 39000, 50000, 63000,
+					75000, 88000, 98000, 115000, 130000},
+			Rarity.MYTHICAL, new int[] {12000, 18000, 25000, 46000, 65000},
+			Rarity.GODLY, new int[] {20000, 31000, 45000},
+			Rarity.UNIQUE, new int[] {30000, 50000, 75000, 95000, 135000},
 			Rarity.EVENT, new int[] {500, 700, 1200, 1800, 2300, 3100, 4500, 6100, 7900, 9000, 10000, 12000, 13000, 14000, 16000,
 					19000, 25000, 30000, 37000, 44000, 50000});
 
@@ -126,23 +127,52 @@ public class Item implements Cloneable {
 		return sb.toString();
 	}
 
+	public boolean isMaxed() {
+		return this.starForceLevel == this.starForceMaxLevel;
+	}
+
 	public int getStarForceCost() {
+		/*
+		 * Warning, if item is at max level, return 0 as the upgrade is not possible anymore
+		 */
+		if (isMaxed())
+			return 0;
 		return Item.upgradePrices.get(this.rarity)[this.starForceLevel];
 	}
 
 	public int getStarForceSuccessChance() {
+		/*
+		 * Warning, if item is at max level, return 0 as the upgrade is not possible anymore
+		 */
+		if (isMaxed())
+			return 0;
 		return Item.rates[this.starForceLevel].success();
 	}
 
 	public int getStarForceKeepChance() {
+		/*
+		 * Warning, if item is at max level, return 0 as the upgrade is not possible anymore
+		 */
+		if (isMaxed())
+			return 0;
 		return Item.rates[this.starForceLevel].keep();
 	}
 
 	public int getStarForceFailChance() {
+		/*
+		 * Warning, if item is at max level, return 0 as the upgrade is not possible anymore
+		 */
+		if (isMaxed())
+			return 0;
 		return Item.rates[this.starForceLevel].down();
 	}
 
 	public int getStarForceDestroyChance() {
+		/*
+		 * Warning, if item is at max level, return 0 as the upgrade is not possible anymore
+		 */
+		if (isMaxed())
+			return 0;
 		return Item.rates[this.starForceLevel].boom();
 	}
 

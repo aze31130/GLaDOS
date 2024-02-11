@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import accounts.Account;
@@ -122,37 +123,54 @@ public class ButtonClick extends ListenerAdapter {
 				return;
 			}
 
+			// Retrieve money
+			authorAccount.money -= item.getStarForceCost();
+
 			int randomValue = new SecureRandom().nextInt(0, 101);
 
 			// Check if success
-			if (randomValue < item.getStarForceSuccessChance()) {
-				System.out.println("Success");
+			if (randomValue <= item.getStarForceSuccessChance()) {
 				item.starForceLevel++;
+				event.editMessageEmbeds(BuildEmbed.upgradeSuccessEmbed(item.starForceLevel).build()).queue();
+
+				if (item.isMaxed()) {
+					event.getMessage().editMessageEmbeds(BuildEmbed.successEmbed("Your item has been maxed out !").build())
+							.queueAfter(5, TimeUnit.SECONDS);
+					event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+					return;
+				}
+
+				event.getMessage().editMessageEmbeds(
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(3, TimeUnit.SECONDS);
 				return;
 			}
 
 			// Check if fail (keep)
-			if (randomValue < item.getStarForceSuccessChance() + item.getStarForceKeepChance()) {
-				System.out.println("Keep !");
+			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance()) {
+				event.editMessageEmbeds(BuildEmbed.upgradeKeepEmbed(item.starForceLevel).build()).queue();
+				event.getMessage().editMessageEmbeds(
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(5, TimeUnit.SECONDS);
 				return;
 			}
 
 			// Check if fail (down)
-			if (randomValue < item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()) {
-				System.out.println("Fail !");
+			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()) {
 				item.starForceLevel--;
+				event.editMessageEmbeds(BuildEmbed.upgradeFailEmbed(item.starForceLevel).build()).queue();
+				event.getMessage().editMessageEmbeds(
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(5, TimeUnit.SECONDS);
 				return;
 			}
 
 			// Check if boom
 			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()
 					+ item.getStarForceDestroyChance()) {
-				System.out.println("Boom !");
 				item.broken = true;
+				event.editMessageEmbeds(BuildEmbed.upgradeDestroyEmbed().build()).queue();
+				event.getMessage().editMessageEmbeds(
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(10, TimeUnit.SECONDS);
 				return;
 			}
-
-			return;
 		}
 
 		if (trigger.equals("AcceptTrade") || trigger.equals("RefuseTrade")) {

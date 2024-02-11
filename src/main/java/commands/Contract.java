@@ -3,17 +3,14 @@ package commands;
 import java.util.Arrays;
 import accounts.Permission;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-public class Reroll extends Command {
-	public Reroll() {
+public class Contract extends Command {
+	public Contract() {
 		super(
-				"reroll",
-				"[WIP] Reroll an item quality.",
+				"contract",
+				"[WIP] Trade 5 items of same tier against one random of upper tier.",
 				Permission.NONE,
-				Arrays.asList(
-						new OptionData(OptionType.STRING, "name", "The item name you want to reroll.", true, true)));
+				Arrays.asList());
 	}
 
 	@Override

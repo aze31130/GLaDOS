@@ -48,8 +48,8 @@ public class Upgrade extends Command {
 
 		// Check if the item is upgradable
 		items.Item item = searchingItem.get();
-		if ((item.starForceMaxLevel == 0) || (item.starForceLevel >= item.starForceMaxLevel)) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("This item is not upgradable !").build()).queue();
+		if ((item.starForceMaxLevel == 0) || item.isMaxed()) {
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot upgrade this item !").build()).queue();
 			return;
 		}
 

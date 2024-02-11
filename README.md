@@ -1,4 +1,8 @@
-# GLaDOS
+<div align="center">
+    <img src="https://static.aze.sh/TODO.png"/>
+    <h1>GLaDOS</h1>
+    <h3>A tyrannical Discord bot</h3>
+</div>
 
 ## What is it ?
 
