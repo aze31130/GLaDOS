@@ -2,12 +2,12 @@
     "id": 46,
     "name": "Valentine's Rose",
     "type": "ITEM",
-    "lore": "",
+    "lore": "Legends say each year, a red flower blooms for each person deeply in love, living an unbreakable union. Its petals reminds you of the passion and sweet devotion expressed for someone close.\nAwarded on February 14th, 2024.",
     "rarity": "EVENT",
     "dropChance": 0,
     "starForceMaxLevel": 20,
     "claimable": false,
     "untradable": true,
-    "value": 1,
+    "value": 75000,
     "conditionnalDrop": ["VALENTINE_ITEM"]
 }
