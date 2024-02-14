@@ -6,6 +6,7 @@ import java.util.Random;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
+import items.Rarity;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -55,6 +56,9 @@ public class Give extends Command {
 			try {
 				items.Item i = (items.Item) item.get().clone();
 				i.quality = new Random().nextDouble();
+
+				if (i.rarity.equals(Rarity.EVENT))
+					i.quality = 1.0;
 				target.inventory.add(i);
 
 				event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();

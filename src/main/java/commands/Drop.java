@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import utils.BuildEmbed;
 import utils.ItemUtils;
-import utils.TimeUtils;
 
 public class Drop extends Command {
 	public Drop() {
@@ -39,14 +38,13 @@ public class Drop extends Command {
 		int acquiredMoney = random.nextInt(1001);
 
 		authorAccount.money += acquiredMoney;
-		event.getMessageChannel().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build())
-				.queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build()).queue();
 
-		if (TimeUtils.isSpecialDay()) {
-			// Guaranteeing specific drops on event days
-			// TODO
-			return;
-		}
+		// if (TimeUtils.isSpecialDay()) {
+		// Guaranteeing specific drops on event days
+		// TODO
+		// return;
+		// }
 
 		// Drop item
 		double dropValue = random.nextDouble(glados.itemTotalProb + 1);
