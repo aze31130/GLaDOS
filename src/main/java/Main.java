@@ -18,10 +18,10 @@ public class Main implements Logging {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
 		GLaDOS glados = GLaDOS.getInstance();
 
-		Logging.LOGGER.info("Starting GLaDOS");
+		LOGGER.info("Starting GLaDOS");
 		glados.initialize();
-		Logging.LOGGER.info("Leveling " + glados.leveling);
-		Logging.LOGGER.info("Maximum level " + glados.maxLevel);
+		LOGGER.info("Leveling " + glados.leveling);
+		LOGGER.info("Maximum level " + glados.maxLevel);
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 

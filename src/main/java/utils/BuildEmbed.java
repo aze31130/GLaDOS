@@ -42,8 +42,8 @@ public class BuildEmbed {
 
 	public static EmbedBuilder joinLeaveEmbed(String mention, Boolean joining) {
 		GLaDOS glados = GLaDOS.getInstance();
-		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(Color.CYAN);
+		EmbedBuilder embed = new EmbedBuilder()
+				.setColor(Color.CYAN);
 
 		String message = "";
 		if (joining)
@@ -212,10 +212,11 @@ public class BuildEmbed {
 
 	public static EmbedBuilder itemInfoEmbed(Item i) {
 		GLaDOS glados = GLaDOS.getInstance();
-		EmbedBuilder info = new EmbedBuilder();
-		info.setTitle("[" + i.rarity.name() + "] " + i.name);
-		info.setDescription(i.lore);
-		info.setColor(i.rarity.color);
+		EmbedBuilder info = new EmbedBuilder()
+				.setTitle("[" + i.rarity.name() + "] " + i.name)
+				.setDescription(i.lore)
+				.setColor(i.rarity.color);
+
 		if (i.untradable)
 			info.addField(":no_entry:  Untradable", "Trade banned", false);
 		if (i.starForceMaxLevel > 0)
