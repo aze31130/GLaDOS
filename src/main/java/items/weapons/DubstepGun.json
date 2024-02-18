@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This Jukebox... no.. rocket launcher..hummm just go Brrrr Drrrr Wuuub Bom Bom Bom with it at will",
     "rarity": "EPIC",
-    "dropChance": 500,
+    "dropChance": 400,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

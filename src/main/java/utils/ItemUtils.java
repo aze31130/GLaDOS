@@ -154,6 +154,18 @@ public class ItemUtils implements Logging {
 		return totalDropRate;
 	}
 
+	public static double getRarityTotalWeight(Rarity r) {
+		GLaDOS glados = GLaDOS.getInstance();
+
+		int totalWeight = 0;
+
+		for (Item i : glados.items)
+			if (i.rarity.equals(r))
+				totalWeight += i.dropChance;
+
+		return totalWeight;
+	}
+
 	public static void generateItemChartDropRate() {
 		Rarity allRarity[] = {
 				Rarity.COMMON,
@@ -168,7 +180,7 @@ public class ItemUtils implements Logging {
 		};
 
 		for (Rarity r : allRarity)
-			LOGGER.info(r.name() + " " + getRarityDropRate(r) + "%");
+			LOGGER.info(r.name() + " " + getRarityDropRate(r) + "% Weight: " + getRarityTotalWeight(r));
 	}
 
 	public static void generateItemChartValue() {

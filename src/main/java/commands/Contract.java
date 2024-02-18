@@ -13,16 +13,16 @@ public class Contract extends Command {
 				"[WIP] Trade 5 items of same tier against one random of upper tier.",
 				Permission.NONE,
 				Arrays.asList(
-						new OptionData(OptionType.STRING, "item1", "The 1st item you want to trade", true, true),
-						new OptionData(OptionType.STRING, "item2", "The 2nd item you want to trade", true, true),
-						new OptionData(OptionType.STRING, "item3", "The 3rd item you want to trade", true, true),
-						new OptionData(OptionType.STRING, "item4", "The 4th item you want to trade", true, true),
-						new OptionData(OptionType.STRING, "item5", "The 5th item you want to trade", true, true)));
+						new OptionData(OptionType.STRING, "item1", "The first item you want to trade", true, true),
+						new OptionData(OptionType.STRING, "item2", "The second item you want to trade", true, true),
+						new OptionData(OptionType.STRING, "item3", "The third item you want to trade", true, true),
+						new OptionData(OptionType.STRING, "item4", "The fourth item you want to trade", true, true),
+						new OptionData(OptionType.STRING, "item5", "The fifth item you want to trade", true, true)));
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		// Ensure the user own all 5 items
+		// Ensure the user own all 5 items and all 5 items are differents
 
 		// Compute average item quality
 

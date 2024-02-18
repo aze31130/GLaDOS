@@ -1,0 +1,13 @@
+{
+    "id": 96,
+    "name": "Precursor Orb",
+    "type": "ITEM",
+    "lore": "This orb... err.. currency... or easter egg ? No one know the purpose of this object but it surely is very old.",
+    "rarity": "UNUSUAL",
+    "dropChance": 3750,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 450,
+    "conditionnalDrop": []
+}

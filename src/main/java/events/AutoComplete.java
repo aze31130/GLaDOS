@@ -28,7 +28,7 @@ public class AutoComplete extends ListenerAdapter {
 			return;
 		}
 
-		if (eventName.equals("upgrade") || eventName.equals("sell")) {
+		if (eventName.equals("upgrade") || eventName.equals("sell") || eventName.equals("contract")) {
 			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
 			List<Command.Choice> options = authorAccount.inventory.stream()

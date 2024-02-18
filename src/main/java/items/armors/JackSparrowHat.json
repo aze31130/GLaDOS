@@ -1,0 +1,13 @@
+{
+    "id": 106,
+    "name": "Jack Sparrow's Three-Cornered hat",
+    "type": "HELMET",
+    "lore": "This faded leather tricorn hat was once owned by Captain Jack Sparrow during pirate era. This legendary hat experienced unbelievable adventures across the seven seas.",
+    "rarity": "LEGENDARY",
+    "dropChance": 166,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 40000,
+    "conditionnalDrop": []
+}

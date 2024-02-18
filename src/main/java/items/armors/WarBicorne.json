@@ -4,7 +4,7 @@
     "type": "HELMET",
     "lore": "",
     "rarity": "FABLED",
-    "dropChance": 150,
+    "dropChance": 120,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,

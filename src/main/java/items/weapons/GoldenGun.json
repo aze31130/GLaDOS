@@ -1,0 +1,13 @@
+{
+    "id": 94,
+    "name": "Golden Gun",
+    "type": "GUN",
+    "lore": "Is that really a gun ? It's hard to tell... This spy gadget can either be used to shoot someone or light a cigarette.",
+    "rarity": "EPIC",
+    "dropChance": 400,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 80000,
+    "conditionnalDrop": []
+}

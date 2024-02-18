@@ -1,0 +1,13 @@
+{
+    "id": 109,
+    "name": "Code of the Pirate Brethren",
+    "type": "ITEM",
+    "lore": "Made up of the great Pirate Lords, the code of the Order of the Brethren (commonly called Pirate's code), is a universal code of conduct among pirates.",
+    "rarity": "EPIC",
+    "dropChance": 400,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 2000,
+    "conditionnalDrop": []
+}

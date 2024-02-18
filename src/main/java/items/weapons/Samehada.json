@@ -1,0 +1,13 @@
+{
+    "id": 102,
+    "name": "Samehada",
+    "type": "SWORD",
+    "lore": "This powerful shark made sword is able to absorb chakra from an opponent, making it incredibly dangerous to fight against. Use it wisely.",
+    "rarity": "LEGENDARY",
+    "dropChance": 166,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 22000,
+    "conditionnalDrop": []
+}

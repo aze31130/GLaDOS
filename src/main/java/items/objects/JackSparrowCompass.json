@@ -1,0 +1,13 @@
+{
+    "id": 107,
+    "name": "Jack Sparrow's Compass",
+    "type": "ITEM",
+    "lore": "This compass does not point north. It points to the thing you want most in the world.",
+    "rarity": "LEGENDARY",
+    "dropChance": 166,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 50000,
+    "conditionnalDrop": []
+}

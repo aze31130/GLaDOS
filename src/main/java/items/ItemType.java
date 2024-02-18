@@ -17,6 +17,7 @@ public enum ItemType {
 	POTION(":tropical_drink:"),
 	WAND(":magic_wand:"),
 	SWORD(":dagger:"),
+	NINJA(":knife:"),
 	SPEAR(""),
 	GUN(":gun:"),
 	SCROLL(":scroll:");

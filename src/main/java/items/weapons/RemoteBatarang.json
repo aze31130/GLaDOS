@@ -1,0 +1,13 @@
+{
+    "id": 98,
+    "name": "Remote Control Batarang",
+    "type": "NINJA",
+    "lore": "This gadget has been crafted and used by the legendary dark knight. This thing can be remotely controlled but should never be used as a boomerang",
+    "rarity": "RARE",
+    "dropChance": 2000,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 850,
+    "conditionnalDrop": []
+}

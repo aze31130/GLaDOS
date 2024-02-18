@@ -1,0 +1,13 @@
+{
+    "id": 112,
+    "name": "Ray Gun",
+    "type": "ITEM",
+    "lore": "This strange device fires explosive lasers that explodes zombies legs. Such wonder weapon should be use cautiously.",
+    "rarity": "EPIC",
+    "dropChance": 400,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 5000,
+    "conditionnalDrop": []
+}

@@ -1,0 +1,13 @@
+{
+    "id": 110,
+    "name": "Crowbar",
+    "type": "ITEM",
+    "lore": "This melee weapon is truely a piece of trusty hardware.",
+    "rarity": "COMMON",
+    "dropChance": 2758,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 50,
+    "conditionnalDrop": []
+}

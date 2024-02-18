@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "You detached this page from a tree and clearly read 'ALWAYS WATCHES NO EYES' hugely written. How scary...",
     "rarity": "EPIC",
-    "dropChance": 500,
+    "dropChance": 400,
     "starForceMaxLevel": 5,
     "claimable": false,
     "untradable": false,

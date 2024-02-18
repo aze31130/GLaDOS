@@ -1,0 +1,13 @@
+{
+    "id": 111,
+    "name": "Needler",
+    "type": "GUN",
+    "lore": "This single-handed fully-automatic gun fires violet needles that only detonate when embedded in living tissue.",
+    "rarity": "RARE",
+    "dropChance": 2000,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 1200,
+    "conditionnalDrop": []
+}

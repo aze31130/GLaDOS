@@ -1,0 +1,13 @@
+{
+    "id": 108,
+    "name": "Davy Jones's pipe",
+    "type": "ITEM",
+    "lore": "Carved from whalebone, surrounded by miniature crab legs and its stem made from ocean's floor silved, this pipe allows you to smoke even underwater.",
+    "rarity": "EPIC",
+    "dropChance": 400,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 3000,
+    "conditionnalDrop": []
+}

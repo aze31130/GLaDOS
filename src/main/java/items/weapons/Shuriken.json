@@ -1,0 +1,13 @@
+{
+    "id": 100,
+    "name": "Shuriken",
+    "type": "NINJA",
+    "lore": "This very small throwing star is very sharp. Ideal for long-range attacks.",
+    "rarity": "COMMON",
+    "dropChance": 2758,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 95,
+    "conditionnalDrop": []
+}

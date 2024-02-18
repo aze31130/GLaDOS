@@ -1,0 +1,13 @@
+{
+    "id": 97,
+    "name": "Master Sword",
+    "type": "SWORD",
+    "lore": "Only a true hero with pure heart and strong body is capable of wielding this sacred blade. This sword is capable of destroying magical barriers and breaking powerful curses.",
+    "rarity": "LEGENDARY",
+    "dropChance": 166,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 95000,
+    "conditionnalDrop": []
+}

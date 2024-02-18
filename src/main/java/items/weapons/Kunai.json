@@ -1,0 +1,13 @@
+{
+    "id": 99,
+    "name": "Kunai",
+    "type": "NINJA",
+    "lore": "A basic ninja weapon, use it as a knife or throw it as fast as possible.",
+    "rarity": "COMMON",
+    "dropChance": 2758,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 120,
+    "conditionnalDrop": []
+}
