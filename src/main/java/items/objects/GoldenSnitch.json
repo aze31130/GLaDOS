@@ -1,0 +1,13 @@
+{
+    "id": 114,
+    "name": "Golden Snitch",
+    "type": "ITEM",
+    "lore": "This flying snitch is very hard to catch. Its speed and size makes it almost impossible to see and catch.",
+    "rarity": "RARE",
+    "dropChance": 1000,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 950,
+    "conditionnalDrop": []
+}

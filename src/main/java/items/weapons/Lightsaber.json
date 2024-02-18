@@ -1,0 +1,13 @@
+{
+    "id": 113,
+    "name": "Lightsaber",
+    "type": "SWORD",
+    "lore": "This energy sword use a luminescent laser to instantly cut any piece of metal. The elegant blue plasma emitted can also redirect and block incoming lasers.",
+    "rarity": "EPIC",
+    "dropChance": 200,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 6000,
+    "conditionnalDrop": []
+}

@@ -1,0 +1,13 @@
+{
+    "id": 118,
+    "name": "Yumi's Tessen Fan",
+    "type": "FAN",
+    "lore": "This virtual Japanese war fan is very accurate at long range and capable to reach enemy behind obstables.",
+    "rarity": "RARE",
+    "dropChance": 1500,
+    "starForceMaxLevel": 5,
+    "claimable": false,
+    "untradable": false,
+    "value": 950,
+    "conditionnalDrop": []
+}

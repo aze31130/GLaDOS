@@ -1,0 +1,13 @@
+{
+    "id": 119,
+    "name": "Strange Spinner",
+    "type": "ITEM",
+    "lore": "This black spinner seems to magically spin forever... Are we living a dream ?",
+    "rarity": "UNUSUAL",
+    "dropChance": 2000,
+    "starForceMaxLevel": 3,
+    "claimable": false,
+    "untradable": false,
+    "value": 300,
+    "conditionnalDrop": []
+}

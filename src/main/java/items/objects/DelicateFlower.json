@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "A flower from a far away land, so fragile it could break at the faintest damage.",
     "rarity": "UNUSUAL",
-    "dropChance": 3750,
+    "dropChance": 2750,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,

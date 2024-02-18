@@ -1,0 +1,13 @@
+{
+    "id": 120,
+    "name": "The One Ring",
+    "type": "RING",
+    "lore": "This powerful artifact has been forged in the deepest cave of Mount Doom",
+    "rarity": "LEGENDARY",
+    "dropChance": 150,
+    "starForceMaxLevel": 15,
+    "claimable": false,
+    "untradable": false,
+    "value": 300,
+    "conditionnalDrop": []
+}

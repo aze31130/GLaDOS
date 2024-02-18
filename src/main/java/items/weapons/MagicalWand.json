@@ -1,0 +1,13 @@
+{
+    "id": 115,
+    "name": "Wodden Magical Wand",
+    "type": "ITEM",
+    "lore": "This magical instrument has been sold by Ollivander family, a perfect tool to learn magic and sorcery.",
+    "rarity": "UNUSUAL",
+    "dropChance": 2000,
+    "starForceMaxLevel": 3,
+    "claimable": false,
+    "untradable": false,
+    "value": 420,
+    "conditionnalDrop": []
+}

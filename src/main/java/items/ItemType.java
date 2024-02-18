@@ -20,7 +20,8 @@ public enum ItemType {
 	NINJA(":knife:"),
 	SPEAR(""),
 	GUN(":gun:"),
-	SCROLL(":scroll:");
+	SCROLL(":scroll:"),
+	FAN(":folding_hand_fan:");
 
 	public final String emote;
 

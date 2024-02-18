@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "",
     "rarity": "RARE",
-    "dropChance": 2000,
+    "dropChance": 1500,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,
