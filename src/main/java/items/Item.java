@@ -71,9 +71,9 @@ public class Item implements Cloneable {
 
 	private static final Map<Rarity, int[]> upgradePrices = Map.of(
 			Rarity.UNUSUAL, new int[] {400, 650, 800},
-			Rarity.RARE, new int[] {750, 1200, 1800, 2300, 2800},
-			Rarity.EPIC, new int[] {1300, 2100, 3400, 4500, 6700, 9500, 11000, 18000, 25000, 31000},
-			Rarity.LEGENDARY, new int[] {2500, 3450, 5200, 7500, 9600, 15000, 27100, 35000, 42000, 56000},
+			Rarity.RARE, new int[] {750, 1200, 1800, 2300, 2850},
+			Rarity.EPIC, new int[] {1300, 1900, 2400, 3100, 4500, 5500, 6700, 8500, 10200, 12100},
+			Rarity.LEGENDARY, new int[] {2100, 3150, 4250, 5600, 7500, 9500, 17100, 25000, 32000, 36000},
 			Rarity.FABLED, new int[] {5000, 9500, 13500, 16000, 21000, 29000, 32000, 39000, 50000, 63000,
 					75000, 88000, 98000, 115000, 130000},
 			Rarity.MYTHICAL, new int[] {12000, 18000, 25000, 46000, 65000},
