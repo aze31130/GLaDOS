@@ -3,9 +3,13 @@ package utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -111,5 +115,12 @@ public class FileUtils {
 		} catch (IOException e) {
 			System.err.println("Cannot write to file " + filename + "! Exiting");
 		}
+	}
+
+	public static String sha256sum(String path) throws IOException, NoSuchAlgorithmException {
+		byte[] data = Files.readAllBytes(Path.of(path));
+		byte[] hash = MessageDigest.getInstance("SHA-256").digest(data);
+
+		return new BigInteger(1, hash).toString(16);
 	}
 }

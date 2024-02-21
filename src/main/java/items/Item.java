@@ -177,13 +177,12 @@ public class Item implements Cloneable {
 	}
 
 	public JSONObject toJson() {
-		JSONObject item = new JSONObject();
-
-		item.put("id", this.id);
-		item.put("name", this.name);
-		item.put("starForceLevel", this.starForceLevel);
-		item.put("broken", this.broken);
-		item.put("quality", this.quality);
+		JSONObject item = new JSONObject()
+				.put("id", this.id)
+				.put("name", this.name)
+				.put("starForceLevel", this.starForceLevel)
+				.put("broken", this.broken)
+				.put("quality", this.quality);
 
 		return item;
 	}

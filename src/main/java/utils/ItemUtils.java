@@ -30,6 +30,8 @@ public class ItemUtils implements Logging {
 	 */
 	public static boolean isTradePossible(Account author, Account target, String srcItem, int srcMoney, String dstItem,
 			int dstMoney) {
+		// TODO Check if item is untradable
+
 		// Check if the author is the target
 		if (author.user.getId().equals(target.user.getId()))
 			return false;

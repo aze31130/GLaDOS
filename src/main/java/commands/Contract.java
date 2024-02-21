@@ -22,6 +22,11 @@ public class Contract extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
+		/*
+		 * Rules of a contract: 5 distintcs items of same tier are destroyed and one random item of upper
+		 * tier is given to member. The quality of this new item is the average of all input item and the
+		 * starforce level is the one of the lowest of 5 input item.
+		 */
 		// Ensure the user own all 5 items and all 5 items are differents
 
 		// Compute average item quality
