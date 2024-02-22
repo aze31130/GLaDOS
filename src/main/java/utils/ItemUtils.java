@@ -67,6 +67,46 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
+	 * This function returns a random item based on all item weight
+	 */
+	public static Item getRandomItem(List<Item> itemList) {
+		GLaDOS glados = GLaDOS.getInstance();
+		SecureRandom random = new SecureRandom();
+		double dropValue = random.nextDouble(glados.itemTotalProb + 1);
+
+		long cumulativeProbability = 0;
+		Item droppedItem = null;
+
+		// if (TimeUtils.isSpecialDay()) {
+		// Guaranteeing specific drops on event days
+		// TODO
+		// return;
+		// }
+
+		for (Item item : glados.items) {
+			cumulativeProbability += item.dropChance;
+			if (dropValue <= cumulativeProbability) {
+				// Check if drop requirements are fulfilled
+				if (ItemUtils.checkDropConditions(item)) {
+					try {
+						droppedItem = (Item) item.clone();
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
+
+		/*
+		 * TODO Very rare edge case: if the last item has been skipped due to unsuffisient drop conditions.
+		 * In this case, we simply send an error message and allow the user to drop again.
+		 */
+
+		return droppedItem;
+	}
+
+	/*
 	 * This function ensures that a given item is owned by a user
 	 */
 	public static boolean userOwnItem(Account account, String itemFQName) {

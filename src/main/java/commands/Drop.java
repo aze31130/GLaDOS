@@ -27,8 +27,8 @@ public class Drop extends Command {
 		Account authorAccount = glados.getAccount(author);
 
 		if (!authorAccount.canDrop) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You already dropped today ! Come back tomorrow :D").build())
-					.queue();
+			event.getHook().sendMessageEmbeds(
+					BuildEmbed.errorEmbed("You already dropped today ! Come back tomorrow for more.").build()).queue();
 			return;
 		}
 
@@ -40,42 +40,8 @@ public class Drop extends Command {
 		authorAccount.money += acquiredMoney;
 		event.getHook().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build()).queue();
 
-		// if (TimeUtils.isSpecialDay()) {
-		// Guaranteeing specific drops on event days
-		// TODO
-		// return;
-		// }
-
 		// Drop item
-		double dropValue = random.nextDouble(glados.itemTotalProb + 1);
-		long cumulativeProbability = 0;
-		Item droppedItem = null;
-
-		for (Item item : glados.items) {
-			cumulativeProbability += item.dropChance;
-			if (dropValue <= cumulativeProbability) {
-				// Check if drop requirements are fulfilled
-				if (ItemUtils.checkDropConditions(item)) {
-					try {
-						droppedItem = (Item) item.clone();
-					} catch (CloneNotSupportedException e) {
-						e.printStackTrace();
-					}
-					break;
-				}
-			}
-		}
-
-		/*
-		 * Very rare edge case: if the last item has been skipped due to unsuffisient drop conditions. In
-		 * this case, we simply send an error message and allow the user to drop again.
-		 */
-		if (droppedItem == null) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(
-					"An error occured during item generation. Your daily record has not been updated: you can drop again normaly right now.")
-					.build()).queue();
-			return;
-		}
+		Item droppedItem = ItemUtils.getRandomItem(glados.items);
 
 		// Asign random quality
 		droppedItem.quality = random.nextDouble();
