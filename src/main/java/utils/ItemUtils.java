@@ -67,7 +67,8 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
-	 * This function returns a random item based on all item weight
+	 * This function returns a random item based on all item weight. The input list is read only and the
+	 * new object is cloned from the given list.
 	 */
 	public static Item getRandomItem(List<Item> itemList) {
 		GLaDOS glados = GLaDOS.getInstance();

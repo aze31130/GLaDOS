@@ -74,7 +74,7 @@ public class BuildEmbed {
 	public static EmbedBuilder upgradeSuccessEmbed(int level) {
 		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder embed = new EmbedBuilder()
-				.setTitle("Success")
+				.setTitle(":sparkles: Success")
 				.setDescription("Upgraded to  " + level + " :star:")
 				.setImage("https://" + glados.cdn + "/SUCCESS.png")
 				.setColor(Color.GREEN);
@@ -117,8 +117,6 @@ public class BuildEmbed {
 				.setDescription(account.user.getAsMention())
 				.setColor(Color.GREEN)
 				.setThumbnail(account.user.getAvatarUrl())
-				.addField(":sparkles: - Level", Integer.toString(account.level), true)
-				.addField(":green_book: - Experience", Long.toString(account.experience), true)
 				.addField(":shield: - Trust Factor", "WIP", true)
 				.addField(":wave: - Fame", "WIP", true)
 				.addField(":clock: :timer: - Joined Discord", account.user.getTimeCreated().toString(), true)
@@ -281,7 +279,6 @@ public class BuildEmbed {
 	public static EmbedBuilder helpEmbed() {
 		EmbedBuilder result = new EmbedBuilder()
 				.setTitle("Help page")
-				.setDescription("Showing help page")
 				.setColor(Color.WHITE);
 
 		return result;

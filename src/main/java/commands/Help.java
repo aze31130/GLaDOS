@@ -28,9 +28,13 @@ public class Help extends Command {
 		GLaDOS g = GLaDOS.getInstance();
 		EmbedBuilder help = BuildEmbed.helpEmbed();
 
+		Tag commandTag = Tag.valueOf(event.getOption("category").getAsString().toUpperCase());
+
+		help.setDescription("Showing help page of " + commandTag.toString().toLowerCase() + " category.");
+
 		// Only display public commands
 		for (Command c : g.commands)
-			if (c.permissionLevel.equals(Permission.NONE))
+			if (c.tag.equals(commandTag))
 				help.addField(c.name, c.description, true);
 
 		event.getHook().sendMessageEmbeds(help.build()).queue();

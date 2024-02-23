@@ -271,6 +271,7 @@ public class GLaDOS implements Logging {
 			URL fileUrl = new URL(attachment.getUrl());
 			Files.copy(fileUrl.openStream(), Paths.get("accounts.json"), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
+			LOGGER.severe(e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -364,7 +365,7 @@ public class GLaDOS implements Logging {
 
 			reader.close();
 		} catch (IOException | InterruptedException exception) {
-			exception.printStackTrace();
+			LOGGER.severe("Could not get version");
 		}
 	}
 }
