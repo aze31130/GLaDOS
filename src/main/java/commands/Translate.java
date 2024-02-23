@@ -30,6 +30,7 @@ public class Translate extends Command {
 				"translate",
 				"Translates the latests messages in a text channel",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "amount", "Amount of message you want to translate.")));
 	}

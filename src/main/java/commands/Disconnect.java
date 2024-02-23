@@ -12,6 +12,7 @@ public class Disconnect extends Command {
 				"disconnect",
 				"Disconnects GLaDOS from a vocal channel",
 				Permission.MODERATOR,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

@@ -1,7 +1,11 @@
 package commands;
 
 import java.util.Arrays;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import utils.BuildEmbed;
 import accounts.Permission;
 import glados.GLaDOS;
 
@@ -11,19 +15,24 @@ public class Help extends Command {
 				"help",
 				"Shows an help page listing each commands",
 				Permission.NONE,
-				Arrays.asList());
+				Tag.SYSTEM,
+				Arrays.asList(
+						new OptionData(OptionType.STRING, "category", "The category you want to be helped with", true)
+								.addChoice("rpg", "rpg")
+								.addChoice("maths", "maths")
+								.addChoice("system", "system")));
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
 		GLaDOS g = GLaDOS.getInstance();
-		StringBuilder sb = new StringBuilder();
+		EmbedBuilder help = BuildEmbed.helpEmbed();
 
-		sb.append("Command list:\n");
-
+		// Only display public commands
 		for (Command c : g.commands)
-			sb.append(c.name + " " + c.description + " " + c.permissionLevel.toString().toLowerCase());
+			if (c.permissionLevel.equals(Permission.NONE))
+				help.addField(c.name, c.description, true);
 
-		event.getHook().sendMessage(sb.toString()).queue();
+		event.getHook().sendMessageEmbeds(help.build()).queue();
 	}
 }

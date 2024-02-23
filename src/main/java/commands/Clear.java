@@ -16,6 +16,7 @@ public class Clear extends Command {
 				"clear",
 				"Clears the latests messages in a channel. Moderator privileges required",
 				Permission.MODERATOR,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "amount", "Amount of message you want to delete", true)));
 	}

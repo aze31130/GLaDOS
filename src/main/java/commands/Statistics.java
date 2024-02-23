@@ -12,6 +12,7 @@ public class Statistics extends Command {
 				"statistics",
 				"Generates statistics of the given channel.",
 				Permission.MODERATOR,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.CHANNEL, "target", "The channel you want to inspect", true)));
 	}

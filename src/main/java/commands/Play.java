@@ -15,6 +15,7 @@ public class Play extends Command {
 				"play",
 				"Play a youtube music in channel [WIP]",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

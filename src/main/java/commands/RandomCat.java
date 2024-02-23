@@ -21,6 +21,7 @@ public class RandomCat extends Command {
 				"random-cat",
 				"Displays a cat picture",
 				Permission.NONE,
+				Tag.FUN,
 				Arrays.asList());
 	}
 

@@ -14,6 +14,7 @@ public class Ping extends Command {
 				"ping",
 				"Display ping between Discord gateway and glados",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

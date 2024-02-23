@@ -15,6 +15,7 @@ public class Profile extends Command {
 				"profile",
 				"Show a user profile",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList());
 	}
 

@@ -14,6 +14,7 @@ public class Vote extends Command {
 				"vote",
 				"Submit a vote, for a feature request or any other subject you want",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

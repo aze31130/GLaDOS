@@ -20,6 +20,7 @@ public class Item extends Command {
 				"item",
 				"Get information about an item",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "name", "The item name you're searching for.", false, true)));
 	}

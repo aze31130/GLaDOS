@@ -15,6 +15,7 @@ public class Status extends Command {
 				"activity",
 				"Updates GLaDOS's activity",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type", "Can be [listening, playing, watching, streaming]", true)
 								.addChoice("listening", "listening")

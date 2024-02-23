@@ -19,6 +19,7 @@ public class Give extends Command {
 				"give",
 				"Gives an item to someone. Owner privileges required.",
 				Permission.OWNER,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The user you want to give an item", false),
 						new OptionData(OptionType.STRING, "item", "The item you want to give", false, true),
@@ -61,7 +62,7 @@ public class Give extends Command {
 					i.quality = 1.0;
 				target.inventory.add(i);
 
-				event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i).build()).queue();
+				event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i, glados.cdn).build()).queue();
 			} catch (CloneNotSupportedException e) {
 				e.printStackTrace();
 			}

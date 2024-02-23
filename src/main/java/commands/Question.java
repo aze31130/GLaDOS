@@ -30,6 +30,7 @@ public class Question extends Command {
 				"question",
 				"Challenges your general knowledge",
 				Permission.NONE,
+				Tag.FUN,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "difficulty", "Can be [easy, normal, hard]. Default is random")
 								.addChoice("easy", "easy")

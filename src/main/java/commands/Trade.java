@@ -22,6 +22,7 @@ public class Trade extends Command {
 				"trade",
 				"Request a trade with another user.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The target of your trade offer", true),
 						new OptionData(OptionType.STRING, "srcitem", "The item you want to give", false, true),

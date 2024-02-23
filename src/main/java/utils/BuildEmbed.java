@@ -72,33 +72,41 @@ public class BuildEmbed {
 	}
 
 	public static EmbedBuilder upgradeSuccessEmbed(int level) {
+		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Success")
 				.setDescription("Upgraded to  " + level + " :star:")
+				.setImage("https://" + glados.cdn + "/SUCCESS.png")
 				.setColor(Color.GREEN);
 		return embed;
 	}
 
 	public static EmbedBuilder upgradeKeepEmbed(int level) {
+		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Failed ! (Keep)")
 				.setDescription("Keep " + level + " :star:")
+				.setImage("https://" + glados.cdn + "/FAIL1.png")
 				.setColor(Color.ORANGE);
 		return embed;
 	}
 
 	public static EmbedBuilder upgradeFailEmbed(int level) {
+		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Failed ! (Down)")
 				.setDescription("Downgraded to " + level + " :star:")
+				.setImage("https://" + glados.cdn + "/FAIL2.png")
 				.setColor(Color.RED);
 		return embed;
 	}
 
 	public static EmbedBuilder upgradeDestroyEmbed() {
+		GLaDOS glados = GLaDOS.getInstance();
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Destroyed !")
 				.setDescription("The item is now broken an not upgradable anymore !")
+				.setImage("https://" + glados.cdn + "/DESTROYED.png")
 				.setColor(Color.BLACK);
 		return embed;
 	}
@@ -191,10 +199,11 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder itemDropEmbed(User dropper, Item item) {
+	public static EmbedBuilder itemDropEmbed(User dropper, Item item, String cdn) {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("You got:")
 				.setAuthor(dropper.getName(), dropper.getAvatarUrl(), dropper.getAvatarUrl())
+				.setImage("https://" + cdn + "/" + item.id + ".png")
 				.setColor(item.rarity.color)
 				.setDescription("[**" + item.rarity.name().toLowerCase() + "**] " + item.getFQName())
 				.setTimestamp(Instant.now());
@@ -215,6 +224,7 @@ public class BuildEmbed {
 		EmbedBuilder info = new EmbedBuilder()
 				.setTitle("[" + i.rarity.name() + "] " + i.name)
 				.setDescription(i.lore)
+				.setImage("https://" + glados.cdn + "/" + i.id + ".png")
 				.setColor(i.rarity.color);
 
 		if (i.untradable)
@@ -266,5 +276,14 @@ public class BuildEmbed {
 				.setColor(Color.ORANGE)
 				.setTimestamp(Instant.now());
 		return upgrade;
+	}
+
+	public static EmbedBuilder helpEmbed() {
+		EmbedBuilder result = new EmbedBuilder()
+				.setTitle("Help page")
+				.setDescription("Showing help page")
+				.setColor(Color.WHITE);
+
+		return result;
 	}
 }

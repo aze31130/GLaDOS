@@ -12,6 +12,7 @@ public class Shutdown extends Command implements Logging {
 				"shutdown",
 				"Gracely Shutdown GLaDOS. Moderator privileges required.",
 				Permission.MODERATOR,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

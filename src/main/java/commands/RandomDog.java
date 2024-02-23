@@ -16,6 +16,7 @@ public class RandomDog extends Command {
 				"random-dog",
 				"Display a dog picture",
 				Permission.NONE,
+				Tag.FUN,
 				Arrays.asList());
 	}
 

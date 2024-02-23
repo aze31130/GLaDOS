@@ -15,6 +15,7 @@ public class Role extends Command {
 				"role",
 				"Generate buttons for members to clic on.",
 				Permission.MODERATOR,
+				Tag.SYSTEM,
 				Arrays.asList(
 						new OptionData(OptionType.MENTIONABLE, "role", "Generates the join/leave button for the given role.",
 								true)));

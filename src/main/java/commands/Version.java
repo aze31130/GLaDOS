@@ -16,6 +16,7 @@ public class Version extends Command {
 				"version",
 				"Displays version alongside others indicators",
 				Permission.NONE,
+				Tag.SYSTEM,
 				Arrays.asList());
 	}
 

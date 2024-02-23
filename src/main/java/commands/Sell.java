@@ -17,6 +17,7 @@ public class Sell extends Command {
 				"sell",
 				"Sells an item.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "item", "The item you want to sell", true, true)));
 	}

@@ -17,6 +17,7 @@ public class Idea extends Command {
 				"what-should-i-do",
 				"Use it when you do not know what to do",
 				Permission.NONE,
+				Tag.FUN,
 				Arrays.asList());
 	}
 

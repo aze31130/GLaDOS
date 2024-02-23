@@ -17,6 +17,7 @@ public class CheGuevara extends Command {
 				"che-guevara",
 				"Generate a random fact about Che-Guevara",
 				Permission.NONE,
+				Tag.FUN,
 				Arrays.asList());
 	}
 

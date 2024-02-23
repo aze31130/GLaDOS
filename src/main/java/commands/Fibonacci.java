@@ -19,6 +19,7 @@ public class Fibonacci extends Command {
 				"fibonacci",
 				"Computes given fibonacci number",
 				Permission.NONE,
+				Tag.MATHS,
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute", true)));
 	}

@@ -12,6 +12,7 @@ public class Contract extends Command {
 				"contract",
 				"[WIP] Trade 5 items of same tier against one random of upper tier.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "item1", "The first item you want to trade", true, true),
 						new OptionData(OptionType.STRING, "item2", "The second item you want to trade", true, true),

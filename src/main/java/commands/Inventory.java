@@ -23,6 +23,7 @@ public class Inventory extends Command {
 				"inventory",
 				"Shows your inventory.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "page", "The inventory page you want to open")));
 	}

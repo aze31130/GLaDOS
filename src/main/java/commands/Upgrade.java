@@ -21,6 +21,7 @@ public class Upgrade extends Command {
 				"upgrade",
 				"Upgrade an item from your inventory.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList(new OptionData(OptionType.STRING, "name", "The item full qualified name you want to upgrade.", true,
 						true)));
 	}

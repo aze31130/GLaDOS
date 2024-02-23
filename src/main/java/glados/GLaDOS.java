@@ -35,7 +35,7 @@ import utils.Logging;
 
 public class GLaDOS implements Logging {
 	private static volatile GLaDOS instance = null;
-	public String version, token;
+	public String version, token, cdn;
 
 	// Internal settings
 	public boolean leveling, checkPrivateMessages, metricLogging;
@@ -118,6 +118,8 @@ public class GLaDOS implements Logging {
 			this.leveling = json.getBoolean("leveling");
 			this.metricLogging = json.getBoolean("metricLogging");
 			this.checkPrivateMessages = json.getBoolean("checkPrivateMessages");
+
+			this.cdn = json.getString("cdn");
 
 			this.guildId = json.getString("guildId");
 			this.ownerId = json.getString("ownerId");

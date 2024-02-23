@@ -16,6 +16,7 @@ public class Checksum extends Command {
 				"checksum",
 				"Compute the checksum of string input.",
 				Permission.NONE,
+				Tag.MATHS,
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "algorithm", "The algorithm type", true)
 								.addChoice("md2", "md2")

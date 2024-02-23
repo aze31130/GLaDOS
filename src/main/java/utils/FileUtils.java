@@ -30,6 +30,7 @@ public class FileUtils {
 
 		defaultConfig.put("metricLogging", true);
 		defaultConfig.put("checkPrivateMessages", false);
+		defaultConfig.put("cdn", "");
 		defaultConfig.put("guildId", "");
 		defaultConfig.put("ownerId", "");
 		defaultConfig.put("channel_general", "");

@@ -17,6 +17,7 @@ public class Drop extends Command {
 				"drop",
 				"Drops you a random item.",
 				Permission.NONE,
+				Tag.RPG,
 				Arrays.asList());
 	}
 
@@ -34,7 +35,6 @@ public class Drop extends Command {
 
 		SecureRandom random = new SecureRandom();
 
-		// Get random amount of money [1 - 1000]
 		int acquiredMoney = random.nextInt(100, 1001);
 
 		authorAccount.money += acquiredMoney;
@@ -52,7 +52,7 @@ public class Drop extends Command {
 			droppedItem.quality = 0.0;
 
 		authorAccount.inventory.add(droppedItem);
-		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem).build()).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem, glados.cdn).build()).queue();
 		authorAccount.canDrop = false;
 	}
 }
