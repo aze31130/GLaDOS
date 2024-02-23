@@ -13,12 +13,8 @@ public class Account {
 	public String id;
 	public User user;
 
-	public int level;
-	public long experience;
-	public long totalExperience;
-
+	public long trustFactorScore;
 	public TrustFactor trustLevel;
-	public Permission permission;
 
 	public List<Item> inventory;
 	public List<Achievement> achievements;
@@ -26,16 +22,12 @@ public class Account {
 	public boolean canDrop;
 	public long money;
 
-	public Account(String id, User user, int level, long experience, long totalExperience, TrustFactor trustLevel,
-			Permission permission,
-			List<Item> inventory, boolean canDrop, long money) {
+	public Account(String id, User user, long trustFactorScore, TrustFactor trustLevel, List<Item> inventory, boolean canDrop,
+			long money) {
 		this.id = id;
 		this.user = user;
-		this.level = level;
-		this.experience = experience;
-		this.totalExperience = totalExperience;
+		this.trustFactorScore = trustFactorScore;
 		this.trustLevel = trustLevel;
-		this.permission = permission;
 		this.inventory = inventory;
 		this.achievements = new ArrayList<>();
 		this.canDrop = canDrop;
@@ -69,14 +61,10 @@ public class Account {
 		result.put("joined", this.user.getTimeCreated().toString());
 		result.put("inventory", items);
 		result.put("achievements", achievements);
-		result.put("level", this.level);
-		result.put("experience", this.experience);
-		result.put("totalExperience", this.totalExperience);
+		result.put("trustFactorScore", this.trustFactorScore);
 		result.put("trustFactor", this.trustLevel);
-		result.put("permission", this.permission);
 		result.put("canDrop", this.canDrop);
 		result.put("money", this.money);
-		result.put("version", 1);
 		return result;
 	}
 }

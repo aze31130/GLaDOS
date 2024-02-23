@@ -153,7 +153,7 @@ public class GLaDOS implements Logging {
 			this.translationCooldown = LocalDateTime.now();
 
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOGGER.severe(e.getMessage());
 			System.exit(1);
 		}
 	}
@@ -311,11 +311,8 @@ public class GLaDOS implements Logging {
 			Account a = new Account(
 					jsonAccount.getString("id"),
 					jda.getUserById(jsonAccount.getString("id")),
-					jsonAccount.getInt("level"),
-					jsonAccount.getInt("experience"),
-					jsonAccount.getInt("totalExperience"),
+					jsonAccount.getLong("trustFactorScore"),
 					jsonAccount.getEnum(TrustFactor.class, "trustFactor"),
-					jsonAccount.getEnum(Permission.class, "permission"),
 					userInventory,
 					jsonAccount.getBoolean("canDrop"),
 					jsonAccount.getLong("money"));
@@ -335,7 +332,7 @@ public class GLaDOS implements Logging {
 
 		// Create the account if not exist
 		if (result == null) {
-			result = new Account(u.getId(), u, 1, 0, 0, TrustFactor.UNTRUSTED, Permission.NONE, new ArrayList<Item>(), true, 0);
+			result = new Account(u.getId(), u, 0, TrustFactor.UNTRUSTED, new ArrayList<Item>(), true, 0);
 			this.accounts.add(result);
 		}
 
@@ -364,8 +361,9 @@ public class GLaDOS implements Logging {
 			this.version = reader.readLine();
 
 			reader.close();
-		} catch (IOException | InterruptedException exception) {
+		} catch (IOException | InterruptedException e) {
 			LOGGER.severe("Could not get version");
+			LOGGER.severe(e.getMessage());
 		}
 	}
 }
