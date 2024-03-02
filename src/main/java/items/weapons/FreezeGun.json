@@ -1,0 +1,13 @@
+{
+    "id": 121,
+    "name": "Freeze Gun",
+    "type": "ITEM",
+    "lore": "Conceived with pure evil and ridiculous design, this gun is perfect to freeze anyone waiting in queue.",
+    "rarity": "EPIC",
+    "dropChance": 380,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 2800,
+    "conditionnalDrop": []
+}

@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This wingy shell is able to target with increadible accuracy someone far away. Use it wisely.",
     "rarity": "EPIC",
-    "dropChance": 400,
+    "dropChance": 370,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

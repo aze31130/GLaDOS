@@ -4,7 +4,7 @@
     "type": "POTION",
     "lore": "This strange bottle with glowing blue liquid inside lights up during the night. You can barely read *radioactive isotope Strontium-90, drink before October 2078* on it.",
     "rarity": "EPIC",
-    "dropChance": 400,
+    "dropChance": 370,
     "starForceMaxLevel": 5,
     "claimable": false,
     "untradable": false,

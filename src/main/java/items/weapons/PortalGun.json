@@ -4,7 +4,7 @@
     "type": "GUN",
     "lore": "This strange portal device shoots blue and orange portals. You still wonder how to use it to solve this room...",
     "rarity": "EPIC",
-    "dropChance": 400,
+    "dropChance": 370,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

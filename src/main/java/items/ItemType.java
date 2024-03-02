@@ -10,6 +10,7 @@ public enum ItemType {
 	CHESTPLATE(":shirt:"),
 	LEGGINGS(":jeans:"),
 	BOOTS(":boot:"),
+	BOW(":bow_and_arrow:"),
 	GLOVES(":gloves:"),
 	ITEM(":briefcase:"),
 	MEDAL(":medal:"),

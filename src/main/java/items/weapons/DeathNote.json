@@ -1,0 +1,13 @@
+{
+    "id": 123,
+    "name": "Death Note",
+    "type": "ITEM",
+    "lore": "Through 67 rules and an apple enjoyer death god, this increadibly powerful death book allows you to kill anyone by simply writing a name on it. Be very careful with this magical artefact.",
+    "rarity": "MYTHICAL",
+    "dropChance": 60,
+    "starForceMaxLevel": 20,
+    "claimable": false,
+    "untradable": false,
+    "value": 491500,
+    "conditionnalDrop": []
+}

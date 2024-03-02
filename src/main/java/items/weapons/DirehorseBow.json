@@ -1,0 +1,13 @@
+{
+    "id": 124,
+    "name": "Na'vi Direhorse Bow",
+    "type": "BOW",
+    "lore": "A simple but very efficient wooden bow. Can either be used in hunt or war for home tree.",
+    "rarity": "COMMON",
+    "dropChance": 2600,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 180,
+    "conditionnalDrop": []
+}

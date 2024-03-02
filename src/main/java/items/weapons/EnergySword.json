@@ -4,7 +4,7 @@
     "type": "SWORD",
     "lore": "A noble and ancient weapon that requires great skill and bravery to use. It inspires fear in those who face its elegant plasma blade.",
     "rarity": "EPIC",
-    "dropChance": 400,
+    "dropChance": 370,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
