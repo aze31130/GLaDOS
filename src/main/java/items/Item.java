@@ -6,24 +6,19 @@ import utils.UpgradeRatesUtils;
 
 public class Item implements Cloneable {
 	public int id;
-	public String name;
+	public String name, lore, url;
 	public ItemType type;
-	public String lore;
 	public Rarity rarity;
 	public Double dropChance;
 
-	public int starForceLevel;
-	public int starForceMaxLevel;
+	public int starForceLevel, starForceMaxLevel;
 
-	public boolean claimable;
-	public boolean untradable;
+	public boolean claimable, untradable;
 
 	public boolean broken;
 	public Double quality;
 
 	public int value;
-
-	public String url;
 
 	private static final UpgradeRatesUtils rates[] = {
 			// 0 -> 5 stars
@@ -82,12 +77,6 @@ public class Item implements Cloneable {
 			Rarity.EVENT, new int[] {500, 700, 1200, 1800, 2300, 3100, 4500, 6100, 7900, 9000, 10000, 12000, 13000, 14000, 16000,
 					19000, 25000, 30000, 37000, 44000, 50000});
 
-	/*
-	 * Specials bonuses that can be rerolled. This includes flat raw stats alongside % based stats.
-	 */
-	// public String potential;
-	// public List<PairUtils<String, Integer>> Enchants;
-
 	public Item(int id, String name, ItemType type, String lore, Rarity rarity, Double dropChance, int starForceLevel,
 			int starForceMaxLevel, boolean claimable, boolean untradable, boolean broken, Double quality, int value) {
 		this.id = id;
@@ -125,6 +114,10 @@ public class Item implements Cloneable {
 			sb.append("☆");
 
 		return sb.toString();
+	}
+
+	public Double getQuality() {
+		return this.quality;
 	}
 
 	public boolean isMaxed() {

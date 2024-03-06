@@ -223,8 +223,8 @@ public class GLaDOS implements Logging {
 	/*
 	 * Returns the item list of a given tier
 	 */
-	public List<Item> getItemsByTier(Rarity tier) {
-		return this.items.stream().filter(it -> it.rarity.equals(tier)).toList();
+	public List<Item> getItemsByTier(int rarityLevel) {
+		return this.items.stream().filter(it -> it.rarity.level == rarityLevel).toList();
 	}
 
 	public int getLastItemId() {

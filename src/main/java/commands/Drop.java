@@ -35,7 +35,7 @@ public class Drop extends Command {
 
 		SecureRandom random = new SecureRandom();
 
-		int acquiredMoney = random.nextInt(100, 1001);
+		int acquiredMoney = random.nextInt(150, 1001);
 
 		authorAccount.money += acquiredMoney;
 		event.getHook().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build()).queue();
