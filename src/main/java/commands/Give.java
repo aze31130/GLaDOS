@@ -21,7 +21,7 @@ public class Give extends Command {
 				Permission.OWNER,
 				Tag.SYSTEM,
 				Arrays.asList(
-						new OptionData(OptionType.USER, "target", "The user you want to give an item", false),
+						new OptionData(OptionType.USER, "target", "The user you want to give an item", true),
 						new OptionData(OptionType.STRING, "item", "The item you want to give", false, true),
 						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to give")));
 	}

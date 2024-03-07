@@ -10,6 +10,7 @@ import java.util.Set;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
+import items.Item;
 import items.Rarity;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -21,13 +22,13 @@ import utils.BuildEmbed;
  * Rules of a contract: 5 distintcs items are destroyed and one random item of upper tier is given
  * to member. The quality of this new item is the average of all input item and the starforce level
  * alongside rarity is equal to the one of the lowest of 5 input item + 1. The rarity and starforce
- * cannot exceed GODLY tier and 30 stars.
+ * cannot exceed GODLY tier.
  */
 public class Contract extends Command {
 	public Contract() {
 		super(
 				"contract",
-				"[WIP] Trade 5 items of same tier against one random of upper tier.",
+				"Trade 5 items of same tier against one random of upper tier.",
 				Permission.NONE,
 				Tag.RPG,
 				Arrays.asList(
@@ -44,7 +45,7 @@ public class Contract extends Command {
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
 
-		// Ensure that the 5 provided items are differents. Let's use a Set<String> for that:
+		// Ensure that the 5 provided items are differents. Let's use a Set for that:
 		Set<String> contractItemsFQName = new HashSet<>();
 
 		for (int i = 1; i <= 5; i++)
@@ -78,7 +79,6 @@ public class Contract extends Command {
 		}
 
 		// Compute average item quality
-		// TODO check value
 		double averageQuality = contractItems.stream().mapToDouble(items.Item::getQuality).average().orElse(0);
 
 		// Get lowest star force
@@ -91,15 +91,23 @@ public class Contract extends Command {
 		// Take random item from upper quality
 		SecureRandom random = new SecureRandom();
 		List<items.Item> possibleItems = glados.getItemsByTier(lowestRarity.level + 1);
-		items.Item tradedItem = possibleItems.get(random.nextInt(possibleItems.size()));
 
-		// Give to user
-		// TODO
+		try {
+			items.Item tradedItem = (Item) possibleItems.get(random.nextInt(possibleItems.size())).clone();
+			tradedItem.quality = averageQuality;
+			tradedItem.starForceLevel = lowestStarForce + 1;
 
-		// Remove all 5 items from user inventory
-		// TODO
+			// Remove all 5 items from user inventory
+			for (items.Item i : contractItems)
+				authorAccount.inventory.remove(i);
 
-		// Send the embed
-		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, tradedItem, glados.cdn).build()).queue();
+			// Give to user
+			authorAccount.inventory.add(tradedItem);
+
+			// Send the embed
+			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, tradedItem, glados.cdn).build()).queue();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 }
