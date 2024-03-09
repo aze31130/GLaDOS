@@ -25,20 +25,14 @@ public class Trade extends Command {
 				Tag.RPG,
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The target of your trade offer", true),
-						new OptionData(OptionType.STRING, "srcitem", "The item you want to give", false, true),
+						new OptionData(OptionType.STRING, "srcitem", "The item you want to give", true, true),
+						new OptionData(OptionType.STRING, "dstitem", "What item the target gives you in exchange", true, true),
 						new OptionData(OptionType.INTEGER, "srcmoney", "The amount of money you want to give"),
-						new OptionData(OptionType.STRING, "dstitem", "What item the target gives you in exchange", false, true),
 						new OptionData(OptionType.INTEGER, "dstmoney", "The amount of money the target gives you")));
 	}
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) {
-		// Check if the target is valid
-		if (event.getOption("target") == null) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("The target account does not exist !").build()).queue();
-			return;
-		}
-
 		// Ensures trade is performed in a server, not in private message
 		if (!event.isFromGuild()) {
 			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You can only trade in a server !").build()).queue();
@@ -48,6 +42,7 @@ public class Trade extends Command {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
+
 		Optional<Account> optionnalTargetAccount = glados.getAccountById(event.getOption("target").getAsString());
 
 		if (optionnalTargetAccount.isEmpty()) {
@@ -58,13 +53,19 @@ public class Trade extends Command {
 
 		Account targetAccount = optionnalTargetAccount.get();
 
-		String srcItem = Optional.ofNullable(event.getOption("srcitem")).map(OptionMapping::getAsString).orElse("");
+		Optional<items.Item> srcItem = authorAccount.getItemByFQName(event.getOption("srcitem").getAsString());
+		Optional<items.Item> dstItem = targetAccount.getItemByFQName(event.getOption("dstitem").getAsString());
 		int srcMoney = Optional.ofNullable(event.getOption("srcmoney")).map(OptionMapping::getAsInt).orElse(0);
-		String dstItem = Optional.ofNullable(event.getOption("dstitem")).map(OptionMapping::getAsString).orElse("");
 		int dstMoney = Optional.ofNullable(event.getOption("dstmoney")).map(OptionMapping::getAsInt).orElse(0);
 
+		if (srcItem.isEmpty() || dstItem.isEmpty()) {
+			event.getHook().sendMessageEmbeds(
+					BuildEmbed.errorEmbed("Someone in the trade does not own the provided item !").build()).queue();
+			return;
+		}
+
 		// Ensure the trade is possible
-		if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem, srcMoney, dstItem, dstMoney)) {
+		if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem.get(), srcMoney, dstItem.get(), dstMoney)) {
 			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Illegal trade ! Ensures the trade is possible !").build())
 					.queue();
 			return;
@@ -76,7 +77,8 @@ public class Trade extends Command {
 				Button.danger("RefuseTrade", "Refuse Trade"));
 
 		event.getHook().sendMessageEmbeds(
-				BuildEmbed.tradeEmbed(authorAccount, targetAccount, srcItem, srcMoney, dstItem, dstMoney).build())
+				BuildEmbed.tradeEmbed(authorAccount, targetAccount, srcItem.get(), srcMoney, dstItem.get(), dstMoney).build())
 				.addActionRow(buttons).queue();
+		event.getHook().sendMessage("<@" + targetAccount.id + "> :arrow_heading_up:").queue();
 	}
 }

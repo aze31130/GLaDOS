@@ -173,14 +173,14 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder tradeEmbed(Account author, Account target, String srcItem,
-			int srcMoney, String dstItem, int dstMoney) {
+	public static EmbedBuilder tradeEmbed(Account author, Account target, Item srcItem,
+			int srcMoney, Item dstItem, int dstMoney) {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Trade Offer")
 				.setDescription(author.user.getAsMention() + "=>" + target.user.getAsMention())
-				.addField("Item source", srcItem, false)
+				.addField("Item source", srcItem.getFQName(), false)
 				.addField("Money source", Integer.toString(srcMoney), false)
-				.addField("Item destination", dstItem, false)
+				.addField("Item destination", dstItem.getFQName(), false)
 				.addField("Money destination", Integer.toString(dstMoney), false)
 				.setColor(Color.ORANGE)
 				.setTimestamp(Instant.now());

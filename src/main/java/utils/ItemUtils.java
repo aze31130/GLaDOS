@@ -28,9 +28,10 @@ public class ItemUtils implements Logging {
 	/*
 	 * This function checks if a given trade is possible or not.
 	 */
-	public static boolean isTradePossible(Account author, Account target, String srcItem, int srcMoney, String dstItem,
+	public static boolean isTradePossible(Account author, Account target, Item srcItem, int srcMoney, Item dstItem,
 			int dstMoney) {
-		// TODO Check if item is untradable
+		if (srcItem.untradable || dstItem.untradable)
+			return false;
 
 		// Check if the author is the target
 		if (author.user.getId().equals(target.user.getId()))
@@ -41,7 +42,7 @@ public class ItemUtils implements Logging {
 			return false;
 
 		// Check src item
-		if ((srcItem.length() > 1) && !ItemUtils.userOwnItem(author, srcItem))
+		if (author.getItemByFQName(srcItem.getFQName()).isEmpty())
 			return false;
 
 		// Check dst money
@@ -49,7 +50,7 @@ public class ItemUtils implements Logging {
 			return false;
 
 		// Check src item
-		if ((dstItem.length() > 1) && !ItemUtils.userOwnItem(target, dstItem))
+		if (target.getItemByFQName(dstItem.getFQName()).isEmpty())
 			return false;
 		return true;
 	}

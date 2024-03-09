@@ -222,21 +222,21 @@ public class ButtonClick extends ListenerAdapter {
 			Account authorAccount = optionalAuthorAccount.get();
 			Account targetAccount = optionalTargetAccount.get();
 
-			String srcItemFQName = "";
+			Optional<Item> srcItem = null;
 			int srcMoney = 0;
-			String dstItemFQName = "";
+			Optional<Item> dstItem = null;
 			int dstMoney = 0;
 
 			for (Field f : event.getMessage().getEmbeds().get(0).getFields()) {
 				switch (f.getName()) {
 					case "Item source":
-						srcItemFQName = f.getValue();
+						srcItem = authorAccount.getItemByFQName(f.getValue());
 						break;
 					case "Money source":
 						srcMoney = Integer.parseInt(f.getValue());
 						break;
 					case "Item destination":
-						dstItemFQName = f.getValue();
+						dstItem = targetAccount.getItemByFQName(f.getValue());
 						break;
 					case "Money destination":
 						dstMoney = Integer.parseInt(f.getValue());
@@ -247,25 +247,17 @@ public class ButtonClick extends ListenerAdapter {
 			}
 
 			// Checks again if the trade is still possible
-			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItemFQName, srcMoney, dstItemFQName, dstMoney)) {
+			if (!ItemUtils.isTradePossible(authorAccount, targetAccount, srcItem.get(), srcMoney, dstItem.get(), dstMoney)) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("The trade is no longer possible ! Operation cancelled !").build())
 						.queue();
 				return;
 			}
 
-			// Check presence of src item
-			if (srcItemFQName.length() > 1) {
-				items.Item srcItem = authorAccount.getItemByFQName(srcItemFQName).get();
-				authorAccount.inventory.remove(srcItem);
-				targetAccount.inventory.add(srcItem);
-			}
+			authorAccount.inventory.remove(srcItem.get());
+			targetAccount.inventory.add(srcItem.get());
 
-			// Check presence of dst item
-			if (dstItemFQName.length() > 1) {
-				items.Item dstItem = targetAccount.getItemByFQName(dstItemFQName).get();
-				targetAccount.inventory.remove(dstItem);
-				authorAccount.inventory.add(dstItem);
-			}
+			targetAccount.inventory.remove(dstItem.get());
+			authorAccount.inventory.add(dstItem.get());
 
 			// Exchange money
 			authorAccount.money -= srcMoney;
@@ -280,7 +272,9 @@ public class ButtonClick extends ListenerAdapter {
 		}
 
 		// Check if action is add role
-		if (trigger.startsWith("+")) {
+		if (trigger.startsWith("+"))
+
+		{
 			trigger = trigger.replace("+", "");
 			if (!dictionary.containsKey(trigger)) {
 				event.reply("You cannot get this role by doing that !").setEphemeral(true).setSuppressedNotifications(true)

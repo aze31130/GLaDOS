@@ -25,7 +25,11 @@ public class SlashCommandInteraction extends ListenerAdapter {
 					event.getChannel().sendTyping().queue();
 				}
 
-				command.execute(event);
+				try {
+					command.execute(event);
+				} catch (Exception e) {
+					event.replyEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+				}
 				return;
 			}
 		}
