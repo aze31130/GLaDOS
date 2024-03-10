@@ -21,5 +21,5 @@ public abstract class Command {
 		this.tag = tag;
 	}
 
-	public abstract void execute(SlashCommandInteractionEvent event);
+	public abstract void execute(SlashCommandInteractionEvent event) throws Exception;
 }

@@ -28,7 +28,6 @@ public class Move extends Command {
 
 		int userAmount = event.getMember().getVoiceState().getChannel().getMembers().size();
 
-
 		VoiceChannel dest = event.getJDA().getVoiceChannelById(destination.getId());
 		for (Member m : event.getMember().getVoiceState().getChannel().getMembers())
 			event.getMember().getGuild().moveVoiceMember(m, dest).queue();

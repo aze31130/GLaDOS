@@ -13,7 +13,6 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import glados.GLaDOS;
@@ -36,7 +35,7 @@ public class Translate extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void execute(SlashCommandInteractionEvent event) throws IOException, InterruptedException {
 		GLaDOS g = GLaDOS.getInstance();
 
 		int delay = 300;
@@ -71,15 +70,11 @@ public class Translate extends Command {
 					.POST(BodyPublishers.ofString(json.toString())).build();
 
 			// Build an embed and send it
-			try {
-				HttpResponse<String> response =
-						client.send(request, HttpResponse.BodyHandlers.ofString());
-				JSONObject responseJson = new JSONObject(response.body());
-				event.getHook().sendMessage("`[Translated] <" + m.getMember().getEffectiveName() + ">`: "
-						+ responseJson.get("translatedText").toString()).queue();
-			} catch (IOException | InterruptedException | JSONException e) {
-				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
-			}
+			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			JSONObject responseJson = new JSONObject(response.body());
+			event.getHook().sendMessage(
+					"`[Translated] <" + m.getMember().getEffectiveName() + ">`: " + responseJson.get("translatedText").toString())
+					.queue();
 		}
 	}
 }

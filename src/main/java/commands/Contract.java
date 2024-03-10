@@ -40,7 +40,7 @@ public class Contract extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void execute(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
@@ -92,22 +92,18 @@ public class Contract extends Command {
 		SecureRandom random = new SecureRandom();
 		List<items.Item> possibleItems = glados.getItemsByTier(lowestRarity.level + 1);
 
-		try {
-			items.Item tradedItem = (Item) possibleItems.get(random.nextInt(possibleItems.size())).clone();
-			tradedItem.quality = averageQuality;
-			tradedItem.starForceLevel = lowestStarForce + 1;
+		items.Item tradedItem = (Item) possibleItems.get(random.nextInt(possibleItems.size())).clone();
+		tradedItem.quality = averageQuality;
+		tradedItem.starForceLevel = lowestStarForce + 1;
 
-			// Remove all 5 items from user inventory
-			for (items.Item i : contractItems)
-				authorAccount.inventory.remove(i);
+		// Remove all 5 items from user inventory
+		for (items.Item i : contractItems)
+			authorAccount.inventory.remove(i);
 
-			// Give to user
-			authorAccount.inventory.add(tradedItem);
+		// Give to user
+		authorAccount.inventory.add(tradedItem);
 
-			// Send the embed
-			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, tradedItem, glados.cdn).build()).queue();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		// Send the embed
+		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, tradedItem, glados.cdn).build()).queue();
 	}
 }

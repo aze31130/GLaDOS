@@ -79,7 +79,7 @@ public class ButtonClick extends ListenerAdapter {
 			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, newPageNumber);
 
 			for (items.Item i : ItemUtils.getUserInventory(authorAccount, newPageNumber))
-				inventory.addField(i.getFQName(), i.rarity.name(), false);
+				inventory.addField(i.getFQName(), "```ansi\n" + i.rarity.ansiCode + i.rarity.name() + "```", false);
 
 			event.editMessageEmbeds(inventory.build()).queue();
 			return;

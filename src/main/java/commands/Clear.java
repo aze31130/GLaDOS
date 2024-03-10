@@ -26,13 +26,9 @@ public class Clear extends Command {
 		TextChannel source = event.getChannel().asTextChannel();
 		Integer amount = event.getOption("amount").getAsInt();
 
-		try {
-			List<Message> messages = source.getHistory().retrievePast(amount).complete();
-			source.deleteMessages(messages).queue();
-			event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Successfully deleted " + amount + " messages.").build())
-					.queue();
-		} catch (Exception exception) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
-		}
+		List<Message> messages = source.getHistory().retrievePast(amount).complete();
+		source.deleteMessages(messages).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Successfully deleted " + amount + " messages.").build())
+				.queue();
 	}
 }

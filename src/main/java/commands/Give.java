@@ -27,7 +27,7 @@ public class Give extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void execute(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());
@@ -54,18 +54,14 @@ public class Give extends Command {
 				return;
 			}
 
-			try {
-				items.Item i = (items.Item) item.get().clone();
-				i.quality = new Random().nextDouble();
+			items.Item i = (items.Item) item.get().clone();
+			i.quality = new Random().nextDouble();
 
-				if (i.rarity.equals(Rarity.EVENT))
-					i.quality = 1.0;
-				target.inventory.add(i);
+			if (i.rarity.equals(Rarity.EVENT))
+				i.quality = 1.0;
+			target.inventory.add(i);
 
-				event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i, glados.cdn).build()).queue();
-			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
-			}
+			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i, glados.cdn).build()).queue();
 		}
 
 		// Check if it's a money give

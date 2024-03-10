@@ -1,11 +1,11 @@
 package commands;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Arrays;
-
+import org.json.JSONException;
 import org.json.JSONObject;
-import utils.BuildEmbed;
 import utils.JsonDownloader;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -22,22 +22,18 @@ public class Idea extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
-		try {
-			JSONObject jsonObject = JsonDownloader.getJson("https://www.boredapi.com/api/activity");
-			String activity = jsonObject.getString("activity");
-			String type = jsonObject.getString("type");
-			int participants = jsonObject.getInt("participants");
-			int price = jsonObject.getInt("price");
+	public void execute(SlashCommandInteractionEvent event) throws JSONException, IOException {
+		JSONObject jsonObject = JsonDownloader.getJson("https://www.boredapi.com/api/activity");
+		String activity = jsonObject.getString("activity");
+		String type = jsonObject.getString("type");
+		int participants = jsonObject.getInt("participants");
+		int price = jsonObject.getInt("price");
 
-			EmbedBuilder info =
-					new EmbedBuilder().setAuthor("What Should I Do ?").setTitle(activity)
-							.addField("Price: ", price + "", false).addField("Type: ", type, false)
-							.addField("Participants: ", participants + "", false)
-							.setColor(Color.CYAN).setTimestamp(Instant.now());
-			event.getHook().sendMessageEmbeds(info.build()).queue();
-		} catch (Exception e) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
-		}
+		EmbedBuilder info =
+				new EmbedBuilder().setAuthor("What Should I Do ?").setTitle(activity)
+						.addField("Price: ", price + "", false).addField("Type: ", type, false)
+						.addField("Participants: ", participants + "", false)
+						.setColor(Color.CYAN).setTimestamp(Instant.now());
+		event.getHook().sendMessageEmbeds(info.build()).queue();
 	}
 }

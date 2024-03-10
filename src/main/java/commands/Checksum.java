@@ -30,21 +30,17 @@ public class Checksum extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void execute(SlashCommandInteractionEvent event) throws NoSuchAlgorithmException {
 		String algorithm = event.getOption("algorithm").getAsString();
 		String content = event.getOption("content").getAsString();
 
-		try {
-			MessageDigest digest = MessageDigest.getInstance(algorithm);
-			digest.update(content.getBytes(StandardCharsets.UTF_8));
+		MessageDigest digest = MessageDigest.getInstance(algorithm);
+		digest.update(content.getBytes(StandardCharsets.UTF_8));
 
-			StringBuilder result = new StringBuilder();
-			for (byte b : digest.digest())
-				result.append(String.format("%02x", b));
+		StringBuilder result = new StringBuilder();
+		for (byte b : digest.digest())
+			result.append(String.format("%02x", b));
 
-			event.getHook().sendMessageEmbeds(BuildEmbed.hashEmbed(result.toString(), algorithm).build()).queue();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
+		event.getHook().sendMessageEmbeds(BuildEmbed.hashEmbed(result.toString(), algorithm).build()).queue();
 	}
 }

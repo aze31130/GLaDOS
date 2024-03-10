@@ -39,7 +39,7 @@ public class Question extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void execute(SlashCommandInteractionEvent event) throws JSONException, IOException {
 		GLaDOS g = GLaDOS.getInstance();
 
 		if (g.goodAnswer.length() > 0) {
@@ -55,34 +55,29 @@ public class Question extends Command {
 			if (om != null && possibleDifficulties.contains(om.getAsString()))
 				difficulty = om.getAsString();
 
-		try {
-			JSONObject response =
-					JsonDownloader.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty=" + difficulty);
+		JSONObject response =
+				JsonDownloader.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty=" + difficulty);
 
-			JSONObject question = response.getJSONArray("results").getJSONObject(0);
-			List<ItemComponent> responses = new ArrayList<>();
-			responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(question.getString("correct_answer"))),
-					new String(Base64.getDecoder().decode(question.getString("correct_answer")))));
-			JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
+		JSONObject question = response.getJSONArray("results").getJSONObject(0);
+		List<ItemComponent> responses = new ArrayList<>();
+		responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(question.getString("correct_answer"))),
+				new String(Base64.getDecoder().decode(question.getString("correct_answer")))));
+		JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
 
-			for (int i = 0; i < wrongAnswers.length(); i++)
-				responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(wrongAnswers.getString(i))),
-						new String(Base64.getDecoder().decode(wrongAnswers.getString(i)))));
+		for (int i = 0; i < wrongAnswers.length(); i++)
+			responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(wrongAnswers.getString(i))),
+					new String(Base64.getDecoder().decode(wrongAnswers.getString(i)))));
 
-			Collections.shuffle(responses);
+		Collections.shuffle(responses);
 
-			// Post message with buttons with answers
-			event.getHook().sendMessageEmbeds(BuildEmbed.questionEmbed(
-					new String(Base64.getDecoder().decode(question.getString("question"))),
-					new String(Base64.getDecoder().decode(question.getString("category"))),
-					new String(Base64.getDecoder().decode(question.getString("difficulty"))))
-					.build()).addActionRow(responses).queue();
+		// Post message with buttons with answers
+		event.getHook().sendMessageEmbeds(BuildEmbed.questionEmbed(
+				new String(Base64.getDecoder().decode(question.getString("question"))),
+				new String(Base64.getDecoder().decode(question.getString("category"))),
+				new String(Base64.getDecoder().decode(question.getString("difficulty"))))
+				.build()).addActionRow(responses).queue();
 
-			// Save good answer in glados variable
-			g.goodAnswer = "?" + new String(Base64.getDecoder().decode(question.getString("correct_answer")));
-
-		} catch (JSONException | IOException exception) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed(exception.toString()).build()).queue();
-		}
+		// Save good answer in glados variable
+		g.goodAnswer = "?" + new String(Base64.getDecoder().decode(question.getString("correct_answer")));
 	}
 }
