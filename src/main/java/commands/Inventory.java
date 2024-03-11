@@ -47,7 +47,7 @@ public class Inventory extends Command {
 		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, startingPage);
 
 		for (items.Item i : ItemUtils.getUserInventory(authorAccount, startingPage))
-			inventory.addField(i.getFQName(), "```ansi\n" + i.rarity.ansiCode + i.rarity.name() + "```", false);
+			inventory.addField(i.rarity.emote + " " + i.getFQName(), i.rarity.name(), false);
 
 		List<ItemComponent> buttons = Arrays.asList(
 				Button.primary("PrevPage", "Previous Page"),
