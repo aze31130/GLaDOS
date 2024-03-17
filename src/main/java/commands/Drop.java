@@ -46,10 +46,7 @@ public class Drop extends Command {
 		// Asign random quality
 		droppedItem.quality = random.nextDouble();
 
-		if (droppedItem.quality > 0.9999)
-			droppedItem.quality = 1.0;
-		if (droppedItem.quality < 0.0001)
-			droppedItem.quality = 0.0;
+		droppedItem.makeLegit();
 
 		authorAccount.inventory.add(droppedItem);
 		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem, glados.cdn).build()).queue();

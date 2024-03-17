@@ -6,7 +6,6 @@ import java.util.Random;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
-import items.Rarity;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -23,7 +22,9 @@ public class Give extends Command {
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The user you want to give an item", true),
 						new OptionData(OptionType.STRING, "item", "The item you want to give", false, true),
-						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to give")));
+						new OptionData(OptionType.NUMBER, "quality", "The item quality you want to generate", false),
+						new OptionData(OptionType.INTEGER, "starforce", "The item starforce level you want to generate", false),
+						new OptionData(OptionType.INTEGER, "money", "The amount of money you want to give", false)));
 	}
 
 	@Override
@@ -41,6 +42,8 @@ public class Give extends Command {
 		Account target = optionalTarget.get();
 
 		Optional<String> itemName = Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
+		Optional<Double> itemQuality = Optional.ofNullable(event.getOption("quality")).map(OptionMapping::getAsDouble);
+		Optional<Integer> itemStarforce = Optional.ofNullable(event.getOption("starforce")).map(OptionMapping::getAsInt);
 		Optional<Integer> moneyAmount = Optional.ofNullable(event.getOption("money")).map(OptionMapping::getAsInt);
 
 
@@ -55,10 +58,18 @@ public class Give extends Command {
 			}
 
 			items.Item i = (items.Item) item.get().clone();
-			i.quality = new Random().nextDouble();
 
-			if (i.rarity.equals(Rarity.EVENT))
-				i.quality = 1.0;
+			if (itemQuality.isPresent())
+				i.quality = itemQuality.get();
+			else
+				i.quality = new Random().nextDouble();
+
+			if (itemStarforce.isPresent())
+				i.starForceLevel = itemStarforce.get();
+
+			// Ensure item cannot go beyond max stats
+			i.makeLegit();
+
 			target.inventory.add(i);
 
 			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(target.user, i, glados.cdn).build()).queue();

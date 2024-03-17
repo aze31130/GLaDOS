@@ -20,12 +20,11 @@ public class SlashCommandInteraction extends ListenerAdapter {
 					return;
 				}
 
-				if (!command.name.equalsIgnoreCase("vote")) {
+				if (!command.name.equalsIgnoreCase("vote"))
 					event.deferReply().queue();
-					event.getChannel().sendTyping().queue();
-				}
 
 				try {
+					event.getChannel().sendTyping().queue();
 					command.execute(event);
 				} catch (Exception e) {
 					event.replyEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();

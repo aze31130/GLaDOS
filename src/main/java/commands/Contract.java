@@ -96,6 +96,10 @@ public class Contract extends Command {
 		tradedItem.quality = averageQuality;
 		tradedItem.starForceLevel = lowestStarForce + 1;
 
+		// Ensure the generated item is able to reach this starforce level
+		if (tradedItem.starForceMaxLevel < tradedItem.starForceLevel)
+			tradedItem.starForceLevel = tradedItem.starForceMaxLevel;
+
 		// Remove all 5 items from user inventory
 		for (items.Item i : contractItems)
 			authorAccount.inventory.remove(i);

@@ -104,7 +104,7 @@ public class Item implements Cloneable {
 		sb.append("(" + String.format("%.2f%%", 100 * this.quality) + ") ");
 		sb.append(this.name);
 
-		if (this.starForceMaxLevel > 0)
+		if (this.starForceLevel > 0 || this.starForceMaxLevel > 0)
 			sb.append(" ");
 
 		for (int i = 0; i < this.starForceLevel; i++)
@@ -114,6 +114,27 @@ public class Item implements Cloneable {
 			sb.append("☆");
 
 		return sb.toString();
+	}
+
+	public void makeLegit() {
+		if (this.starForceLevel > this.starForceMaxLevel)
+			this.starForceLevel = this.starForceMaxLevel;
+
+		// Allow max quality to be reached
+		if (this.quality > 0.9999)
+			this.quality = 1.0;
+		if (this.quality < 0.0001)
+			this.quality = 0.0;
+
+		// Ensure max quality cannot be exceeded
+		if (this.quality > 1)
+			this.quality = 1.0;
+		if (this.quality < 0)
+			this.quality = 0.0;
+
+		// Ensure all event item are quality maxed
+		if (this.rarity.equals(Rarity.EVENT))
+			this.quality = 1.0;
 	}
 
 	public Double getQuality() {
