@@ -4,7 +4,7 @@
     "type": "NINJA",
     "lore": "A basic ninja weapon, use it as a knife or throw it as fast as possible.",
     "rarity": "COMMON",
-    "dropChance": 2600,
+    "dropChance": 1685,
     "starForceMaxLevel": 0,
     "claimable": false,
     "untradable": false,

@@ -1,0 +1,13 @@
+{
+    "id": 141,
+    "name": "Doran Blade",
+    "type": "SWORD",
+    "lore": "Starter item for fighters. Gives Atack damage and life steal.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 300,
+    "conditionnalDrop": []
+}

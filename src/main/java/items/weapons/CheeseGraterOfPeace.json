@@ -1,0 +1,13 @@
+{
+    "id": 137,
+    "name": "Cheese Grater of Peace",
+    "type": "SWORD",
+    "lore": "A humble tool able to spread peace and harmony in a single blow.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 160,
+    "conditionnalDrop": []
+}

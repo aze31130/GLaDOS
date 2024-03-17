@@ -1,0 +1,13 @@
+{
+    "id": 134,
+    "name": "Holy Grail",
+    "type": "ITEM",
+    "lore": "The Holy Grail is a mythical cup or chalice from Christian legend, believed to be the cup used by Jesus during the Last Supper. It's often associated with divine power and eternal life.",
+    "rarity": "MYTHICAL",
+    "dropChance": 50,
+    "starForceMaxLevel": 20,
+    "claimable": false,
+    "untradable": false,
+    "value": 500000,
+    "conditionnalDrop": []
+}

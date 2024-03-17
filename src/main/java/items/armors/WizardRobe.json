@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "Before applying to Hogwarts, every student must own this wizard robe. This elegant cloak already make you feel as a true magician.",
     "rarity": "UNUSUAL",
-    "dropChance": 2000,
+    "dropChance": 2500,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,

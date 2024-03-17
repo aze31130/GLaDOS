@@ -1,0 +1,13 @@
+{
+    "id": 135,
+    "name": "Excalibur",
+    "type": "SWORD",
+    "lore": "Excalibur is the legendary sword of King Arthur, bestowed upon him by the Lady of the Lake. It symbolizes Arthur's rightful rule and embodies qualities of nobility, honor, and destiny.",
+    "rarity": "LEGENDARY",
+    "dropChance": 142,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 41000,
+    "conditionnalDrop": []
+}

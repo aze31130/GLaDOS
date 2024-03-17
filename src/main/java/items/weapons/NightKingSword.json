@@ -4,7 +4,7 @@
     "type": "SPEAR",
     "lore": "Forged from enchanted ice that will never melt, this spear is a symbol of terror through its icy glow and incredible hardness.",
     "rarity": "FABLED",
-    "dropChance": 120,
+    "dropChance": 90,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,

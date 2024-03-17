@@ -1,0 +1,13 @@
+{
+    "id": 132,
+    "name": "Snowman Piece",
+    "type": "CAKE",
+    "lore": "A pieace of a happy snowman - Please try to take it to a lance far away.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 80,
+    "conditionnalDrop": []
+}

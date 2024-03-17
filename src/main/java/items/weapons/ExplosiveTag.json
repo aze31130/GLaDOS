@@ -4,7 +4,7 @@
     "type": "NINJA",
     "lore": "Also known as paper bomb, this piece of paper inscribed with chakra-infused writing can explode on command.",
     "rarity": "UNUSUAL",
-    "dropChance": 3750,
+    "dropChance": 2500,
     "starForceMaxLevel": 1,
     "claimable": false,
     "untradable": false,

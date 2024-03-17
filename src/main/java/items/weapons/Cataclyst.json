@@ -4,7 +4,7 @@
     "type": "WAND",
     "lore": "",
     "rarity": "FABLED",
-    "dropChance": 120,
+    "dropChance": 90,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,

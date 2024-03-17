@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This magical instrument has been sold by Ollivander family, a perfect tool to learn magic and sorcery.",
     "rarity": "UNUSUAL",
-    "dropChance": 2000,
+    "dropChance": 2500,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,

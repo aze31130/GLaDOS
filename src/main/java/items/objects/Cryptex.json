@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "From Greek kryptós and Latin codex, this device is used to protect secrets written in a scroll. Be warned, it is capable of self-destructing its secret if opened by force.",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 142,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

@@ -1,0 +1,13 @@
+{
+    "id": 131,
+    "name": "Butterscotch Cinnamon Pie",
+    "type": "CAKE",
+    "lore": "Warm and comforting homemade dessert crafted by Toriel. It symbolizes love, care, and comfort.",
+    "rarity": "COMMON",
+    "dropChance": 1690,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 300,
+    "conditionnalDrop": []
+}

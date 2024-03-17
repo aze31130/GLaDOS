@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This insanely rare computer comes from another time.",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 142,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

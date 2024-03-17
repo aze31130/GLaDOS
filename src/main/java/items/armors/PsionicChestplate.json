@@ -4,7 +4,7 @@
     "type": "CHESTPLATE",
     "lore": "",
     "rarity": "MYTHICAL",
-    "dropChance": 55,
+    "dropChance": 50,
     "starForceMaxLevel": 20,
     "claimable": false,
     "untradable": false,

@@ -4,7 +4,7 @@
     "type": "WAND",
     "lore": "This magical staff holds the sheer power of lightning inside. Allows its user to cast an incredible amount of damage.",
     "rarity": "UNIQUE",
-    "dropChance": 3,
+    "dropChance": 2,
     "starForceMaxLevel": 30,
     "claimable": false,
     "untradable": false,

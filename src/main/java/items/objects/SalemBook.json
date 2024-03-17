@@ -1,0 +1,13 @@
+{
+    "id": 138,
+    "name": "Salem's Book",
+    "type": "BOOK",
+    "lore": "Salem's Book is a mystical and powerful grimoire containing all the witchcraft of salem's witches. It's often associated with dark magic, arcane knowledge, and the supernatural, serving as a conduit for summoning demons or casting spells.",
+    "rarity": "FABLED",
+    "dropChance": 90,
+    "starForceMaxLevel": 15,
+    "claimable": false,
+    "untradable": false,
+    "value": 75000,
+    "conditionnalDrop": []
+}

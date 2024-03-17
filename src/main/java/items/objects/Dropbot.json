@@ -1,0 +1,13 @@
+{
+    "id": 130,
+    "name": "Dropbot",
+    "type": "ROBOT",
+    "lore": "This unique (and totaly not rigged) robot is the heartbeat of our server, faithfully giving away common cards into our digital realm for year.",
+    "rarity": "UNIQUE",
+    "dropChance": 2,
+    "starForceMaxLevel": 30,
+    "claimable": false,
+    "untradable": false,
+    "value": 10000000,
+    "conditionnalDrop": ["UNIQUE_ITEM"]
+}

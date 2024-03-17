@@ -1,0 +1,13 @@
+{
+    "id": 128,
+    "name": "Pepito",
+    "type": "ITEM",
+    "lore": "An alien from the chi'nwa empire set to conquer and destroy the world.",
+    "rarity": "EPIC",
+    "dropChance": 333,
+    "starForceMaxLevel": 7,
+    "claimable": false,
+    "untradable": false,
+    "value": 2000,
+    "conditionnalDrop": []
+}

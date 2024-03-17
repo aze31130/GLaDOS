@@ -1,0 +1,13 @@
+{
+    "id": 126,
+    "name": "Richard",
+    "type": "ITEM",
+    "lore": "Plush dog who likes sex jokes and dark humour.",
+    "rarity": "RARE",
+    "dropChance": 1436,
+    "starForceMaxLevel": 3,
+    "claimable": false,
+    "untradable": false,
+    "value": 870,
+    "conditionnalDrop": []
+}

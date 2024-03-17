@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "Ayyy a lovely cube that seems to be friend with you. How cute.",
     "rarity": "EPIC",
-    "dropChance": 370,
+    "dropChance": 333,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

@@ -1,0 +1,13 @@
+{
+    "id": 133,
+    "name": "Pandora's Box",
+    "type": "ITEM",
+    "lore": "Artifact from Greek mythology said to contain all the world's evils. **DO NOT OPEN THIS CHEST !**",
+    "rarity": "FABLED",
+    "dropChance": 90,
+    "starForceMaxLevel": 15,
+    "claimable": false,
+    "untradable": false,
+    "value": 95000,
+    "conditionnalDrop": []
+}

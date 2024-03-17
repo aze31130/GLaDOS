@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This orb... err.. currency... or easter egg ? No one know the purpose of this object but it surely is very old.",
     "rarity": "UNUSUAL",
-    "dropChance": 2750,
+    "dropChance": 2500,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,

@@ -1,0 +1,13 @@
+{
+    "id": 136,
+    "name": "Limburger And Anchovy Sandwich",
+    "type": "CAKE",
+    "lore": "This disgusting chocolate-mushroom-fish sandwich smells miles around. Efficient to dispel masses during demonstrations.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 1,
+    "conditionnalDrop": []
+}

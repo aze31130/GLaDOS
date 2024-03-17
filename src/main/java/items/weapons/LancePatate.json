@@ -1,0 +1,13 @@
+{
+    "id": 125,
+    "name": "Le Lance Patate",
+    "type": "LAUNCHER",
+    "lore": "'Le Lance Patate' is a whimsical and absurd weapon, depicted as a potato launcher.",
+    "rarity": "EPIC",
+    "dropChance": 333,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 2300,
+    "conditionnalDrop": []
+}

@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This black spinner seems to magically spin forever... Are we living a dream ?",
     "rarity": "UNUSUAL",
-    "dropChance": 2000,
+    "dropChance": 2500,
     "starForceMaxLevel": 3,
     "claimable": false,
     "untradable": false,

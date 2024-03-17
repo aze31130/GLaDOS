@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "Conceived with pure evil and ridiculous design, this gun is perfect to freeze anyone waiting in queue.",
     "rarity": "EPIC",
-    "dropChance": 380,
+    "dropChance": 333,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

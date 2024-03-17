@@ -1,0 +1,13 @@
+{
+    "id": 129,
+    "name": "Viceroy Frangipanus",
+    "type": "ITEM",
+    "lore": "A slice of Kings cake from a noble family, last of his specie of sientient cakes.",
+    "rarity": "EPIC",
+    "dropChance": 343,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": false,
+    "value": 3800,
+    "conditionnalDrop": []
+}

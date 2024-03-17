@@ -4,7 +4,7 @@
     "type": "WAND",
     "lore": "When the lost city of Atlantis sunk beneath the depths, this staff emerged from the water. When used, you can hear the towns laments.",
     "rarity": "FABLED",
-    "dropChance": 120,
+    "dropChance": 90,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,

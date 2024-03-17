@@ -4,7 +4,7 @@
     "type": "GUN",
     "lore": "Is that really a gun ? It's hard to tell... This spy gadget can either be used to shoot someone or light a cigarette.",
     "rarity": "EPIC",
-    "dropChance": 370,
+    "dropChance": 333,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

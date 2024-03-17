@@ -1,0 +1,13 @@
+{
+    "id": 139,
+    "name": "Doran Ring",
+    "type": "RING",
+    "lore": "Starter item for mages. Gives ability power and mana regeneration.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 150,
+    "conditionnalDrop": []
+}

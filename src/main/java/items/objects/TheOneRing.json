@@ -4,10 +4,10 @@
     "type": "RING",
     "lore": "This powerful artifact has been forged in the deepest cave of Mount Doom",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 142,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,
-    "value": 300,
+    "value": 48000,
     "conditionnalDrop": []
 }

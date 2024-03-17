@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "This compass does not point north. It points to the thing you want most in the world.",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 142,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

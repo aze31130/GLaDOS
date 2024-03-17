@@ -1,0 +1,13 @@
+{
+    "id": 140,
+    "name": "Doran Shield",
+    "type": "SHIELD",
+    "lore": "Starter item for tanks. Gives hp and halth regeneration.",
+    "rarity": "COMMON",
+    "dropChance": 1685,
+    "starForceMaxLevel": 0,
+    "claimable": false,
+    "untradable": false,
+    "value": 200,
+    "conditionnalDrop": []
+}

@@ -22,6 +22,11 @@ public enum ItemType {
 	SPEAR(":french_bread:"),
 	GUN(":gun:"),
 	SCROLL(":scroll:"),
+	LAUNCHER(":rocket:"),
+	ROBOT(":robot:"),
+	CAKE(":cake:"),
+	BOOK(":book:"),
+	SHIELD(":shield:"),
 	FAN(":folding_hand_fan:");
 
 	public final String emote;

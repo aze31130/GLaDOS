@@ -4,7 +4,7 @@
     "type": "SWORD",
     "lore": "According to Kojiki, this blade has been forged by the god Susanoo itself and gifted to Mankind. The rarity of this blade makes it difficult to confirm its existence.",
     "rarity": "FABLED",
-    "dropChance": 120,
+    "dropChance": 100,
     "starForceMaxLevel": 15,
     "claimable": false,
     "untradable": false,

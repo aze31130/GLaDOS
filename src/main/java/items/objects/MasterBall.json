@@ -4,7 +4,7 @@
     "type": "ITEM",
     "lore": "'This ball captures anything it touches at 100% rate.' I guess you first have to aim right before throwing it...",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 160,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,

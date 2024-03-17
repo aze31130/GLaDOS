@@ -4,7 +4,7 @@
     "type": "SCROLL",
     "lore": "Master Oogway wrote this legendary scroll a thousand years ago. It contains the secret to 'limitless power' to anyone worthy enough.",
     "rarity": "LEGENDARY",
-    "dropChance": 150,
+    "dropChance": 142,
     "starForceMaxLevel": 10,
     "claimable": false,
     "untradable": false,
