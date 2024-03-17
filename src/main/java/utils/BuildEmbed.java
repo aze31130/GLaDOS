@@ -260,6 +260,15 @@ public class BuildEmbed {
 		return result;
 	}
 
+	public static EmbedBuilder ownerEmbed(Item i) {
+		EmbedBuilder result = new EmbedBuilder()
+				.setTitle("Users owning " + i.name)
+				.setDescription(i.rarity.emote + " [" + i.rarity.toString() + "] " + i.getFQName())
+				.setColor(Color.LIGHT_GRAY)
+				.setTimestamp(Instant.now());
+		return result;
+	}
+
 	public static EmbedBuilder upgradeEmbed(Account author, Item i) {
 		EmbedBuilder upgrade = new EmbedBuilder()
 				.setAuthor(author.user.getName())
