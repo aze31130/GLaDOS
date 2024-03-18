@@ -36,6 +36,7 @@ public class Backup extends Command implements Logging {
 		target.getIterableHistory().forEachRemaining(message -> {
 			LOGGER.info(target.getName() + " " + messages.length());
 			JSONObject jsonMessage = new JSONObject();
+			jsonMessage.put("id", message.getIdLong());
 			jsonMessage.put("authorId", message.getAuthor().getIdLong());
 			jsonMessage.put("authorName", message.getAuthor().getName());
 			jsonMessage.put("message", message.getContentRaw());

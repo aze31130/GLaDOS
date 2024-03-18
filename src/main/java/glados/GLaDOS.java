@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
-import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -52,9 +51,7 @@ public class GLaDOS implements Logging {
 
 	public int requestsAmount;
 
-	public JSONArray bannedWords;
-
-	public JSONArray epicgameQuotes, joinQuote, leaveQuote, randomQuote;
+	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
