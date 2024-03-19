@@ -285,11 +285,21 @@ public class BuildEmbed {
 		return upgrade;
 	}
 
+	public static EmbedBuilder cheGuevaraEmbed(String meme) {
+		EmbedBuilder result = new EmbedBuilder()
+				.setTitle("Che Guevara")
+				.setThumbnail(
+						"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Che_Guevara_vector_SVG_format.svg/1200px-Che_Guevara_vector_SVG_format.svg.png")
+				.setDescription(meme)
+				.setColor(Color.BLUE)
+				.setTimestamp(Instant.now());
+		return result;
+	}
+
 	public static EmbedBuilder helpEmbed() {
 		EmbedBuilder result = new EmbedBuilder()
 				.setTitle("Help page")
 				.setColor(Color.WHITE);
-
 		return result;
 	}
 }
