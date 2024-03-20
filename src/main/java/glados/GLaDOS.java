@@ -51,7 +51,7 @@ public class GLaDOS implements Logging {
 
 	public int requestsAmount;
 
-	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote;
+	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote, activities;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
@@ -106,6 +106,7 @@ public class GLaDOS implements Logging {
 			this.joinQuote = FileUtils.loadJsonArray("./joinQuote.json");
 			this.leaveQuote = FileUtils.loadJsonArray("./leaveQuote.json");
 			this.randomQuote = FileUtils.loadJsonArray("./randomAnswer.json");
+			this.activities = FileUtils.loadJsonArray("./activities.json");
 
 			// Load the global variables
 			JSONObject json = FileUtils.loadJsonObject("./config.json");

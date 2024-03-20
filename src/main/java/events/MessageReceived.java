@@ -21,17 +21,8 @@ public class MessageReceived extends ListenerAdapter {
 			}
 		}
 
-		// if(glados.leveling) {
-		// Account a = glados.getAccount(event.getMember().getId());
-		// if(a != null && a.level < glados.maxLevel) {
-		// a.experience += 1;
-		// Levels.checkLevelUp(a);
-		// }
-		// a.totalExperience += 1;
-		// }
-
 		if (event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
-			if (new Random().nextInt(100) >= 30) {
+			if (new Random().nextInt(10) >= 3) {
 				event.getChannel().sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length())))
 						.queue();
 			}
@@ -45,7 +36,7 @@ public class MessageReceived extends ListenerAdapter {
 		// Check self sender
 		for (String dropbotCommand : dropbotCommands)
 			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand)
-					&& (new Random().nextInt(100) >= 80))
+					&& (new Random().nextInt(10) < 2))
 				event.getChannel().sendMessage(dropbotCommand).queue();
 	}
 }

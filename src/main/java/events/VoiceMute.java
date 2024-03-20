@@ -8,7 +8,5 @@ public class VoiceMute extends ListenerAdapter {
 	public void onGuildVoiceMute(GuildVoiceMuteEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
-		// event.getGuild().getMemberById("").mute(true).queue();
-		// event.getGuild().getMemberById("").deafen(true).queue();
 	}
 }
