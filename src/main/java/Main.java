@@ -20,8 +20,6 @@ public class Main implements Logging {
 
 		LOGGER.info("Starting GLaDOS");
 		glados.initialize();
-		LOGGER.info("Leveling " + glados.leveling);
-		LOGGER.info("Maximum level " + glados.maxLevel);
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 

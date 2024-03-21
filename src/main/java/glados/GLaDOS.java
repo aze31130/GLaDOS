@@ -37,8 +37,7 @@ public class GLaDOS implements Logging {
 	public String version, token, cdn;
 
 	// Internal settings
-	public boolean leveling, checkPrivateMessages, metricLogging;
-	public int maxLevel, maxExpPerDay;
+	public boolean metricLogging;
 	public String guildId, ownerId;
 
 	// Role attributes
@@ -112,9 +111,7 @@ public class GLaDOS implements Logging {
 			JSONObject json = FileUtils.loadJsonObject("./config.json");
 			this.getVersion();
 
-			this.leveling = json.getBoolean("leveling");
 			this.metricLogging = json.getBoolean("metricLogging");
-			this.checkPrivateMessages = json.getBoolean("checkPrivateMessages");
 
 			this.cdn = json.getString("cdn");
 
@@ -144,8 +141,6 @@ public class GLaDOS implements Logging {
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.token = json.getString("token");
 
-			this.maxExpPerDay = json.getInt("maxExpPerDay");
-			this.maxLevel = json.getInt("maxLevel");
 			this.requestsAmount = 0;
 			this.translationCooldown = LocalDateTime.now();
 

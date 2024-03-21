@@ -26,10 +26,8 @@ public class FileUtils {
 	public static void createDefaultConfig() {
 		JSONObject defaultConfig = new JSONObject();
 		JSONArray bannedWords = new JSONArray();
-		defaultConfig.put("leveling", false);
 
 		defaultConfig.put("metricLogging", true);
-		defaultConfig.put("checkPrivateMessages", false);
 		defaultConfig.put("cdn", "");
 		defaultConfig.put("guildId", "");
 		defaultConfig.put("ownerId", "");
@@ -52,8 +50,6 @@ public class FileUtils {
 		defaultConfig.put("role_moderator", "");
 		defaultConfig.put("role_administrator", "");
 
-		defaultConfig.put("maxExpPerDay", "1000");
-		defaultConfig.put("maxLevel", "100");
 		defaultConfig.put("bannedWords", bannedWords);
 		defaultConfig.put("token", "YOUR_TOKEN_HERE");
 
