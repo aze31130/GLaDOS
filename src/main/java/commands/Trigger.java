@@ -56,7 +56,6 @@ public class Trigger extends Command {
 		// Download latest messages and removes duplicates but keep the lowest score of each member
 		for (Message m : generalChannel.getHistory().retrievePast(50).complete()) {
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
-
 			// Adds to the list only if message is in time range
 			if ((delta >= -15000) && (delta <= 15000))
 				sortedMessages.add(m);

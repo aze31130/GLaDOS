@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import net.dv8tion.jda.api.entities.Message;
 
@@ -42,10 +44,11 @@ public class TimeUtils {
 	 * been send before midnight, returns a negative delta
 	 */
 	public static long computeDelta(OffsetDateTime timestamp) {
-		LocalDate today = LocalDate.now();
-		OffsetDateTime midnight = today.atStartOfDay().atOffset(ZoneOffset.UTC);
+		ZoneId parisZone = ZoneId.of("Europe/Paris");
+		LocalDate today = LocalDate.now(parisZone);
+		ZonedDateTime midnight = today.atStartOfDay(parisZone);
 
-		return Duration.between(midnight.toInstant(), timestamp.plusHours(1).toInstant()).toMillis();
+		return ChronoUnit.MILLIS.between(midnight, timestamp);
 	}
 
 	public static int compareTo(Message a, Message b) {
