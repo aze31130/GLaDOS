@@ -16,7 +16,7 @@ import items.Rarity;
 
 public class ItemUtils implements Logging {
 
-	public static final int AMOUNT_ITEM_PER_PAGE = 5;
+	public static final int AMOUNT_ITEM_PER_PAGE = 10;
 
 	/*
 	 * This private constructor hides the implicit public one
