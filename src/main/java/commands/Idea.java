@@ -29,11 +29,14 @@ public class Idea extends Command {
 		int participants = jsonObject.getInt("participants");
 		int price = jsonObject.getInt("price");
 
-		EmbedBuilder info =
-				new EmbedBuilder().setAuthor("What Should I Do ?").setTitle(activity)
-						.addField("Price: ", price + "", false).addField("Type: ", type, false)
-						.addField("Participants: ", participants + "", false)
-						.setColor(Color.CYAN).setTimestamp(Instant.now());
+		EmbedBuilder info = new EmbedBuilder()
+				.setAuthor("What Should I Do ?")
+				.setTitle(activity)
+				.addField("Price: ", price + "", false)
+				.addField("Type: ", type, false)
+				.addField("Participants: ", participants + "", false)
+				.setColor(Color.CYAN)
+				.setTimestamp(Instant.now());
 		event.getHook().sendMessageEmbeds(info.build()).queue();
 	}
 }

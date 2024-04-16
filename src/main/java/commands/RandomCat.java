@@ -33,8 +33,10 @@ public class RandomCat extends Command {
 		JSONArray jsonArray = new JSONArray(new JSONTokener(
 				new BufferedReader(new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
 		JSONObject jsonObject = new JSONObject(jsonArray.get(0).toString());
-		EmbedBuilder info = new EmbedBuilder().setTitle("Random Cat Picture")
-				.setImage(jsonObject.getString("url")).setColor(Color.WHITE)
+		EmbedBuilder info = new EmbedBuilder()
+				.setTitle("Random Cat Picture")
+				.setImage(jsonObject.getString("url"))
+				.setColor(Color.WHITE)
 				.setTimestamp(Instant.now());
 		event.getHook().sendMessageEmbeds(info.build()).queue();
 	}

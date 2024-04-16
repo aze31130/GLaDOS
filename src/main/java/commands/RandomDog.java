@@ -22,9 +22,11 @@ public class RandomDog extends Command {
 
 	@Override
 	public void execute(SlashCommandInteractionEvent event) throws JSONException, IOException {
-		EmbedBuilder info = new EmbedBuilder().setTitle("Random Dog Picture")
+		EmbedBuilder info = new EmbedBuilder()
+				.setTitle("Random Dog Picture")
 				.setImage(JsonDownloader.getJson("https://dog.ceo/api/breeds/image/random").getString("message"))
-				.setColor(Color.WHITE).setTimestamp(Instant.now());
+				.setColor(Color.WHITE)
+				.setTimestamp(Instant.now());
 		event.getHook().sendMessageEmbeds(info.build()).queue();
 	}
 }

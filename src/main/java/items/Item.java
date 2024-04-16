@@ -6,7 +6,7 @@ import utils.UpgradeRatesUtils;
 
 public class Item implements Cloneable {
 	public int id;
-	public String name, lore, url;
+	public String name, lore;
 	public ItemType type;
 	public Rarity rarity;
 	public Double dropChance;
@@ -92,7 +92,6 @@ public class Item implements Cloneable {
 		this.broken = broken;
 		this.quality = quality;
 		this.value = value;
-		this.url = "https://" + id;
 	}
 
 	public String getFQName() {
