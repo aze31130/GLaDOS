@@ -43,7 +43,7 @@ public class Item extends Command {
 		};
 
 		for (Rarity r : allRarity)
-			rarityEmbed.addField(r.name().toLowerCase() + " : " + ItemUtils.getRarityDropRate(r) + "%",
+			rarityEmbed.addField(r.name().toLowerCase() + " : " + String.format("%.2f", ItemUtils.getRarityDropRate(r)) + "%",
 					"Registered Items: " + g.items.stream().filter(i -> i.rarity.equals(r)).count(), false);
 
 		source.sendMessageEmbeds(rarityEmbed.build()).queue();
