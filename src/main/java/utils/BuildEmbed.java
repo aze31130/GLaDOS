@@ -241,7 +241,7 @@ public class BuildEmbed {
 	}
 
 	public static EmbedBuilder inventoryEmbed(Account sender, int pageNumber) {
-		int totalPages = (int) Math.ceil((double) sender.inventory.size() / 5);
+		int totalPages = (int) Math.ceil((double) sender.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
 
 		EmbedBuilder inventory = new EmbedBuilder()
 				.setTitle("Your inventory")
