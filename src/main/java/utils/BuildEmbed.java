@@ -118,12 +118,9 @@ public class BuildEmbed {
 				.setColor(Color.GREEN)
 				.setThumbnail(account.user.getAvatarUrl())
 				.addField(":shield: - Trust Factor", "WIP", true)
-				.addField(":wave: - Fame", "WIP", true)
 				.addField(":clock: :timer: - Joined Discord", account.user.getTimeCreated().toString(), true)
 				.addField(":moneybag: - Money", Long.toString(account.money), true)
 				.addField(":briefcase: - Items", Integer.toString(account.inventory.size()), true)
-				.addField(":envelope: - Messages", "WIP", true)
-				.addField(":tada: - Reactions", "WIP", true)
 				.addField(":trophy: - Achievements", "WIP", true)
 				.setTimestamp(Instant.now());
 		return embed;
