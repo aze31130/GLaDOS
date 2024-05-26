@@ -7,7 +7,10 @@ import com.sun.management.OperatingSystemMXBean;
 import glados.GLaDOS;
 import utils.TimeUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import accounts.Permission;
 
 public class Version extends Command {
@@ -17,11 +20,18 @@ public class Version extends Command {
 				"Displays version alongside others indicators",
 				Permission.NONE,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList());
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		OperatingSystemMXBean os = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 		EmbedBuilder info = new EmbedBuilder()

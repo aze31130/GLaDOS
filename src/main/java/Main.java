@@ -37,11 +37,10 @@ public class Main implements Logging {
 
 		jda.setAutoReconnect(true);
 
-		ListenerAdapter events[] =
-				{new AutoComplete(), new ButtonClick(), new ChannelCreate(), new ChannelDelete(), new MemberJoin(),
-						new MemberRemove(), new MessageDelete(), new MessageReactionAdd(), new MessageReactionRemove(),
-						new MessageReceived(), new ModalReceived(), new SlashCommandInteraction(), new VoiceUpdate(),
-						new VoiceMute()};
+		ListenerAdapter events[] = {new AutoComplete(), new ButtonClick(), new ChannelCreate(), new ChannelDelete(),
+				new ContextMessage(), new ContextUser(), new MemberJoin(), new MemberRemove(), new MessageDelete(),
+				new MessageReactionAdd(), new MessageReactionRemove(), new MessageReceived(), new ModalReceived(),
+				new SlashCommandInteraction(), new VoiceUpdate(), new VoiceMute()};
 
 		for (ListenerAdapter event : events)
 			jda.addEventListener(event);

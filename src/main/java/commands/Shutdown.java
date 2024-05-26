@@ -4,7 +4,10 @@ import utils.Logging;
 import java.util.Arrays;
 import java.util.logging.Level;
 import accounts.Permission;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 
 public class Shutdown extends Command implements Logging {
 	public Shutdown() {
@@ -13,11 +16,18 @@ public class Shutdown extends Command implements Logging {
 				"Gracely Shutdown GLaDOS. Moderator privileges required.",
 				Permission.MODERATOR,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList());
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 
 		Logging.LOGGER.log(Level.INFO, "Shutting down now !");
 

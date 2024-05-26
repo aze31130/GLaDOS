@@ -11,12 +11,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.Permission;
 import glados.GLaDOS;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ItemComponent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 
@@ -31,6 +34,7 @@ public class Question extends Command {
 				"Challenges your general knowledge",
 				Permission.NONE,
 				Tag.FUN,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "difficulty", "Can be [easy, normal, hard]. Default is random")
 								.addChoice("easy", "easy")
@@ -39,7 +43,13 @@ public class Question extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) throws JSONException, IOException {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) throws JSONException, IOException {
 		GLaDOS g = GLaDOS.getInstance();
 
 		if (g.goodAnswer.length() > 0) {

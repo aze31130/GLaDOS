@@ -7,7 +7,10 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
 
@@ -18,11 +21,18 @@ public class Drop extends Command {
 				"Drops you a random item.",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList());
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);

@@ -6,7 +6,10 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import accounts.Permission;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.utils.FileUpload;
@@ -19,12 +22,19 @@ public class Factorielle extends Command {
 				"Computes given factorial number",
 				Permission.NONE,
 				Tag.MATHS,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.INTEGER, "n", "F(n) you want to compute", true)));
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {

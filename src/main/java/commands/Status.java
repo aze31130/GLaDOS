@@ -2,7 +2,10 @@ package commands;
 
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.Arrays;
@@ -16,6 +19,7 @@ public class Status extends Command {
 				"Updates GLaDOS's activity",
 				Permission.NONE,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "type", "Can be [listening, playing, watching, streaming]", true)
 								.addChoice("listening", "listening")
@@ -26,7 +30,13 @@ public class Status extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		String activity = event.getOption("type").getAsString();
 		String description = event.getOption("description").getAsString();
 

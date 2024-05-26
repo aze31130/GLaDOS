@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ItemComponent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
 import accounts.Account;
@@ -22,12 +25,19 @@ public class Upgrade extends Command {
 				"Upgrade an item from your inventory.",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(new OptionData(OptionType.STRING, "name", "The item full qualified name you want to upgrade.", true,
 						true)));
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);

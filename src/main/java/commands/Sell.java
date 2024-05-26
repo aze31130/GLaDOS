@@ -6,7 +6,10 @@ import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
@@ -18,12 +21,19 @@ public class Sell extends Command {
 				"Sells an item.",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "item", "The item you want to sell", true, true)));
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);

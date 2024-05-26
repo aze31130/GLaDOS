@@ -7,9 +7,12 @@ import accounts.Permission;
 import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.FileUtils;
 import utils.Logging;
@@ -21,12 +24,19 @@ public class Backup extends Command implements Logging {
 				"Download a backup of the entire server. Admin privileges required",
 				Permission.ADMINISTRATOR,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.CHANNEL, "target", "The channel you want to backup.", true)));
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		MessageChannel target = (MessageChannel) event.getOption("target").getAsChannel();
 
 		event.getHook().sendMessage("Downloading channel " + target.getAsMention() + "...").complete();

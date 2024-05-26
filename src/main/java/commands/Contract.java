@@ -13,7 +13,10 @@ import glados.GLaDOS;
 import items.Item;
 import items.Rarity;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
@@ -31,6 +34,7 @@ public class Contract extends Command {
 				"Trade 5 items of same tier against one random of upper tier.",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "item1", "The first item you want to trade", true, true),
 						new OptionData(OptionType.STRING, "item2", "The second item you want to trade", true, true),
@@ -40,7 +44,13 @@ public class Contract extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);

@@ -4,7 +4,10 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
@@ -17,6 +20,7 @@ public class Checksum extends Command {
 				"Compute the checksum of string input.",
 				Permission.NONE,
 				Tag.MATHS,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "algorithm", "The algorithm type", true)
 								.addChoice("md2", "md2")
@@ -30,7 +34,13 @@ public class Checksum extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) throws NoSuchAlgorithmException {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) throws NoSuchAlgorithmException {
 		String algorithm = event.getOption("algorithm").getAsString();
 		String content = event.getOption("content").getAsString();
 

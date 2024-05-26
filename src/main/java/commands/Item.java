@@ -7,11 +7,14 @@ import accounts.Permission;
 import glados.GLaDOS;
 import items.Rarity;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
 
@@ -22,10 +25,17 @@ public class Item extends Command {
 				"Get information about an item",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "name", "The item name you're searching for.", false, true),
 						new OptionData(OptionType.BOOLEAN, "owners", "Displays a list of all account owning the item.")));
 	}
+
+	@Override
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
 
 	public void generateItemChart(InteractionHook source, GLaDOS g) {
 		EmbedBuilder rarityEmbed = BuildEmbed.itemChartEmbed();
@@ -65,7 +75,7 @@ public class Item extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS g = GLaDOS.getInstance();
 
 		// Get item name from argument

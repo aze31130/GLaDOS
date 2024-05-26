@@ -4,7 +4,10 @@ import java.util.Arrays;
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
@@ -16,11 +19,26 @@ public class Profile extends Command {
 				"Show a user profile",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH, Type.USER),
 				Arrays.asList());
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {
+		GLaDOS glados = GLaDOS.getInstance();
+		User author = event.getTarget();
+		Account a = glados.getAccount(author);
+
+		EmbedBuilder profile = BuildEmbed.profileEmbed(a);
+
+		event.getHook().sendMessageEmbeds(profile.build()).queue();
+	}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		User author = event.getUser();
 		Account a = glados.getAccount(author);

@@ -5,9 +5,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
@@ -28,6 +31,7 @@ public class Trigger extends Command {
 				"Triggers an internal event. Moderator privileges required",
 				Permission.MODERATOR,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "trigger", "Call name you want to trigger", true)
 								.addChoice("Gamer", "Gamer")
@@ -117,7 +121,13 @@ public class Trigger extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		TextChannel source = event.getChannel().asTextChannel();
 		String trigger = event.getOption("trigger").getAsString();
 

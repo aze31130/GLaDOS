@@ -5,10 +5,13 @@ import java.util.Optional;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
 
@@ -19,6 +22,7 @@ public class Delete extends Command {
 				"Deletes an item from someone's inventory. Owner privileges required.",
 				Permission.OWNER,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The user you want to remove an item", true),
 						new OptionData(OptionType.STRING, "item", "The item you want to remove", true),
@@ -26,7 +30,13 @@ public class Delete extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());

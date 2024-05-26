@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
+import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -25,8 +26,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.Message.Attachment;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import utils.BuildEmbed;
 import utils.FileUtils;
 import utils.ItemUtils;
@@ -234,13 +236,27 @@ public class GLaDOS implements Logging {
 		if (this.commands.isEmpty())
 			return;
 
-		List<SlashCommandData> convertedCommands = new ArrayList<>();
+		List<CommandData> convertedCommands = new ArrayList<>();
 
 		for (Command c : this.commands) {
-			if (c.arguments.isEmpty())
-				convertedCommands.add(Commands.slash(c.name, c.description));
-			else
-				convertedCommands.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
+			for (Type t : c.type) {
+				switch (t) {
+					case SLASH:
+						if (c.arguments.isEmpty())
+							convertedCommands.add(Commands.slash(c.name, c.description));
+						else
+							convertedCommands.add(Commands.slash(c.name, c.description).addOptions(c.arguments));
+						break;
+					case MESSAGE:
+						convertedCommands.add(Commands.message(c.name));
+						break;
+					case USER:
+						convertedCommands.add(Commands.user(c.name));
+						break;
+					case UNKNOWN:
+						break;
+				}
+			}
 		}
 
 		jda.updateCommands().addCommands(convertedCommands).queue();

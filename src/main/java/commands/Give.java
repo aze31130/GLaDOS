@@ -6,10 +6,13 @@ import java.util.Random;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 
 public class Give extends Command {
@@ -19,6 +22,7 @@ public class Give extends Command {
 				"Gives an item to someone. Owner privileges required.",
 				Permission.OWNER,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The user you want to give an item", true),
 						new OptionData(OptionType.STRING, "item", "The item you want to give", false, true),
@@ -28,7 +32,13 @@ public class Give extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) throws CloneNotSupportedException {
 		GLaDOS glados = GLaDOS.getInstance();
 
 		Optional<Account> optionalTarget = glados.getAccountById(event.getOption("target").getAsString());

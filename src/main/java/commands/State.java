@@ -2,7 +2,10 @@ package commands;
 
 import utils.BuildEmbed;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.Arrays;
@@ -16,6 +19,7 @@ public class State extends Command {
 				"Updates GLaDOS's state (online, idle, do not disturb)",
 				Permission.NONE,
 				Tag.SYSTEM,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.STRING, "status", "Can be [online, idle, dnd]", true)
 								.addChoice("online", "online")
@@ -24,7 +28,13 @@ public class State extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		String state = event.getOption("status").getAsString();
 
 		switch (state) {

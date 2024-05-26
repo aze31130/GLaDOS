@@ -1,14 +1,14 @@
 package events;
 
-import glados.GLaDOS;
 import commands.Command;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import glados.GLaDOS;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
 import utils.PermissionsUtils;
 
-public class SlashCommandInteraction extends ListenerAdapter {
-	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+public class ContextMessage extends ListenerAdapter {
+	public void onMessageContextInteraction(MessageContextInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
 
@@ -20,12 +20,10 @@ public class SlashCommandInteraction extends ListenerAdapter {
 					return;
 				}
 
-				if (!command.name.equalsIgnoreCase("vote"))
-					event.deferReply().queue();
-
 				try {
+					event.deferReply().queue();
 					event.getChannel().sendTyping().queue();
-					command.executeSlash(event);
+					command.executeContextMessage(event);
 				} catch (Exception e) {
 					event.replyEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
 				}

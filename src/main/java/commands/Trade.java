@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -23,6 +26,7 @@ public class Trade extends Command {
 				"Request a trade with another user.",
 				Permission.NONE,
 				Tag.RPG,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList(
 						new OptionData(OptionType.USER, "target", "The target of your trade offer", true),
 						new OptionData(OptionType.STRING, "srcitem", "The item you want to give", true, true),
@@ -32,7 +36,13 @@ public class Trade extends Command {
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) {
 		// Ensures trade is performed in a server, not in private message
 		if (!event.isFromGuild()) {
 			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You can only trade in a server !").build()).queue();

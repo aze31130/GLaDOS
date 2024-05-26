@@ -14,7 +14,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import accounts.Permission;
 
 public class RandomCat extends Command {
@@ -24,11 +27,18 @@ public class RandomCat extends Command {
 				"Displays a cat picture",
 				Permission.NONE,
 				Tag.FUN,
+				Arrays.asList(Type.SLASH),
 				Arrays.asList());
 	}
 
 	@Override
-	public void execute(SlashCommandInteractionEvent event) throws JSONException, MalformedURLException, IOException {
+	public void executeContextUser(UserContextInteractionEvent event) {}
+
+	@Override
+	public void executeContextMessage(MessageContextInteractionEvent event) {}
+
+	@Override
+	public void executeSlash(SlashCommandInteractionEvent event) throws JSONException, MalformedURLException, IOException {
 		String apiUrl = "https://api.thecatapi.com/v1/images/search";
 		JSONArray jsonArray = new JSONArray(new JSONTokener(
 				new BufferedReader(new InputStreamReader(new URL(apiUrl).openConnection().getInputStream()))));
