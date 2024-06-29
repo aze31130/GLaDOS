@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://static.aze.sh/TODO.png"/>
+    <img src="https://static.aze.sh/GLaDOS.png"/>
     <h1>GLaDOS</h1>
     <h3>A tyrannical Discord bot</h3>
 </div>
