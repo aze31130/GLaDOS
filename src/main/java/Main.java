@@ -1,6 +1,10 @@
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import com.apptasticsoftware.rssreader.Item;
+import com.apptasticsoftware.rssreader.RssReader;
 import events.*;
 import tasks.*;
 import glados.GLaDOS;
@@ -54,11 +58,12 @@ public class Main implements Logging {
 		glados.registerCommands(jda);
 		glados.loadAccounts(jda);
 
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
 		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
+		scheduler.scheduleAtFixedRate(new News(jda), 0, 10, TimeUnit.MINUTES);
 
 		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}

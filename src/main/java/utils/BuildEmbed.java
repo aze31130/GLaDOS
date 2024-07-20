@@ -296,6 +296,21 @@ public class BuildEmbed {
 		return result;
 	}
 
+	public static EmbedBuilder rssNewsEmbed(com.apptasticsoftware.rssreader.Item i, String feedName) {
+		EmbedBuilder result = new EmbedBuilder()
+				.setTitle(i.getTitle().isPresent() ? i.getTitle().get() : "?")
+				.setFooter(feedName + " - " + (i.getPubDate().isPresent() ? i.getPubDate().get() : "?"))
+				.setColor(Color.MAGENTA);
+
+		if (i.getDescription().isPresent())
+			result.setDescription(StringsUtils.escapeHTML(i.getDescription().get()));
+
+		if (i.getLink().isPresent())
+			result.addField("", i.getLink().get(), false);
+
+		return result;
+	}
+
 	public static EmbedBuilder helpEmbed() {
 		EmbedBuilder result = new EmbedBuilder()
 				.setTitle("Help page")

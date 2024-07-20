@@ -48,11 +48,11 @@ public class GLaDOS implements Logging {
 
 	// Channel attributes
 	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole, channelVote, channelBackup,
-			channelSystem;
+			channelSystem, channelHacker;
 
 	public int requestsAmount;
 
-	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote, activities;
+	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
@@ -61,6 +61,9 @@ public class GLaDOS implements Logging {
 	public List<Account> accounts = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
+
+	public List<Integer> rssNews = new ArrayList<>();
+
 	// Optimisation, holds the sum of each drop weight so that we avoid recalculating it
 	public double itemTotalProb = 0;
 
@@ -139,8 +142,10 @@ public class GLaDOS implements Logging {
 			this.channelVote = json.getString("channel_vote");
 			this.channelBackup = json.getString("channel_backup");
 			this.channelSystem = json.getString("channel_system");
+			this.channelHacker = json.getString("channel_hacker");
 
 			this.bannedWords = json.getJSONArray("bannedWords");
+			this.rssFeeds = json.getJSONArray("rss");
 			this.token = json.getString("token");
 
 			this.requestsAmount = 0;
