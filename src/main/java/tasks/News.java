@@ -15,6 +15,25 @@ public class News implements Runnable, Logging {
 
 	public News(JDA jda) {
 		this.jda = jda;
+
+		// init rss reader
+		GLaDOS glados = GLaDOS.getInstance();
+
+		// Fill rss cache at first launch
+		for (int i = 0; i < glados.rssFeeds.length(); i++) {
+			JSONObject feedObj = glados.rssFeeds.getJSONObject(i);
+			String feedLink = feedObj.getString("link");
+
+			try {
+				List<Item> items = new RssReader().read(feedLink).toList();
+				for (Item it : items) {
+					int hash = it.getTitle().get().hashCode();
+					glados.rssNews.add(hash);
+				}
+			} catch (IOException e) {
+				LOGGER.severe(e.toString() + " for URL " + feedLink);
+			}
+		}
 	}
 
 	@Override
@@ -30,25 +49,17 @@ public class News implements Runnable, Logging {
 			try {
 				List<Item> items = new RssReader().read(feedLink).toList();
 
-				// Fill rss cache if first launch and do not post updates
-				if (glados.rssNews.size() == 0) {
-					for (Item it : items)
-						glados.rssNews.add(it.hashCode());
-					return;
-				}
-
-				// Post only new
+				// Post only new feed
 				for (Item it : items) {
-					int hash = it.hashCode();
+					int hash = it.getTitle().get().hashCode();
 					if (!glados.rssNews.contains(hash)) {
 						jda.getTextChannelById(glados.channelBotSnapshot)
-								.sendMessageEmbeds(BuildEmbed.rssNewsEmbed(it, feedName).build())
-								.queue();
+								.sendMessageEmbeds(BuildEmbed.rssNewsEmbed(it, feedName).build()).queue();
 						glados.rssNews.add(hash);
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.severe(e.toString() + " for URL " + feedLink);
 			}
 		}
 	}
