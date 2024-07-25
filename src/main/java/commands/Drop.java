@@ -61,5 +61,19 @@ public class Drop extends Command {
 		authorAccount.inventory.add(droppedItem);
 		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem, glados.cdn).build()).queue();
 		authorAccount.canDrop = false;
+
+		// Temporary event drop for Paris's 2024 Olympic Game
+		try {
+			// Check if the item is already in user's inventory
+			if (authorAccount.inventory.stream().filter(it -> it.id == 142).findFirst().isPresent())
+				return;
+
+			Item eventItem = (Item) glados.getItemById(142).get().clone();
+			eventItem.makeLegit();
+			authorAccount.inventory.add(eventItem);
+			event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, eventItem, glados.cdn).build()).queue();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -5,9 +5,15 @@ package items;
  */
 public enum ConditionnalDrop {
 	/*
-	 * The item cannot be dropped twice as long as someone holds it in its inventory
+	 * The item is unique. It cannot be dropped again as long as someone holds it in its inventory
 	 */
 	UNIQUE_ITEM,
+
+	/*
+	 * This item can only be obtained once per account during special times.
+	 * Drops 100% of the time during event time
+	 */
+	EVENT_ITEM,
 
 	/*
 	 * The item can only be dropped at christmas

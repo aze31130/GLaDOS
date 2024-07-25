@@ -1,0 +1,13 @@
+{
+    "id": 142,
+    "name": "Paris 2024 Olympic Flame",
+    "type": "MEDAL",
+    "lore": "This Olympic flame is a prestigious medal awarded to champions who attended 2024 Olympic Games. This eternal flame reflects athletic excellence and the vibrant culture of Paris.",
+    "rarity": "EVENT",
+    "dropChance": 0,
+    "starForceMaxLevel": 10,
+    "claimable": false,
+    "untradable": true,
+    "value": 1,
+    "conditionnalDrop": []
+}
