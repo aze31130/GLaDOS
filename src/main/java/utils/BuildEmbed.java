@@ -300,7 +300,7 @@ public class BuildEmbed {
 		EmbedBuilder result = new EmbedBuilder()
 				.setTitle(i.getTitle().isPresent() ? i.getTitle().get() : "?")
 				.setFooter(feedName + " - " + (i.getPubDate().isPresent() ? i.getPubDate().get() : "?"))
-				.setColor(Color.decode("6460AA"));
+				.setColor(Color.decode("#6460AA"));
 
 		if (i.getDescription().isPresent())
 			result.setDescription(StringsUtils.escapeHTML(i.getDescription().get()));

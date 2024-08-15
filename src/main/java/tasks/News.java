@@ -27,7 +27,7 @@ public class News implements Runnable, Logging {
 			try {
 				List<Item> items = new RssReader().read(feedLink).toList();
 				for (Item it : items) {
-					int hash = it.getTitle().get().hashCode();
+					int hash = it.getLink().get().hashCode();
 					glados.rssNews.add(hash);
 				}
 			} catch (IOException e) {
@@ -51,14 +51,14 @@ public class News implements Runnable, Logging {
 
 				// Post only new feed
 				for (Item it : items) {
-					int hash = it.getTitle().get().hashCode();
+					int hash = it.getLink().get().hashCode();
 					if (!glados.rssNews.contains(hash)) {
 						jda.getTextChannelById(glados.channelBotSnapshot)
 								.sendMessageEmbeds(BuildEmbed.rssNewsEmbed(it, feedName).build()).queue();
 						glados.rssNews.add(hash);
 					}
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				LOGGER.severe(e.toString() + " for URL " + feedLink);
 			}
 		}

@@ -54,12 +54,12 @@ public class Main implements Logging {
 		glados.registerCommands(jda);
 		glados.loadAccounts(jda);
 
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
 		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
-		// scheduler.scheduleAtFixedRate(new News(jda), 0, 1, TimeUnit.HOURS);
+		scheduler.scheduleAtFixedRate(new News(jda), 0, 1, TimeUnit.HOURS);
 
 		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}
