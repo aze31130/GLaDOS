@@ -48,7 +48,7 @@ public class GLaDOS implements Logging {
 
 	// Channel attributes
 	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole, channelVote, channelBackup,
-			channelSystem, channelHacker;
+			channelSystem, channelHacker, channelNews;
 
 	public int requestsAmount;
 
@@ -138,6 +138,7 @@ public class GLaDOS implements Logging {
 			this.channelGamer = json.getString("channel_gamer");
 			this.channelBotSnapshot = json.getString("channel_botSnapshot");
 			this.channelNsfw = json.getString("channel_nsfw");
+			this.channelNews = json.getString("channel_news");
 			this.channelRole = json.getString("channel_role");
 			this.channelVote = json.getString("channel_vote");
 			this.channelBackup = json.getString("channel_backup");

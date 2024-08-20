@@ -1,6 +1,5 @@
 package tasks;
 
-import java.io.IOException;
 import java.util.List;
 import org.json.JSONObject;
 import com.apptasticsoftware.rssreader.Item;
@@ -30,7 +29,7 @@ public class News implements Runnable, Logging {
 					int hash = it.getLink().get().hashCode();
 					glados.rssNews.add(hash);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				LOGGER.severe(e.toString() + " for URL " + feedLink);
 			}
 		}
@@ -53,7 +52,7 @@ public class News implements Runnable, Logging {
 				for (Item it : items) {
 					int hash = it.getLink().get().hashCode();
 					if (!glados.rssNews.contains(hash)) {
-						jda.getTextChannelById(glados.channelBotSnapshot)
+						jda.getTextChannelById(glados.channelNews)
 								.sendMessageEmbeds(BuildEmbed.rssNewsEmbed(it, feedName).build()).queue();
 						glados.rssNews.add(hash);
 					}
