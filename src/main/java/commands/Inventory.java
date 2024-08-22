@@ -29,6 +29,7 @@ public class Inventory extends Command {
 				Tag.RPG,
 				Arrays.asList(Type.SLASH),
 				Arrays.asList(
+						new OptionData(OptionType.USER, "target", "The account you want to consult"),
 						new OptionData(OptionType.INTEGER, "page", "The inventory page you want to open")));
 	}
 
@@ -41,8 +42,14 @@ public class Inventory extends Command {
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
+
 		User author = event.getUser();
 		Account authorAccount = glados.getAccount(author);
+
+		// Check if another account is given
+		OptionMapping target = event.getOption("target");
+		if (target != null)
+			authorAccount = glados.getAccount(target.getAsUser());
 
 		int startingPage = Optional.ofNullable(event.getOption("page")).map(OptionMapping::getAsInt).orElse(1);
 		int lastPage = (int) Math.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);

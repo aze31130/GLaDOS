@@ -243,7 +243,7 @@ public class BuildEmbed {
 		EmbedBuilder inventory = new EmbedBuilder()
 				.setTitle("Your inventory")
 				.setDescription("You have " + sender.money + " :coin:")
-				.setAuthor(sender.user.getName())
+				.setAuthor(sender.user.getId())
 				.setThumbnail(sender.user.getAvatarUrl())
 				.setColor(Color.GRAY)
 				.setFooter(pageNumber + " / " + totalPages)

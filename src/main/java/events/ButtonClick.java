@@ -44,21 +44,12 @@ public class ButtonClick extends ListenerAdapter {
 
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("NextPage") || trigger.equals("PrevPage")) {
-			User author = event.getUser();
-			Account authorAccount = glados.getAccount(author);
-
 			/*
-			 * Check if the clicker owns the inventory. This is to make sure another user cannot click on the
-			 * inventory of someone else.
+			 * To get the account's inventory displayed on the embed, the author field must have the id of the
+			 * account. That way, we can simply get it and display the inventory.
 			 */
-			String inventoryName = event.getMessage().getEmbeds().get(0).getAuthor().getName();
-			String clickerName = event.getUser().getName();
-			if (!inventoryName.equals(clickerName)) {
-				event.replyEmbeds(
-						BuildEmbed.errorEmbed("You cannot explore other's inventory !").build())
-						.setEphemeral(true).queue();
-				return;
-			}
+			String accountInventoryId = event.getMessage().getEmbeds().get(0).getAuthor().getName();
+			Account authorAccount = glados.getAccountById(accountInventoryId).get();
 
 			// Get the current page
 			int pageNumber =
