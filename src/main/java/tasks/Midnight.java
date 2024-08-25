@@ -1,6 +1,9 @@
 package tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import org.json.JSONObject;
 import accounts.Account;
 import commands.Trigger;
 import glados.GLaDOS;
@@ -39,5 +42,20 @@ public class Midnight implements Runnable, Logging {
 		}
 
 		Trigger.midnightRank(jda.getTextChannelById(glados.channelGeneral));
+
+		// Check for birthday events
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		for (int i = 0; i < glados.birthdays.length(); i++) {
+			JSONObject person = glados.birthdays.getJSONObject(i);
+
+			LocalDate birthdate = LocalDate.parse(person.getString("date"), formatter);
+
+			if (birthdate.getMonthValue() == today.getMonthValue() &&
+					birthdate.getDayOfMonth() == today.getDayOfMonth()) {
+				jda.getTextChannelById(glados.channelGeneral).sendMessage("Happy birthday <@" + person.getString("id") + "> ! May this special day full of treasures and wonders ! :birthday::cake::gift::balloon::partying_face::tada::confetti_ball:").queue();
+			}
+		}
 	}
 }

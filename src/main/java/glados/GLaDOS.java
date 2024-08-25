@@ -52,7 +52,7 @@ public class GLaDOS implements Logging {
 
 	public int requestsAmount;
 
-	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds;
+	public JSONArray bannedWords, epicgameQuotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds, birthdays;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
@@ -147,6 +147,7 @@ public class GLaDOS implements Logging {
 
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.rssFeeds = json.getJSONArray("rss");
+			this.birthdays = json.getJSONArray("birthdays");
 			this.token = json.getString("token");
 
 			this.requestsAmount = 0;
