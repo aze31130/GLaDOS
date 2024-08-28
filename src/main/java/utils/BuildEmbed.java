@@ -302,8 +302,15 @@ public class BuildEmbed {
 				.setFooter(feedName + " - " + (i.getPubDate().isPresent() ? i.getPubDate().get() : "?"))
 				.setColor(Color.decode("#6460AA"));
 
-		if (i.getDescription().isPresent())
-			result.setDescription(StringsUtils.escapeHTML(i.getDescription().get()));
+		if (i.getDescription().isPresent()) {
+			String description = i.getDescription().get();
+
+			// Ensure description length is bellow 4096 char limit
+			if (description.length() > 4096)
+				description = description.substring(0, 4096);
+
+			result.setDescription(StringsUtils.escapeHTML(description));
+		}
 
 		if (i.getLink().isPresent())
 			result.addField("", i.getLink().get(), false);

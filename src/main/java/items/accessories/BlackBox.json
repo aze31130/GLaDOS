@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "Black Box",
+    "type": "ITEM",
+    "lore": "This enigmatic YoRHa classified technology contains fragments of Human soul. Embedded within androids, this powerfull device serves as both the 'source life force' and their self-destruct mechanism. Its origin and true nature remain shrouded in mystery.",
+    "rarity": "UNIQUE",
+    "dropChance": 2,
+    "starForceMaxLevel": 30,
+    "claimable": false,
+    "untradable": false,
+    "value": 1000000,
+    "conditionnalDrop": ["UNIQUE_ITEM"]
+}

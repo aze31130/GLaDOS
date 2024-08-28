@@ -20,6 +20,9 @@ public class Item implements Cloneable {
 
 	public int value;
 
+	/*
+	 * Table used to store % of success, failure, critical failure and item explosion.
+	 */
 	private static final UpgradeRatesUtils rates[] = {
 			// 0 -> 5 stars
 			new UpgradeRatesUtils(95, 5, 0, 0),
@@ -61,7 +64,30 @@ public class Item implements Cloneable {
 			new UpgradeRatesUtils(10, 0, 65, 25),
 			new UpgradeRatesUtils(10, 0, 60, 30),
 			new UpgradeRatesUtils(10, 0, 55, 35),
-			new UpgradeRatesUtils(5, 0, 55, 40),
+			new UpgradeRatesUtils(5, 0, 55, 40)
+	};
+
+	/*
+	 * This table holds the % of increase value for each starforce level.
+	 */
+	private static final int UpgradeValueIncrease[] = {
+			// 0 -> 5 stars
+			0, 5, 10, 15, 20,
+
+			// 5 -> 10 stars
+			25, 30, 35, 40, 45,
+
+			// 10 -> 15 stars
+			50, 60, 70, 80, 90,
+
+			// 15 -> 20 stars
+			100, 150, 200, 250, 300,
+
+			// 20 -> 25 stars
+			400, 500, 600, 700, 800,
+
+			// 25 -> 30 stars
+			900, 1000, 1500, 2000, 2500
 	};
 
 	private static final Map<Rarity, int[]> upgradePrices = Map.of(

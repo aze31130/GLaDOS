@@ -126,8 +126,9 @@ public class ItemUtils implements Logging {
 
 		List<Item> sortedInventory = a.inventory.stream()
 				.sorted(Comparator.comparingInt((Item item) -> item.rarity.level)
-						.thenComparing(item -> item.name)
-						.thenComparing(item -> item.starForceLevel))
+						.thenComparing(item -> item.starForceLevel)
+						.thenComparing(item -> item.quality)
+						.thenComparing(item -> item.name))
 				.collect(Collectors.toList());
 		Collections.reverse(sortedInventory);
 
