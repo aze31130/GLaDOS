@@ -51,11 +51,11 @@ public class Sell extends Command {
 		// Sells the item
 		items.Item item = pretendedItem.get();
 
-		authorAccount.money += item.value;
+		authorAccount.money += item.getValue();
 		authorAccount.inventory.remove(item);
 
 		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed(
-				"Successfully sold " + item.getFQName() + " at " + item.value + " (" + authorAccount.money + " total)").build())
-				.queue();
+				"Successfully sold " + item.getFQName() + " at " + item.getValue() + " (" + authorAccount.money + " total)")
+				.build()).queue();
 	}
 }

@@ -18,7 +18,7 @@ public class Item implements Cloneable {
 	public boolean broken;
 	public Double quality;
 
-	public int value;
+	private int value;
 
 	/*
 	 * Table used to store % of success, failure, critical failure and item explosion.
@@ -70,7 +70,7 @@ public class Item implements Cloneable {
 	/*
 	 * This table holds the % of increase value for each starforce level.
 	 */
-	private static final int UpgradeValueIncrease[] = {
+	private static final int upgradeValueIncrease[] = {
 			// 0 -> 5 stars
 			0, 5, 10, 15, 20,
 
@@ -167,6 +167,13 @@ public class Item implements Cloneable {
 		// Ensure all event item are quality maxed
 		if (this.rarity.equals(Rarity.EVENT))
 			this.quality = 1.0;
+	}
+
+	/*
+	 * Apply value increase depending on the starforce level
+	 */
+	public int getValue() {
+		return this.value * (100 + Item.upgradeValueIncrease[this.starForceLevel]) / 100;
 	}
 
 	public Double getQuality() {

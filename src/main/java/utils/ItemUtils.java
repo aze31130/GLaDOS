@@ -234,7 +234,7 @@ public class ItemUtils implements Logging {
 		List<Map.Entry<Item, Integer>> value = new ArrayList<>();
 
 		for (Item i : glados.items)
-			value.add(new AbstractMap.SimpleEntry<Item, Integer>(i, i.value));
+			value.add(new AbstractMap.SimpleEntry<Item, Integer>(i, i.getValue()));
 
 		value.sort(Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
 

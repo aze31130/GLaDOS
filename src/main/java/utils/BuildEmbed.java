@@ -230,7 +230,7 @@ public class BuildEmbed {
 		if (i.starForceMaxLevel > 0)
 			info.addField(":star2: Max StarForce", Integer.toString(i.starForceMaxLevel), false);
 		info.addField(i.type.emote + " Type", i.type.toString().toLowerCase(), false);
-		info.addField(":coin: Value", Integer.toString(i.value), false);
+		info.addField(":coin: Value", Integer.toString(i.getValue()), false);
 		info.addField(":four_leaf_clover: Drop Chance", String.format("%.3f%%", 100 * (i.dropChance / glados.itemTotalProb)),
 				false);
 		info.setTimestamp(Instant.now());
@@ -305,9 +305,9 @@ public class BuildEmbed {
 		if (i.getDescription().isPresent()) {
 			String description = i.getDescription().get();
 
-			// Ensure description length is bellow 4096 char limit
-			if (description.length() > 4096)
-				description = description.substring(0, 4096);
+			// Ensure description length is short enough to be read quickly
+			if (description.length() > 400)
+				description = description.substring(0, 400);
 
 			result.setDescription(StringsUtils.escapeHTML(description));
 		}
