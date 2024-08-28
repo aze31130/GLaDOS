@@ -242,7 +242,7 @@ public class BuildEmbed {
 
 		EmbedBuilder inventory = new EmbedBuilder()
 				.setTitle("Your inventory")
-				.setDescription("You have " + sender.money + " :coin:")
+				.setDescription("You have " + StringsUtils.formatNumber(sender.money) + " :coin:")
 				.setAuthor(sender.user.getId())
 				.setThumbnail(sender.user.getAvatarUrl())
 				.setColor(Color.GRAY)
@@ -273,9 +273,9 @@ public class BuildEmbed {
 		EmbedBuilder upgrade = new EmbedBuilder()
 				.setAuthor(author.user.getName())
 				.setTitle(i.getFQName())
-				.setDescription("You have " + author.money + " :coin:")
+				.setDescription("You have " + StringsUtils.formatNumber(author.money) + " :coin:")
 				.addField("Upgrade", i.starForceLevel + " :star: => " + (i.starForceLevel + 1) + " :star2: ", true)
-				.addField(":moneybag: Cost", Integer.toString(i.getStarForceCost()), true)
+				.addField(":moneybag: Cost", StringsUtils.formatNumber(i.getStarForceCost()), true)
 				.addField(":chart_with_upwards_trend: Success", i.getStarForceSuccessChance() + " %", true)
 				.addField(":chart_with_downwards_trend: Fail (keep)", i.getStarForceKeepChance() + " %", true)
 				.addField(":chart_with_downwards_trend: Fail (decrease)", i.getStarForceFailChance() + " %", true)
@@ -323,5 +323,13 @@ public class BuildEmbed {
 				.setTitle("Help page")
 				.setColor(Color.WHITE);
 		return result;
+	}
+
+	public static EmbedBuilder rankingEmbed() {
+		EmbedBuilder ranking = new EmbedBuilder()
+				.setTitle("Ranking of user's fortune")
+				.setColor(Color.WHITE)
+				.setTimestamp(Instant.now());
+		return ranking;
 	}
 }

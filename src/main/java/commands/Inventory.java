@@ -2,6 +2,7 @@ package commands;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
+import utils.StringsUtils;
 import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
@@ -64,7 +66,8 @@ public class Inventory extends Command {
 		EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, startingPage);
 
 		for (items.Item i : ItemUtils.getUserInventory(authorAccount, startingPage))
-			inventory.addField(i.rarity.emote + " " + i.getFQName(), i.rarity.name() + " | " + i.getValue() + " :coin:", false);
+			inventory.addField(i.rarity.emote + " " + i.getFQName(),
+					i.rarity.name() + " | " + StringsUtils.formatNumber(i.getValue()) + " :coin:", false);
 
 		List<ItemComponent> buttons = Arrays.asList(
 				Button.primary("PrevPage", "Previous Page"),

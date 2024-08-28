@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
 import utils.ItemUtils;
+import utils.StringsUtils;
 
 public class ButtonClick extends ListenerAdapter {
 	public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -70,8 +71,8 @@ public class ButtonClick extends ListenerAdapter {
 			EmbedBuilder inventory = BuildEmbed.inventoryEmbed(authorAccount, newPageNumber);
 
 			for (items.Item i : ItemUtils.getUserInventory(authorAccount, newPageNumber))
-				inventory.addField(i.rarity.emote + " " + i.getFQName(), i.rarity.name() + " | " + i.getValue() + " :coin:",
-						false);
+				inventory.addField(i.rarity.emote + " " + i.getFQName(),
+						i.rarity.name() + " | " + StringsUtils.formatNumber(i.getValue()) + " :coin:", false);
 
 			event.editMessageEmbeds(inventory.build()).queue();
 			return;
@@ -264,9 +265,7 @@ public class ButtonClick extends ListenerAdapter {
 		}
 
 		// Check if action is add role
-		if (trigger.startsWith("+"))
-
-		{
+		if (trigger.startsWith("+")) {
 			trigger = trigger.replace("+", "");
 			if (!dictionary.containsKey(trigger)) {
 				event.reply("You cannot get this role by doing that !").setEphemeral(true).setSuppressedNotifications(true)

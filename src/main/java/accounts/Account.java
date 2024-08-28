@@ -42,6 +42,13 @@ public class Account {
 	}
 
 	/*
+	 * Returns total value of its inventory
+	 */
+	public int getInventoryValue() {
+		return this.inventory.stream().mapToInt(Item::getValue).sum();
+	}
+
+	/*
 	 * Converts the current user to a jsonObject
 	 */
 	public JSONObject toJson() {

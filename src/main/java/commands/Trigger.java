@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEven
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
+import utils.AccountUtils;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
 import utils.TimeUtils;
@@ -41,15 +42,6 @@ public class Trigger extends Command {
 								.addChoice("Backup", "Backup")));
 	}
 
-	private static String getMedalEmoji(int rank) {
-		return switch (rank) {
-			case 1 -> ":first_place: ";
-			case 2 -> ":second_place: ";
-			case 3 -> ":third_place: ";
-			default -> " ";
-		};
-	}
-
 	/*
 	 * Ranks midnight messages and computes who is the winner
 	 */
@@ -75,7 +67,7 @@ public class Trigger extends Command {
 			}
 			long delta = TimeUtils.computeDelta(m.getTimeCreated());
 
-			midnightEmbed.addField(getMedalEmoji(rank) + m.getAuthor().getName(), "**" + delta + "** ms", true);
+			midnightEmbed.addField(AccountUtils.getMedalEmoji(rank) + m.getAuthor().getName(), "**" + delta + "** ms", true);
 			rank++;
 		}
 
