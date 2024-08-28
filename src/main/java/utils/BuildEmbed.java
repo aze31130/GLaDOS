@@ -307,7 +307,7 @@ public class BuildEmbed {
 
 			// Ensure description length is short enough to be read quickly
 			if (description.length() > 400)
-				description = description.substring(0, 400);
+				description = description.substring(0, 400) + "...";
 
 			result.setDescription(StringsUtils.escapeHTML(description));
 		}
