@@ -28,12 +28,12 @@ public class Midnight implements Runnable, Logging {
 	public void run() {
 		LOGGER.info("Executed Random Quote at " + LocalDateTime.now().toString());
 		GLaDOS glados = GLaDOS.getInstance();
-
-		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 		
 		// Resets the ability for all accounts to drop
 		for (Account a : glados.accounts)
 			a.canDrop = true;
+
+		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 
 		try {
 			Thread.sleep(15000);

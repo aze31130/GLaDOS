@@ -94,6 +94,7 @@ public class Trigger extends Command {
 					embed = BuildEmbed.midnightQuote(quote, author);
 				} catch (Exception e) {
 					destination.sendMessageEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+					return;
 				}
 				break;
 			case "Ranking":
