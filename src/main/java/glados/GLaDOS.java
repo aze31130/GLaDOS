@@ -114,6 +114,7 @@ public class GLaDOS implements Logging {
 
 			// Load the global variables
 			JSONObject json = FileUtils.loadJsonObject("./config.json");
+			JSONObject rssFeeds = FileUtils.loadJsonObject("./feeds.json");
 			this.getVersion();
 
 			this.metricLogging = json.getBoolean("metricLogging");
@@ -146,7 +147,7 @@ public class GLaDOS implements Logging {
 			this.channelHacker = json.getString("channel_hacker");
 
 			this.bannedWords = json.getJSONArray("bannedWords");
-			this.rssFeeds = json.getJSONArray("rss");
+			this.rssFeeds = rssFeeds.getJSONArray("rss");
 			this.birthdays = json.getJSONArray("birthdays");
 			this.token = json.getString("token");
 
