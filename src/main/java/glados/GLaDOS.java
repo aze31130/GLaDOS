@@ -1,9 +1,7 @@
 package glados;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
+import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -367,19 +366,6 @@ public class GLaDOS implements Logging {
 	 * Reads the latest commit hash where the project is currently running
 	 */
 	public void getVersion() {
-		try {
-			ProcessBuilder builder = new ProcessBuilder("git", "rev-parse", "HEAD");
-			Process p = builder.start();
-			p.waitFor();
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			this.version = reader.readLine();
-
-			reader.close();
-		} catch (IOException | InterruptedException e) {
-			LOGGER.severe("Could not get version");
-			LOGGER.severe(e.getMessage());
-		}
+		this.version = FileUtils.readRawFile(".git/refs/heads/master");
 	}
 }
