@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionE
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
+import utils.HttpUtils;
 import accounts.Permission;
 
 public class Ip extends Command {
@@ -26,6 +27,6 @@ public class Ip extends Command {
 
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
-		// TODO
+		event.getHook().sendMessage(HttpUtils.getIp()).queue();
 	}
 }
