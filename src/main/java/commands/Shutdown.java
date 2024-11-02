@@ -28,7 +28,6 @@ public class Shutdown extends Command implements Logging {
 
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
-
 		Logging.LOGGER.log(Level.INFO, "Shutting down now !");
 
 		event.getHook().sendMessage("Shutting down now !").queue();

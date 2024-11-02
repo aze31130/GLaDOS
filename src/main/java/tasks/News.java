@@ -22,6 +22,7 @@ public class News implements Runnable, Logging {
 		for (int i = 0; i < glados.rssFeeds.length(); i++) {
 			JSONObject feedObj = glados.rssFeeds.getJSONObject(i);
 			String feedLink = feedObj.getString("link");
+			LOGGER.info("Reading " + feedLink);
 
 			try {
 				List<Item> items = new RssReader().read(feedLink).toList();

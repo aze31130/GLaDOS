@@ -366,6 +366,6 @@ public class GLaDOS implements Logging {
 	 * Reads the latest commit hash where the project is currently running
 	 */
 	public void getVersion() {
-		this.version = FileUtils.readRawFile(".git/refs/heads/master");
+		this.version = FileUtils.readRawFile("../.git/refs/heads/master").replace("\n", "");
 	}
 }
