@@ -84,7 +84,10 @@ public class Trigger extends Command {
 				break;
 			case "Midnight":
 				try {
-					JSONObject jsonObject = JsonDownloader.getJson("https://api.quotable.io/random");
+					/*
+					 * As of today, api.quotable.io has not renew its ssl certificate.
+					 */
+					JSONObject jsonObject = JsonDownloader.getJson("http://api.quotable.io/random");
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
