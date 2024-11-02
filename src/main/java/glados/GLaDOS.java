@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -366,6 +367,19 @@ public class GLaDOS implements Logging {
 	 * Reads the latest commit hash where the project is currently running
 	 */
 	public void getVersion() {
-		this.version = FileUtils.readRawFile("../.git/refs/heads/master").replace("\n", "");
+		List<String> filesToTry = Arrays.asList(
+				"../.git/refs/heads/master",
+				"master");
+
+		for (String paths : filesToTry) {
+			String content = FileUtils.readRawFile(paths).replace("\n", "");
+
+			if (content.length() > 0) {
+				this.version = content;
+				return;
+			}
+		}
+
+		this.version = "Unknown";
 	}
 }
