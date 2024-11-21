@@ -13,12 +13,12 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.AccountUtils;
 import utils.BuildEmbed;
-import utils.JsonDownloader;
 import utils.TimeUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import org.json.JSONObject;
 import accounts.Account;
 import accounts.Permission;
@@ -84,10 +84,8 @@ public class Trigger extends Command {
 				break;
 			case "Midnight":
 				try {
-					/*
-					 * As of today, api.quotable.io has not renew its ssl certificate.
-					 */
-					JSONObject jsonObject = JsonDownloader.getJson("http://api.quotable.io/random");
+					int quoteAmount = GLaDOS.getInstance().quotes.length();
+					JSONObject jsonObject = GLaDOS.getInstance().quotes.getJSONObject(new Random().nextInt(quoteAmount));
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
