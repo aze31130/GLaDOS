@@ -52,8 +52,7 @@ public class Midnight implements Runnable, Logging {
 
 			LocalDate birthdate = LocalDate.parse(person.getString("date"), formatter);
 
-			if (birthdate.getMonthValue() == today.getMonthValue() &&
-					birthdate.getDayOfMonth() == today.getDayOfMonth()) {
+			if (birthdate.getMonthValue() == today.getMonthValue() && birthdate.getDayOfMonth() == today.getDayOfMonth()) {
 				jda.getTextChannelById(glados.channelGeneral).sendMessage("Happy birthday <@" + person.getString("id") + "> ! May this special day full of treasures and wonders ! :birthday::cake::gift::balloon::partying_face::tada::confetti_ball:").queue();
 			}
 		}
