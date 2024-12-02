@@ -132,6 +132,8 @@ public class Trigger extends Command {
 
 		if (trigger.equals("Backup")) {
 			new tasks.Backup(event.getJDA()).run();
+			event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Trigger " + trigger + " successfully executed").build())
+					.queue();
 			return;
 		}
 
