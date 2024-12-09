@@ -48,7 +48,7 @@ public class MessageReceived extends ListenerAdapter {
 		// Check self sender
 		for (String dropbotCommand : dropbotCommands)
 			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand)
-					&& (new Random().nextInt(10) < 1))
+					&& (new Random().nextInt(15) < 1))
 				event.getChannel().sendMessage(dropbotCommand).queue();
 	}
 }

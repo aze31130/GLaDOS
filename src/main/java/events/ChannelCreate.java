@@ -10,8 +10,7 @@ public class ChannelCreate extends ListenerAdapter {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
 		event.getJDA().getTextChannelById(glados.channelSystem).sendMessageEmbeds(
-				BuildEmbed.loggerEmbed("Channel created",
-						event.getChannel().getAsMention() + " " + event.getChannel().getName())
+				BuildEmbed.loggerEmbed("Channel created", event.getChannel().getAsMention() + " " + event.getChannel().getName())
 						.build())
 				.queue();
 	}
