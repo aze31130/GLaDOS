@@ -6,6 +6,7 @@ import accounts.Account;
 import accounts.Permission;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
@@ -33,6 +34,7 @@ public class Ranking extends Command {
 
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
+		User author = event.getUser();
 		GLaDOS g = GLaDOS.getInstance();
 
 		// Sort account list using inventory value
@@ -41,19 +43,19 @@ public class Ranking extends Command {
 		// Build embed
 		EmbedBuilder ranking = BuildEmbed.rankingEmbed();
 
-		// Display it (10 first)
 		int count = 1;
 		for (Account a : g.accounts) {
-			if (count > 10)
-				break;
+			// Display only 10 first
+			if (count < 10)
+				ranking.addField(AccountUtils.getMedalEmoji(count) + a.user.getName(),
+						StringsUtils.formatNumber(a.getInventoryValue()) + " :coin:", false);
 
-			ranking.addField(AccountUtils.getMedalEmoji(count) + a.user.getName(),
-					StringsUtils.formatNumber(a.getInventoryValue()) + " :coin:", false);
+			if (a.user.getId().equals(author.getId()))
+				ranking.setDescription("Your rank is " + count + " out of " + g.accounts.size());
+
 			count++;
 		}
 
-		// TODO Adds member place
-		// ranking.setDescription("Your rank is " + 0);
 		event.getHook().sendMessageEmbeds(ranking.build()).queue();
 	}
 }
