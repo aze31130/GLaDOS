@@ -3,13 +3,18 @@ package events;
 import java.util.Random;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class MessageReceived extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent event) {
-		Message m = event.getMessage();
-		String[] messageContent = m.getContentRaw().split("\\s+");
+
+		MessageChannelUnion channel = event.getChannel();
+		User author = event.getAuthor();
+		Message message = event.getMessage();
+		String[] messageContent = message.getContentRaw().split("\\s+");
 
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
@@ -17,8 +22,8 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Check for banned words
 		 */
-		if (event.isFromGuild() && !event.getChannel().asTextChannel().isNSFW()
-				&& !event.getChannel().getId().equals(glados.channelNsfw)) {
+		if (event.isFromGuild() && !channel.asTextChannel().isNSFW()
+				&& !channel.getId().equals(glados.channelNsfw)) {
 			for (int i = 0; i < glados.bannedWords.length(); i++) {
 				if (messageContent[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
 					event.getMessage().delete().queue();
@@ -29,7 +34,7 @@ public class MessageReceived extends ListenerAdapter {
 
 		if (event.getMessage().getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
 			if (new Random().nextInt(10) >= 2) {
-				event.getChannel().sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length())))
+				channel.sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length())))
 						.queue();
 			}
 		}
@@ -37,8 +42,9 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Ensure every message received in survey channel contains a poll
 		 */
-		if (m.getChannelId().equals(glados.channelVote) && m.getPoll() == null)
-			m.delete().queue();
+		if (message.getChannelId().equals(glados.channelVote) && message.getPoll() == null) {
+			message.delete().queue();
+		}
 
 		final String dropbotCommands[] = {
 				"|d",
@@ -49,6 +55,6 @@ public class MessageReceived extends ListenerAdapter {
 		for (String dropbotCommand : dropbotCommands)
 			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand)
 					&& (new Random().nextInt(15) < 1))
-				event.getChannel().sendMessage(dropbotCommand).queue();
+				channel.sendMessage(dropbotCommand).queue();
 	}
 }
