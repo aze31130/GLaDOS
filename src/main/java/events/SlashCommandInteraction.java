@@ -5,9 +5,10 @@ import commands.Command;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import utils.BuildEmbed;
+import utils.Logging;
 import utils.PermissionsUtils;
 
-public class SlashCommandInteraction extends ListenerAdapter {
+public class SlashCommandInteraction extends ListenerAdapter implements Logging {
 	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		glados.requestsAmount++;
@@ -27,7 +28,7 @@ public class SlashCommandInteraction extends ListenerAdapter {
 					event.getChannel().sendTyping().queue();
 					command.executeSlash(event);
 				} catch (Exception e) {
-					event.replyEmbeds(BuildEmbed.errorEmbed(e.toString()).build()).queue();
+					LOGGER.severe(e.toString());
 				}
 				return;
 			}
