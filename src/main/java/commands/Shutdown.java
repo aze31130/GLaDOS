@@ -30,7 +30,7 @@ public class Shutdown extends Command implements Logging {
 	public void executeSlash(SlashCommandInteractionEvent event) {
 		Logging.LOGGER.log(Level.INFO, "Shutting down now !");
 
-		event.getHook().sendMessage("Shutting down now !").queue();
+		event.getHook().sendMessage("Shutting down now !").complete();
 
 		// Triggers the backup task
 		new tasks.Backup(event.getJDA()).run();
