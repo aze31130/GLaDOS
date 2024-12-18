@@ -76,16 +76,17 @@ public class Trigger extends Command {
 
 	public static void callMessage(MessageChannel destination, String trigger) {
 		EmbedBuilder embed = null;
+		GLaDOS g = GLaDOS.getInstance();
 
 		switch (trigger) {
 			case "Gamer":
-				destination.sendMessage("<@&" + GLaDOS.getInstance().roleBroadcastMessenger + ">").queue();
+				destination.sendMessage("<@&" + g.roleBroadcastMessenger + ">").queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":
 				try {
-					int quoteAmount = GLaDOS.getInstance().quotes.length();
-					JSONObject jsonObject = GLaDOS.getInstance().quotes.getJSONObject(new Random().nextInt(quoteAmount));
+					int quoteAmount = g.quotes.length();
+					JSONObject jsonObject = g.quotes.getJSONObject(new Random().nextInt(quoteAmount));
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
@@ -103,7 +104,7 @@ public class Trigger extends Command {
 				return;
 			case "Reset":
 				// Resets the ability for all accounts to drop
-				for (Account a : GLaDOS.getInstance().accounts)
+				for (Account a : g.accounts)
 					a.canDrop = true;
 				return;
 			default:

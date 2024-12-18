@@ -50,9 +50,7 @@ public class Delete extends Command {
 		Account target = optionalTarget.get();
 
 		Optional<String> itemName = Optional.ofNullable(event.getOption("item")).map(OptionMapping::getAsString);
-
 		Optional<Integer> moneyAmount = Optional.ofNullable(event.getOption("money")).map(OptionMapping::getAsInt);
-
 
 		// Check if it's an item give
 		if (itemName.isPresent()) {

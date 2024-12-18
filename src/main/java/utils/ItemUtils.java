@@ -28,8 +28,7 @@ public class ItemUtils implements Logging {
 	/*
 	 * This function checks if a given trade is possible or not.
 	 */
-	public static boolean isTradePossible(Account author, Account target, Item srcItem, int srcMoney, Item dstItem,
-			int dstMoney) {
+	public static boolean isTradePossible(Account author, Account target, Item srcItem, int srcMoney, Item dstItem, int dstMoney) {
 		if (srcItem.untradable || dstItem.untradable)
 			return false;
 

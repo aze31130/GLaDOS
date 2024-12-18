@@ -87,7 +87,6 @@ public class Give extends Command {
 
 		// Check if it's a money give
 		if (moneyAmount.isPresent()) {
-
 			if (moneyAmount.get() <= 0) {
 				event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot give this amount of money !").build())
 						.queue();

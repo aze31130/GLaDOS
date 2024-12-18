@@ -17,10 +17,9 @@ public class MessageReactionAdd extends ListenerAdapter {
 			Message reactedMessage = event.retrieveMessage().complete();
 
 			// Get amount of reaction
-			long amountOfStars =
-					reactedMessage.getReactions().stream().filter(r -> r.getEmoji().getName().equals(pinReaction)).count();
+			long starsAmout = reactedMessage.getReactions().stream().filter(r -> r.getEmoji().getName().equals(pinReaction)).count();
 
-			if (amountOfStars >= 5 && !reactedMessage.isPinned())
+			if (starsAmout >= 5 && !reactedMessage.isPinned())
 				reactedMessage.pin().complete();
 		}
 	}

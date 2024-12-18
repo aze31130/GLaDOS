@@ -12,6 +12,7 @@ import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -25,6 +26,7 @@ public class ButtonClick extends ListenerAdapter {
 		glados.requestsAmount++;
 
 		String trigger = event.getComponentId();
+		Message message = event.getMessage();
 
 		HashMap<String, String> dictionary = new HashMap<>();
 		dictionary.put("Broadcast", glados.roleBroadcastMessenger);
@@ -42,19 +44,17 @@ public class ButtonClick extends ListenerAdapter {
 		dictionary.put(glados.roleDeveloper, glados.roleDeveloper);
 		dictionary.put(glados.roleNsfw, glados.roleNsfw);
 
-
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("NextPage") || trigger.equals("PrevPage")) {
 			/*
 			 * To get the account's inventory displayed on the embed, the author field must have the id of the
 			 * account. That way, we can simply get it and display the inventory.
 			 */
-			String accountInventoryId = event.getMessage().getEmbeds().get(0).getAuthor().getName();
+			String accountInventoryId = message.getEmbeds().get(0).getAuthor().getName();
 			Account authorAccount = glados.getAccountById(accountInventoryId).get();
 
 			// Get the current page
-			int pageNumber =
-					Integer.parseInt(event.getMessage().getEmbeds().get(0).getFooter().getText().replace(" ", "").split("/")[0]);
+			int pageNumber = Integer.parseInt(message.getEmbeds().get(0).getFooter().getText().replace(" ", "").split("/")[0]);
 
 			// Check if the event is Next Page
 			int newPageNumber = trigger.equals("NextPage") ? pageNumber + 1 : pageNumber - 1;
@@ -80,7 +80,7 @@ public class ButtonClick extends ListenerAdapter {
 
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("Upgrade") || trigger.equals("Exit")) {
-			String authorName = event.getMessage().getEmbeds().get(0).getAuthor().getName();
+			String authorName = message.getEmbeds().get(0).getAuthor().getName();
 			String clickerName = event.getUser().getName();
 
 			if (!authorName.equals(clickerName)) {
@@ -90,20 +90,20 @@ public class ButtonClick extends ListenerAdapter {
 
 			if (trigger.equals("Exit")) {
 				event.editMessageEmbeds(BuildEmbed.successEmbed("Closed upgrade session").build()).queue();
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
 			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
 
-			String itemFQName = event.getMessage().getEmbeds().get(0).getTitle();
+			String itemFQName = message.getEmbeds().get(0).getTitle();
 			Optional<Item> perhapsItem = authorAccount.getItemByFQName(itemFQName);
 
 			// Check if the user own the item
 			if (perhapsItem.isEmpty()) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own this item anymore !").build()).queue();
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
@@ -112,7 +112,7 @@ public class ButtonClick extends ListenerAdapter {
 			// Check if the user has enough money
 			if (authorAccount.money < item.getStarForceCost()) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("You do not own enough money to upgrade !").build()).queue();
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
@@ -127,21 +127,20 @@ public class ButtonClick extends ListenerAdapter {
 				event.editMessageEmbeds(BuildEmbed.upgradeSuccessEmbed(item.starForceLevel).build()).queue();
 
 				if (item.isMaxed()) {
-					event.getMessage().editMessageEmbeds(BuildEmbed.successEmbed("Your item has been maxed out !").build())
+					message.editMessageEmbeds(BuildEmbed.successEmbed("Your item has been maxed out !").build())
 							.queueAfter(5, TimeUnit.SECONDS);
-					event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+					message.editMessageComponents(new ArrayList<>()).queue();
 					return;
 				}
 
-				event.getMessage().editMessageEmbeds(
-						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(3, TimeUnit.SECONDS);
+				message.editMessageEmbeds(BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(3, TimeUnit.SECONDS);
 				return;
 			}
 
 			// Check if fail (keep)
 			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance()) {
 				event.editMessageEmbeds(BuildEmbed.upgradeKeepEmbed(item.starForceLevel).build()).queue();
-				event.getMessage().editMessageEmbeds(
+				message.editMessageEmbeds(
 						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(5, TimeUnit.SECONDS);
 				return;
 			}
@@ -150,7 +149,7 @@ public class ButtonClick extends ListenerAdapter {
 			if (randomValue <= item.getStarForceSuccessChance() + item.getStarForceKeepChance() + item.getStarForceFailChance()) {
 				item.starForceLevel--;
 				event.editMessageEmbeds(BuildEmbed.upgradeFailEmbed(item.starForceLevel).build()).queue();
-				event.getMessage().editMessageEmbeds(
+				message.editMessageEmbeds(
 						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(5, TimeUnit.SECONDS);
 				return;
 			}
@@ -160,8 +159,8 @@ public class ButtonClick extends ListenerAdapter {
 					+ item.getStarForceDestroyChance()) {
 				item.broken = true;
 				event.editMessageEmbeds(BuildEmbed.upgradeDestroyEmbed().build()).queue();
-				event.getMessage().editMessageEmbeds(
-						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(10, TimeUnit.SECONDS);
+				message.editMessageEmbeds(
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(7, TimeUnit.SECONDS);
 				return;
 			}
 		}
@@ -173,7 +172,7 @@ public class ButtonClick extends ListenerAdapter {
 			 */
 			final String pattern = "<@(\\d+)>";
 			Pattern r = Pattern.compile(pattern);
-			Matcher m = r.matcher(event.getMessage().getEmbeds().get(0).getDescription());
+			Matcher m = r.matcher(message.getEmbeds().get(0).getDescription());
 			m.find();
 			String tradeAuthor = m.group(1);
 			m.find();
@@ -190,9 +189,8 @@ public class ButtonClick extends ListenerAdapter {
 
 			// Check if trade is refused and remove buttons if refused
 			if (trigger.equals("RefuseTrade")) {
-				event.editMessageEmbeds(
-						BuildEmbed.errorEmbed("Trade refused by " + event.getUser().getAsMention() + " !").build()).queue();
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				event.editMessageEmbeds(BuildEmbed.errorEmbed("Trade refused by " + event.getUser().getAsMention() + " !").build()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
@@ -208,7 +206,7 @@ public class ButtonClick extends ListenerAdapter {
 			if (optionalAuthorAccount.isEmpty() || optionalTargetAccount.isEmpty()) {
 				event.editMessageEmbeds(BuildEmbed.errorEmbed("One of the user does not have an inventory ! Operation cancelled")
 						.build()).queue();
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 
@@ -220,7 +218,7 @@ public class ButtonClick extends ListenerAdapter {
 			Optional<Item> dstItem = null;
 			int dstMoney = 0;
 
-			for (Field f : event.getMessage().getEmbeds().get(0).getFields()) {
+			for (Field f : message.getEmbeds().get(0).getFields()) {
 				switch (f.getName()) {
 					case "Item source":
 						srcItem = authorAccount.getItemByFQName(f.getValue());
@@ -260,7 +258,7 @@ public class ButtonClick extends ListenerAdapter {
 
 			// Updates the embed
 			event.editMessageEmbeds(BuildEmbed.successEmbed("Trade completed !").build()).queue();
-			event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+			message.editMessageComponents(new ArrayList<>()).queue();
 			return;
 		}
 
@@ -305,7 +303,7 @@ public class ButtonClick extends ListenerAdapter {
 			if (glados.goodAnswer.equals(trigger)) {
 				event.replyEmbeds(BuildEmbed.successEmbed("Good answer " + event.getButton().getLabel() + " !").build()).queue();
 				// Removes buttons when good answer is triggered
-				event.getMessage().editMessageComponents(new ArrayList<>()).queue();
+				message.editMessageComponents(new ArrayList<>()).queue();
 				glados.goodAnswer = "";
 			} else {
 				event.replyEmbeds(BuildEmbed.errorEmbed("Wrong answer " + event.getButton().getLabel() + " !").build()).queue();
