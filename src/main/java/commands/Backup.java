@@ -48,7 +48,7 @@ public class Backup extends Command implements Logging {
 			for (TextChannel gc : event.getGuild().getTextChannels())
 				targets.add((MessageChannel) gc);
 		} else {
-			targets.add(event.getChannel().asTextChannel());
+			targets.add(omTarget.getAsChannel().asTextChannel());
 		}
 
 		for (MessageChannel target : targets) {
