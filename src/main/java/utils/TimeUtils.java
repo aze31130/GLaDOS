@@ -24,7 +24,7 @@ public class TimeUtils {
 		if (now.isAfter(midnight))
 			midnight = midnight.plusDays(1);
 
-		return Duration.between(now, midnight).minusMillis(220).toMillis();
+		return Duration.between(now, midnight).minusMillis(150).toMillis();
 	}
 
 	/*
@@ -37,6 +37,17 @@ public class TimeUtils {
 				.withHour(17).withMinute(0).withSecond(0).withNano(0);
 
 		return Duration.between(now, nextThursday).toSeconds();
+	}
+
+	/*
+	 * Returns the amount of seconds before the next hour
+	 */
+	public static long getNewsDelay() {
+		LocalDateTime now = LocalDateTime.now();
+
+		LocalDateTime nextHour = now.withHour(1).withMinute(0).withSecond(0).withNano(0);
+
+		return Duration.between(now, nextHour).toSeconds();
 	}
 
 	/*

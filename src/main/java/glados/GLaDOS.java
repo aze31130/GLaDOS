@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
-import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -28,6 +27,7 @@ import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import news.News;
 import utils.BuildEmbed;
 import utils.FileUtils;
 import utils.ItemUtils;
@@ -35,7 +35,7 @@ import utils.Logging;
 
 public class GLaDOS implements Logging {
 	private static volatile GLaDOS instance = null;
-	public String version, token, cdn;
+	public String version, token, cdn, llm;
 
 	// Internal settings
 	public boolean metricLogging;
@@ -62,6 +62,7 @@ public class GLaDOS implements Logging {
 	public List<Item> items = new ArrayList<>();
 
 	public List<Integer> rssNews = new ArrayList<>();
+	public List<News> rssNewsSumUp = new ArrayList<>();
 
 	// Optimisation, holds the sum of each drop weight so that we avoid recalculating it
 	public double itemTotalProb = 0;
@@ -151,6 +152,7 @@ public class GLaDOS implements Logging {
 			this.rssFeeds = rssFeeds.getJSONArray("rss");
 			this.birthdays = json.getJSONArray("birthdays");
 			this.token = json.getString("token");
+			this.llm = json.getString("llm");
 
 			this.requestsAmount = 0;
 			this.translationCooldown = LocalDateTime.now();

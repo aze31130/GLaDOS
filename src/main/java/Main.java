@@ -23,10 +23,9 @@ public class Main implements Logging {
 
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 
-		GatewayIntent intents[] =
-				{GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT,
-						GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS,
-						GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_INVITES};
+		GatewayIntent intents[] = {GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT,
+				GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS_AND_STICKERS,
+				GatewayIntent.GUILD_INVITES};
 
 		for (GatewayIntent intent : intents)
 			builder.enableIntents(intent);
@@ -57,9 +56,9 @@ public class Main implements Logging {
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
 		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
+		scheduler.scheduleAtFixedRate(new GetNews(jda), TimeUtils.getNewsDelay(), 3600, TimeUnit.SECONDS);
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
-		scheduler.scheduleAtFixedRate(new News(jda), 0, 1, TimeUnit.HOURS);
 
 		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}

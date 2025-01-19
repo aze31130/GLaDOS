@@ -8,6 +8,7 @@ import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import news.News;
 
 public class BuildEmbed {
 	public static EmbedBuilder gamerEmbed() {
@@ -296,24 +297,14 @@ public class BuildEmbed {
 		return result;
 	}
 
-	public static EmbedBuilder rssNewsEmbed(com.apptasticsoftware.rssreader.Item i, String feedName) {
+	public static EmbedBuilder rssNewsEmbed(News news) {
 		EmbedBuilder result = new EmbedBuilder()
-				.setTitle(i.getTitle().isPresent() ? i.getTitle().get() : "?")
-				.setFooter(feedName + " - " + (i.getPubDate().isPresent() ? i.getPubDate().get() : "?"))
+				.setTitle(news.title())
+				.setDescription(StringsUtils.escapeHTML(news.description()))
+				.setFooter(news.source() + " - " + news.pubDate())
 				.setColor(Color.decode("#6460AA"));
 
-		if (i.getDescription().isPresent()) {
-			String description = i.getDescription().get();
-
-			// Ensure description length is short enough to be read quickly
-			if (description.length() > 400)
-				description = description.substring(0, 400) + "...";
-
-			result.setDescription(StringsUtils.escapeHTML(description));
-		}
-
-		if (i.getLink().isPresent())
-			result.addField("", i.getLink().get(), false);
+		result.addField("", news.url(), false);
 
 		return result;
 	}

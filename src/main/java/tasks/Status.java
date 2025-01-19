@@ -19,7 +19,7 @@ public class Status implements Runnable {
 	public void run() {
 		int rng = new Random().nextInt(100);
 
-		if (rng > 30)
+		if (rng > 40)
 			return;
 
 		GLaDOS glados = GLaDOS.getInstance();

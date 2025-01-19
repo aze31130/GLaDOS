@@ -1,21 +1,23 @@
 package tasks;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.json.JSONObject;
 import com.apptasticsoftware.rssreader.Item;
 import com.apptasticsoftware.rssreader.RssReader;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import news.News;
 import utils.BuildEmbed;
+import utils.HttpUtils;
 import utils.Logging;
 
-public class News implements Runnable, Logging {
+public class GetNews implements Runnable, Logging {
 	public JDA jda;
 
-	public News(JDA jda) {
+	public GetNews(JDA jda) {
 		this.jda = jda;
 
-		// init rss reader
 		GLaDOS glados = GLaDOS.getInstance();
 
 		// Fill rss cache at first launch
@@ -53,14 +55,28 @@ public class News implements Runnable, Logging {
 				for (Item it : items) {
 					int hash = it.getLink().get().hashCode();
 					if (!glados.rssNews.contains(hash)) {
-						jda.getTextChannelById(glados.channelNews)
-								.sendMessageEmbeds(BuildEmbed.rssNewsEmbed(it, feedName).build()).queue();
+
+						News n = new News(it.getTitle(), it.getDescription(), it.getLink(), feedName, it.getPubDate());
+						glados.rssNewsSumUp.add(n);
+
+						jda.getTextChannelById(glados.channelNews).sendMessageEmbeds(BuildEmbed.rssNewsEmbed(n).build()).queue();
 						glados.rssNews.add(hash);
 					}
 				}
 			} catch (Exception e) {
 				LOGGER.severe(e.toString() + " for URL " + feedLink);
 			}
+		}
+
+		LocalDateTime now = LocalDateTime.now();
+		if (now.getHour() == 7) {
+			// Call api phi4
+			String llmAnwser = HttpUtils.sendLLMQuery(glados.rssNewsSumUp);
+
+			// Sends llm answser to channel
+			jda.getTextChannelById(glados.channelHacker).sendMessage(llmAnwser).queue();
+
+			glados.rssNewsSumUp.clear();
 		}
 	}
 }
