@@ -1,5 +1,7 @@
 package tasks;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.json.JSONObject;
@@ -7,6 +9,7 @@ import com.apptasticsoftware.rssreader.Item;
 import com.apptasticsoftware.rssreader.RssReader;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.utils.FileUpload;
 import news.News;
 import utils.BuildEmbed;
 import utils.HttpUtils;
@@ -73,8 +76,15 @@ public class GetNews implements Runnable, Logging {
 			// Call api phi4
 			String llmAnwser = HttpUtils.sendLLMQuery(glados.rssNewsSumUp);
 
-			// Sends llm answser to channel
-			jda.getTextChannelById(glados.channelHacker).sendMessage(llmAnwser).queue();
+			// If anwser is too long, write it in a text file
+			if (llmAnwser.length() >= 2000) {
+				InputStream inputStream = new ByteArrayInputStream(llmAnwser.getBytes());
+				jda.getTextChannelById(glados.channelHacker)
+						.sendMessage("Cyber-News Sumup")
+						.addFiles(FileUpload.fromData(inputStream, "inference.txt")).queue();
+			} else {
+				jda.getTextChannelById(glados.channelHacker).sendMessage(llmAnwser).queue();
+			}
 
 			glados.rssNewsSumUp.clear();
 		}

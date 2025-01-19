@@ -3,11 +3,7 @@ package utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import org.json.JSONObject;
 import glados.GLaDOS;
@@ -40,7 +36,8 @@ public class HttpUtils implements Logging {
 	public static String sendLLMQuery(List<News> newsToSumUp) {
 		try {
 			final String url = "https://" + GLaDOS.getInstance().llm + "/api/generate";
-			final String prePrompt = "Hello, I have the following cybersecurity news. Can you synthetise all in a few paragraphs ?\n\n";
+			final String prePrompt =
+					"Here is a list of cybersecurity news. Please summarize them into a few concise paragraphs of 4000 characters max, merge duplicated news and format them in Markdown. Provide links to the original sources when possible.\n";
 
 			// Build the prompt
 			StringBuilder prompt = new StringBuilder(prePrompt);
@@ -53,16 +50,14 @@ public class HttpUtils implements Logging {
 			requestBody.put("prompt", prompt.toString());
 			requestBody.put("stream", false);
 
-			HttpRequest request = HttpRequest.newBuilder()
-					.uri(URI.create(url))
-					.header("Content-Type", "application/json")
-					.POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
-					.build();
+			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", requestBody.toString(), url);
+			Process p = builder.start();
+			p.waitFor();
 
-			// Send the request and get the response
-			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			JSONObject result = new JSONObject(reader.readLine());
 
-			return response.body();
+			return result.getString("response");
 		} catch (Exception e) {
 			LOGGER.severe(e.toString());
 		}
