@@ -125,7 +125,7 @@ public class GLaDOS implements Logging {
 
 			this.guildId = json.getString("guildId");
 			this.ownerId = json.getString("ownerId");
-			this.botId = json.getString("ownerId");
+			this.botId = json.getString("botId");
 
 			// Read role and channels attributes
 			this.roleAdministrator = json.getString("role_administrator");
@@ -278,7 +278,6 @@ public class GLaDOS implements Logging {
 		LOGGER.info("Downloading account file from discord...");
 
 		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory().retrievePast(1).complete().get(0);
-
 		if (!latestMessage.getAuthor().getId().equalsIgnoreCase(this.botId)) {
 			jda.getTextChannelById(this.channelSystem).sendMessageEmbeds(
 					BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
