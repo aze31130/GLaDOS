@@ -39,7 +39,7 @@ public class GLaDOS implements Logging {
 
 	// Internal settings
 	public boolean metricLogging;
-	public String guildId, ownerId;
+	public String guildId, ownerId, botId;
 
 	// Role attributes
 	public String roleAdministrator, roleModerator, roleGamer, roleMember, roleArtistic, roleBroadcastMessenger,
@@ -125,6 +125,7 @@ public class GLaDOS implements Logging {
 
 			this.guildId = json.getString("guildId");
 			this.ownerId = json.getString("ownerId");
+			this.botId = json.getString("ownerId");
 
 			// Read role and channels attributes
 			this.roleAdministrator = json.getString("role_administrator");
@@ -278,9 +279,9 @@ public class GLaDOS implements Logging {
 
 		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory().retrievePast(1).complete().get(0);
 
-		if (!latestMessage.getAuthor().isBot()) {
-			jda.getTextChannelById(this.channelSystem)
-					.sendMessageEmbeds(BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
+		if (!latestMessage.getAuthor().getId().equalsIgnoreCase(this.botId)) {
+			jda.getTextChannelById(this.channelSystem).sendMessageEmbeds(
+					BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
 			return;
 		}
 

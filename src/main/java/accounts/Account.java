@@ -63,9 +63,9 @@ public class Account {
 			achievements.put(achievement);
 
 		result.put("id", this.id);
-		result.put("name", this.user.getName());
-		result.put("created", this.user.getTimeCreated().toString());
-		result.put("joined", this.user.getTimeCreated().toString());
+		result.put("name", this.user == null ? "?" : this.user.getName());
+		result.put("created", this.user == null ? "?" : this.user.getTimeCreated().toString());
+		result.put("joined", this.user == null ? "?" : this.user.getTimeCreated().toString());
 		result.put("inventory", items);
 		result.put("achievements", achievements);
 		result.put("trustFactorScore", this.trustFactorScore);
