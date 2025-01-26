@@ -51,6 +51,7 @@
         {"name": "Exploit One", "link": "https://www.exploitone.com/feed/"},
         {"name": "Da Vinci Cybersecurity", "link": "https://davinciforensics.co.za/cybersecurity/feed/"},
         {"name": "New York Times - PersonalTech", "link": "https://rss.nytimes.com/services/xml/rss/nyt/PersonalTech.xml"},
+        {"name": "Only Fan version 0day", "link": "https://0dayfans.com/feed.rss"},
         {"name": "Cisco Threat Intel", "link": "https://newsroom.cisco.com/c/services/i/servlets/newsroom/rssfeed.json?feed=security"}
     ]
 }
