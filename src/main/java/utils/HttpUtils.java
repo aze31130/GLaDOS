@@ -43,10 +43,10 @@ public class HttpUtils implements Logging {
 			StringBuilder prompt = new StringBuilder(prePrompt);
 
 			for (News news : newsToSumUp)
-				prompt.append(news.title() + " - " + news.description() + " Source: " + news.source() + "\n");
+				prompt.append(news.title() + " - " + news.description() + " Source: " + news.url() + "\n");
 
 			JSONObject requestBody = new JSONObject();
-			requestBody.put("model", "phi4");
+			requestBody.put("model", "mistral");
 			requestBody.put("prompt", prompt.toString());
 			requestBody.put("stream", false);
 
@@ -58,7 +58,15 @@ public class HttpUtils implements Logging {
 			p.waitFor();
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			JSONObject result = new JSONObject(reader.readLine());
+			String rawResponse = reader.readLine();
+
+			// Debug output
+			FileUtils.writeRawFile("rawanwser", rawResponse);
+
+			JSONObject result = new JSONObject(rawResponse);
+
+			// Debug output
+			FileUtils.writeRawFile("anwserJSON", result.toString());
 
 			return result.getString("response");
 		} catch (Exception e) {

@@ -73,14 +73,14 @@ public class GetNews implements Runnable, Logging {
 
 		LocalDateTime now = LocalDateTime.now();
 		if (now.getHour() == 7) {
-			// Call api phi4
+			// Call LLM to sumup text
 			String llmAnwser = HttpUtils.sendLLMQuery(glados.rssNewsSumUp);
 
 			// If anwser is too long, write it in a text file
 			if (llmAnwser.length() >= 2000) {
 				InputStream inputStream = new ByteArrayInputStream(llmAnwser.getBytes());
 				jda.getTextChannelById(glados.channelHacker)
-						.sendMessage("Cyber-News Sumup")
+						.sendMessage(":bookmark: Cyber-News Sumup")
 						.addFiles(FileUpload.fromData(inputStream, "inference.txt")).queue();
 			} else {
 				jda.getTextChannelById(glados.channelHacker).sendMessage(llmAnwser).queue();
