@@ -12,8 +12,6 @@
         {"name": "Zero Day Initiative - Blog", "link": "https://www.zerodayinitiative.com/blog/?format=rss"},
         {"name": "Cloudflare Blog", "link": "https://blog.cloudflare.com/rss"},
         {"name": "Reddit pwned", "link": "https://www.reddit.com/r/pwned/.rss"},
-        {"name": "Reddit CyberSecurity", "link": "https://www.reddit.com/r/cybersecurity/.rss"},
-        {"name": "Reddit NetSecurity", "link": "http://www.reddit.com/r/netsec/.rss"},
         {"name": "Virus Total", "link": "https://blog.virustotal.com/feeds/posts/default"},
         {"name": "DarkNet", "link": "http://www.darknet.org.uk/feed/"},
         {"name": "NCSC (UK) - News", "link": "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml"},
