@@ -26,7 +26,7 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Check for banned words
 		 */
-		if (event.isFromGuild() && !channel.asTextChannel().isNSFW() && !channel.getId().equals(glados.channelNsfw)) {
+		if (event.isFromGuild() && !channel.asTextChannel().isNSFW() && !channel.getId().equals(glados.getRoleId("nsfw").get())) {
 			for (int i = 0; i < glados.bannedWords.length(); i++) {
 				if (messageContent[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
 					message.delete().queue();
@@ -44,7 +44,7 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Ensure every message received in survey channel contains a poll
 		 */
-		if (message.getChannelId().equals(glados.channelVote) && message.getPoll() == null)
+		if (message.getChannelId().equals(glados.getChannelId("vote").get()) && message.getPoll() == null)
 			message.delete().queue();
 
 

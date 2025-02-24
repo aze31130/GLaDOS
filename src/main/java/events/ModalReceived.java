@@ -17,7 +17,7 @@ public class ModalReceived extends ListenerAdapter {
 		User author = event.getUser();
 		String reactions = event.getValue("reactions").getAsString();
 
-		event.getJDA().getTextChannelById(glados.channelVote)
+		event.getJDA().getTextChannelById(glados.getRoleId("vote").get())
 				.sendMessageEmbeds(BuildEmbed.modalEmbed(subject, body, reactions, author).build())
 				.queue(message -> {
 					for (Character c : reactions.toCharArray()) {

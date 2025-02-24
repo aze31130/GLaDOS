@@ -50,6 +50,8 @@ public class Main implements Logging {
 			e.printStackTrace();
 		}
 
+		jda.getGuildById(glados.guildId).getTextChannelById("676731153444765709").sendMessage("<:what:1343712905262137444>").queue();
+
 		glados.registerCommands(jda);
 		glados.loadAccounts(jda);
 
@@ -59,6 +61,12 @@ public class Main implements Logging {
 		scheduler.scheduleAtFixedRate(new GetNews(jda), TimeUtils.getNewsDelay(), 3600, TimeUnit.SECONDS);
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
+
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+				System.out.println("Test");
+			}
+		}));
 
 		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}

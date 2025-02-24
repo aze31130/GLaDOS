@@ -62,7 +62,7 @@ public class GetNews implements Runnable, Logging {
 						News n = new News(it.getTitle(), it.getDescription(), it.getLink(), feedName, it.getPubDate());
 						glados.rssNewsSumUp.add(n);
 
-						jda.getTextChannelById(glados.channelNews).sendMessageEmbeds(BuildEmbed.rssNewsEmbed(n).build()).queue();
+						jda.getTextChannelById(glados.getRoleId("news").get()).sendMessageEmbeds(BuildEmbed.rssNewsEmbed(n).build()).queue();
 						glados.rssNews.add(hash);
 					}
 				}
@@ -79,11 +79,11 @@ public class GetNews implements Runnable, Logging {
 			// If anwser is too long, write it in a text file
 			if (llmAnwser.length() >= 2000) {
 				InputStream inputStream = new ByteArrayInputStream(llmAnwser.getBytes());
-				jda.getTextChannelById(glados.channelHacker)
+				jda.getTextChannelById(glados.getRoleId("hacker").get())
 						.sendMessage(":bookmark: Cyber-News Sumup")
 						.addFiles(FileUpload.fromData(inputStream, "inference.txt")).queue();
 			} else {
-				jda.getTextChannelById(glados.channelHacker).sendMessage(llmAnwser).queue();
+				jda.getTextChannelById(glados.getRoleId("hacker").get()).sendMessage(llmAnwser).queue();
 			}
 
 			glados.rssNewsSumUp.clear();

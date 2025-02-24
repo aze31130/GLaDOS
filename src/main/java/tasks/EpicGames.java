@@ -18,6 +18,6 @@ public class EpicGames implements Runnable, Logging {
 		LOGGER.info("Executed EpicGameAnnoune at " + LocalDateTime.now().toString());
 		GLaDOS glados = GLaDOS.getInstance();
 
-		Trigger.callMessage(jda.getTextChannelById(glados.channelGamer), "Gamer");
+		Trigger.callMessage(jda.getTextChannelById(glados.getRoleId("gamer").get()), "Gamer");
 	}
 }

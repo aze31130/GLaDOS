@@ -22,11 +22,11 @@ public class PermissionsUtils {
 
 		Permission actualPermission = Permission.NONE;
 		for (Role role : roles)
-			if (role.getId().equals(g.roleModerator))
+			if (role.getId().equals(g.getRoleId("moderator").get()))
 				actualPermission = Permission.MODERATOR;
 
 		for (Role role : roles)
-			if (role.getId().equals(g.roleAdministrator))
+			if (role.getId().equals(g.getRoleId("administrator").get()))
 				actualPermission = Permission.ADMINISTRATOR;
 
 		return actualPermission.level >= requiredPermission.level;

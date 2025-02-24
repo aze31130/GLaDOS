@@ -29,20 +29,20 @@ public class ButtonClick extends ListenerAdapter {
 		Message message = event.getMessage();
 
 		HashMap<String, String> dictionary = new HashMap<>();
-		dictionary.put("Broadcast", glados.roleBroadcastMessenger);
-		dictionary.put("Gamer", glados.roleGamer);
-		dictionary.put("Member", glados.roleMember);
-		dictionary.put("Artistic", glados.roleArtistic);
-		dictionary.put("International", glados.roleInternational);
-		dictionary.put("Developer", glados.roleDeveloper);
-		dictionary.put("NSFW", glados.roleNsfw);
-		dictionary.put(glados.roleBroadcastMessenger, glados.roleBroadcastMessenger);
-		dictionary.put(glados.roleGamer, glados.roleGamer);
-		dictionary.put(glados.roleMember, glados.roleMember);
-		dictionary.put(glados.roleArtistic, glados.roleArtistic);
-		dictionary.put(glados.roleInternational, glados.roleInternational);
-		dictionary.put(glados.roleDeveloper, glados.roleDeveloper);
-		dictionary.put(glados.roleNsfw, glados.roleNsfw);
+		dictionary.put("Broadcast", glados.getRoleId("broadcast").get());
+		dictionary.put("Gamer", glados.getRoleId("gamer").get());
+		dictionary.put("Member", glados.getRoleId("member").get());
+		dictionary.put("Artistic", glados.getRoleId("artistic").get());
+		dictionary.put("International", glados.getRoleId("international").get());
+		dictionary.put("Developer", glados.getRoleId("developer").get());
+		dictionary.put("NSFW", glados.getRoleId("nsfw").get());
+		dictionary.put(glados.getRoleId("broadcast").get(), glados.getRoleId("broadcast").get());
+		dictionary.put(glados.getRoleId("gamer").get(), glados.getRoleId("gamer").get());
+		dictionary.put(glados.getRoleId("member").get(), glados.getRoleId("member").get());
+		dictionary.put(glados.getRoleId("artistic").get(), glados.getRoleId("artistic").get());
+		dictionary.put(glados.getRoleId("international").get(), glados.getRoleId("international").get());
+		dictionary.put(glados.getRoleId("developer").get(), glados.getRoleId("developer").get());
+		dictionary.put(glados.getRoleId("nsfw").get(), glados.getRoleId("nsfw").get());
 
 		// Check if action is Next or Previous Inventory Page
 		if (trigger.equals("NextPage") || trigger.equals("PrevPage")) {

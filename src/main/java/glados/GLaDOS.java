@@ -41,17 +41,9 @@ public class GLaDOS implements Logging {
 	public boolean metricLogging;
 	public String guildId, ownerId, botId;
 
-	// Role attributes
-	public String roleAdministrator, roleModerator, roleGamer, roleMember, roleArtistic, roleBroadcastMessenger,
-			roleInternational, roleDeveloper, roleNsfw;
-
-	// Channel attributes
-	public String channelGeneral, channelGamer, channelBotSnapshot, channelNsfw, channelRole, channelVote, channelBackup,
-			channelSystem, channelHacker, channelNews;
-
 	public int requestsAmount;
 
-	public JSONArray bannedWords, epicgameQuotes, quotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds, birthdays;
+	public JSONArray roles, channels, bannedWords, epicgameQuotes, quotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds, birthdays;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
@@ -119,6 +111,10 @@ public class GLaDOS implements Logging {
 			JSONObject rssFeeds = FileUtils.loadJsonObject("./feeds.json");
 			this.getVersion();
 
+			// Read role and channels attributes
+			this.channels = json.getJSONArray("channels");
+			this.roles = json.getJSONArray("roles");
+
 			this.metricLogging = json.getBoolean("metricLogging");
 
 			this.cdn = json.getString("cdn");
@@ -126,28 +122,6 @@ public class GLaDOS implements Logging {
 			this.guildId = json.getString("guildId");
 			this.ownerId = json.getString("ownerId");
 			this.botId = json.getString("botId");
-
-			// Read role and channels attributes
-			this.roleAdministrator = json.getString("role_administrator");
-			this.roleModerator = json.getString("role_moderator");
-			this.roleGamer = json.getString("role_gamer");
-			this.roleMember = json.getString("role_member");
-			this.roleArtistic = json.getString("role_artistic");
-			this.roleBroadcastMessenger = json.getString("role_broadcastMessenger");
-			this.roleInternational = json.getString("role_international");
-			this.roleDeveloper = json.getString("role_developer");
-			this.roleNsfw = json.getString("role_nsfw");
-
-			this.channelGeneral = json.getString("channel_general");
-			this.channelGamer = json.getString("channel_gamer");
-			this.channelBotSnapshot = json.getString("channel_botSnapshot");
-			this.channelNsfw = json.getString("channel_nsfw");
-			this.channelNews = json.getString("channel_news");
-			this.channelRole = json.getString("channel_role");
-			this.channelVote = json.getString("channel_vote");
-			this.channelBackup = json.getString("channel_backup");
-			this.channelSystem = json.getString("channel_system");
-			this.channelHacker = json.getString("channel_hacker");
 
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.rssFeeds = rssFeeds.getJSONArray("rss");
@@ -277,9 +251,9 @@ public class GLaDOS implements Logging {
 	public void loadAccounts(JDA jda) {
 		LOGGER.info("Downloading account file from discord...");
 
-		Message latestMessage = jda.getTextChannelById(this.channelBackup).getHistory().retrievePast(1).complete().get(0);
+		Message latestMessage = jda.getTextChannelById(this.getChannelId("backup").get()).getHistory().retrievePast(1).complete().get(0);
 		if (!latestMessage.getAuthor().getId().equalsIgnoreCase(this.botId)) {
-			jda.getTextChannelById(this.channelSystem).sendMessageEmbeds(
+			jda.getTextChannelById(this.getChannelId("system").get()).sendMessageEmbeds(
 					BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
 			return;
 		}
@@ -364,6 +338,34 @@ public class GLaDOS implements Logging {
 	 */
 	public Optional<Account> getAccountById(String accountId) {
 		return this.accounts.stream().filter(a -> a.id.equals(accountId)).findFirst();
+	}
+
+	/*
+	 * Returns the channel id based on its name
+	 */
+	public Optional<String> getChannelId(String channelName) {
+		for (int i = 0; i < this.channels.length(); i++) {
+			JSONObject channel = this.channels.getJSONObject(i);
+
+			if (channel.getString("name").equalsIgnoreCase(channelName))
+				return Optional.of(channel.getString("id"));
+		}
+		LOGGER.warning("Channel id " + channelName + " not found !");
+		return Optional.empty();
+	}
+
+	/*
+	 * Returns the role id based on its name
+	 */
+	public Optional<String> getRoleId(String roleName) {
+		for (int i = 0; i < this.roles.length(); i++) {
+			JSONObject role = this.roles.getJSONObject(i);
+
+			if (role.getString("name").equalsIgnoreCase(roleName))
+				return Optional.of(role.getString("id"));
+		}
+		LOGGER.warning("Role id " + roleName + " not found !");
+		return Optional.empty();
 	}
 
 	/*

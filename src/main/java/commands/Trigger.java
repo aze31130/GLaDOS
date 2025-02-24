@@ -80,7 +80,7 @@ public class Trigger extends Command {
 
 		switch (trigger) {
 			case "Gamer":
-				destination.sendMessage("<@&" + g.roleBroadcastMessenger + ">").queue();
+				destination.sendMessage("<@&" + g.getRoleId("broadcast").get() + ">").queue();
 				embed = BuildEmbed.gamerEmbed();
 				break;
 			case "Midnight":

@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 
-public class Shutdown extends Command implements Logging {
+public class Shutdown extends Command {
 	public Shutdown() {
 		super(
 				"shutdown",
