@@ -133,14 +133,12 @@ public class Trigger extends Command {
 
 		if (trigger.equals("Backup")) {
 			new tasks.Backup(event.getJDA()).run();
-			event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Trigger " + trigger + " successfully executed").build())
-					.queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Trigger " + trigger + " successfully executed").build()).queue();
 			return;
 		}
 
 		Trigger.callMessage(source, trigger);
-		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Trigger " + trigger + " successfully executed")
-				.build()).queue();
+		event.getHook().sendMessageEmbeds(BuildEmbed.successEmbed("Trigger " + trigger + " successfully executed").build()).queue();
 	}
 
 	public static void MerryChristmas(JDA jda) {
