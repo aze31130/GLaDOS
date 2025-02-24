@@ -36,7 +36,7 @@ public class Midnight implements Runnable, Logging {
 		Trigger.callMessage(jda.getTextChannelById(glados.channelGeneral), "Midnight");
 
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(12000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
