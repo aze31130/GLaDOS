@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.Arrays;
 
 import accounts.Permission;
+import glados.GLaDOS;
 
 public class Ping extends Command {
 	public Ping() {
@@ -30,10 +31,11 @@ public class Ping extends Command {
 
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
+		GLaDOS g = GLaDOS.getInstance();
 		EmbedBuilder ping = new EmbedBuilder()
-				.setColor(Color.green)
+				.setColor(Color.GREEN)
 				.setTitle("Ping: " + event.getJDA().getGatewayPing() + "ms")
-				.setThumbnail(event.getJDA().getGuildById("676731153444765706").getIconUrl())
+				.setThumbnail(event.getJDA().getGuildById(g.guildId).getIconUrl())
 				.setTimestamp(Instant.now());
 		event.getHook().sendMessageEmbeds(ping.build()).queue();
 	}

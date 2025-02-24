@@ -7,9 +7,10 @@ import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionE
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import utils.Logging;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 
-public abstract class Command {
+public abstract class Command implements Logging {
 	public String name;
 	public String description;
 	public Permission permissionLevel;

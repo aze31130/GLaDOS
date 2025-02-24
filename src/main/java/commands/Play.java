@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.managers.AudioManager;
-import utils.BuildEmbed;
 
 public class Play extends Command {
 	public Play() {
@@ -43,8 +42,7 @@ public class Play extends Command {
 
 			event.getHook().sendMessage("200 OK").queue();
 		} catch (IllegalArgumentException e) {
-			event.getHook().sendMessageEmbeds(
-					BuildEmbed.errorEmbed(e.toString() + "You need to be connected in a voice channel first !").build()).queue();
+			LOGGER.severe(e.toString());
 		}
 	}
 }

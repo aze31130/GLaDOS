@@ -18,9 +18,8 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.FileUtils;
-import utils.Logging;
 
-public class Backup extends Command implements Logging {
+public class Backup extends Command {
 	public Backup() {
 		super(
 				"backup",
