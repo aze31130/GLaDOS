@@ -26,7 +26,7 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Check for banned words
 		 */
-		if (event.isFromGuild() && !channel.asTextChannel().isNSFW() && !channel.getId().equals(glados.getRoleId("nsfw").get())) {
+		if (event.isFromGuild() && !channel.asTextChannel().isNSFW() && !channel.getId().equals(glados.getChannelId("nsfw").get())) {
 			for (int i = 0; i < glados.bannedWords.length(); i++) {
 				if (messageContent[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
 					message.delete().queue();

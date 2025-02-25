@@ -33,7 +33,7 @@ public class Midnight implements Runnable, Logging {
 		for (Account a : glados.accounts)
 			a.canDrop = true;
 
-		Trigger.callMessage(jda.getTextChannelById(glados.getRoleId("general").get()), "Midnight");
+		Trigger.callMessage(jda.getTextChannelById(glados.getChannelId("general").get()), "Midnight");
 
 		try {
 			Thread.sleep(12000);
@@ -41,7 +41,7 @@ public class Midnight implements Runnable, Logging {
 			e.printStackTrace();
 		}
 
-		Trigger.midnightRank(jda.getTextChannelById(glados.getRoleId("general").get()));
+		Trigger.midnightRank(jda.getTextChannelById(glados.getChannelId("general").get()));
 
 		// Check for birthday events
 		LocalDate today = LocalDate.now();
@@ -53,7 +53,7 @@ public class Midnight implements Runnable, Logging {
 			LocalDate birthdate = LocalDate.parse(person.getString("date"), formatter);
 
 			if (birthdate.getMonthValue() == today.getMonthValue() && birthdate.getDayOfMonth() == today.getDayOfMonth()) {
-				jda.getTextChannelById(glados.getRoleId("general").get()).sendMessage("Happy birthday <@" + person.getString("id") + "> ! May this special day full of treasures and wonders ! :birthday::cake::gift::balloon::partying_face::tada::confetti_ball:").queue();
+				jda.getTextChannelById(glados.getChannelId("general").get()).sendMessage("Happy birthday <@" + person.getString("id") + "> ! May this special day full of treasures and wonders ! :birthday::cake::gift::balloon::partying_face::tada::confetti_ball:").queue();
 			}
 		}
 	}

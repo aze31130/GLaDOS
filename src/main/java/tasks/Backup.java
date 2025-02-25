@@ -35,7 +35,7 @@ public class Backup implements Runnable, Logging {
 		FileUtils.writeRawFile("accounts.json", accounts.toString(4));
 		// Upload file to discord
 		InputStream inputStream = new ByteArrayInputStream(accounts.toString().getBytes());
-		jda.getTextChannelById(g.getRoleId("backup").get()).sendMessageEmbeds(BuildEmbed.successEmbed("Account backup").build())
+		jda.getTextChannelById(g.getChannelId("backup").get()).sendMessageEmbeds(BuildEmbed.successEmbed("Account backup").build())
 				.addFiles(FileUpload.fromData(inputStream, "accounts.json")).complete();
 
 		LOGGER.info("Backup done !");

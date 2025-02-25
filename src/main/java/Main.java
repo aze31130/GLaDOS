@@ -50,8 +50,6 @@ public class Main implements Logging {
 			e.printStackTrace();
 		}
 
-		jda.getGuildById(glados.guildId).getTextChannelById("676731153444765709").sendMessage("<:what:1343712905262137444>").queue();
-
 		glados.registerCommands(jda);
 		glados.loadAccounts(jda);
 
