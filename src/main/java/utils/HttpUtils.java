@@ -37,7 +37,7 @@ public class HttpUtils implements Logging {
 		try {
 			final String url = GLaDOS.getInstance().llm + "/api/generate";
 			final String prePrompt =
-					"Here is a list of cybersecurity news. Please summarize them into a few concise paragraphs of 4000 characters max, merge duplicated news and format them in Markdown. Provide links to the original sources when possible.\n";
+					"Here is a list of cybersecurity news. Please summarize them into a few concise paragraphs of 4000 characters max, merge duplicated news and hightlight titles in bold using two '*'. Provide links to the original sources when possible.\n";
 
 			// Build the prompt
 			StringBuilder prompt = new StringBuilder(prePrompt);
