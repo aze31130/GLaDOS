@@ -202,7 +202,7 @@ public class BuildEmbed {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("You got:")
 				.setAuthor(dropper.getName(), dropper.getAvatarUrl(), dropper.getAvatarUrl())
-				.setImage("https://" + cdn + "/" + item.id + ".png")
+				.setImage(cdn + "/" + item.id + ".png")
 				.setColor(item.rarity.color)
 				.setDescription("[**" + item.rarity.name().toLowerCase() + "**] " + item.getFQName())
 				.setTimestamp(Instant.now());

@@ -47,7 +47,6 @@ public class Drop extends Command {
 		int acquiredMoney = random.nextInt(250, 1001);
 
 		authorAccount.money += acquiredMoney;
-		event.getHook().sendMessageEmbeds(BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build()).queue();
 
 		// Drop item
 		Item droppedItem = ItemUtils.getRandomItem(glados.items);
@@ -58,7 +57,9 @@ public class Drop extends Command {
 		droppedItem.makeLegit();
 
 		authorAccount.inventory.add(droppedItem);
-		event.getHook().sendMessageEmbeds(BuildEmbed.itemDropEmbed(author, droppedItem, glados.cdn).build()).queue();
+		event.getHook().sendMessageEmbeds(
+				BuildEmbed.moneyDropEmbed(author, acquiredMoney, authorAccount.money).build(),
+				BuildEmbed.itemDropEmbed(author, droppedItem, glados.cdn).build()).queue();
 		authorAccount.canDrop = false;
 	}
 }

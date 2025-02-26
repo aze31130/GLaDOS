@@ -24,8 +24,7 @@ public class Main implements Logging {
 		JDABuilder builder = JDABuilder.createDefault(glados.token);
 
 		GatewayIntent intents[] = {GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT,
-				GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS_AND_STICKERS,
-				GatewayIntent.GUILD_INVITES};
+				GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_INVITES};
 
 		for (GatewayIntent intent : intents)
 			builder.enableIntents(intent);
