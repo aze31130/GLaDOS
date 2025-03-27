@@ -77,7 +77,7 @@ public class BuildEmbed {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle(":sparkles: Success")
 				.setDescription("Upgraded to  " + level + " :star:")
-				.setImage("https://" + glados.cdn + "/SUCCESS.png")
+				.setImage(glados.cdn + "/SUCCESS.png")
 				.setColor(Color.GREEN);
 		return embed;
 	}
@@ -87,7 +87,7 @@ public class BuildEmbed {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Failed ! (Keep)")
 				.setDescription("Keep " + level + " :star:")
-				.setImage("https://" + glados.cdn + "/FAIL1.png")
+				.setImage(glados.cdn + "/FAIL1.png")
 				.setColor(Color.ORANGE);
 		return embed;
 	}
@@ -97,7 +97,7 @@ public class BuildEmbed {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Failed ! (Down)")
 				.setDescription("Downgraded to " + level + " :star:")
-				.setImage("https://" + glados.cdn + "/FAIL2.png")
+				.setImage(glados.cdn + "/FAIL2.png")
 				.setColor(Color.RED);
 		return embed;
 	}
@@ -107,7 +107,7 @@ public class BuildEmbed {
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle("Destroyed !")
 				.setDescription("The item is now broken an not upgradable anymore !")
-				.setImage("https://" + glados.cdn + "/DESTROYED.png")
+				.setImage(glados.cdn + "/DESTROYED.png")
 				.setColor(Color.BLACK);
 		return embed;
 	}
@@ -223,7 +223,7 @@ public class BuildEmbed {
 		EmbedBuilder info = new EmbedBuilder()
 				.setTitle("[" + i.rarity.name() + "] " + i.name)
 				.setDescription(i.lore)
-				.setImage("https://" + glados.cdn + "/" + i.id + ".png")
+				.setImage(glados.cdn + "/" + i.id + ".png")
 				.setColor(i.rarity.color);
 
 		if (i.untradable)
