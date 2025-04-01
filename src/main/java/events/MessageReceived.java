@@ -12,7 +12,10 @@ public class MessageReceived extends ListenerAdapter {
 	final String dropbotCommands[] = {
 			"|d",
 			"|c",
-			"|g -1"
+			"|g -1",
+			"|g",
+			"|ml",
+			"|collection"
 	};
 
 	public void onMessageReceived(MessageReceivedEvent event) {
@@ -35,11 +38,11 @@ public class MessageReceived extends ListenerAdapter {
 			}
 		}
 
-		if (message.getContentRaw().contains(event.getJDA().getSelfUser().getId())) {
-			if (new Random().nextInt(10) >= 2) {
-				channel.sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length()))).queue();
-			}
-		}
+		/*
+		 * Insert troll message here
+		 */
+		if (message.getContentRaw().contains(event.getJDA().getSelfUser().getId()) && new Random().nextInt(10) >= 2)
+			channel.sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length()))).queue();
 
 		/*
 		 * Ensure every message received in survey channel contains a poll
@@ -47,11 +50,9 @@ public class MessageReceived extends ListenerAdapter {
 		if (message.getChannelId().equals(glados.getChannelId("vote").get()) && message.getPoll() == null)
 			message.delete().queue();
 
-
 		// Check self sender
 		for (String dropbotCommand : dropbotCommands)
-			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand)
-					&& (new Random().nextInt(15) < 1))
+			if (!event.getAuthor().isBot() && event.getMessage().getContentRaw().contains(dropbotCommand) && (new Random().nextInt(15) < 1))
 				channel.sendMessage(dropbotCommand).queue();
 	}
 }
