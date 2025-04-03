@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -18,13 +17,16 @@ public class TimeUtils {
 	 * This function returns the amount of millis seconds between current time to midnight
 	 */
 	public static long getMidnightDelay() {
-		LocalDateTime now = LocalDateTime.now();
-		LocalDateTime midnight = LocalDate.now().atTime(LocalTime.MIDNIGHT);
+		String timeZone = System.getenv("TZ");
+		ZoneId zoneId = (timeZone != null && !timeZone.isEmpty()) ? ZoneId.of(timeZone) : ZoneId.of("UTC");
+
+		ZonedDateTime now = ZonedDateTime.now(zoneId);
+		ZonedDateTime midnight = now.toLocalDate().atStartOfDay(zoneId);
 
 		if (now.isAfter(midnight))
 			midnight = midnight.plusDays(1);
 
-		return Duration.between(now, midnight).minusMillis(100).toMillis();
+		return Duration.between(now, midnight).minusMillis(80).toMillis();
 	}
 
 	/*
