@@ -1,11 +1,6 @@
 package glados;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,14 +16,11 @@ import items.Item;
 import items.ItemType;
 import items.Rarity;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.Message.Attachment;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import news.News;
-import utils.BuildEmbed;
 import utils.FileUtils;
 import utils.ItemUtils;
 import utils.Logging;
@@ -249,25 +241,6 @@ public class GLaDOS implements Logging {
 	}
 
 	public void loadAccounts(JDA jda) {
-		LOGGER.info("Downloading account file from discord...");
-
-		Message latestMessage = jda.getTextChannelById(this.getChannelId("backup").get()).getHistory().retrievePast(1).complete().get(0);
-		if (!latestMessage.getAuthor().getId().equalsIgnoreCase(this.botId)) {
-			jda.getTextChannelById(this.getChannelId("system").get()).sendMessageEmbeds(
-					BuildEmbed.errorEmbed("Inventory sender is not a bot. Aborting loading.").build()).queue();
-			return;
-		}
-
-		Attachment attachment = latestMessage.getAttachments().get(0);
-
-		try {
-			URL fileUrl = new URL(attachment.getUrl());
-			Files.copy(fileUrl.openStream(), Paths.get("accounts.json"), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			LOGGER.severe(e.getMessage());
-			e.printStackTrace();
-		}
-
 		LOGGER.info("Loading account from file...");
 		JSONArray jsonAccounts = FileUtils.loadJsonArray("accounts.json");
 

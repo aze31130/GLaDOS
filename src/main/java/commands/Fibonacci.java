@@ -39,8 +39,7 @@ public class Fibonacci extends Command {
 		Integer n = event.getOption("n").getAsInt();
 
 		if (n < 0) {
-			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build())
-					.queue();
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, you cannot compute negative numbers").build()).queue();
 			return;
 		}
 
@@ -54,9 +53,8 @@ public class Fibonacci extends Command {
 		 * Define a temporary limit to make sure midnight ranking is not affected
 		 */
 		if (n > 1000 && LocalDateTime.now().getHour() == 23) {
-			event.getHook()
-					.sendMessageEmbeds(BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build())
-					.queue();
+			event.getHook().sendMessageEmbeds(
+					BuildEmbed.errorEmbed("Sorry, command limited to n = 1000 between 11pm to 12pm.").build()).queue();
 			return;
 		}
 
@@ -78,8 +76,7 @@ public class Fibonacci extends Command {
 		// Write number to a file if too big
 		if (f.toString().length() >= 2000) {
 			InputStream inputStream = new ByteArrayInputStream(f.toString().getBytes());
-			event.getHook().sendMessage("Fibonacci(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt"))
-					.queue();
+			event.getHook().sendMessage("Fibonacci(" + n + ") = ").addFiles(FileUpload.fromData(inputStream, "output.txt")).queue();
 		} else {
 			event.getHook().sendMessage("Fibonacci(" + n + ") = " + f).queue();
 		}

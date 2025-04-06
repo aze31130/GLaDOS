@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.List;
+import org.json.JSONArray;
+import accounts.Account;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -22,6 +25,16 @@ public class AccountUtils {
 
 		for (Member m : guild.getMembers())
 			glados.getAccount(m.getUser());
+	}
+
+	public static void backup(List<Account> input) {
+		JSONArray accounts = new JSONArray();
+
+		for (Account a : input)
+			accounts.put(a.toJson());
+
+		// Write backup file
+		FileUtils.writeRawFile("accounts.json", accounts.toString(4));
 	}
 
 	/*

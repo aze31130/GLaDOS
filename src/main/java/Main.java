@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import events.*;
 import tasks.*;
 import glados.GLaDOS;
+import utils.AccountUtils;
 import utils.Logging;
 import utils.TimeUtils;
 import net.dv8tion.jda.api.JDA;
@@ -59,10 +60,12 @@ public class Main implements Logging {
 		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
 		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
 
+		// Saves accounts on exit
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
-				System.out.println("Test");
-				// TODO
+				LOGGER.info("Saving accounts...");
+				AccountUtils.backup(glados.accounts);
+				LOGGER.info("Saved " + glados.accounts.size() + " accounts.");
 			}
 		}));
 
