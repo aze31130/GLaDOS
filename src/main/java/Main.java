@@ -62,6 +62,7 @@ public class Main implements Logging {
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
 				System.out.println("Test");
+				// TODO
 			}
 		}));
 

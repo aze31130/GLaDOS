@@ -51,6 +51,17 @@ public class Drop extends Command {
 		// Drop item
 		Item droppedItem = ItemUtils.getRandomItem(glados.items);
 
+		/*
+		 * Very rare case: if the item dropped is not obtainable. For instance, dropping again a unique item
+		 * already in someones else inventory.
+		 */
+		if (!ItemUtils.checkDropConditions(droppedItem)) {
+			event.getHook().sendMessageEmbeds(
+					BuildEmbed.errorEmbed("The item you dropped " + droppedItem.name + " cannot be added to your inventory !").build(),
+					BuildEmbed.errorEmbed("Drop canceled, you are allowed to drop again.").build()).queue();
+			return;
+		}
+
 		// Asign random quality
 		droppedItem.quality = random.nextDouble();
 

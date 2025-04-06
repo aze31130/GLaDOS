@@ -57,11 +57,15 @@ public class ItemUtils implements Logging {
 	/*
 	 * This function checks if the drop conditions are fulfilled
 	 */
-	public static Boolean checkDropConditions(Item i) {
-		if (i.rarity.equals(Rarity.EVENT))
-			return false;
+	public static Boolean checkDropConditions(Item input) {
+		List<Account> accounts = GLaDOS.getInstance().accounts;
 
-		// TODO Add more checks here
+		// Ensures unique items are unique
+		if (input.rarity == Rarity.UNIQUE) {
+			return accounts.stream()
+					.flatMap(account -> account.inventory.stream())
+					.noneMatch(item -> item.id == input.id);
+		}
 
 		return true;
 	}
@@ -78,31 +82,24 @@ public class ItemUtils implements Logging {
 		long cumulativeProbability = 0;
 		Item droppedItem = null;
 
-		// if (TimeUtils.isSpecialDay()) {
+
 		// Guaranteeing specific drops on event days
-		// TODO
-		// return;
-		// }
+		if (TimeUtils.isSpecialDay()) {
+			// TODO
+			// return droppedItem;
+		}
 
 		for (Item item : glados.items) {
 			cumulativeProbability += item.dropChance;
 			if (dropValue <= cumulativeProbability) {
-				// Check if drop requirements are fulfilled
-				if (ItemUtils.checkDropConditions(item)) {
-					try {
-						droppedItem = (Item) item.clone();
-					} catch (CloneNotSupportedException e) {
-						e.printStackTrace();
-					}
-					break;
+				try {
+					droppedItem = (Item) item.clone();
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
 				}
+				break;
 			}
 		}
-
-		/*
-		 * TODO Very rare edge case: if the last item has been skipped due to unsuffisient drop conditions.
-		 * In this case, we simply send an error message and allow the user to drop again.
-		 */
 
 		return droppedItem;
 	}
