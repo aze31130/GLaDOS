@@ -11,54 +11,33 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
 
 public class AutoComplete extends ListenerAdapter {
+
+	private static final int MAX_AUTOCOMPLETE = 25;
+
 	public void onCommandAutoCompleteInteraction(CommandAutoCompleteInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
 		String eventName = event.getName();
+		String field = event.getFocusedOption().getName();
 
 		if (eventName.equals("item") || eventName.equals("give")) {
-			List<Command.Choice> options = glados.items.stream()
-					.filter(item -> item.name.toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))
-					.map(item -> new Command.Choice(item.name, item.name))
-					.collect(Collectors.toList());
-
-			// Only keep 25 first elements at max
-			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
-
-			event.replyChoices(filtered).queue();
+			event.replyChoices(autoCompleteItems(event.getFocusedOption().getValue().toLowerCase())).queue();
 			return;
 		}
 
 		if (eventName.equals("upgrade") || eventName.equals("sell") || eventName.equals("contract")) {
 			User author = event.getUser();
 			Account authorAccount = glados.getAccount(author);
-			List<Command.Choice> options = authorAccount.inventory.stream()
-					.filter(item -> item.getFQName().toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))
-					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
-					.collect(Collectors.toList());
 
-			// Only keep 25 first elements at max
-			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
-
-			event.replyChoices(filtered).queue();
+			event.replyChoices(autoCompleteItems(authorAccount, event.getFocusedOption().getValue().toLowerCase())).queue();
 			return;
 		}
 
 		if (eventName.equals("trade") && event.getOption("target") != null) {
-			String field = event.getFocusedOption().getName();
 
 			if (field.equals("srcitem")) {
 				Account authorAccount = glados.getAccount(event.getUser());
 
-				List<Command.Choice> options = authorAccount.inventory.stream()
-						.filter(item -> item.getFQName().toLowerCase()
-								.contains(event.getFocusedOption().getValue().toLowerCase()))
-						.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
-						.collect(Collectors.toList());
-
-				// Only keep 25 first elements at max
-				List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
-
-				event.replyChoices(filtered).queue();
+				event.replyChoices(autoCompleteItems(authorAccount, event.getFocusedOption().getValue().toLowerCase())).queue();
 				return;
 			}
 
@@ -74,16 +53,7 @@ public class AutoComplete extends ListenerAdapter {
 
 				Account targetAccount = optionalTargetAccount.get();
 
-				List<Command.Choice> options = targetAccount.inventory.stream()
-						.filter(item -> item.getFQName().toLowerCase()
-								.contains(event.getFocusedOption().getValue().toLowerCase()))
-						.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
-						.collect(Collectors.toList());
-
-				// Only keep 25 first elements at max
-				List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
-
-				event.replyChoices(filtered).queue();
+				event.replyChoices(autoCompleteItems(targetAccount, event.getFocusedOption().getValue().toLowerCase())).queue();
 				return;
 			}
 		}
@@ -100,16 +70,30 @@ public class AutoComplete extends ListenerAdapter {
 
 			Account targetAccount = optionalTargetAccount.get();
 
-			List<Command.Choice> options = targetAccount.inventory.stream()
-					.filter(item -> item.getFQName().toLowerCase().contains(event.getFocusedOption().getValue().toLowerCase()))
-					.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
-					.collect(Collectors.toList());
-
-			// Only keep 25 first elements at max
-			List<Command.Choice> filtered = options.subList(0, Math.min(options.size(), 25));
-
-			event.replyChoices(filtered).queue();
+			event.replyChoices(autoCompleteItems(targetAccount, event.getFocusedOption().getValue().toLowerCase())).queue();
 			return;
 		}
+	}
+
+	public List<Command.Choice> autoCompleteItems(String itemName) {
+		GLaDOS glados = GLaDOS.getInstance();
+
+		List<Command.Choice> options = glados.items.stream()
+				.filter(item -> item.name.toLowerCase().contains(itemName))
+				.map(item -> new Command.Choice(item.name, item.name))
+				.collect(Collectors.toList());
+
+		// Only keep the few first elements at max
+		return options.subList(0, Math.min(options.size(), MAX_AUTOCOMPLETE));
+	}
+
+	public List<Command.Choice> autoCompleteItems(Account account, String itemName) {
+		List<Command.Choice> options = account.inventory.stream()
+				.filter(item -> item.name.toLowerCase().contains(itemName))
+				.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
+				.collect(Collectors.toList());
+
+		// Only keep the few first elements at max
+		return options.subList(0, Math.min(options.size(), MAX_AUTOCOMPLETE));
 	}
 }
