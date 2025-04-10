@@ -63,8 +63,7 @@ public class ButtonClick extends ListenerAdapter {
 			int lastPage = (int) Math.ceil((double) authorAccount.inventory.size() / ItemUtils.AMOUNT_ITEM_PER_PAGE);
 
 			if ((newPageNumber > lastPage) || (newPageNumber <= 0)) {
-				event.replyEmbeds(BuildEmbed.errorEmbed("You cannot see page " + newPageNumber + " !")
-						.build()).setEphemeral(true).queue();
+				event.deferEdit().queue();
 				return;
 			}
 
