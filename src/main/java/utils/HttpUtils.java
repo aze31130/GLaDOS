@@ -34,17 +34,17 @@ public class HttpUtils implements Logging {
 	}
 
 	public static String sendLLMQuery(List<News> newsToSumUp) {
-		LOGGER.info("Sent LLM inference query...");
+		LOGGER.info("Processing " + newsToSumUp.size() + " news...");
 		try {
 			final String url = GLaDOS.getInstance().llm + "/api/generate";
 			final String prePrompt =
-					"You are given a list of cybersecurity news articles. Summarize them into a single, well-structured paragraph, no longer than 4000 characters. Merge duplicate or similar news stories. Include the source link for each story when available.";
+					"You are given a list of cybersecurity news articles. Summarize them into a single, well-structured paragraph, no longer than 4000 characters. Merge duplicate or similar news stories.";
 
 			// Build the prompt
 			StringBuilder prompt = new StringBuilder(prePrompt);
 
 			for (News news : newsToSumUp)
-				prompt.append(news.title() + " - " + news.description() + " Source: " + news.url() + "\n");
+				prompt.append(news.title() + " - " + news.description() + "\n");
 
 			JSONObject requestBody = new JSONObject();
 			requestBody.put("model", "mistral");
@@ -52,9 +52,11 @@ public class HttpUtils implements Logging {
 			requestBody.put("stream", false);
 
 			JSONObject options = new JSONObject();
-			options.put("num_ctx", "4096");
+			options.put("num_ctx", 4096);
 
 			requestBody.put("options", options);
+
+			LOGGER.info("Query size " + prompt.length());
 
 			// Write request content in a file
 			FileUtils.writeRawFile("llm", requestBody.toString());
