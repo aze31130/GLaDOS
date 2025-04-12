@@ -7,8 +7,6 @@ import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionE
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import utils.BuildEmbed;
 
 public class Market extends Command {
@@ -19,7 +17,7 @@ public class Market extends Command {
 				Permission.NONE,
 				Tag.RPG,
 				Arrays.asList(Type.SLASH),
-				Arrays.asList(new OptionData(OptionType.STRING, "item", "The item you want to buy", false, true)));
+				Arrays.asList());
 	}
 
 	@Override
@@ -31,8 +29,6 @@ public class Market extends Command {
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
 		GLaDOS glados = GLaDOS.getInstance();
-
-		// TODO Buy mechanism
 
 		event.getHook().sendMessageEmbeds(BuildEmbed.marketEmbed(glados.market).build()).queue();
 	}

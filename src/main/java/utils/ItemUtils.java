@@ -120,6 +120,8 @@ public class ItemUtils implements Logging {
 
 			glados.market.add(marketItem);
 		}
+
+		glados.market.sort(Comparator.comparingInt(Item::getValue).reversed());
 	}
 
 	/*

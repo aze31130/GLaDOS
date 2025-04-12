@@ -2,6 +2,7 @@ package utils;
 
 import java.awt.Color;
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import accounts.Account;
@@ -313,12 +314,12 @@ public class BuildEmbed {
 	public static EmbedBuilder marketEmbed(List<Item> items) {
 		EmbedBuilder result = new EmbedBuilder()
 				.setTitle("Market")
-				.setDescription("Use /market <item> to buy a given item")
+				.setDescription("Use /buy <item> to buy a given item")
 				.setColor(Color.ORANGE)
 				.setTimestamp(Instant.now());
 
 		for (Item i : items)
-			result.addField(i.rarity.emote + " " + i.rarity.toString(), i.getFQName(), false);
+			result.addField(i.rarity.emote + " " + i.rarity.toString() + " - " + i.getValue() + " :coin:  ", i.getFQName(), false);
 
 		return result;
 	}
