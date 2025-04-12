@@ -48,7 +48,9 @@ public class Ranking extends Command {
 			// Display only 10 first
 			if (count < 10)
 				ranking.addField(AccountUtils.getMedalEmoji(count) + a.user.getName(),
-						StringsUtils.formatNumber(a.getInventoryValue()) + " :coin:", false);
+						StringsUtils.formatNumber(a.getInventoryValue()) + " :coin:" + " | " + StringsUtils.formatNumber(a.inventory.size())
+								+ " items",
+						false);
 
 			if (a.user.getId().equals(author.getId()))
 				ranking.setDescription("Your rank is " + count + " out of " + g.accounts.size());
