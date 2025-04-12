@@ -257,4 +257,14 @@ public class ItemUtils implements Logging {
 		for (Map.Entry<Item, Integer> entry : value)
 			LOGGER.info(entry.getKey().rarity + " " + entry.getKey().name + " : " + entry.getValue());
 	}
+
+	public static int getTotalAmountOfRarity(Rarity r) {
+		GLaDOS g = GLaDOS.getInstance();
+
+		return g.accounts.stream()
+				.flatMap(a -> a.inventory.stream())
+				.filter(i -> i.rarity.equals(r))
+				.mapToInt(i -> 1)
+				.sum();
+	}
 }

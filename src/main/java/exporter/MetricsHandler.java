@@ -6,6 +6,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import accounts.Account;
 import glados.GLaDOS;
+import items.Rarity;
+import utils.ItemUtils;
 import utils.Logging;
 
 public class MetricsHandler implements Logging, HttpHandler {
@@ -16,9 +18,25 @@ public class MetricsHandler implements Logging, HttpHandler {
 			StringBuilder sb = new StringBuilder();
 
 			for (Account a : g.accounts) {
-				sb.append("glados_statistic{account=\"" + a.user.getName() + "\",statistic=\"inventory_value\"} " + a.getInventoryValue() + "\n");
-				sb.append("glados_statistic{account=\"" + a.user.getName() + "\",statistic=\"inventory_size\"} " + a.inventory.size() + "\n");
+				sb.append("glados_items{account=\"" + a.user.getName() + "\",statistic=\"inventory_value\"} " + a.getInventoryValue() + "\n");
+				sb.append("glados_items{account=\"" + a.user.getName() + "\",statistic=\"inventory_size\"} " + a.inventory.size() + "\n");
+				sb.append("glados_items{account=\"" + a.user.getName() + "\",statistic=\"money\"} " + a.money + "\n");
 			}
+
+			Rarity allRarity[] = {
+					Rarity.COMMON,
+					Rarity.UNUSUAL,
+					Rarity.RARE,
+					Rarity.EPIC,
+					Rarity.LEGENDARY,
+					Rarity.FABLED,
+					Rarity.MYTHICAL,
+					Rarity.GODLY,
+					Rarity.UNIQUE,
+			};
+
+			for (Rarity r : allRarity)
+				sb.append("glados_items_" + r.toString().toLowerCase() + " " + ItemUtils.getTotalAmountOfRarity(r) + "\n");
 
 			String response = sb.toString();
 			exchange.sendResponseHeaders(200, response.length());
