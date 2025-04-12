@@ -2,6 +2,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import events.*;
+import exporter.Exporter;
 import tasks.*;
 import glados.GLaDOS;
 import utils.AccountUtils;
@@ -52,6 +53,13 @@ public class Main implements Logging {
 
 		glados.registerCommands(jda);
 		glados.loadAccounts(jda);
+
+		// Starts metrics exporter
+		Thread exporter = new Thread(() -> {
+			Exporter.httpServer();
+		});
+		exporter.setDaemon(true);
+		exporter.start();
 
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
