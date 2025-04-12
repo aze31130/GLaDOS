@@ -71,6 +71,7 @@ public class Buy extends Command {
 		authorAccount.inventory.add(itemInstance);
 
 		event.getHook().sendMessageEmbeds(
-				BuildEmbed.successEmbed("Successfully acquired " + itemInstance.getFQName() + " for " + itemInstance.getValue()).build()).queue();
+				BuildEmbed.successEmbed("Successfully acquired " + itemInstance.getFQName() + " for " + itemInstance.getValue() + " :coin:").build())
+				.queue();
 	}
 }

@@ -19,6 +19,11 @@ public class AutoComplete extends ListenerAdapter {
 		String eventName = event.getName();
 		String field = event.getFocusedOption().getName();
 
+		if (eventName.equals("buy")) {
+			event.replyChoices(autoCompleteMarket(event.getFocusedOption().getValue().toLowerCase())).queue();
+			return;
+		}
+
 		if (eventName.equals("item") || eventName.equals("give")) {
 			event.replyChoices(autoCompleteItems(event.getFocusedOption().getValue().toLowerCase())).queue();
 			return;
@@ -73,6 +78,18 @@ public class AutoComplete extends ListenerAdapter {
 			event.replyChoices(autoCompleteItems(targetAccount, event.getFocusedOption().getValue().toLowerCase())).queue();
 			return;
 		}
+	}
+
+	public List<Command.Choice> autoCompleteMarket(String itemName) {
+		GLaDOS glados = GLaDOS.getInstance();
+
+		List<Command.Choice> options = glados.market.stream()
+				.filter(item -> item.name.toLowerCase().contains(itemName))
+				.map(item -> new Command.Choice(item.getFQName(), item.getFQName()))
+				.collect(Collectors.toList());
+
+		// Only keep the few first elements at max
+		return options.subList(0, Math.min(options.size(), MAX_AUTOCOMPLETE));
 	}
 
 	public List<Command.Choice> autoCompleteItems(String itemName) {
