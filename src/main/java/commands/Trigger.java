@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 import org.json.JSONObject;
 import accounts.Account;
 import accounts.Permission;
@@ -57,10 +59,18 @@ public class Trigger extends Command {
 				sortedMessages.add(m);
 		}
 
-		Collections.sort(sortedMessages, TimeUtils::compareTo);
+		// Remove all message of user posting twice
+		Map<String, Long> authorIdCounts = sortedMessages.stream()
+				.collect(Collectors.groupingBy(m -> m.getAuthor().getId(), Collectors.counting()));
+
+		List<Message> filtered = sortedMessages.stream()
+				.filter(m -> authorIdCounts.get(m.getAuthor().getId()) == 1)
+				.collect(Collectors.toList());
+
+		Collections.sort(filtered, TimeUtils::compareTo);
 
 		int rank = 1;
-		for (Message m : sortedMessages) {
+		for (Message m : filtered) {
 			if (rank == 1) {
 				midnightEmbed.setThumbnail(m.getAuthor().getAvatarUrl());
 				midnightEmbed.setDescription("Winner is " + m.getAuthor().getAsMention());

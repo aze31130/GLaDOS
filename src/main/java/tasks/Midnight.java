@@ -39,7 +39,7 @@ public class Midnight implements Runnable, Logging {
 		ItemUtils.resetMarket();
 
 		try {
-			Thread.sleep(12000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
