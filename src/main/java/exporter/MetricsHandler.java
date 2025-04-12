@@ -36,7 +36,7 @@ public class MetricsHandler implements Logging, HttpHandler {
 			};
 
 			for (Rarity r : allRarity)
-				sb.append("glados_items_" + r.toString().toLowerCase() + " " + ItemUtils.getTotalAmountOfRarity(r) + "\n");
+				sb.append("glados_items_amount{rarity=\"" + r.toString().toLowerCase() + "\"} " + ItemUtils.getTotalAmountOfRarity(r) + "\n");
 
 			String response = sb.toString();
 			exchange.sendResponseHeaders(200, response.length());
