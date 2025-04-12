@@ -62,9 +62,7 @@ public class Drop extends Command {
 			return;
 		}
 
-		// Asign random quality
 		droppedItem.quality = random.nextDouble();
-
 		droppedItem.makeLegit();
 
 		authorAccount.inventory.add(droppedItem);

@@ -44,6 +44,7 @@ public class GLaDOS implements Logging {
 	public List<Account> accounts = new ArrayList<>();
 	public List<Command> commands = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
+	public List<Item> market = new ArrayList<>();
 
 	public List<Integer> rssNews = new ArrayList<>();
 	public List<News> rssNewsSumUp = new ArrayList<>();
@@ -79,7 +80,7 @@ public class GLaDOS implements Logging {
 		Command commands[] =
 				{new Auction(), new Backup(), new Checksum(), new CheGuevara(), new Clear(), new Contract(),
 						new Delete(), new Disconnect(), new Drop(), new Factorielle(), new Fibonacci(), new Give(), new Help(),
-						new Inventory(), new Ip(), new commands.Item(), new Move(), new Ping(), new Play(),
+						new Inventory(), new Ip(), new commands.Item(), new Market(), new Move(), new Ping(), new Play(),
 						new Profile(), new Question(), new RandomCat(), new RandomDog(), new Ranking(), new Rng(), new Role(),
 						new Sell(), new Shutdown(), new Spam(), new State(), new Status(), new Trade(), new Translate(),
 						new Trigger(), new Upgrade(), new Version()};
@@ -88,6 +89,9 @@ public class GLaDOS implements Logging {
 			this.commands.add(c);
 
 		this.loadItems();
+
+		// Init market
+		ItemUtils.resetMarket();
 
 		try {
 			// Load quotes
@@ -345,9 +349,7 @@ public class GLaDOS implements Logging {
 	 * Reads the latest commit hash where the project is currently running
 	 */
 	public void getVersion() {
-		List<String> filesToTry = Arrays.asList(
-				"../.git/refs/heads/master",
-				"master");
+		List<String> filesToTry = Arrays.asList("../.git/refs/heads/master", "master");
 
 		for (String paths : filesToTry) {
 			String content = FileUtils.readRawFile(paths).replace("\n", "");

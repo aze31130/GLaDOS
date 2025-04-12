@@ -8,6 +8,7 @@ import accounts.Account;
 import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import utils.ItemUtils;
 import utils.Logging;
 
 /*
@@ -34,6 +35,8 @@ public class Midnight implements Runnable, Logging {
 			a.canDrop = true;
 
 		Trigger.callMessage(jda.getTextChannelById(glados.getChannelId("general").get()), "Midnight");
+
+		ItemUtils.resetMarket();
 
 		try {
 			Thread.sleep(12000);

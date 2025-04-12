@@ -2,6 +2,7 @@ package utils;
 
 import java.awt.Color;
 import java.time.Instant;
+import java.util.List;
 import java.util.Random;
 import accounts.Account;
 import glados.GLaDOS;
@@ -305,6 +306,19 @@ public class BuildEmbed {
 				.setColor(Color.decode("#6460AA"));
 
 		result.addField("", news.url(), false);
+
+		return result;
+	}
+
+	public static EmbedBuilder marketEmbed(List<Item> items) {
+		EmbedBuilder result = new EmbedBuilder()
+				.setTitle("Market")
+				.setDescription("Use /market <item> to buy a given item")
+				.setColor(Color.ORANGE)
+				.setTimestamp(Instant.now());
+
+		for (Item i : items)
+			result.addField(i.rarity.emote + " " + i.rarity.toString(), i.getFQName(), false);
 
 		return result;
 	}

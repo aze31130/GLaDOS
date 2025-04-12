@@ -82,7 +82,6 @@ public class ItemUtils implements Logging {
 		long cumulativeProbability = 0;
 		Item droppedItem = null;
 
-
 		// Guaranteeing specific drops on event days
 		if (TimeUtils.isSpecialDay()) {
 			// TODO
@@ -102,6 +101,25 @@ public class ItemUtils implements Logging {
 		}
 
 		return droppedItem;
+	}
+
+	/*
+	 * Resets the market
+	 */
+	public static void resetMarket() {
+		GLaDOS glados = GLaDOS.getInstance();
+		SecureRandom random = new SecureRandom();
+
+		glados.market.clear();
+
+		// Refill the market
+		for (int i = 0; i < 10; i++) {
+			Item marketItem = ItemUtils.getRandomItem(glados.items);
+			marketItem.quality = random.nextDouble();
+			marketItem.makeLegit();
+
+			glados.market.add(marketItem);
+		}
 	}
 
 	/*
