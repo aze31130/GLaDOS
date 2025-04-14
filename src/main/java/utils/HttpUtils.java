@@ -3,7 +3,10 @@ package utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import org.json.JSONObject;
 import glados.GLaDOS;
@@ -17,20 +20,17 @@ public class HttpUtils implements Logging {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static String getIp() {
+	public static String sendHTTPRequest(String url) {
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+
 		try {
-			final String url = "https://api.ipify.org?format=text";
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openConnection().getInputStream()));
-
-			String result = reader.readLine();
-
-			reader.close();
-			return result;
-		} catch (IOException e) {
-			LOGGER.severe(e.toString());
+			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			return response.body();
+		} catch (InterruptedException | IOException e) {
+			e.printStackTrace();
 		}
-		return "Could not get Ip";
+		return "Unable to retrieve HTTP body";
 	}
 
 	public static String sendLLMQuery(List<News> newsToSumUp) {

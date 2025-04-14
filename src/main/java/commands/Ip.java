@@ -27,6 +27,6 @@ public class Ip extends Command {
 
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
-		event.getHook().sendMessage(HttpUtils.getIp()).queue();
+		event.getHook().sendMessage(HttpUtils.sendHTTPRequest("https://api.ipify.org?format=text")).queue();
 	}
 }
