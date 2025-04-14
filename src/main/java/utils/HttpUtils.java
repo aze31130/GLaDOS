@@ -52,14 +52,11 @@ public class HttpUtils implements Logging {
 			requestBody.put("stream", false);
 
 			JSONObject options = new JSONObject();
-			options.put("num_ctx", 4096);
+			options.put("num_ctx", 8192);
 
 			requestBody.put("options", options);
 
 			LOGGER.info("Query size " + prompt.length());
-
-			// Write request content in a file
-			FileUtils.writeRawFile("llm", requestBody.toString());
 
 			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", "@llm", url);
 			Process p = builder.start();
@@ -68,13 +65,7 @@ public class HttpUtils implements Logging {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String rawResponse = reader.readLine();
 
-			// Debug output
-			FileUtils.writeRawFile("rawanwser", rawResponse);
-
 			JSONObject result = new JSONObject(rawResponse);
-
-			// Debug output
-			FileUtils.writeRawFile("anwserJSON", result.toString());
 
 			LOGGER.info("Query OK !");
 
