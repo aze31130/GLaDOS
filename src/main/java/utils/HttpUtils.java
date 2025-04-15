@@ -58,6 +58,9 @@ public class HttpUtils implements Logging {
 
 			LOGGER.info("Query size " + prompt.length());
 
+			// Write request content in a file
+			FileUtils.writeRawFile("llm", requestBody.toString());
+
 			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", "@llm", url);
 			Process p = builder.start();
 			p.waitFor();
