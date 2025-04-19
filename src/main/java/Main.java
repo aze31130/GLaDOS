@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class Main implements Logging {
 	public static void main(String[] args) {
@@ -32,6 +33,7 @@ public class Main implements Logging {
 			builder.enableIntents(intent);
 
 		builder.setChunkingFilter(ChunkingFilter.ALL);
+		builder.enableCache(CacheFlag.ONLINE_STATUS);
 		builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 		JDA jda = builder.build();
 

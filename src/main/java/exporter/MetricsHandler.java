@@ -7,6 +7,9 @@ import com.sun.net.httpserver.HttpHandler;
 import accounts.Account;
 import glados.GLaDOS;
 import items.Rarity;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Guild;
 import utils.ItemUtils;
 import utils.Logging;
 
@@ -16,6 +19,18 @@ public class MetricsHandler implements Logging, HttpHandler {
 		try {
 			GLaDOS g = GLaDOS.getInstance();
 			StringBuilder sb = new StringBuilder();
+
+			JDA jda = g.accounts.get(0).user.getJDA();
+			Guild guild = jda.getGuilds().get(0);
+
+			int onlineMembers = (int) guild.getMembers().stream().filter(m -> {
+				OnlineStatus status = m.getOnlineStatus();
+				return status == OnlineStatus.ONLINE ||
+						status == OnlineStatus.IDLE ||
+						status == OnlineStatus.DO_NOT_DISTURB;
+			}).count();
+
+			sb.append("discord_online_members " + onlineMembers + "\n");
 
 			for (Account a : g.accounts) {
 				sb.append("glados_items{account=\"" + a.user.getName() + "\",statistic=\"inventory_value\"} " + a.getInventoryValue() + "\n");
