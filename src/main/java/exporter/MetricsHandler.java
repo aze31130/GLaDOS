@@ -39,6 +39,8 @@ public class MetricsHandler implements Logging, HttpHandler {
 				sb.append("glados_items_amount{rarity=\"" + r.toString().toLowerCase() + "\"} " + ItemUtils.getTotalAmountOfRarity(r) + "\n");
 
 			String response = sb.toString();
+
+			exchange.getResponseHeaders().set("Content-Type", "text/plain");
 			exchange.sendResponseHeaders(200, response.length());
 
 			OutputStream os = exchange.getResponseBody();
