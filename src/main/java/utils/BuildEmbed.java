@@ -113,7 +113,10 @@ public class BuildEmbed {
 		return embed;
 	}
 
-	public static EmbedBuilder profileEmbed(Account account) {
+	public static EmbedBuilder profileEmbed(Account account, GLaDOS g) {
+		int totalItemAmount = g.items.size();
+		int totalUniqueOwnedItem = (int) account.inventory.stream().map(item -> item.id).distinct().count();
+
 		EmbedBuilder embed = new EmbedBuilder()
 				.setTitle(account.user.getName() + "'s profile")
 				.setDescription(account.user.getAsMention())
@@ -123,6 +126,8 @@ public class BuildEmbed {
 				.addField(":clock: :timer: - Joined Discord", account.user.getTimeCreated().toString(), true)
 				.addField(":moneybag: - Money", Long.toString(account.money), true)
 				.addField(":briefcase: - Items", Integer.toString(account.inventory.size()), true)
+				.addField(":notepad_spiral: - Collection",
+						totalUniqueOwnedItem + " / " + totalItemAmount + " (" + (totalUniqueOwnedItem * 100 / totalItemAmount) + "%)", true)
 				.addField(":trophy: - Achievements", "WIP", true)
 				.setTimestamp(Instant.now());
 		return embed;
