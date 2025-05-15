@@ -3,6 +3,7 @@ package events;
 import java.util.Random;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -29,7 +30,7 @@ public class MessageReceived extends ListenerAdapter {
 		/*
 		 * Check for banned words
 		 */
-		if (event.isFromGuild() && !channel.asTextChannel().isNSFW() && !channel.getId().equals(glados.getChannelId("nsfw").get())) {
+		if (event.isFromGuild() && channel.getType().equals(ChannelType.TEXT) && !channel.asTextChannel().isNSFW()) {
 			for (int i = 0; i < glados.bannedWords.length(); i++) {
 				if (messageContent[0].equalsIgnoreCase(glados.bannedWords.get(i).toString())) {
 					message.delete().queue();
