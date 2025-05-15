@@ -124,7 +124,8 @@ public class BuildEmbed {
 				.setThumbnail(account.user.getAvatarUrl())
 				.addField(":shield: - Trust Factor", "WIP", true)
 				.addField(":clock: :timer: - Joined Discord", account.user.getTimeCreated().toString(), true)
-				.addField(":moneybag: - Money", Long.toString(account.money), true)
+				.addField(":coin: - Money", StringsUtils.formatNumber(account.money), true)
+				.addField(":moneybag: - Inventory value", StringsUtils.formatNumber(account.getInventoryValue()), true)
 				.addField(":briefcase: - Items", Integer.toString(account.inventory.size()), true)
 				.addField(":notepad_spiral: - Collection",
 						totalUniqueOwnedItem + " / " + totalItemAmount + " (" + (totalUniqueOwnedItem * 100 / totalItemAmount) + "%)", true)
