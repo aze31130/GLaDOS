@@ -13,7 +13,7 @@
         {"name": "Cloudflare Blog", "link": "https://blog.cloudflare.com/rss"},
         {"name": "Reddit pwned", "link": "https://www.reddit.com/r/pwned/.rss"},
         {"name": "Virus Total", "link": "https://blog.virustotal.com/feeds/posts/default"},
-        {"name": "DarkNet", "link": "http://www.darknet.org.uk/feed/"},
+        {"name": "DarkNet", "link": "https://www.darknet.org.uk/feed/"},
         {"name": "NCSC (UK) - News", "link": "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml"},
         {"name": "NCSC (UK) - Report", "link": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml"},
         {"name": "CrowdStrike", "link": "https://www.crowdstrike.com/blog/feed"},

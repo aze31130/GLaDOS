@@ -34,7 +34,6 @@ public class FileUtils {
 		defaultConfig.put("channel_general", "");
 		defaultConfig.put("channel_gamer", "");
 		defaultConfig.put("channel_botSnapshot", "");
-		defaultConfig.put("channel_nsfw", "");
 		defaultConfig.put("channel_role", "");
 		defaultConfig.put("channel_vote", "");
 		defaultConfig.put("channel_system", "");

@@ -44,6 +44,7 @@ public class GetNews implements Runnable, Logging {
 	@Override
 	public void run() {
 		GLaDOS glados = GLaDOS.getInstance();
+		LOGGER.info("Calling news method with " + glados.rssFeeds.length() + " news.");
 
 		// Check if news are new
 		for (int i = 0; i < glados.rssFeeds.length(); i++) {
