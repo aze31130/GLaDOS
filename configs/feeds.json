@@ -39,7 +39,7 @@
         {"name": "Blaze's Security Blog", "link": "https://bartblaze.blogspot.com/feeds/posts/default"},
         {"name": "Bleeping Computer", "link": "https://www.bleepingcomputer.com/feed/"},
         {"name": "Dark Reading", "link": "https://www.darkreading.com/rss.xml"},
-        {"name": "Wordfence", "link": "https://www.wordfence.com/blog/feed"},
+        {"name": "Wordfence", "link": "https://www.wordfence.com/blog/feed/"},
         {"name": "InfoSec Insights", "link": "https://sectigostore.com/blog/feed/"},
         {"name": "Exploit One", "link": "https://www.exploitone.com/feed/"},
         {"name": "Da Vinci Cybersecurity", "link": "https://davinciforensics.co.za/cybersecurity/feed/"},
