@@ -45,6 +45,11 @@
         {"name": "Da Vinci Cybersecurity", "link": "https://davinciforensics.co.za/cybersecurity/feed/"},
         {"name": "Only Fan version 0day", "link": "https://0dayfans.com/feed.rss"},
         {"name": "Cisco Talos Threat Intel", "link": "https://blog.talosintelligence.com/rss/"},
-        {"name": "Cisco Threat Intel", "link": "https://newsroom.cisco.com/c/services/i/servlets/newsroom/rssfeed.json?feed=security"}
+        {"name": "Cisco Talos", "link": "https://feeds.feedburner.com/feedburner/Talos"},
+        {"name": "Cisco Threat Intel", "link": "https://newsroom.cisco.com/c/services/i/servlets/newsroom/rssfeed.json?feed=security"},
+        {"name": "Cisco", "link": "https://blogs.cisco.com/feed"},
+        {"name": "talkback.sh - App Security", "link": "https://talkback.sh/resources/feed/category/1/"},
+        {"name": "talkback.sh - Cloud Security", "link": "https://talkback.sh/resources/feed/category/2/"},
+        {"name": "talkback.sh - Network Security", "link": "https://talkback.sh/resources/feed/category/7/"}
     ]
 }
