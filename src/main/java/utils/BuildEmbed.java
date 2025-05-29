@@ -17,7 +17,7 @@ public class BuildEmbed {
 
 		EmbedBuilder embed = new EmbedBuilder()
 				.setColor(Color.BLACK)
-				.setAuthor("www.epicgames.com", "https://www.epicgames.com/store/fr/free-games/")
+				.setAuthor("epicgames.com", "https://store.epicgames.com/fr/free-games/")
 				.setTitle(glados.epicgameQuotes.getString(new Random().nextInt(glados.epicgameQuotes.length())))
 				.setThumbnail(
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/1200px-Epic_Games_logo.svg.png")
