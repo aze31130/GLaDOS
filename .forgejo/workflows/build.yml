@@ -1,23 +1,19 @@
-name: Build
-
-on:
-- push
+on: [push]
 
 jobs:
-  build:
-    name: Build
-    runs-on: docker
-    container:
-      image: docker.io/maven:3.9.9-amazoncorretto-21-debian-bookworm
+    build:    
+        runs-on: docker
+        container:
+          image: docker.io/maven:3.9.9-amazoncorretto-21-debian-bookworm
 
-    - uses: actions/checkout@v4
-      name: Checkout repo
+        - uses: actions/checkout@v4
+          name: Checkout repo
 
-    - name: Build with Maven
-      run: mvn install
+        - name: Build with Maven
+          run: mvn install
 
-    - uses: actions/upload-artifact@v4
-      name: Upload Artifact
-      with:
-        name: GLaDOS
-        path: target/GLaDOS-*.jar
+        - uses: actions/upload-artifact@v4
+          name: Upload Artifact
+          with:
+            name: GLaDOS
+            path: target/GLaDOS-*.jar
