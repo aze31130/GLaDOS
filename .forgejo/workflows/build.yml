@@ -7,17 +7,11 @@ jobs:
   build:
     name: Build
     runs-on: docker
+    container:
+      image: docker.io/maven:3.9.9-amazoncorretto-21-debian-bookworm
 
-    steps:
     - uses: actions/checkout@v4
       name: Checkout repo
-
-    - name: Set up JDK 24
-      uses: actions/setup-java@v4
-      with:
-        java-version: '24'
-        distribution: 'temurin'
-        cache: maven
 
     - name: Build with Maven
       run: mvn install
