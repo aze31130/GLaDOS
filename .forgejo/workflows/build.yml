@@ -9,8 +9,9 @@ jobs:
     container:
       image: docker.io/maven:3.9.9-amazoncorretto-21-debian-bookworm
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Clone repository
+        run: |
+          git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
 
       - name: Build with Maven
         run: mvn install
