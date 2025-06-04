@@ -50,6 +50,7 @@
         {"name": "Cisco", "link": "https://blogs.cisco.com/feed"},
         {"name": "talkback.sh - App Security", "link": "https://talkback.sh/resources/feed/category/1/"},
         {"name": "talkback.sh - Cloud Security", "link": "https://talkback.sh/resources/feed/category/2/"},
-        {"name": "talkback.sh - Network Security", "link": "https://talkback.sh/resources/feed/category/7/"}
+        {"name": "talkback.sh - Network Security", "link": "https://talkback.sh/resources/feed/category/7/"},
+        {"name": "arxiv.org | Quantum", "link": "https://rss.arxiv.org/rss/quant-ph"}
     ]
 }
