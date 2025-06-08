@@ -2,24 +2,24 @@ name: Java CI with Maven
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: docker
     container:
       image: docker.io/maven:3.9.9-eclipse-temurin-24
+      options: --entrypoint /bin/bash
     steps:
-      - name: Clone repository
-        run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Build with Maven
-        run: mvn package
+      - name: Compile with Maven
+        run: mvn clean package
 
-      - name: Install node for upload Artifact
-        run: apt update && apt install nodejs -y
-
-      - name: Upload Artifact
+      - name: Upload GLADOS.jar artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GLaDOS
-          path: target/GLaDOS-*.jar
+          name: GLADOS
+          path: target/GLADOS.jar
