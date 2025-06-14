@@ -17,9 +17,6 @@ jobs:
       - name: Build with Maven
         run: mvn package
 
-      - name: Install node for upload Artifact
-        run: apt update && apt install nodejs -y
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
