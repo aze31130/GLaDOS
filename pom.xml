@@ -45,7 +45,7 @@
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/java/items</directory>
+				<directory>items</directory>
 				<targetPath>items</targetPath>
 			</resource>
 		</resources>

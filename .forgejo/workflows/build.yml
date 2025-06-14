@@ -20,8 +20,14 @@ jobs:
       - name: Install node for upload Artifact
         run: apt update && apt install nodejs -y
 
-      - name: Upload Artifact
+      - name: Upload final jar artifact
         uses: actions/upload-artifact@v3
         with:
           name: GLaDOS
           path: target/GLaDOS-2.0.0.jar
+
+      - name: Upload items artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: items
+          path: items/*
