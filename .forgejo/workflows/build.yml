@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: GLaDOS
-          path: target/GLaDOS-*.jar
+          path: target/GLaDOS-2.0.0.jar
