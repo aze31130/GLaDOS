@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.json.JSONObject;
 import glados.GLaDOS;
 import news.News;
@@ -63,7 +64,7 @@ public class HttpUtils implements Logging {
 
 			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", "@llm", url);
 			Process p = builder.start();
-			p.waitFor();
+			p.waitFor(10, TimeUnit.MINUTES);
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String rawResponse = reader.readLine();
