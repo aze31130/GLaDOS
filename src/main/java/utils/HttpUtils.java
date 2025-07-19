@@ -39,7 +39,7 @@ public class HttpUtils implements Logging {
 		try {
 			final String url = GLaDOS.getInstance().llm + "/api/generate";
 			final String prePrompt =
-					"You are given a list of cybersecurity news articles. Summarize them into a single, well-structured paragraph, no longer than 4000 characters. Merge duplicate or similar news stories.";
+					"Here is a list of cybersecurity news articles. Summarize them into a single, well-structured and easily readable paragraph, no longer than 4000 characters. Merge duplicate or similar news stories and use few emotes when appropriate.";
 
 			// Build the prompt
 			StringBuilder prompt = new StringBuilder(prePrompt);
@@ -53,7 +53,7 @@ public class HttpUtils implements Logging {
 			requestBody.put("stream", false);
 
 			JSONObject options = new JSONObject();
-			options.put("num_ctx", 8192);
+			options.put("num_ctx", 16384);
 
 			requestBody.put("options", options);
 
@@ -64,7 +64,7 @@ public class HttpUtils implements Logging {
 
 			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", "@llm", url);
 			Process p = builder.start();
-			p.waitFor(10, TimeUnit.MINUTES);
+			p.waitFor(15, TimeUnit.MINUTES);
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String rawResponse = reader.readLine();
