@@ -17,6 +17,8 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class Main implements Logging {
+	private static final String TOKEN = System.getenv("token");
+
 	public static void main(String[] args) {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
 		GLaDOS glados = GLaDOS.getInstance();
@@ -24,7 +26,7 @@ public class Main implements Logging {
 		LOGGER.info("Starting GLaDOS");
 		glados.initialize();
 
-		JDABuilder builder = JDABuilder.createDefault(glados.token);
+		JDABuilder builder = JDABuilder.createDefault(TOKEN);
 
 		GatewayIntent intents[] = {GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT,
 				GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_INVITES};

@@ -27,7 +27,7 @@ import utils.Logging;
 
 public class GLaDOS implements Logging {
 	private static volatile GLaDOS instance = null;
-	public String version, token, cdn, llm;
+	public String version, cdn, llm;
 
 	// Internal settings
 	public boolean metricLogging;
@@ -70,8 +70,7 @@ public class GLaDOS implements Logging {
 
 		if (!config.exists()) {
 			FileUtils.createDefaultConfig();
-			LOGGER.severe("You have to define your token inside your config file !");
-			System.exit(1);
+			LOGGER.severe("Config file not found ! Creating default one.");
 		}
 
 		/*
@@ -121,7 +120,6 @@ public class GLaDOS implements Logging {
 			this.bannedWords = json.getJSONArray("bannedWords");
 			this.rssFeeds = rssFeeds.getJSONArray("rss");
 			this.birthdays = json.getJSONArray("birthdays");
-			this.token = json.getString("token");
 			this.llm = json.getString("llm");
 
 			this.requestsAmount = 0;

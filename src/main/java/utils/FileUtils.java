@@ -49,7 +49,6 @@ public class FileUtils {
 		defaultConfig.put("role_administrator", "");
 
 		defaultConfig.put("bannedWords", bannedWords);
-		defaultConfig.put("token", "YOUR_TOKEN_HERE");
 
 		FileUtils.writeRawFile("config.json", defaultConfig.toString(4));
 	}
