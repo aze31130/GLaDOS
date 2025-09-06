@@ -173,7 +173,9 @@ public class Item implements Cloneable {
 	 * Apply value increase depending on the starforce level
 	 */
 	public int getValue() {
-		return this.value * (100 + Item.upgradeValueIncrease[this.starForceLevel]) / 100;
+		double baseWithStarForce = this.value * (100.0 + Item.upgradeValueIncrease[this.starForceLevel]) / 100.0;
+		double finalValue = baseWithStarForce * (1.0 + this.quality);
+		return (int) Math.round(finalValue);
 	}
 
 	public Double getQuality() {
