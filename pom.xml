@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>net.dv8tion</groupId>
 			<artifactId>JDA</artifactId>
-			<version>5.3.2</version> 
+			<version>5.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -39,6 +39,11 @@
 			<groupId>com.apptasticsoftware</groupId>
 			<artifactId>rssreader</artifactId>
 			<version>3.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.javalin</groupId>
+			<artifactId>javalin</artifactId>
+			<version>6.7.0</version>
 		</dependency>
 	</dependencies>
 
