@@ -17,7 +17,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class Main implements Logging {
-	private static final String TOKEN = System.getenv("token");
+	private static final String TOKEN = System.getenv("Token");
 
 	public static void main(String[] args) {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s%6$s%n");
