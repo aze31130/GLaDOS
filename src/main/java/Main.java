@@ -4,7 +4,9 @@ import java.util.concurrent.TimeUnit;
 import events.*;
 import exporter.Exporter;
 import tasks.*;
+import api.*;
 import glados.GLaDOS;
+import io.javalin.Javalin;
 import utils.AccountUtils;
 import utils.Logging;
 import utils.TimeUtils;
@@ -64,6 +66,15 @@ public class Main implements Logging {
 		});
 		exporter.setDaemon(true);
 		exporter.start();
+
+		// Starts api
+		Javalin api = Javalin.create().start(8080);
+		api.before(Auth::checkKey);
+		api.error(404, Auth::checkKey);
+		new api.Drop().register(api);
+		new api.Buy().register(api);
+		new api.Market().register(api);
+
 
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
