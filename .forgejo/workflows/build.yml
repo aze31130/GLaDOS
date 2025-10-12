@@ -17,11 +17,9 @@ jobs:
         run: |
           echo "== Environment variable DOCKER_HOST =="
           echo "${DOCKER_HOST:-<not set>}"
-
           echo
           echo "== Check if /var/run/docker.sock exists =="
           ls -l /var/run/docker.sock || echo "❌ Socket not found"
-
           echo
           echo "== Check Docker daemon connectivity =="
           docker version || echo "❌ Docker daemon not reachable"
