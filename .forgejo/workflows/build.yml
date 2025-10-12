@@ -8,8 +8,17 @@ on:
 jobs:
   build:
     runs-on: docker
+    services:
+      docker:
+        image: docker:27.3.1-dind
+        privileged: true
+        ports:
+          - 2375:2375
+        options: --privileged
     container:
-      image: docker.io/docker:27.3.1-dind
+      image: docker:27.3.1-cli
+      env:
+        DOCKER_HOST: tcp://docker:2375
     steps:
       - name: Clone repository
         run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
