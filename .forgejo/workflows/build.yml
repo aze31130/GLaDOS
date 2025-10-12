@@ -10,20 +10,14 @@ jobs:
     runs-on: docker
     container:
       image: docker.io/docker:27.3.1-cli
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - name: Clone repository
         run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
 
       - name: Build docker image
-        runs:
-          using: docker
-          image: docker:27.3.1-cli
-          volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-          commands:
-            - docker build -t glados:latest .
-            - docker images
-
+        run: docker build -t glados:latest .
 
       # - name: Install node for upload Artifact
       #   run: apt update && apt install nodejs -y
