@@ -8,21 +8,31 @@ on:
 jobs:
   build:
     runs-on: docker
-    services:
-      docker:
-        image: docker:27.3.1-dind
-        privileged: true
-        ports:
-          - 2375:2375
-        options: --privileged
     container:
-      image: docker:27.3.1-cli
-      env:
-        DOCKER_HOST: tcp://docker:2375
+      image: docker.io/docker:27.3.1-cli
     steps:
       - name: Clone repository
         run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
 
       - name: Build docker image
-        run: docker build -t glados:latest .
+        image: docker:latest
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+        commands:
+          - docker build -t glados:latest .
+          - docker images
 
+      # - name: Install node for upload Artifact
+      #   run: apt update && apt install nodejs -y
+
+      # - name: Upload final jar artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: GLaDOS
+      #     path: target/GLaDOS-2.0.0.jar
+
+      # - name: Upload items artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: items
+      #     path: items/*
