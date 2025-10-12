@@ -5,37 +5,26 @@ on:
     branches:
       - master
 
-steps:
-  - name: clone
-    image: alpine/git
-    commands:
-      - git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
+jobs:
+  build:
+    runs-on: docker
+    container:
+      image: docker.io/docker:27.3.1-cli
+    steps:
+      - name: Clone repository
+        run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
 
-  - name: build
-    image: docker:27.3.1-cli
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    commands:
-      - docker version
-      - docker build -t glados:latest .
-      - docker images
+      - name: Build docker image
+        runs:
+          using: docker
+          image: docker:27.3.1-cli
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+          commands:
+            - docker build -t glados:latest .
+            - docker images
 
-# jobs:
-#   build:
-#     runs-on: docker
-#     container:
-#       image: docker.io/docker:27.3.1-cli
-#     steps:
-#       - name: Clone repository
-#         run: git clone --depth 1 https://git.aze.sh/aze/GLaDOS .
 
-#       - name: Build docker image
-#         image: docker:27.3.1-cli
-#         volumes:
-#           - /var/run/docker.sock:/var/run/docker.sock
-#         commands:
-#           - docker build -t glados:latest .
-#           - docker images
       # - name: Install node for upload Artifact
       #   run: apt update && apt install nodejs -y
 
