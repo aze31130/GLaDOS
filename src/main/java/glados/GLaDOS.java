@@ -66,7 +66,7 @@ public class GLaDOS implements Logging {
 	}
 
 	public void initialize() {
-		File config = new File("./config.json");
+		File config = new File("./configs/config.json");
 
 		if (!config.exists()) {
 			FileUtils.createDefaultConfig();
@@ -93,16 +93,16 @@ public class GLaDOS implements Logging {
 
 		try {
 			// Load quotes
-			this.epicgameQuotes = FileUtils.loadJsonArray("./epicgameQuote.json");
-			this.quotes = FileUtils.loadJsonArray("./quotes.json");
-			this.joinQuote = FileUtils.loadJsonArray("./joinQuote.json");
-			this.leaveQuote = FileUtils.loadJsonArray("./leaveQuote.json");
-			this.randomQuote = FileUtils.loadJsonArray("./randomAnswer.json");
-			this.activities = FileUtils.loadJsonArray("./activities.json");
+			this.epicgameQuotes = FileUtils.loadJsonArray("./configs/epicgameQuote.json");
+			this.quotes = FileUtils.loadJsonArray("./configs/quotes.json");
+			this.joinQuote = FileUtils.loadJsonArray("./configs/joinQuote.json");
+			this.leaveQuote = FileUtils.loadJsonArray("./configs/leaveQuote.json");
+			this.randomQuote = FileUtils.loadJsonArray("./configs/randomAnswer.json");
+			this.activities = FileUtils.loadJsonArray("./configs/activities.json");
 
 			// Load the global variables
-			JSONObject json = FileUtils.loadJsonObject("./config.json");
-			JSONObject rssFeeds = FileUtils.loadJsonObject("./feeds.json");
+			JSONObject json = FileUtils.loadJsonObject("./configs/config.json");
+			JSONObject rssFeeds = FileUtils.loadJsonObject("./configs/feeds.json");
 			this.getVersion();
 
 			// Read role and channels attributes
@@ -139,7 +139,7 @@ public class GLaDOS implements Logging {
 
 		List<JSONObject> itemsJson = new ArrayList<>();
 
-		FileUtils.loadItems(new File("classes/items"), itemsJson);
+		FileUtils.loadItems(new File("/app/items"), itemsJson);
 
 		for (JSONObject itemJson : itemsJson) {
 			Item i = new Item(
