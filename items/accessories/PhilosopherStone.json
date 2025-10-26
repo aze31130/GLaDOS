@@ -1,8 +1,8 @@
 {
     "id": 2,
-    "name": "Warp Stone",
+    "name": "Philosopher's Stone",
     "type": "ITEM",
-    "lore": "Deep within this stone, a glimmer of light seems to call you. The Warp Stone enables adventurers to teleport to an alternate reality unpredictable precision. Use at your own risk.",
+    "lore": "Deep within this stone, a glimmer of light seems to call you. The true power of this stone remains unknown.",
     "rarity": "UNIQUE",
     "dropChance": 2,
     "starForceMaxLevel": 30,
