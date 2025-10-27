@@ -164,8 +164,8 @@ public class Item implements Cloneable {
 		if (this.quality < 0)
 			this.quality = 0.0;
 
-		// Ensure all event item are quality maxed
-		if (this.rarity.equals(Rarity.EVENT))
+		// Ensure all event item and unique are quality maxed
+		if (this.rarity.equals(Rarity.EVENT) || this.rarity.equals(Rarity.UNIQUE))
 			this.quality = 1.0;
 	}
 
