@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import news.News;
 import utils.FileUtils;
 import utils.ItemUtils;
 import utils.Logging;
@@ -47,7 +46,6 @@ public class GLaDOS implements Logging {
 	public List<Item> market = new ArrayList<>();
 
 	public List<Integer> rssNews = new ArrayList<>();
-	public List<News> rssNewsSumUp = new ArrayList<>();
 
 	// Optimisation, holds the sum of each drop weight so that we avoid recalculating it
 	public double itemTotalProb = 0;

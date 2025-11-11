@@ -1,17 +1,10 @@
 package utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import org.json.JSONObject;
-import glados.GLaDOS;
-import news.News;
 
 public class HttpUtils implements Logging {
 	/*
@@ -32,51 +25,5 @@ public class HttpUtils implements Logging {
 			e.printStackTrace();
 		}
 		return "Unable to retrieve HTTP body";
-	}
-
-	public static String sendLLMQuery(List<News> newsToSumUp) {
-		LOGGER.info("Processing " + newsToSumUp.size() + " news...");
-		try {
-			final String url = GLaDOS.getInstance().llm + "/api/generate";
-			final String prePrompt =
-					"Here is a list of cybersecurity news articles. Summarize them into a single, well-structured and easily readable paragraph, no longer than 4000 characters. Merge duplicate or similar news stories and use few emotes when appropriate.";
-
-			// Build the prompt
-			StringBuilder prompt = new StringBuilder(prePrompt);
-
-			for (News news : newsToSumUp)
-				prompt.append(news.title() + " - " + news.description() + "\n");
-
-			JSONObject requestBody = new JSONObject();
-			requestBody.put("model", "mistral");
-			requestBody.put("prompt", prompt.toString());
-			requestBody.put("stream", false);
-
-			JSONObject options = new JSONObject();
-			options.put("num_ctx", 16384);
-
-			requestBody.put("options", options);
-
-			LOGGER.info("Query size " + prompt.length());
-
-			// Write request content in a file
-			FileUtils.writeRawFile("llm", requestBody.toString());
-
-			ProcessBuilder builder = new ProcessBuilder("curl", "-k", "-d", "@llm", url);
-			Process p = builder.start();
-			p.waitFor(15, TimeUnit.MINUTES);
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			String rawResponse = reader.readLine();
-
-			JSONObject result = new JSONObject(rawResponse);
-
-			LOGGER.info("Query OK !");
-
-			return result.getString("response");
-		} catch (Exception e) {
-			LOGGER.severe(e.toString());
-		}
-		return "Could not get LLM inference";
 	}
 }
