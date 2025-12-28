@@ -3,6 +3,7 @@ package commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import accounts.Permission;
@@ -52,7 +53,6 @@ public class Backup extends Command {
 
 		for (MessageChannel target : targets) {
 			event.getHook().sendMessage("Downloading channel " + target.getAsMention() + "...").complete();
-
 			JSONArray messages = new JSONArray();
 
 			target.getIterableHistory().forEachRemaining(message -> {
@@ -65,6 +65,7 @@ public class Backup extends Command {
 				jsonMessage.put("posted", message.getTimeCreated());
 				jsonMessage.put("isEdited", message.isEdited());
 				jsonMessage.put("isPinned", message.isPinned());
+				jsonMessage.put("isReply", !Objects.isNull(message.getReferencedMessage()));
 				jsonMessage.put("channelId", message.getChannelIdLong());
 				jsonMessage.put("channelName", target.getName());
 
@@ -92,7 +93,7 @@ public class Backup extends Command {
 				messages.put(jsonMessage);
 				return true;
 			});
-			FileUtils.writeRawFile(target.getName() + ".json", messages.toString(4));
+			FileUtils.writeRawFile(target.getName() + ".json", messages.toString(0));
 
 			event.getHook().sendMessage("Downloaded " + messages.length() + " messages in " + target.getAsMention()).complete();
 		}
