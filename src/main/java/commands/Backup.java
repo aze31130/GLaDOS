@@ -42,6 +42,7 @@ public class Backup extends Command {
 	@Override
 	public void executeSlash(SlashCommandInteractionEvent event) {
 		OptionMapping omTarget = event.getOption("target");
+		TextChannel source = event.getChannel().asTextChannel();
 		List<MessageChannel> targets = new ArrayList<>();
 
 		// If no channel is given, download the entire server
@@ -53,7 +54,7 @@ public class Backup extends Command {
 		}
 
 		for (MessageChannel target : targets) {
-			event.getHook().sendMessage("Downloading channel " + target.getAsMention() + "...").complete();
+			source.sendMessage("Downloading channel " + target.getAsMention() + "...").complete();
 			JSONArray messages = new JSONArray();
 
 			target.getIterableHistory().forEachRemaining(message -> {
@@ -106,7 +107,7 @@ public class Backup extends Command {
 			});
 			FileUtils.writeRawFile(target.getName() + ".json", messages.toString(0));
 
-			event.getHook().sendMessage("Downloaded " + messages.length() + " messages in " + target.getAsMention()).complete();
+			source.sendMessage("Downloaded " + messages.length() + " messages in " + target.getAsMention()).complete();
 		}
 	}
 }
