@@ -32,6 +32,7 @@ public class GetNews implements Runnable, Logging {
 				}
 			} catch (Exception e) {
 				LOGGER.severe(e.toString() + " for URL " + feedLink);
+				jda.getTextChannelById(glados.getChannelId("system").get()).sendMessage(e.toString() + " for URL " + feedLink).queue();
 			}
 		}
 	}
@@ -63,6 +64,7 @@ public class GetNews implements Runnable, Logging {
 				}
 			} catch (Exception e) {
 				LOGGER.severe(e.toString() + " for URL " + feedLink);
+				jda.getTextChannelById(glados.getChannelId("system").get()).sendMessage(e.toString() + " for URL " + feedLink).queue();
 			}
 		}
 	}
