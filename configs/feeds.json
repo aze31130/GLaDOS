@@ -14,8 +14,6 @@
         {"name": "Reddit pwned", "link": "https://www.reddit.com/r/pwned/.rss"},
         {"name": "Virus Total", "link": "https://blog.virustotal.com/feeds/posts/default"},
         {"name": "DarkNet", "link": "https://www.darknet.org.uk/feed/"},
-        {"name": "NCSC (UK) - News", "link": "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml"},
-        {"name": "NCSC (UK) - Report", "link": "https://www.ncsc.gov.uk/api/1/services/v1/report-rss-feed.xml"},
         {"name": "CrowdStrike", "link": "https://www.crowdstrike.com/blog/feed"},
         {"name": "Microsoft Malware Protection Center", "link": "https://www.microsoft.com/security/blog/feed?source=mmpc"},
         {"name": "Google Online Security Blog", "link": "https://feeds.feedburner.com/GoogleOnlineSecurityBlog"},
@@ -51,6 +49,6 @@
         {"name": "talkback.sh - App Security", "link": "https://talkback.sh/resources/feed/category/1/"},
         {"name": "talkback.sh - Cloud Security", "link": "https://talkback.sh/resources/feed/category/2/"},
         {"name": "talkback.sh - Network Security", "link": "https://talkback.sh/resources/feed/category/7/"},
-        {"name": "Technadu - Security", "link": "https://www.technadu.com/security/feed"}
+        {"name": "Technadu - Security", "link": "https://www.technadu.com/security/feed/"}
     ]
 }
