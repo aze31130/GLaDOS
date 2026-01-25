@@ -46,7 +46,7 @@ public class Item implements Cloneable {
 			new UpgradeRatesUtils(30, 0, 70, 0),
 
 			// 15 -> 20 stars
-			new UpgradeRatesUtils(30, 0, 69, 1),
+			new UpgradeRatesUtils(30, 69, 0, 1),
 			new UpgradeRatesUtils(30, 0, 68, 2),
 			new UpgradeRatesUtils(30, 0, 67, 3),
 			new UpgradeRatesUtils(30, 0, 66, 4),
@@ -60,7 +60,7 @@ public class Item implements Cloneable {
 			new UpgradeRatesUtils(20, 0, 62, 18),
 
 			// 25 -> 30 stars
-			new UpgradeRatesUtils(10, 0, 70, 20),
+			new UpgradeRatesUtils(10, 70, 0, 20),
 			new UpgradeRatesUtils(10, 0, 65, 25),
 			new UpgradeRatesUtils(10, 0, 60, 30),
 			new UpgradeRatesUtils(10, 0, 55, 35),
@@ -87,7 +87,7 @@ public class Item implements Cloneable {
 			400, 500, 600, 700, 800,
 
 			// 25 -> 30 stars
-			900, 1000, 1500, 2000, 2500
+			1000, 1500, 2000, 2500, 3000
 	};
 
 	private static final Map<Rarity, int[]> upgradePrices = Map.of(

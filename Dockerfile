@@ -7,7 +7,7 @@ COPY src ./src
 RUN mvn package
 
 # ---- Stage 2 ----
-FROM docker.io/openjdk:24-jdk-slim
+FROM docker.io/openjdk:26-ea-slim
 
 WORKDIR /app
 

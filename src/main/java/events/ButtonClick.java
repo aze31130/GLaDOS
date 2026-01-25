@@ -159,7 +159,7 @@ public class ButtonClick extends ListenerAdapter {
 				item.broken = true;
 				event.editMessageEmbeds(BuildEmbed.upgradeDestroyEmbed().build()).queue();
 				message.editMessageEmbeds(
-						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(7, TimeUnit.SECONDS);
+						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(10, TimeUnit.SECONDS);
 				return;
 			}
 		}
