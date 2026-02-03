@@ -131,7 +131,7 @@ public class Item implements Cloneable {
 		StringBuilder sb = new StringBuilder();
 
 		if (this.broken)
-			sb.append("[BROKEN] ");
+			sb.append("💥 ");
 
 		sb.append("(" + String.format("%.2f%%", 100 * this.quality) + ") ");
 		sb.append(this.name);
@@ -172,10 +172,18 @@ public class Item implements Cloneable {
 	/*
 	 * Apply value increase depending on the starforce level and quality
 	 */
-	public int getValue() {
-		double baseWithStarForce = this.value * (100.0 + Item.upgradeValueIncrease[this.starForceLevel]) / 100.0;
+	public int getItemValue(int starForceLevel) {
+		double baseWithStarForce = this.value * (100.0 + Item.upgradeValueIncrease[starForceLevel]) / 100.0;
 		double finalValue = baseWithStarForce * (1.0 + this.quality);
 		return (int) Math.round(finalValue);
+	}
+
+	public int getValue() {
+		return getItemValue(this.starForceLevel);
+	}
+
+	public int getUpgradeValue() {
+		return getItemValue(this.starForceLevel + 1);
 	}
 
 	public Double getQuality() {
