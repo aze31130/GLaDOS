@@ -48,9 +48,14 @@ public class Sell extends Command {
 			return;
 		}
 
-		// Sells the item
 		items.Item item = pretendedItem.get();
 
+		if (item.broken) {
+			event.getHook().sendMessageEmbeds(BuildEmbed.errorEmbed("You cannot sell a broken item !").build()).queue();
+			return;
+		}
+
+		// Sells the item
 		authorAccount.money += item.getValue();
 		authorAccount.inventory.remove(item);
 
