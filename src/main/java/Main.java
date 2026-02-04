@@ -75,14 +75,6 @@ public class Main implements Logging {
 		new api.Buy().register(api);
 		new api.Market().register(api);
 
-
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
-		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
-		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
-		scheduler.scheduleAtFixedRate(new GetNews(jda), TimeUtils.getNewsDelay(), 3600, TimeUnit.SECONDS);
-		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
-		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
-
 		// Saves accounts on exit
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
@@ -91,6 +83,13 @@ public class Main implements Logging {
 				LOGGER.info("Saved " + glados.accounts.size() + " accounts.");
 			}
 		}));
+
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
+		scheduler.scheduleAtFixedRate(new Midnight(jda), TimeUtils.getMidnightDelay(), 86400000, TimeUnit.MILLISECONDS);
+		scheduler.scheduleAtFixedRate(new EpicGames(jda), TimeUtils.getEpicGameDelay(), 7 * 86400, TimeUnit.SECONDS);
+		scheduler.scheduleAtFixedRate(new GetNews(jda), TimeUtils.getNewsDelay(), 3600, TimeUnit.SECONDS);
+		scheduler.scheduleAtFixedRate(new Status(jda), 0, 10, TimeUnit.HOURS);
+		scheduler.scheduleAtFixedRate(new Backup(jda), 12, 24, TimeUnit.HOURS);
 
 		LOGGER.info("Done ! GLaDOS is running on version " + glados.version + " !");
 	}
