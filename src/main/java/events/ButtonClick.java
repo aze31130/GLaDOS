@@ -158,8 +158,8 @@ public class ButtonClick extends ListenerAdapter {
 					+ item.getStarForceDestroyChance()) {
 				item.broken = true;
 				event.editMessageEmbeds(BuildEmbed.upgradeDestroyEmbed().build()).queue();
-				message.editMessageEmbeds(
-						BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(10, TimeUnit.SECONDS);
+				message.editMessageEmbeds(BuildEmbed.upgradeEmbed(authorAccount, item).build()).queueAfter(10, TimeUnit.SECONDS);
+				message.editMessageComponents(new ArrayList<>()).queue();
 				return;
 			}
 		}
