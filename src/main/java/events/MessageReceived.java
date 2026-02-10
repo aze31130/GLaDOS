@@ -46,6 +46,18 @@ public class MessageReceived extends ListenerAdapter {
 			channel.sendMessage(glados.randomQuote.getString(new Random().nextInt(glados.randomQuote.length()))).queue();
 
 		/*
+		 * Anti KannaFu Eradication
+		 */
+		if (event.isFromGuild() && event.getAuthor().isBot()) {
+			Message previous = event.getChannel().getHistoryBefore(message, 1).complete().getRetrievedHistory().get(0);
+
+			if (!previous.getAuthor().isBot() && previous.getContentRaw().contains("<:KannaFu:1417982796168958114>")) {
+				String randomTrashAnwser = glados.trashAnswer.getString(new Random().nextInt(glados.trashAnswer.length()));
+				event.getChannel().sendMessage(event.getMember().getAsMention() + " " + randomTrashAnwser).queue();
+			}
+		}
+
+		/*
 		 * Ensure every message received in survey channel contains a poll
 		 */
 		if (message.getChannelId().equals(glados.getChannelId("vote").get()) && message.getPoll() == null)

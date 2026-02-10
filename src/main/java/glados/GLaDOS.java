@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.*;
 import commands.*;
+import commands.Shutdown;
 import items.Item;
 import items.ItemType;
 import items.Rarity;
@@ -34,7 +35,7 @@ public class GLaDOS implements Logging {
 
 	public int requestsAmount;
 
-	public JSONArray roles, channels, bannedWords, epicgameQuotes, quotes, joinQuote, leaveQuote, randomQuote, activities, rssFeeds, birthdays;
+	public JSONArray roles, channels, bannedWords, epicgameQuotes, quotes, joinQuote, leaveQuote, randomQuote, trashAnswer, activities, rssFeeds, birthdays;
 
 	// Temp variable
 	public LocalDateTime translationCooldown;
@@ -96,6 +97,7 @@ public class GLaDOS implements Logging {
 			this.joinQuote = FileUtils.loadJsonArray("./configs/joinQuote.json");
 			this.leaveQuote = FileUtils.loadJsonArray("./configs/leaveQuote.json");
 			this.randomQuote = FileUtils.loadJsonArray("./configs/randomAnswer.json");
+			this.trashAnswer = FileUtils.loadJsonArray("./configs/trashAnswer.json");
 			this.activities = FileUtils.loadJsonArray("./configs/activities.json");
 
 			// Load the global variables
