@@ -8,6 +8,8 @@ import accounts.Account;
 import commands.Trigger;
 import glados.GLaDOS;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
+import utils.BuildEmbed;
 import utils.ItemUtils;
 import utils.Logging;
 
@@ -52,11 +54,12 @@ public class Midnight implements Runnable, Logging {
 
 		for (int i = 0; i < glados.birthdays.length(); i++) {
 			JSONObject person = glados.birthdays.getJSONObject(i);
+			Member m = jda.getGuilds().get(0).getMemberById(person.getString("id"));
 
 			LocalDate birthdate = LocalDate.parse(person.getString("date"), formatter);
 
 			if (birthdate.getMonthValue() == today.getMonthValue() && birthdate.getDayOfMonth() == today.getDayOfMonth()) {
-				jda.getTextChannelById(glados.getChannelId("general").get()).sendMessage("Happy birthday <@" + person.getString("id") + "> ! May this special day full of treasures and wonders ! :birthday::cake::gift::balloon::partying_face::tada::confetti_ball:").queue();
+				jda.getTextChannelById(glados.getChannelId("general").get()).sendMessageEmbeds(BuildEmbed.birthdayEmbed(m).build()).queue();
 			}
 		}
 	}

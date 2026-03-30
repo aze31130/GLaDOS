@@ -8,6 +8,7 @@ import accounts.Account;
 import glados.GLaDOS;
 import items.Item;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import news.News;
 
@@ -343,5 +344,15 @@ public class BuildEmbed {
 				.setColor(Color.WHITE)
 				.setTimestamp(Instant.now());
 		return ranking;
+	}
+
+	public static EmbedBuilder birthdayEmbed(Member member) {
+		EmbedBuilder birthday = new EmbedBuilder()
+				.setTitle(":partying_face: Happy birthday " + member.getEffectiveName() + " :tada: !")
+				.setDescription("Wishing you a special day filled with treasures and wonders :birthday::balloon::gift::confetti_ball: !")
+				.setColor(Color.YELLOW)
+				.setThumbnail(member.getUser().getAvatarUrl())
+				.setTimestamp(Instant.now());
+		return birthday;
 	}
 }
