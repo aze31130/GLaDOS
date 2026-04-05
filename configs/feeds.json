@@ -22,6 +22,7 @@
         {"name": "talkback.sh - App Security", "link": "https://talkback.sh/resources/feed/category/1/"},
         {"name": "talkback.sh - Cloud Security", "link": "https://talkback.sh/resources/feed/category/2/"},
         {"name": "talkback.sh - Network Security", "link": "https://talkback.sh/resources/feed/category/7/"},
-        {"name": "Technadu - Security", "link": "https://www.technadu.com/security/feed/"}
+        {"name": "Technadu - Security", "link": "https://www.technadu.com/security/feed/"},
+        {"name": "Archlinux News", "link": "https://archlinux.org/feeds/news/"}
     ]
 }
