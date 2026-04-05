@@ -3,13 +3,13 @@ package commands;
 import java.util.Arrays;
 import java.util.List;
 import accounts.Permission;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.ItemComponent;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 
 public class Role extends Command {
@@ -35,10 +35,10 @@ public class Role extends Command {
 	public void executeSlash(SlashCommandInteractionEvent event) {
 		net.dv8tion.jda.api.entities.Role argument = event.getOption("role").getAsRole();
 
-		List<ItemComponent> buttons = Arrays.asList(
+		List<Button> buttons = Arrays.asList(
 				Button.primary("+" + argument.getId(), "Join " + argument.getName()),
 				Button.danger("-" + argument.getId(), "Leave" + argument.getName()));
 
-		event.getHook().sendMessage("200 OK").addActionRow(buttons).queue();
+		event.getHook().sendMessage("200 OK").addComponents(ActionRow.of(buttons)).queue();
 	}
 }

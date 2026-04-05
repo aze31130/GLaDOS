@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -11,8 +13,6 @@ import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEven
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.ItemComponent;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.ItemUtils;
@@ -68,10 +68,10 @@ public class Inventory extends Command {
 			inventory.addField(i.rarity.emote + " " + i.getFQName(),
 					i.rarity.name() + " | " + StringsUtils.formatNumber(i.getValue()) + " :coin:", false);
 
-		List<ItemComponent> buttons = Arrays.asList(
+		List<Button> buttons = Arrays.asList(
 				Button.primary("PrevPage", "Previous Page"),
 				Button.primary("NextPage", "Next Page"));
 
-		event.getHook().sendMessageEmbeds(inventory.build()).addActionRow(buttons).queue();
+		event.getHook().sendMessageEmbeds(inventory.build()).addComponents(ActionRow.of(buttons)).queue();
 	}
 }

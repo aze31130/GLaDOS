@@ -69,11 +69,11 @@ public class Main implements Logging {
 
 		// Starts api
 		Javalin api = Javalin.create().start(8080);
-		api.before(Auth::checkKey);
-		api.error(404, Auth::checkKey);
-		new api.Drop().register(api);
-		new api.Buy().register(api);
-		new api.Market().register(api);
+		// api.before(Auth::checkKey);
+		// api.error(404, Auth::checkKey);
+		// new api.Drop().register(api);
+		// new api.Buy().register(api);
+		// new api.Market().register(api);
 
 		// Saves accounts on exit
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {

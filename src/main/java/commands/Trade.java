@@ -3,6 +3,8 @@ package commands;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -11,8 +13,6 @@ import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.ItemComponent;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import utils.BuildEmbed;
 import utils.ItemUtils;
 import accounts.Account;
@@ -82,13 +82,13 @@ public class Trade extends Command {
 		}
 
 		// Put the button accept and refuse trade
-		List<ItemComponent> buttons = Arrays.asList(
+		List<Button> buttons = Arrays.asList(
 				Button.primary("AcceptTrade", "Accept Trade"),
 				Button.danger("RefuseTrade", "Refuse Trade"));
 
 		event.getHook().sendMessageEmbeds(
 				BuildEmbed.tradeEmbed(authorAccount, targetAccount, srcItem.get(), srcMoney, dstItem.get(), dstMoney).build())
-				.addActionRow(buttons).queue();
+				.addComponents(ActionRow.of(buttons)).queue();
 		event.getHook().sendMessage("<@" + targetAccount.id + "> :arrow_heading_up:").queue();
 	}
 }

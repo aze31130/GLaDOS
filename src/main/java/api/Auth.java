@@ -1,11 +1,9 @@
 package api;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import io.javalin.http.Context;
-import io.javalin.http.util.NaiveRateLimit;
 import utils.FileUtils;
 
 public class Auth {
@@ -13,7 +11,7 @@ public class Auth {
 	private static JSONArray apiKeys = FileUtils.loadJsonArray("./apiKeys.json");
 
 	public static void checkKey(Context ctx) {
-		NaiveRateLimit.requestPerTimeUnit(ctx, 50, TimeUnit.MINUTES);
+		// NaiveRateLimit.requestPerTimeUnit(ctx, 50, TimeUnit.MINUTES);
 		String apiKey = ctx.header(headerName);
 
 		if (Objects.isNull(apiKey)) {

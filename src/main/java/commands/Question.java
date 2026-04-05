@@ -11,14 +11,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import accounts.Permission;
 import glados.GLaDOS;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.ItemComponent;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.BuildEmbed;
 import utils.JsonDownloader;
@@ -69,7 +69,7 @@ public class Question extends Command {
 				JsonDownloader.getJson("https://opentdb.com/api.php?amount=1&encode=base64&difficulty=" + difficulty);
 
 		JSONObject question = response.getJSONArray("results").getJSONObject(0);
-		List<ItemComponent> responses = new ArrayList<>();
+		List<Button> responses = new ArrayList<>();
 		responses.add(Button.primary("?" + new String(Base64.getDecoder().decode(question.getString("correct_answer"))),
 				new String(Base64.getDecoder().decode(question.getString("correct_answer")))));
 		JSONArray wrongAnswers = question.getJSONArray("incorrect_answers");
@@ -85,7 +85,7 @@ public class Question extends Command {
 				new String(Base64.getDecoder().decode(question.getString("question"))),
 				new String(Base64.getDecoder().decode(question.getString("category"))),
 				new String(Base64.getDecoder().decode(question.getString("difficulty"))))
-				.build()).addActionRow(responses).queue();
+				.build()).addComponents(ActionRow.of(responses)).queue();
 
 		// Save good answer in glados variable
 		g.goodAnswer = "?" + new String(Base64.getDecoder().decode(question.getString("correct_answer")));
