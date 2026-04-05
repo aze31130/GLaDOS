@@ -13,7 +13,5 @@ WORKDIR /app
 
 RUN apt update && apt install curl -y
 COPY --from=builder /build/target/GLaDOS-2.0.0.jar /app/GLaDOS.jar
-COPY configs /app/configs
-COPY items /app/items
 
 ENTRYPOINT ["java", "-jar", "GLaDOS.jar"]
