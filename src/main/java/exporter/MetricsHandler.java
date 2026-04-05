@@ -24,13 +24,13 @@ public class MetricsHandler implements Logging, HttpHandler {
 			Guild guild = jda.getGuilds().get(0);
 
 			int onlineMembers = (int) guild.getMembers().stream().filter(m -> {
-				OnlineStatus status = m.getOnlineStatus();
-				return status == OnlineStatus.ONLINE ||
-						status == OnlineStatus.IDLE ||
-						status == OnlineStatus.DO_NOT_DISTURB;
+				return m.getOnlineStatus() != OnlineStatus.OFFLINE;
 			}).count();
 
+			int vocalConnectedMembers = guild.getVoiceChannels().stream().mapToInt(c -> c.getMembers().size()).sum();
+
 			sb.append("discord_online_members " + onlineMembers + "\n");
+			sb.append("discord_vocal_members " + vocalConnectedMembers + "\n");
 
 			for (Account a : g.accounts) {
 				sb.append("glados_items{account=\"" + a.user.getName() + "\",statistic=\"inventory_value\"} " + a.getInventoryValue() + "\n");
