@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import accounts.Account;
 import glados.GLaDOS;
 import items.Item;
@@ -104,6 +106,53 @@ public class ItemUtils implements Logging {
 	}
 
 	/*
+	 * Loads the market
+	 */
+	public static void loadMarket() {
+		GLaDOS glados = GLaDOS.getInstance();
+		JSONArray savedMarket = FileUtils.loadJsonArray("market.json");
+
+		for (int i = 0; i < savedMarket.length(); i++) {
+			JSONObject rawItem = savedMarket.getJSONObject(i);
+
+			int itemId = rawItem.getInt("id");
+			int itemStarForceLevel = rawItem.getInt("starForceLevel");
+			Boolean itemBroken = rawItem.getBoolean("broken");
+			Double itemQuality = rawItem.getDouble("quality");
+
+			Optional<Item> item = glados.getItemById(itemId);
+			if (item.isEmpty()) {
+				LOGGER.warning("Skipped unknown item id in market " + rawItem);
+				continue;
+			}
+
+			try {
+				Item it = (Item) item.get().clone();
+				it.starForceLevel = itemStarForceLevel;
+				it.broken = itemBroken;
+				it.quality = itemQuality;
+				glados.market.add(it);
+			} catch (CloneNotSupportedException e) {
+				LOGGER.severe("Cannot clone item " + itemId);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * Save market
+	 */
+	public static void saveMarket() {
+		GLaDOS glados = GLaDOS.getInstance();
+		JSONArray market = new JSONArray();
+
+		for (Item i : glados.market)
+			market.put(i.toJson());
+
+		FileUtils.writeRawFile("market.json", market.toString(4));
+	}
+
+	/*
 	 * Resets the market
 	 */
 	public static void resetMarket() {
@@ -122,6 +171,7 @@ public class ItemUtils implements Logging {
 		}
 
 		glados.market.sort(Comparator.comparingInt(Item::getValue).reversed());
+		saveMarket();
 	}
 
 	/*

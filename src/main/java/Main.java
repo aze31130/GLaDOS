@@ -7,6 +7,7 @@ import tasks.*;
 import glados.GLaDOS;
 import io.javalin.Javalin;
 import utils.AccountUtils;
+import utils.ItemUtils;
 import utils.Logging;
 import utils.TimeUtils;
 import net.dv8tion.jda.api.JDA;
@@ -79,6 +80,7 @@ public class Main implements Logging {
 			public void run() {
 				LOGGER.info("Saving accounts...");
 				AccountUtils.backup(glados.accounts);
+				ItemUtils.saveMarket();
 				LOGGER.info("Saved " + glados.accounts.size() + " accounts.");
 			}
 		}));

@@ -88,7 +88,7 @@ public class GLaDOS implements Logging {
 		this.loadItems();
 
 		// Init market
-		ItemUtils.resetMarket();
+		ItemUtils.loadMarket();
 
 		try {
 			// Load quotes

@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.Command.Type;
 import utils.AccountUtils;
 import utils.BuildEmbed;
+import utils.ItemUtils;
 import utils.TimeUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,6 +117,7 @@ public class Trigger extends Command {
 				// Resets the ability for all accounts to drop
 				for (Account a : g.accounts)
 					a.canDrop = true;
+				ItemUtils.resetMarket();
 				return;
 			default:
 				embed = BuildEmbed.errorEmbed("This trigger has not been registered !");
