@@ -101,8 +101,10 @@ public class Trigger extends Command {
 					String author = jsonObject.getString("author");
 					String quote = jsonObject.getString("content");
 
-					if (quote.length() > 256)
+					if (quote.length() >= 256) {
 						destination.sendMessage(quote + author).queue();
+						return;
+					}
 
 					embed = BuildEmbed.midnightQuote(quote, author);
 				} catch (Exception e) {
