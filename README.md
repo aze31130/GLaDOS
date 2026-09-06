@@ -1,3 +1,5 @@
+
+
 <div align="center">
     <img src="https://static.aze.sh/GLaDOS.png"/>
     <h1>GLaDOS</h1>
@@ -22,7 +24,7 @@ This bot include multiple tools such as :
 You can compile and run the project at home by using the following commands:
 ```sh
 mvn package             # Generates .jar file
-java -jar GLaDOS.jar    # Run GLaDOS
+java -jar target/GLaDOS-2.0.0.jar    # Run GLaDOS
 ```
 
 ## Disclaimer
