@@ -1,5 +1,4 @@
 
-
 <div align="center">
     <img src="https://static.aze.sh/GLaDOS.png"/>
     <h1>GLaDOS</h1>
